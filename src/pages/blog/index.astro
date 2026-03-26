@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = [
+  { slug: "tsena-uebsayt-bulgaria-2026", title: "Колко струва изработката на уебсайт в България за 2026?", excerpt: "Пълен ценови наръчник - от landing page до корпоративен сайт.", cat: "SEO", date: "Март 2026" },
+  { slug: "koga-ti-trqbva-ai-bot", title: "Кога имаш нужда от AI бот за бизнеса си?", excerpt: "3 ясни знака, че е момент да автоматизираш клиентското обслужване.", cat: "AI", date: "Февр. 2026" },
+  { slug: "sayt-gubi-klienti-tehniches-greshki", title: "Защо сайтът ти губи клиенти заради технически грешки?", excerpt: "Счупени форми, бавно зареждане, мобилни бъгове - невидимите убийци на продажбите.", cat: "QA", date: "Февр. 2026" },
+];
+---
+<BaseLayout
+  title="Блог - уебсайтове, AI и SEO | buildify.bg"
+  description="Практични статии за изработка на уебсайтове, AI ботове, QA тестване и органик SEO в България."
+>
+  <section class="bg-cream">
+    <div class="border-b border-border px-6 md:px-10 py-8 flex items-center justify-between">
+      <h1 class="font-mono font-bold text-xs uppercase tracking-widest text-muted">Блог / {posts.length} статии</h1>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border border-b border-border">
+      {posts.map(post => (
+        <a href={`/blog/${post.slug}`} class="group block p-8 hover:bg-ink transition-all duration-300">
+          <div class="flex items-center justify-between mb-6">
+            <span class="font-mono text-xs font-bold uppercase tracking-widest text-muted group-hover:text-yellow transition-colors border border-border group-hover:border-yellow/30 px-2.5 py-1">{post.cat}</span>
+            <span class="font-mono text-xs text-muted group-hover:text-white/30 transition-colors">{post.date}</span>
+          </div>
+          <h2 class="font-bold text-base leading-snug tracking-tight group-hover:text-white transition-colors mb-3">{post.title}</h2>
+          <p class="text-sm text-muted group-hover:text-white/40 transition-colors leading-relaxed">{post.excerpt}</p>
+          <div class="mt-5 flex items-center gap-1.5 text-xs font-semibold text-muted group-hover:text-yellow transition-all uppercase tracking-wide">
+            Прочети <span class="group-hover:translate-x-1 transition-transform inline-block">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

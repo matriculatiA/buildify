@@ -1,0 +1,49 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink text-white border-t-2 border-ink">
+  <div class="grid md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
+
+    <!-- Brand -->
+    <div class="md:col-span-2 px-8 md:px-14 py-10 flex flex-col justify-between gap-6">
+      <div>
+        <a href="/" class="font-mono font-bold text-xl tracking-tight text-white">
+          ■ buildify.bg
+        </a>
+        <p class="mt-3 text-sm text-white/40 leading-relaxed max-w-xs">
+          Уебсайтове, плъгини и AI ботове за малкия бизнес в България. Бургас, 2026.
+        </p>
+      </div>
+      <div class="font-mono text-xs text-white/20 uppercase tracking-widest">
+        Богдан Димитров · 7+ год. опит
+      </div>
+    </div>
+
+    <!-- Услуги -->
+    <div class="px-8 py-10">
+      <p class="font-mono text-xs font-bold uppercase tracking-widest text-white/25 mb-5">Услуги</p>
+      <ul class="flex flex-col gap-3 text-sm">
+        <li><a href="/websites"  class="text-white/50 hover:text-yellow transition-colors">Уебсайтове</a></li>
+        <li><a href="/plugini"   class="text-white/50 hover:text-yellow transition-colors">Плъгини</a></li>
+        <li><a href="/ai-botove" class="text-white/50 hover:text-yellow transition-colors">AI ботове</a></li>
+      </ul>
+    </div>
+
+    <!-- Компания -->
+    <div class="px-8 py-10">
+      <p class="font-mono text-xs font-bold uppercase tracking-widest text-white/25 mb-5">Навигация</p>
+      <ul class="flex flex-col gap-3 text-sm">
+        <li><a href="/blog"    class="text-white/50 hover:text-yellow transition-colors">Блог</a></li>
+        <li><a href="/kontakt" class="text-white/50 hover:text-yellow transition-colors">Контакти</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="border-t border-white/10 px-8 md:px-14 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <span class="font-mono text-xs text-white/20">© {year} buildify.bg — Всички права запазени</span>
+    <span class="font-mono text-xs text-white/20">Astro · Cloudflare · Бургас, България</span>
+  </div>
+</footer>

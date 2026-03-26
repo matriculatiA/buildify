@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="404 - Страницата не е намерена | buildify.bg" description="Тази страница не съществува.">
+  <section class="min-h-screen bg-ink text-white flex items-center justify-center">
+    <div class="text-center px-6">
+      <div class="font-mono font-bold text-[10rem] leading-none text-white/10 mb-4">404</div>
+      <h1 class="font-bold text-3xl text-white mb-4 tracking-tight">Страницата не е намерена.</h1>
+      <p class="text-white/40 mb-10 font-mono text-sm">Изглежда тази страница е изчезнала.</p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="/" class="bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">Начало →</a>
+        <a href="/kontakt" class="border border-white/20 text-white/60 font-semibold text-sm px-7 py-4 uppercase tracking-wide hover:border-white/50 hover:text-white transition-all">Контакти</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

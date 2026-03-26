@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Изработка на уебсайтове",
+  "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "description": "Изработка на бизнес уебсайтове и landing pages оптимизирани за Google. SEO-ready от ден 1, Core Web Vitals зелено, без скрити такси.",
+  "areaServed": "Bulgaria",
+  "offers": [
+    { "@type": "Offer", "name": "Landing page",    "price": "700",  "priceCurrency": "BGN" },
+    { "@type": "Offer", "name": "Бизнес сайт",     "price": "1500", "priceCurrency": "BGN" },
+    { "@type": "Offer", "name": "Корпоративен сайт","price": "3500", "priceCurrency": "BGN" }
+  ]
+};
+
+const packages = [
+  {
+    name: "Landing page", price: "от 700 лв.", for: "Промоция / един продукт / услуга",
+    features: ["До 5 секции", "Контактна форма", "Mobile-first дизайн", "SEO оптимизация", "Готов до 7 дни"],
+    featured: false,
+  },
+  {
+    name: "Бизнес сайт", price: "от 1 500 лв.", for: "Малък и среден бизнес",
+    features: ["До 8 страници", "Блог / новини", "Google Analytics", "Schema markup", "Core Web Vitals", "Готов до 3 седмици"],
+    featured: true,
+  },
+  {
+    name: "Корпоративен", price: "от 3 500 лв.", for: "По-сложни проекти",
+    features: ["Неограничени страници", "Многоезичност", "CMS за редакция", "E-commerce / резервации", "Приоритетна поддръжка"],
+    featured: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Изработка на уебсайт за бизнес в Бургас | buildify.bg"
+  description="Изработка на бизнес уебсайтове оптимизирани за Google. SEO-ready от ден 1, Core Web Vitals зелено, без скрити такси. От 700 лв."
+  schema={schema}
+>
+
+  <!-- Hero split -->
+  <section class="border-b-2 border-ink grid md:grid-cols-2 min-h-[60vh]">
+    <div class="bg-ink text-white px-8 md:px-14 py-16 flex flex-col justify-between">
+      <span class="font-mono text-xs text-white/25 uppercase tracking-widest">buildify.bg / Уебсайтове</span>
+      <div>
+        <h1 class="font-bold text-white leading-tight tracking-tightest mb-5" style="font-size:clamp(2.5rem,6vw,4.5rem)">
+          Сайт, който<br/>
+          <span class="bg-yellow text-ink px-2">продава.</span><br/>
+          Не само изглежда добре.
+        </h1>
+        <p class="text-white/40 text-base leading-relaxed max-w-sm">
+          Бързи, SEO-оптимизирани уебсайтове, които класират в Google и убеждават посетителите да станат клиенти.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="/kontakt" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+          Безплатна консултация →
+        </a>
+        <a href="#paketi" class="inline-flex items-center gap-3 border-2 border-white/20 text-white/60 font-semibold text-sm px-7 py-4 uppercase tracking-wide hover:border-yellow hover:text-yellow transition-colors">
+          Виж пакетите ↓
+        </a>
+      </div>
+    </div>
+    <div class="bg-cream px-8 md:px-14 py-16 flex flex-col justify-center gap-6 border-t-2 md:border-t-0 md:border-l-2 border-ink">
+      {[
+        { icon: "speed",    title: "БЪРЗИНА",              desc: "Под 2 секунди зареждане. Core Web Vitals зелено. Google го обича." },
+        { icon: "seo",      title: "SEO ОТ ДЕН 1",        desc: "Schema markup, sitemap, мета тагове - всичко наредено преди публикуване." },
+        { icon: "mobile-broken", title: "MOBILE-FIRST",   desc: "70%+ от трафика е мобилен. Правим сайта за телефона, после за desktop." },
+        { icon: "check",    title: "ОРИЕНТИРАН КЪМ ПРОДАЖБИ", desc: "Всяка секция има цел. CTA на правилното място." },
+      ].map(item => (
+        <div class="flex gap-4 items-start border-l-4 border-yellow pl-4">
+          <div class="shrink-0 mt-0.5"><Icon name={item.icon} size={20} /></div>
+          <div>
+            <div class="font-mono font-bold text-xs uppercase tracking-widest text-ink mb-1">{item.title}</div>
+            <div class="text-sm text-muted leading-relaxed">{item.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tech stack -->
+  <section class="bg-yellow border-b-2 border-ink">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-ink">
+      {[
+        { name: "Astro",       desc: "Максимална скорост" },
+        { name: "Tailwind",    desc: "Отзивчив дизайн"    },
+        { name: "Cloudflare",  desc: "CDN + SSL безплатно"},
+        { name: "Schema.org",  desc: "Google структури"   },
+      ].map(t => (
+        <div class="py-5 px-6 text-center">
+          <div class="font-mono font-bold text-ink text-base">{t.name}</div>
+          <div class="text-xs text-ink/50 mt-0.5">{t.desc}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="paketi" class="scroll-mt-14 bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">01 · Пакети</span>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+      {packages.map(pkg => (
+        <div class={`p-8 ${pkg.featured ? 'bg-ink' : ''}`}>
+          {pkg.featured && <span class="font-mono text-xs font-bold text-yellow uppercase tracking-widest block mb-4">Най-популярен</span>}
+          <h3 class={`font-bold text-2xl uppercase tracking-tight mb-1 ${pkg.featured ? 'text-white' : 'text-ink'}`}>{pkg.name}</h3>
+          <div class={`font-mono font-bold text-xl mb-1 ${pkg.featured ? 'text-yellow' : 'text-ink'}`}>{pkg.price}</div>
+          <div class={`text-xs uppercase tracking-wide mb-6 ${pkg.featured ? 'text-white/30' : 'text-muted'}`}>{pkg.for}</div>
+          <ul class="space-y-2.5 mb-8">
+            {pkg.features.map(f => (
+              <li class="flex gap-3 items-start text-sm">
+                <Icon name="check" size={16} />
+                <span class={pkg.featured ? 'text-white/70' : 'text-muted'}>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="/kontakt" class={`inline-flex items-center gap-2 font-bold text-sm px-6 py-3 uppercase tracking-wide transition-colors ${pkg.featured ? 'bg-yellow text-ink hover:bg-yellow-dark' : 'bg-ink text-yellow hover:bg-ink/80'}`}>
+            Заяви →
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">02 · Въпроси</span>
+    </div>
+    <div class="divide-y-2 divide-ink">
+      {[
+        { q: "Колко отнема изработката?",             a: "Landing page - 5-7 работни дни. Бизнес сайт - 2-3 седмици. Включваме те в процеса на всяка стъпка." },
+        { q: "Нужен ли ми е хостинг отделно?",       a: "Не - деплойваме безплатно на Cloudflare Pages. Плащаш само за домейна (~20 лв./год.)." },
+        { q: "Мога ли да редактирам сайта сам?",     a: "Да. При бизнес и корпоративен пакет интегрираме CMS панел за редакция без технически знания." },
+        { q: "Правите ли и дизайна?",                a: "Да - дизайн, разработка и SEO са в пакета. Ако имаш съществуващ бранд, работим с него." },
+      ].map(faq => (
+        <details class="group px-8 py-6">
+          <summary class="font-bold text-base uppercase tracking-tight text-ink cursor-pointer list-none flex justify-between items-center">
+            {faq.q}
+            <span class="font-mono text-yellow text-xl group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-muted text-sm mt-4 leading-relaxed max-w-2xl">{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-ink px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <h2 class="font-bold text-white leading-tight tracking-tightest mb-4" style="font-size:clamp(1.8rem,4vw,3rem)">
+        Готов за нов сайт?
+      </h2>
+      <p class="text-white/40 mb-8">30 минути разговор - и знаеш точно какво ще получиш и на каква цена.</p>
+      <a href="/kontakt" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+        Безплатна консултация →
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

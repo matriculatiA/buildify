@@ -1,0 +1,631 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Разработка на custom плъгини и добавки",
+  "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "description": "Custom плъгини и добавки по мярка. Конкретна функционалност без тежки готови решения. От 300 лв.",
+  "areaServed": "Bulgaria"
+};
+
+const examples = [
+  { icon: "plugin",    title: "Калкулатори",            desc: "Ценови калкулатор, ипотечен калкулатор, оферти - всичко интерактивно и вградено в сайта." },
+  { icon: "clock",     title: "Резервационни системи",  desc: "Записване за часове, резервации на маси, регистрации за събития." },
+  { icon: "seo",       title: "API интеграции",         desc: "Свързване на сайта с CRM, счетоводна система, куриерска фирма или друг external service." },
+  { icon: "form-broken", title: "Форми и автоматизация", desc: "Сложни многостъпкови форми с условна логика и автоматични имейли." },
+  { icon: "no-fee",    title: "Сигурност и ограничения",desc: "Ограничаване на достъп, watermarking на снимки, защита на съдържание." },
+  { icon: "star",      title: "Табла и отчети",         desc: "Admin панели за управление на специфична бизнес логика директно от сайта." },
+];
+---
+
+<BaseLayout
+  title="Разработка на custom плъгини | buildify.bg"
+  description="Custom плъгини и добавки по мярка. Само каквото ти трябва - без тежки готови решения. От 300 лв."
+  schema={schema}
+>
+  <!-- Hero split -->
+  <section class="border-b-2 border-ink grid md:grid-cols-2 min-h-[55vh]">
+    <div class="bg-ink text-white px-8 md:px-14 py-16 flex flex-col justify-between">
+      <span class="font-mono text-xs text-white/25 uppercase tracking-widest">buildify.bg / Плъгини</span>
+      <div>
+        <h1 class="font-bold text-white leading-tight tracking-tightest mb-5" style="font-size:clamp(2.5rem,6vw,4.5rem)">
+          Точно каквото<br/>ти трябва.<br/>
+          <span class="bg-yellow text-ink px-2">Нищо повече.</span>
+        </h1>
+        <p class="text-white/40 text-base leading-relaxed max-w-sm">
+          Вместо тежки плъгини с 200 функции от които ползваш 3 - правим лека добавка, която прави точно нужното.
+        </p>
+      </div>
+      <a href="/kontakt" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors w-fit">
+        Опиши нуждата си →
+      </a>
+    </div>
+    <div class="bg-cream px-8 md:px-14 py-16 flex flex-col justify-center gap-5 border-t-2 md:border-t-0 md:border-l-2 border-ink">
+      {[
+        { num: "01", title: "Описваш нуждата",           desc: "Казваш ни какво трябва да прави. Без технически детайли." },
+        { num: "02", title: "Правим спецификация",       desc: "Разписваме точно какво ще се направи и на каква цена." },
+        { num: "03", title: "Разработваме и тестваме",   desc: "Чист, документиран код. QA тест включен." },
+        { num: "04", title: "Инсталираме и обучаваме",   desc: "Инсталираме на сайта ти и обясняваме как се ползва." },
+      ].map(step => (
+        <div class="flex gap-4 items-start">
+          <span class="font-mono font-bold text-ink/20 text-2xl shrink-0 w-10">{step.num}</span>
+          <div>
+            <div class="font-bold text-sm uppercase tracking-tight text-ink mb-0.5">{step.title}</div>
+            <div class="text-xs text-muted leading-relaxed">{step.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tech strip -->
+  <section class="bg-yellow border-b-2 border-ink">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-ink">
+      {[
+        { name: "Web / CMS",     desc: "Платформа"              },
+        { name: "PHP / JS",      desc: "Технологии"             },
+        { name: "Интеграции",    desc: "API, CRM, системи"      },
+        { name: "Без абонамент", desc: "Еднократно плащане"     },
+      ].map(t => (
+        <div class="py-5 px-6 text-center">
+          <div class="font-mono font-bold text-ink text-base">{t.name}</div>
+          <div class="text-xs text-ink/50 mt-0.5">{t.desc}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Examples -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">01 · Примери</span>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 divide-ink">
+      {examples.map((ex, i) => (
+        <div class={`p-8 border-b-2 md:border-b-0 border-ink ${i % 3 !== 2 ? 'md:border-r-2' : ''} ${i >= 3 ? 'border-b-0' : ''}`}>
+          <div class="mb-4"><Icon name={ex.icon} size={32} /></div>
+          <h3 class="font-bold text-base uppercase tracking-tight text-ink mb-2">{ex.title}</h3>
+          <p class="text-muted text-sm leading-relaxed">{ex.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- LIVE DEMOS -->
+  <section class="border-b-2 border-ink" style="background:#f0ede6">
+    <div class="border-b-2 border-ink px-8 py-5" style="border-color:#111111">
+      <span class="font-mono text-xs uppercase tracking-widest font-bold" style="color:#888888">02 · Демо плъгини — пробвай ги сега</span>
+    </div>
+    <div class="px-6 md:px-10 py-10" id="wave-grid"></div>
+  </section>
+
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+    #wave-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      #wave-grid { grid-template-columns: repeat(3, 1fr); }
+      .wc:nth-child(1) { margin-top: 0px; }
+      .wc:nth-child(2) { margin-top: 48px; }
+      .wc:nth-child(3) { margin-top: 0px; }
+      .wc:nth-child(4) { margin-top: 24px; }
+      .wc:nth-child(5) { margin-top: 72px; }
+      .wc:nth-child(6) { margin-top: 24px; }
+    }
+
+    .wc {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #111111;
+      box-shadow: 4px 4px 0px #111111;
+      font-family: 'Space Grotesk', sans-serif;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      animation: wcIn 0.5s ease both;
+    }
+    @keyframes wcIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .wc:nth-child(1){animation-delay:.05s}
+    .wc:nth-child(2){animation-delay:.12s}
+    .wc:nth-child(3){animation-delay:.18s}
+    .wc:nth-child(4){animation-delay:.24s}
+    .wc:nth-child(5){animation-delay:.30s}
+    .wc:nth-child(6){animation-delay:.36s}
+
+    .wc-header { padding: 16px 20px; flex-shrink: 0; }
+    .wc-body   { padding: 16px 20px; flex: 1; overflow-y: auto; }
+    .wc-badge  { display: inline-block; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+    .wc-title  { font-weight: 700; font-size: 14px; }
+    .wc-lbl    { font-family: 'Space Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .1em; color: #94a3b8; display: block; margin: 10px 0 5px; }
+    .wc-lbl:first-child { margin-top: 0; }
+    .wc-inp    { width: 100%; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 13px; padding: 8px 11px; outline: none; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; transition: border-color .2s; color: #1e293b; background: white; }
+    .wc-result { border-radius: 10px; padding: 12px; text-align: center; margin: 10px 0; }
+    .wc-rval   { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 22px; }
+    .wc-rlbl   { font-size: 9px; text-transform: uppercase; letter-spacing: .1em; margin-top: 3px; opacity: .65; }
+    .wc-btn    { width: 100%; border: none; border-radius: 8px; font-weight: 700; font-size: 12px; padding: 11px; cursor: pointer; transition: opacity .15s; font-family: 'Space Grotesk', sans-serif; }
+    .wc-btn:hover { opacity: .85; }
+
+    /* 01 MORTGAGE */
+    .wc-01 .wc-header { background: #e8edf5; }
+    .wc-01 .wc-badge  { background: #c7d4e8; color: #2d4a7a; }
+    .wc-01 .wc-title  { color: #2d4a7a; }
+    .wc-01 .wc-result { background: #e8edf5; }
+    .wc-01 .wc-rval   { color: #2d4a7a; }
+    .wc-01 .wc-rlbl   { color: #5a7ab0; }
+    .m-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 2px; }
+    .m-stat  { background: #f4f7fc; border-radius: 8px; padding: 8px 10px; }
+    .m-sv    { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; color: #2d4a7a; }
+    .m-sl    { font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: #8aaad4; margin-top: 2px; }
+
+    /* 02 BOOKING */
+    .wc-02 .wc-header { background: #e8f0e9; display: flex; align-items: center; justify-content: space-between; }
+    .wc-02 .wc-badge  { background: #c8dfca; color: #2d5e34; margin-bottom: 0; }
+    .wc-02 .wc-title  { color: #2d5e34; }
+        .bk-week-nav { display: flex; align-items: center; gap: 6px; margin: 6px 0 8px; }
+    .bk-nav-btn  { width: 28px; height: 28px; border: 1.5px solid #e2e8f0; border-radius: 7px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #475569; transition: all .15s; flex-shrink: 0; }
+    .bk-nav-btn:hover { border-color: #4a8c52; color: #4a8c52; }
+    .bk-week-lbl { font-family: 'Space Mono', monospace; font-size: 10px; color: #64748b; text-align: center; flex: 1; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .bk-cal  { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-bottom: 8px; }
+    .bk-dhdr { font-family: 'Space Mono', monospace; font-size: 8px; text-align: center; color: #94a3b8; padding: 2px 0; text-transform: uppercase; }
+    .bk-d    { border-radius: 7px; padding: 5px 2px; text-align: center; cursor: pointer; transition: all .15s; border: 1.5px solid transparent; background: white; }
+    .bk-d:hover { border-color: #c8dfca; background: #f0f7f1; }
+    .bk-d.sel { background: #4a8c52; border-color: #4a8c52; }
+    .bk-d.off { opacity: .3; cursor: not-allowed; }
+    .bk-d-num  { font-weight: 700; font-size: 12px; color: #1e293b; display: block; }
+    .bk-d.sel .bk-d-num { color: white; }
+    .bk-d.off .bk-d-num { color: #94a3b8; }
+    .bk-times { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    .bk-t    { border: 1.5px solid #c8dfca; border-radius: 6px; background: white; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; padding: 4px 8px; cursor: pointer; color: #4a8c52; transition: all .15s; }
+    .bk-t:hover,.bk-t.sel { background: #4a8c52; color: white; border-color: #4a8c52; }
+    .bk-t.busy { color: #c8dfca; border-color: #f1f5f9; cursor: not-allowed; background: #fafafa; }
+    .bk-btn  { width: 100%; background: #4a8c52; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 12px; padding: 10px; cursor: pointer; transition: background .15s; margin-top: 4px; }
+    .bk-btn:hover { background: #3a7a42; }
+    .bk-success { background: #f0f7f1; border: 1.5px solid #c8dfca; border-radius: 8px; padding: 12px; text-align: center; font-family: 'Space Mono', monospace; font-size: 9px; color: #2d5e34; text-transform: uppercase; letter-spacing: .07em; margin-top: 6px; }
+
+    /* 03 CHATBOT */
+    .wc-03 { border-radius: 20px !important; display: flex; flex-direction: column; }
+    .wc-03 .wc-header { background: #ebe8f5; display: flex; align-items: center; gap: 10px; padding: 14px 18px; flex-shrink: 0; }
+    .chat-av  { width: 34px; height: 34px; border-radius: 50%; background: #c9c2e8; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .chat-nm  { font-weight: 700; font-size: 13px; color: #4a3d8c; }
+    .chat-st  { font-size: 10px; color: #8a7fc4; display: flex; align-items: center; gap: 3px; }
+    .chat-dot { width: 5px; height: 5px; background: #7bc47f; border-radius: 50%; display: inline-block; }
+    .chat-msgs { background: #f7f6fc; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; overflow-y: auto; }
+    .msg-ai   { background: white; border: 1px solid #e2ddf5; border-radius: 10px 10px 10px 3px; padding: 7px 10px; font-size: 11px; color: #4a3d8c; max-width: 88%; align-self: flex-start; line-height: 1.5; }
+    .msg-me   { background: #7a6ec4; border-radius: 10px 10px 3px 10px; padding: 7px 10px; font-size: 11px; color: white; max-width: 88%; align-self: flex-end; line-height: 1.5; }
+    .msg-typing { display: flex; gap: 3px; align-items: center; padding: 7px 10px; background: white; border: 1px solid #e2ddf5; border-radius: 10px 10px 10px 3px; width: fit-content; }
+    .msg-typing span { width: 5px; height: 5px; background: #c9c2e8; border-radius: 50%; animation: td .8s infinite; }
+    .msg-typing span:nth-child(2){animation-delay:.15s}
+    .msg-typing span:nth-child(3){animation-delay:.30s}
+    @keyframes td{0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.3);opacity:1}}
+    .chat-quick { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 14px; background: #f7f6fc; border-top: 1px solid #ede9f7; flex-shrink: 0; }
+    .chat-qb  { border: 1px solid #ddd9f0; border-radius: 20px; background: white; font-size: 9px; color: #7a6ec4; padding: 3px 9px; cursor: pointer; font-weight: 600; transition: all .15s; }
+    .chat-qb:hover { background: #7a6ec4; color: white; border-color: #7a6ec4; }
+    .chat-row { display: flex; border-top: 1px solid #ede9f7; background: white; border-radius: 0 0 18px 18px; flex-shrink: 0; overflow: hidden; }
+    .chat-row input { flex: 1; border: none; padding: 10px 12px; font-size: 12px; outline: none; color: #334155; font-family: 'Space Grotesk', sans-serif; }
+    .chat-row button { background: #7a6ec4; color: white; border: none; padding: 10px 14px; cursor: pointer; font-size: 13px; transition: background .15s; border-radius: 0 0 18px 0; }
+    .chat-row button:hover { background: #6a5eb4; }
+
+    /* 04 BMI */
+    .wc-04 .wc-header { background: #f2ebe5; }
+    .wc-04 .wc-badge  { background: #e4d0c0; color: #7a4a2d; }
+    .wc-04 .wc-title  { color: #7a4a2d; }
+    .wc-04 .wc-result { background: #f2ebe5; }
+    .wc-04 .wc-rlbl   { color: #b07a5a; }
+    .bmi-track  { height: 8px; background: #edddd4; border-radius: 4px; margin: 8px 0 4px; overflow: hidden; }
+    .bmi-fill   { height: 100%; border-radius: 4px; transition: width .5s, background .4s; width: 52%; background: #c47a52; }
+    .bmi-marks  { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 8px; color: #c0956e; margin-bottom: 8px; }
+    .bmi-ideal  { font-family: 'Space Mono', monospace; font-size: 10px; color: #b07a5a; margin-bottom: 6px; }
+    .bmi-advice { background: #fdf7f3; border-radius: 8px; padding: 9px 11px; font-size: 11px; color: #9a6040; line-height: 1.5; }
+
+    /* 05 UTILITY */
+    .wc-05 { background: white; }
+    .wc-05 .wc-header { background: #fdf6e3; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f0e8c8; }
+    .wc-05 .wc-badge  { background: #f0d86a; color: #5a4200; margin-bottom: 0; }
+    .wc-05 .wc-title  { color: #5a4200; }
+    .wc-05 .wc-body   { background: white; }
+    .wc-05 .wc-lbl    { color: #94a3b8; }
+    .wc-05 .wc-result { background: #fdf6e3; }
+    .wc-05 .wc-rval   { color: #5a4200; }
+    .wc-05 .wc-rlbl   { color: #a07830; }
+    .wc-05 select,.wc-05 input[type=number] { background: white; border: 1.5px solid #e2e8f0; border-radius: 8px; color: #1e293b; font-size: 13px; padding: 8px 11px; width: 100%; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; outline: none; margin-bottom: 0; }
+    .ut-tip  { font-family: 'Space Mono', monospace; font-size: 9px; color: #a07830; text-align: center; margin-top: 6px; }
+    .ut-fuel { display: none; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* 06 CONTACT */
+    .wc-06 .wc-header { background: #f0ede6; }
+    .wc-06 .wc-badge  { background: #111111; color: #f5e642; }
+    .wc-06 .wc-title  { color: #111111; }
+    .wc-06 select { width: 100%; border: 1.5px solid #e2e8f0; border-radius: 8px; color: #1e293b; font-weight: 600; font-size: 13px; padding: 8px 11px; outline: none; box-sizing: border-box; cursor: pointer; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0; }
+    .wc-06 textarea { resize: none; }
+    .wc-06 .wc-btn { background: #111111; color: #f5e642; font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: .08em; margin-top: 8px; }
+    .cf-success { background: #f0f7f1; border: 1.5px solid #c8dfca; border-radius: 10px; padding: 20px; text-align: center; }
+    .cf-ok-title { font-weight: 700; font-size: 13px; color: #2d5e34; margin-bottom: 4px; }
+    .cf-ok-sub   { font-size: 11px; color: #6b9470; }
+    .cf-reset    { display: block; margin-top: 10px; font-size: 11px; color: #94a3b8; cursor: pointer; text-align: center; text-decoration: underline; background: none; border: none; width: 100%; font-family: 'Space Grotesk', sans-serif; }
+  </style>
+
+  <script>
+  function calcM() {
+    const price = +document.getElementById('mp')?.value || 200000;
+    const dpct  = +document.getElementById('mslider')?.value || 20;
+    const rate  = +document.getElementById('mr')?.value || 3.5;
+    const yrs   = +document.getElementById('my')?.value || 25;
+    const down  = price * dpct / 100;
+    const loan  = price - down;
+    const mo    = rate / 100 / 12;
+    const n     = yrs * 12;
+    const mth   = mo === 0 ? loan/n : loan * mo * Math.pow(1+mo,n) / (Math.pow(1+mo,n)-1);
+    const tot   = mth * n;
+    const fmt   = v => Math.round(v).toLocaleString('bg-BG') + ' лв.';
+    if (!document.getElementById('mres')) return;
+    document.getElementById('mslider-lbl').textContent = dpct + '% = ' + fmt(down);
+    document.getElementById('mres').textContent = fmt(mth);
+    document.getElementById('mloаn').textContent = fmt(loan);
+    document.getElementById('mtot').textContent  = fmt(tot);
+    document.getElementById('mint').textContent  = fmt(tot - loan);
+    document.getElementById('mltv').textContent  = Math.round(loan / price * 100) + '%';
+  }
+
+  const DAYS_BG   = ['нд','пн','вт','ср','чт','пт','сб'];
+  const MONTHS_BG = ['яну','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
+  let bkWeekOffset = 0;
+  let bkSelDate = null;
+
+  function bkGetWeekStart(offset) {
+    const d = new Date(); d.setHours(0,0,0,0);
+    const dow = d.getDay();
+    const diff = dow === 0 ? -6 : 1 - dow;
+    d.setDate(d.getDate() + diff + offset * 7);
+    return d;
+  }
+
+  function bkRenderWeek() {
+    const ws = bkGetWeekStart(bkWeekOffset);
+    const we = new Date(ws); we.setDate(ws.getDate() + 6);
+    const lbl = document.getElementById('bk-week-lbl');
+    if (lbl) lbl.textContent = ws.getDate() + ' ' + MONTHS_BG[ws.getMonth()] + ' - ' + we.getDate() + ' ' + MONTHS_BG[we.getMonth()];
+    const grid = document.getElementById('bk-cal-grid');
+    if (!grid) return;
+    let html = '';
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(ws); d.setDate(ws.getDate() + i);
+      html += `<div class="bk-dhdr">${DAYS_BG[d.getDay()]}</div>`;
+    }
+    const today = new Date(); today.setHours(0,0,0,0);
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(ws); d.setDate(ws.getDate() + i);
+      const isOff  = d.getDay() === 0 || d.getDay() === 6;
+      const isPast = d < today;
+      const iso    = d.toISOString().split('T')[0];
+      const isSel  = bkSelDate === iso;
+      const cls    = `bk-d${isOff||isPast?' off':''}${isSel?' sel':''}`;
+      html += `<div class="${cls}" data-iso="${iso}" ${isOff||isPast?'':'onclick="bkSelectDay(this)"'}><span class="bk-d-num">${d.getDate()}</span></div>`;
+    }
+    grid.innerHTML = html;
+  }
+
+  function bkSelectDay(el) {
+    bkSelDate = el.dataset.iso;
+    bkRenderWeek();
+    const busy  = ['10:00','14:00'];
+    const slots = ['09:00','10:00','11:00','13:00','14:00','15:00','16:00'];
+    document.getElementById('bk-tw').style.display = 'block';
+    document.getElementById('bk-slots').innerHTML = slots.map(t =>
+      `<button class="bk-t${busy.includes(t)?' busy':''}" onclick="pickTime(this)" ${busy.includes(t)?'disabled':''}>${t}</button>`
+    ).join('');
+    document.getElementById('bk-cw').style.display = 'none';
+    document.getElementById('bk-succ').innerHTML = '';
+  }
+
+  function bkPrevWeek() { bkWeekOffset--; bkSelDate=null; bkRenderWeek(); document.getElementById('bk-tw').style.display='none'; document.getElementById('bk-cw').style.display='none'; }
+  function bkNextWeek() { bkWeekOffset++; bkSelDate=null; bkRenderWeek(); document.getElementById('bk-tw').style.display='none'; document.getElementById('bk-cw').style.display='none'; }
+
+  function initBook() { bkRenderWeek(); }
+
+  function pickTime(btn) {
+    document.querySelectorAll('.bk-t').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+    document.getElementById('bk-cw').style.display = 'block';
+  }
+  function confirmBk() {
+    const name = document.getElementById('bk-name').value.trim();
+    if (!name) return;
+    const svc  = document.getElementById('bk-svc').value;
+    const time = document.querySelector('.bk-t.sel')?.textContent || '09:00';
+    const d    = new Date(bkSelDate);
+    const dateStr = d.getDate() + ' ' + MONTHS_BG[d.getMonth()];
+    document.getElementById('bk-cw').style.display = 'none';
+    document.getElementById('bk-succ').innerHTML = `<div class="bk-success">✓ Записани сте!<br><span style="font-size:9px;color:#6b9470;display:block;margin-top:4px">${name} · ${svc} · ${dateStr} · ${time} · BLD-${Math.floor(Math.random()*9000)+1000}</span></div>`;
+  }
+
+  const chatR = [
+    'Buildify.bg предлага уебсайтове от 700 лв., плъгини от 300 лв. и AI ботове от 400 лв.',
+    'Това е демо версия. Реалният бот се обучава с информацията за вашия бизнес.',
+    'Разработваме за Бургас и цяла България. Свържете се за безплатна консултация!',
+    'Отговаряме до 48 часа. Пишете на /kontakt или hello@buildify.bg.',
+    'Всеки плъгин е по мярка — точно каквото ви трябва, нищо повече.',
+  ];
+  let chatIdx = 0;
+  function sendChatDemo() {
+    const inp  = document.getElementById('chat-inp');
+    const msgs = document.getElementById('chat-msgs');
+    const text = inp.value.trim();
+    if (!text) return;
+    inp.value = '';
+    msgs.innerHTML += `<div class="msg-me">${text}</div>`;
+    msgs.innerHTML += `<div class="msg-typing" id="chat-typing"><span></span><span></span><span></span></div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => {
+      document.getElementById('chat-typing')?.remove();
+      msgs.innerHTML += `<div class="msg-ai">${chatR[chatIdx % chatR.length]}</div>`;
+      chatIdx++;
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 850);
+  }
+
+  function calcBMI() {
+    const h   = +document.getElementById('bmi-h')?.value || 175;
+    const w   = +document.getElementById('bmi-w')?.value || 75;
+    const bmi = w / ((h/100) * (h/100));
+    let color, cat, advice;
+    if      (bmi < 18.5) { color='#5a8fc4'; cat='Поднормено тегло'; advice='Препоръчва се консултация с диетолог.'; }
+    else if (bmi < 25)   { color='#c47a52'; cat='Нормално тегло';   advice='Отлично! Поддържай здравословен начин на живот.'; }
+    else if (bmi < 30)   { color='#c49a52'; cat='Наднормено тегло'; advice='Препоръчва се повече физическа активност.'; }
+    else                  { color='#c45252'; cat='Затлъстяване';     advice='Препоръчва се консултация с лекар.'; }
+    const idealLow  = Math.round(18.5 * (h/100) * (h/100));
+    const idealHigh = Math.round(24.9 * (h/100) * (h/100));
+    const pct = Math.min(Math.max((bmi - 10) / 30 * 100, 0), 100);
+    if (!document.getElementById('bmi-val')) return;
+    document.getElementById('bmi-val').textContent  = bmi.toFixed(1);
+    document.getElementById('bmi-cat').textContent  = cat;
+    document.getElementById('bmi-result').style.background = color + '22';
+    document.getElementById('bmi-rval-c').style.color = color;
+    document.getElementById('bmi-fill').style.width      = pct + '%';
+    document.getElementById('bmi-fill').style.background = color;
+    document.getElementById('bmi-ideal').textContent  = 'Идеално тегло: ' + idealLow + '-' + idealHigh + ' кг';
+    document.getElementById('bmi-advice').textContent = advice;
+  }
+
+  function calcUtil() {
+    const type = document.getElementById('ut-type')?.value;
+    const qty  = +document.getElementById('ut-qty')?.value || 0;
+    let res = '', unit = '', tip = '';
+    if (type === 'elec') {
+      const d = qty * 0.35;
+      res = (d * 30).toFixed(2) + ' лв.'; unit = 'месечна сметка';
+      tip = qty + ' kWh/ден x 0.35 лв. = ' + d.toFixed(2) + ' лв./ден';
+    } else if (type === 'water') {
+      res = (qty * 4.50).toFixed(2) + ' лв.'; unit = 'месечна сметка';
+      tip = qty + ' m3 x 4.50 лв./m3';
+    } else {
+      const price = +document.getElementById('ut-price')?.value || 2.80;
+      const km    = +document.getElementById('ut-km')?.value || 1000;
+      res = (km / 100 * qty * price).toFixed(2) + ' лв.'; unit = 'разход за ' + km + ' км';
+      tip = km + ' км / ' + qty + ' л/100км x ' + price + ' лв.';
+    }
+    if (!document.getElementById('ut-res')) return;
+    document.getElementById('ut-res').textContent = res;
+    document.getElementById('ut-lbl').textContent = unit;
+    document.getElementById('ut-tip').textContent = tip;
+    const fe = document.getElementById('ut-fuel');
+    if (fe) fe.style.display = type === 'fuel' ? 'grid' : 'none';
+  }
+
+  function submitForm() {
+    const name  = document.getElementById('cf-name')?.value.trim();
+    const email = document.getElementById('cf-email')?.value.trim();
+    const msg   = document.getElementById('cf-msg')?.value.trim();
+    if (!name || !email || !msg) { alert('Попълни всички полета'); return; }
+    document.getElementById('cf-form-inner').style.display = 'none';
+    document.getElementById('cf-succ').style.display = 'block';
+  }
+  function resetForm() {
+    document.getElementById('cf-form-inner').style.display = 'block';
+    document.getElementById('cf-succ').style.display = 'none';
+    ['cf-name','cf-email','cf-msg'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  }
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('wave-grid').innerHTML = `
+    <div class="wc wc-01">
+      <div class="wc-header">
+        <div class="wc-badge">Имоти · Банки</div>
+        <div class="wc-title">Ипотечен калкулатор</div>
+      </div>
+      <div class="wc-body">
+        <span class="wc-lbl">Цена на имота (лв.)</span>
+        <input class="wc-inp" type="number" id="mp" value="200000" oninput="calcM()"/>
+        <span class="wc-lbl">Самоучастие: <span id="mslider-lbl">20% = 40 000 лв.</span></span>
+        <input type="range" id="mslider" min="10" max="50" value="20" oninput="calcM()" style="width:100%;accent-color:#4a6fa5;margin:4px 0"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+          <div><span class="wc-lbl">Лихва (%)</span><input class="wc-inp" type="number" id="mr" value="3.5" step="0.1" oninput="calcM()"/></div>
+          <div><span class="wc-lbl">Срок (год.)</span><input class="wc-inp" type="number" id="my" value="25" oninput="calcM()"/></div>
+        </div>
+        <div class="wc-result">
+          <div class="wc-rval" id="mres">732 лв.</div>
+          <div class="wc-rlbl">месечна вноска</div>
+        </div>
+        <div class="m-stats">
+          <div class="m-stat"><div class="m-sv" id="mloаn">160 000 лв.</div><div class="m-sl">Главница</div></div>
+          <div class="m-stat"><div class="m-sv" id="mtot">219 600 лв.</div><div class="m-sl">Общо платено</div></div>
+          <div class="m-stat"><div class="m-sv" id="mint">59 600 лв.</div><div class="m-sl">Лихва</div></div>
+          <div class="m-stat"><div class="m-sv" id="mltv">80%</div><div class="m-sl">LTV</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wc wc-02">
+      <div class="wc-header">
+        <div class="wc-title">Резервационна система</div>
+        <div class="wc-badge">Онлайн</div>
+      </div>
+      <div class="wc-body">
+        <span class="wc-lbl">Услуга</span>
+        <select class="wc-inp" id="bk-svc" style="cursor:pointer">
+          <option>Консултация (30 мин.)</option>
+          <option>Уебсайт среща (60 мин.)</option>
+          <option>Демо среща (20 мин.)</option>
+        </select>
+        <span class="wc-lbl">Избери дата</span>
+        <div class="bk-week-nav">
+          <button class="bk-nav-btn" onclick="bkPrevWeek()">&#8249;</button>
+          <div class="bk-week-lbl" id="bk-week-lbl"></div>
+          <button class="bk-nav-btn" onclick="bkNextWeek()">&#8250;</button>
+        </div>
+        <div class="bk-cal" id="bk-cal-grid"></div>
+        <div id="bk-tw" style="display:none">
+          <span class="wc-lbl">Свободни часове</span>
+          <div class="bk-times" id="bk-slots"></div>
+        </div>
+        <div id="bk-cw" style="display:none">
+          <span class="wc-lbl">Вашето ime</span>
+          <input class="wc-inp" type="text" id="bk-name" placeholder="Иван Иванов" style="margin-bottom:8px"/>
+          <button class="bk-btn" onclick="confirmBk()">Потвърди час →</button>
+        </div>
+        <div id="bk-succ"></div>
+      </div>
+    </div>
+
+    <div class="wc wc-03">
+      <div class="wc-header">
+        <div class="chat-av">🤖</div>
+        <div>
+          <div class="chat-nm">buildify AI</div>
+          <div class="chat-st"><span class="chat-dot"></span> Онлайн сега</div>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chat-msgs">
+        <div class="msg-ai">Здравейте! Мога да помогна с уебсайтове, плъгини и AI ботове. Питайте!</div>
+      </div>
+      <div class="chat-quick">
+        <button class="chat-qb" onclick="document.getElementById('chat-inp').value='Цени?';sendChatDemo()">Цени?</button>
+        <button class="chat-qb" onclick="document.getElementById('chat-inp').value='AI бот за мен?';sendChatDemo()">AI бот?</button>
+        <button class="chat-qb" onclick="document.getElementById('chat-inp').value='Колко отнема?';sendChatDemo()">Колко отнема?</button>
+        <button class="chat-qb" onclick="document.getElementById('chat-inp').value='Работите в Бургас?';sendChatDemo()">Бургас?</button>
+      </div>
+      <div class="chat-row">
+        <input type="text" id="chat-inp" placeholder="Напишете съобщение..." onkeydown="if(event.key==='Enter')sendChatDemo()"/>
+        <button onclick="sendChatDemo()">➤</button>
+      </div>
+    </div>
+
+    <div class="wc wc-04">
+      <div class="wc-header">
+        <div class="wc-badge">Здраве · Фитнес</div>
+        <div class="wc-title">BMI Калкулатор</div>
+      </div>
+      <div class="wc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><span class="wc-lbl">Ръст (см)</span><input class="wc-inp" type="number" id="bmi-h" value="175" oninput="calcBMI()"/></div>
+          <div><span class="wc-lbl">Тегло (кг)</span><input class="wc-inp" type="number" id="bmi-w" value="75"  oninput="calcBMI()"/></div>
+        </div>
+        <div class="wc-result" id="bmi-result" style="background:#c47a5222">
+          <div class="wc-rval" id="bmi-rval-c" style="color:#c47a52;font-size:30px"><span id="bmi-val">24.5</span></div>
+          <div class="wc-rlbl" style="color:#b07a5a" id="bmi-cat">Нормално тегло</div>
+        </div>
+        <div class="bmi-track"><div class="bmi-fill" id="bmi-fill"></div></div>
+        <div class="bmi-marks"><span>Слабо</span><span>Нормално</span><span>Наднормено</span></div>
+        <div class="bmi-ideal" id="bmi-ideal">Идеално тегло: 62-80 кг</div>
+        <div class="bmi-advice" id="bmi-advice">Отлично! Поддържай здравословен начин на живот.</div>
+      </div>
+    </div>
+
+    <div class="wc wc-05">
+      <div class="wc-header">
+        <div class="wc-title">Комунален калкулатор</div>
+        <div class="wc-badge">Ток · Вода · Гориво</div>
+      </div>
+      <div class="wc-body">
+        <span class="wc-lbl">Тип разход</span>
+        <select id="ut-type" onchange="calcUtil();document.getElementById('ut-qty-lbl').textContent=this.value==='elec'?'Дневен разход (kWh)':this.value==='water'?'Месечен разход (m3)':'Разход (л/100км)';document.getElementById('ut-fuel').style.display=this.value==='fuel'?'grid':'none'">
+          <option value="elec">Електричество</option>
+          <option value="water">Вода</option>
+          <option value="fuel">Гориво</option>
+        </select>
+        <span class="wc-lbl" id="ut-qty-lbl">Дневен разход (kWh)</span>
+        <input id="ut-qty" type="number" value="10" step="0.1" oninput="calcUtil()"/>
+        <div id="ut-fuel" class="ut-fuel">
+          <div><span class="wc-lbl">Цена/л (лв.)</span><input id="ut-price" type="number" value="2.80" step="0.01" oninput="calcUtil()"/></div>
+          <div><span class="wc-lbl">Километри</span><input id="ut-km" type="number" value="1000" oninput="calcUtil()"/></div>
+        </div>
+        <div class="wc-result">
+          <div class="wc-rval" id="ut-res">105.00 лв.</div>
+          <div class="wc-rlbl" id="ut-lbl">месечна сметка</div>
+        </div>
+        <div class="ut-tip" id="ut-tip">10 kWh/ден x 0.35 лв. = 3.50 лв./ден</div>
+      </div>
+    </div>
+
+    <div class="wc wc-06">
+      <div class="wc-header">
+        <div class="wc-badge">Безплатна консултация</div>
+        <div class="wc-title">Пишете ни</div>
+      </div>
+      <div class="wc-body">
+        <div id="cf-form-inner">
+          <span class="wc-lbl">Вашето ime</span>
+          <input class="wc-inp" type="text" id="cf-name" placeholder="Иван Иванов"/>
+          <span class="wc-lbl">Имейл</span>
+          <input class="wc-inp" type="email" id="cf-email" placeholder="ivan@firma.bg"/>
+          <span class="wc-lbl">Интересувам се от</span>
+          <select class="wc-inp" id="cf-service" style="cursor:pointer">
+            <option>Уебсайт</option><option>Плъгин</option><option>AI бот</option><option>Не знам още</option>
+          </select>
+          <span class="wc-lbl">Съобщение</span>
+          <textarea class="wc-inp" id="cf-msg" rows="3" placeholder="Разкажи накратко..."></textarea>
+          <button class="wc-btn" onclick="submitForm()">Изпрати →</button>
+        </div>
+        <div id="cf-succ" style="display:none">
+          <div class="cf-success">
+            <div class="cf-ok-title">Съобщението е изпратено!</div>
+            <div class="cf-ok-sub">Ще се свържем до 48 часа.</div>
+          </div>
+          <button class="cf-reset" onclick="resetForm()">Ново съобщение</button>
+        </div>
+      </div>
+    </div>
+    `;
+
+    initBook(); calcM(); calcBMI(); calcUtil();
+    window.calcM=calcM; window.calcBMI=calcBMI; window.calcUtil=calcUtil;
+    window.pickTime=pickTime; window.confirmBk=confirmBk; window.bkPrevWeek=bkPrevWeek; window.bkNextWeek=bkNextWeek; window.bkSelectDay=bkSelectDay;
+    window.sendChatDemo=sendChatDemo; window.submitForm=submitForm; window.resetForm=resetForm;
+  });
+  </script>
+
+    <!-- Pricing -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-yellow/20 px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">03 · Цена</span>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
+      {[
+        { range: "300-600 лв.",   desc: "Прост плъгин - форма, калкулатор, ограничение" },
+        { range: "600-1 500 лв.", desc: "Среден плъгин - резервационна система, API" },
+        { range: "1 500+ лв.",    desc: "Комплексен - admin табло, сложна бизнес логика" },
+      ].map(tier => (
+        <div class="p-8">
+          <div class="font-mono font-bold text-yellow text-2xl mb-2">{tier.range}</div>
+          <div class="text-white/40 text-sm">{tier.desc}</div>
+        </div>
+      ))}
+    </div>
+    <div class="border-t-2 border-white/10 px-8 py-8">
+      <a href="/kontakt" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+        Опиши нуждата - оценяваме безплатно →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Кога имаш нужда от AI бот за бизнеса си?",
+  "author": { "@type": "Organization", "name": "buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-02-10",
+  "dateModified": "2026-02-10"
+};
+---
+
+<BaseLayout
+  title="Кога имаш нужда от AI бот за бизнеса си? | buildify.bg"
+  description="3 ясни знака, че е момент да инсталираш AI чатбот. Колко струва, как работи и кога НЕ ти трябва - честен отговор от buildify.bg."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">AI</span>
+        <span class="font-mono text-xs text-white/25">Февруари 2026</span>
+        <span class="font-mono text-xs text-white/25">5 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Кога имаш нужда от<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">AI бот</mark> за бизнеса си?
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        AI ботовете са на мода. Но не всеки бизнес има нужда от тях. Ето честен отговор кога си струват и кога не.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- SECTION 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Сценарият, в който ботът печели</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          22:00 в неделя. Потенциален клиент влиза на сайта ти и иска да запита за цена. Пише в контактната форма. После чака.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Ти отговаряш в понеделник. Той вече е намерил конкурент, който е отговорил в рамките на минути - с AI бот. <strong>Тази сделка е загубена.</strong>
+        </p>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "67%", lbl: "Клиенти очакват отговор под 1 час" },
+          { val: "24/7", lbl: "Ботът работи без почивка" },
+          { val: "80%", lbl: "Запитвания са повтарящи се въпроси" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- SECTION 02 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">3 знака, че имаш нужда от бот</span>
+        </div>
+        <div class="space-y-4">
+          {[
+            {
+              num: "01", icon: "clock",
+              title: "Отговаряш на едни и същи въпроси всеки ден",
+              desc: "Ако всеки ден получаваш 5+ запитвания от типа 'Какви са цените?', 'Работите ли в събота?' - AI бот може да отговори на 80% от тях автоматично.",
+              example: "Зъболекарска практика получава 30+ запитвания дневно за запазване на час. Бот отговаря мигновено.",
+            },
+            {
+              num: "02", icon: "star",
+              title: "Получаваш запитвания извън работно време",
+              desc: "Хората търсят услуги в 22:00, в неделя, по празниците. Ако нямаш кой да отговори - губиш тези клиенти.",
+              example: "Хотел губи резервации, защото рецепцията е само от 9:00 до 18:00. Бот приема запитвания 24/7.",
+            },
+            {
+              num: "03", icon: "seo",
+              title: "Клиентите не намират информацията на сайта",
+              desc: "Имаш подробен сайт, но все пак получаваш въпроси за неща, написани там. Бот насочва директно.",
+              example: "Адвокатска кантора с 20 страници - клиентите все пак питат за цени и процедури по имейл.",
+            },
+          ].map(sign => (
+            <div class="bg-white border-2 border-ink p-5">
+              <div class="flex gap-4 items-start">
+                <span class="font-mono font-bold text-2xl text-ink/10 shrink-0 w-10">{sign.num}</span>
+                <div class="flex-1">
+                  <div class="flex gap-3 items-center mb-2">
+                    <Icon name={sign.icon} size={20} />
+                    <span class="font-bold text-base uppercase tracking-tight text-ink">{sign.title}</span>
+                  </div>
+                  <p class="text-muted text-sm leading-relaxed mb-3">{sign.desc}</p>
+                  <div class="border-l-4 border-yellow pl-3 text-xs text-muted italic">{sign.example}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Не купуваш бот. Купуваш служител, който не спи, не излиза в отпуск и не иска увеличение."
+        </p>
+      </div>
+
+      <!-- SECTION 03 - WHEN NOT -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога AI бот НЕ ти трябва</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">
+          Честно казано - не всеки бизнес се нуждае от бот. Ето случаите, в които не препоръчваме:
+        </p>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          {[
+            "Получаваш под 3-4 запитвания дневно - разходът не се оправдава",
+            "Всяко запитване е уникално и изисква специализирано мнение",
+            "Клиентите ти предпочитат изключително телефонен контакт",
+            "Нямаш достатъчно документирана информация за обучение на бота",
+          ].map(item => (
+            <div class="flex gap-4 items-center px-5 py-4 bg-white">
+              <span class="font-mono font-bold text-sm bg-ink/10 text-ink/40 px-2 py-0.5 shrink-0">X</span>
+              <span class="text-sm text-ink">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 04 - PRICING -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Колко струва и как работи</span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-white border-2 border-ink p-5">
+            <div class="font-mono text-xs font-bold text-muted uppercase tracking-widest mb-4">Разходи</div>
+            <div class="space-y-3">
+              {[
+                { k: "Еднократна инсталация", v: "от 400 лв." },
+                { k: "Месечна поддръжка",     v: "от 150 лв./мес." },
+                { k: "ROI",                   v: "средно 3-4 месеца" },
+              ].map(item => (
+                <div class="flex justify-between items-center border-b border-border pb-2">
+                  <span class="text-sm text-muted">{item.k}</span>
+                  <span class="font-mono font-bold text-sm text-ink">{item.v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="bg-ink p-5">
+            <div class="font-mono text-xs font-bold text-yellow uppercase tracking-widest mb-4">Процес</div>
+            <div class="space-y-3">
+              {[
+                "Събираме данните за бизнеса ти",
+                "Обучаваме бота (3-5 работни дни)",
+                "Интегрираме в сайта - 1 ред код",
+                "Тест, пускане и оптимизация",
+              ].map((step, i) => (
+                <div class="flex gap-3 items-start">
+                  <span class="font-mono text-xs font-bold text-yellow shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="text-sm text-white/60">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / AI ботове</div>
+            <div class="font-bold text-white text-xl tracking-tight">Не си сигурен дали ти трябва?</div>
+            <p class="text-white/40 text-sm mt-1">Правим безплатен анализ дали AI бот ще донесе реална стойност. Без продаване.</p>
+          </div>
+          <a href="/kontakt" class="shrink-0 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+            Безплатен анализ →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

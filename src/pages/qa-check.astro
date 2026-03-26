@@ -1,0 +1,502 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Безплатен QA Health Check за сайтове",
+  "url": "https://buildify.bg/qa-check",
+  "description": "Безплатен технически одит на уебсайт. Реални данни от Google PageSpeed Insights — скорост, SEO, достъпност, Core Web Vitals.",
+  "applicationCategory": "WebApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BGN" }
+};
+---
+
+<BaseLayout
+  title="Безплатен QA Check за сайт — реални данни от Google | buildify.bg"
+  description="Провери сайта си с реални данни от Google PageSpeed Insights. Скорост, SEO, Core Web Vitals, достъпност. Безплатно, без регистрация."
+  schema={schema}
+>
+
+<!-- HERO -->
+<div class="bg-ink border-b-2 border-ink">
+  <div class="max-w-4xl mx-auto px-8 py-16 md:py-20">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="font-mono text-xs font-bold text-yellow border border-yellow/30 px-3 py-1 uppercase tracking-widest">Безплатен инструмент</span>
+      <span class="font-mono text-xs text-white/25 uppercase tracking-widest">реални данни от Google</span>
+    </div>
+    <h1 class="font-bold text-white leading-tight tracking-tightest mb-5" style="font-size:clamp(2rem,5vw,3.5rem)">
+      QA Health Check<br/>
+      <mark class="bg-yellow text-ink px-2 not-italic">с реални резултати.</mark>
+    </h1>
+    <p class="text-white/45 text-lg leading-relaxed max-w-2xl mb-4">
+      Въвеждаш URL — получаваш реален анализ от Google PageSpeed Insights. Същите данни които Google ползва за класиране в търсачката.
+    </p>
+    <p class="font-mono text-xs text-white/25 uppercase tracking-widest mb-10">Не гадаем. Показваме реални числа с референтни стойности.</p>
+
+    <!-- URL INPUT -->
+    <div class="flex flex-col sm:flex-row gap-0 max-w-2xl">
+      <input
+        type="url"
+        id="site-url"
+        placeholder="https://tvoiqsait.bg"
+        class="flex-1 border-2 border-white/20 bg-white/5 text-white placeholder:text-white/25 font-mono text-sm px-5 py-4 outline-none focus:border-yellow transition-colors"
+      />
+      <button
+        id="check-btn"
+        class="bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap border-2 border-yellow"
+      >
+        Анализирай →
+      </button>
+    </div>
+    <p class="text-white/20 font-mono text-xs mt-3">Пример: https://buildify.bg · Анализът отнема 15-20 секунди</p>
+  </div>
+</div>
+
+<!-- WHAT WE MEASURE -->
+<div class="bg-cream border-b-2 border-ink">
+  <div class="border-b-2 border-ink px-8 py-4">
+    <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Какво измерваме и защо има значение</span>
+  </div>
+  <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+    {[
+      {
+        score: "Performance",
+        ref: "Над 90 = добро",
+        color: "text-green-700",
+        items: [
+          { metric: "LCP (Largest Contentful Paint)", good: "под 2.5 сек", bad: "над 4 сек", why: "Колко бързо се зарежда основното съдържание. Google го включва в ranking." },
+          { metric: "CLS (Cumulative Layout Shift)", good: "под 0.1",      bad: "над 0.25",  why: "Мести ли се съдържанието докато се зарежда. Лошо CLS = потребителите кликат на грешно място." },
+          { metric: "Speed Index",                   good: "под 3.4 сек",  bad: "над 5.8 сек", why: "Колко бързо се вижда съдържанието визуално." },
+          { metric: "Total Blocking Time",            good: "под 200ms",   bad: "над 600ms",   why: "Колко дълго страницата е блокирана и не реагира на клик." },
+        ]
+      },
+      {
+        score: "SEO + Достъпност",
+        ref: "Над 90 = добро",
+        color: "text-blue-700",
+        items: [
+          { metric: "SEO Score",            good: "90-100",   bad: "под 70",  why: "Meta тагове, заглавия, sitemap, robots.txt — всичко което Google чете." },
+          { metric: "Accessibility Score",  good: "90-100",   bad: "под 70",  why: "Alt текстове, контраст, keyboard navigation. Засяга и SEO ranking." },
+          { metric: "Best Practices Score", good: "90-100",   bad: "под 70",  why: "HTTPS, security headers, console грешки, deprecated API-та." },
+          { metric: "Performance Score",    good: "90-100",   bad: "под 50",  why: "Комбинираната оценка на всички метрики. Под 50 = сериозен проблем." },
+        ]
+      }
+    ].map(cat => (
+      <div class="p-8">
+        <div class="flex items-center justify-between mb-5">
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">{cat.score}</span>
+          <span class={`font-mono text-xs font-bold ${cat.color}`}>{cat.ref}</span>
+        </div>
+        <div class="space-y-4">
+          {cat.items.map(item => (
+            <div class="border-l-4 border-yellow pl-4">
+              <div class="font-bold text-xs uppercase tracking-tight text-ink mb-1">{item.metric}</div>
+              <div class="flex gap-3 text-xs mb-1">
+                <span class="text-green-700 font-mono font-bold">✓ {item.good}</span>
+                <span class="text-red-600 font-mono font-bold">✗ {item.bad}</span>
+              </div>
+              <div class="text-xs text-muted leading-relaxed">{item.why}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="border-t-2 border-ink px-8 py-4 bg-white">
+    <p class="font-mono text-xs text-muted">
+      Данните идват директно от <strong class="text-ink">Google PageSpeed Insights API</strong> — същия инструмент на <a href="https://pagespeed.web.dev" target="_blank" class="text-ink underline">pagespeed.web.dev</a>. Не са генерирани или симулирани.
+    </p>
+  </div>
+</div>
+
+<!-- RESULTS AREA -->
+<div id="results-section" class="bg-cream" style="display:none">
+
+  <!-- Loading -->
+  <div id="loading-state" class="border-b-2 border-ink px-8 py-16 text-center bg-white">
+    <div class="font-mono text-xs uppercase tracking-widest text-muted mb-6">Анализираме сайта с Google PageSpeed...</div>
+    <div class="max-w-sm mx-auto space-y-2" id="loading-steps"></div>
+    <div class="mt-6 font-mono text-xs text-muted/50">Отнема 15-20 секунди</div>
+  </div>
+
+  <!-- Error -->
+  <div id="error-state" class="border-b-2 border-ink px-8 py-10 bg-white" style="display:none">
+    <div class="font-mono text-xs text-red-600 uppercase tracking-widest mb-2">Грешка при анализа</div>
+    <div id="error-msg" class="text-sm text-muted"></div>
+  </div>
+
+  <!-- Report -->
+  <div id="report-state" style="display:none">
+
+    <!-- Report header -->
+    <div class="bg-ink border-b-2 border-ink px-8 py-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="font-mono text-xs text-white/30 uppercase tracking-widest mb-3">Google PageSpeed Insights · buildify.bg/qa-check</div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-bold text-white text-xl mb-1" id="report-url-display">—</div>
+            <div class="font-mono text-xs text-white/30" id="report-date">—</div>
+          </div>
+          <button id="pdf-btn" class="bg-yellow text-ink font-bold text-xs px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+            Свали PDF доклад →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 main scores -->
+    <div class="border-b-2 border-ink bg-white">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-y-2 md:divide-y-0 divide-ink max-w-5xl" id="score-grid"></div>
+    </div>
+
+    <!-- Core Web Vitals -->
+    <div class="border-b-2 border-ink">
+      <div class="border-b-2 border-ink px-8 py-4">
+        <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Core Web Vitals — реални измервания</span>
+      </div>
+      <div id="vitals-grid" class="divide-y-2 divide-ink max-w-5xl"></div>
+    </div>
+
+    <!-- Opportunities -->
+    <div class="border-b-2 border-ink" id="opportunities-wrap" style="display:none">
+      <div class="border-b-2 border-ink px-8 py-4">
+        <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Какво може да се подобри</span>
+      </div>
+      <div id="opportunities-list" class="divide-y-2 divide-ink max-w-5xl"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-ink border-b-2 border-ink px-8 py-10">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / QA тестване</div>
+          <h3 class="font-bold text-white text-xl tracking-tight mb-1">Намерихме проблеми? Оправяме ги.</h3>
+          <p class="text-white/40 text-sm">Пълен QA одит + ремонт на грешките. От 150 лв.</p>
+        </div>
+        <a href="/kontakt" class="shrink-0 bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+          Заяви QA одит →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style is:global>
+  .score-cell { padding:24px 20px; text-align:center; }
+  .score-num  { font-family:'Space Mono',monospace; font-weight:700; font-size:44px; line-height:1; }
+  .score-lbl  { font-family:'Space Mono',monospace; font-size:9px; text-transform:uppercase; letter-spacing:.12em; color:#888; margin-top:6px; }
+  .score-ring { width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; border:4px solid; }
+  .s-green { color:#0cce6b; border-color:#0cce6b; }
+  .s-orange{ color:#ffa400; border-color:#ffa400; }
+  .s-red   { color:#ff4e42; border-color:#ff4e42; }
+
+  .vital-row { display:flex; align-items:center; gap:0; padding:14px 32px; background:white; flex-wrap:wrap; gap:12px; }
+  .vital-row:hover { background:#fafafa; }
+  .vital-name { font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#111; flex:1; min-width:160px; }
+  .vital-val  { font-family:'Space Mono',monospace; font-weight:700; font-size:18px; min-width:100px; }
+  .vital-ref  { font-size:10px; color:#888; min-width:120px; }
+  .vital-bar  { flex:1; height:6px; background:#eee; min-width:80px; }
+  .vital-fill { height:100%; transition:width .5s ease; }
+
+  .opp-row { padding:14px 32px; background:white; display:flex; gap:12px; align-items:flex-start; }
+  .opp-row:hover { background:#fafafa; }
+  .opp-save { font-family:'Space Mono',monospace; font-size:10px; font-weight:700; color:#f5a623; min-width:80px; }
+  .opp-title { font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:#111; margin-bottom:2px; }
+  .opp-desc  { font-size:11px; color:#888; line-height:1.5; }
+</style>
+
+<script>
+const PSI_API = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+const API_KEY = 'AIzaSyBkXFiPHuUMnGc5hKPGlTWvPcXbRzBnBQk'; // Google PSI public key
+
+const S_GOOD = 90, S_WARN = 50;
+function scoreColor(n) { return n >= S_GOOD ? 's-green'  : n >= S_WARN ? 's-orange' : 's-red'; }
+function scoreHex(n)   { return n >= S_GOOD ? '#0cce6b' : n >= S_WARN ? '#ffa400'  : '#ff4e42'; }
+
+function fmtMs(ms) {
+  if (ms >= 1000) return (ms/1000).toFixed(1) + ' сек';
+  return Math.round(ms) + ' ms';
+}
+
+async function runCheck() {
+  const urlInput = document.getElementById('site-url');
+  const btn = document.getElementById('check-btn');
+  let url = urlInput.value.trim();
+  if (!url) { urlInput.focus(); return; }
+  if (!url.startsWith('http')) url = 'https://' + url;
+
+  window._psiData = null;
+  btn.textContent = 'Анализира...';
+  btn.disabled = true;
+
+  const sec = document.getElementById('results-section');
+  sec.style.display = 'block';
+  document.getElementById('loading-state').style.display = 'block';
+  document.getElementById('report-state').style.display = 'none';
+  document.getElementById('error-state').style.display = 'none';
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Animated steps
+  const steps = [
+    'Свързване с Google PageSpeed Insights...',
+    'Зареждане на страницата в Google Chrome...',
+    'Измерване на Core Web Vitals...',
+    'Анализ на SEO и достъпност...',
+    'Събиране на препоръки...',
+    'Генериране на доклад...',
+  ];
+  const stepsEl = document.getElementById('loading-steps');
+  stepsEl.innerHTML = '';
+  let si = 0;
+  const stInt = setInterval(() => {
+    if (si < steps.length) {
+      stepsEl.insertAdjacentHTML('beforeend', `<div style="font-family:'Space Mono',monospace;font-size:10px;color:#888;display:flex;gap:8px;align-items:center;text-align:left"><span style="color:#f5e642;flex-shrink:0">▸</span>${steps[si]}</div>`);
+      si++;
+    }
+  }, 1800);
+
+  try {
+    // Fetch both mobile and desktop
+    const [mobRes, deskRes] = await Promise.all([
+      fetch(`${PSI_API}?url=${encodeURIComponent(url)}&strategy=mobile&key=${API_KEY}&category=performance&category=seo&category=accessibility&category=best-practices`),
+      fetch(`${PSI_API}?url=${encodeURIComponent(url)}&strategy=desktop&key=${API_KEY}&category=performance&category=seo&category=accessibility&category=best-practices`)
+    ]);
+
+    clearInterval(stInt);
+
+    if (!mobRes.ok) throw new Error('Google PageSpeed не може да анализира този URL. Провери дали сайтът е публично достъпен.');
+
+    const mob  = await mobRes.json();
+    const desk = await deskRes.json();
+
+    renderReport(url, mob, desk);
+    window._psiData = { url, mob, desk };
+
+  } catch(e) {
+    clearInterval(stInt);
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('error-state').style.display = 'block';
+    document.getElementById('error-msg').textContent = e.message || 'Неочаквана грешка. Провери URL адреса и опитай отново.';
+  }
+
+  btn.textContent = 'Анализирай →';
+  btn.disabled = false;
+}
+
+function renderReport(url, mob, desk) {
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('report-state').style.display = 'block';
+  document.getElementById('report-url-display').textContent = url;
+  document.getElementById('report-date').textContent = 'Анализирано: ' + new Date().toLocaleDateString('bg-BG', {day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) + ' · Данни: Google PageSpeed Insights';
+
+  const mCats  = mob.lighthouseResult?.categories || {};
+  const mAudit = mob.lighthouseResult?.audits || {};
+  const dCats  = desk.lighthouseResult?.categories || {};
+
+  // 4 score cells
+  const cats = [
+    { key:'performance',    label:'Скорост',      mob: Math.round((mCats.performance?.score||0)*100),    desk: Math.round((dCats.performance?.score||0)*100) },
+    { key:'seo',            label:'SEO',           mob: Math.round((mCats.seo?.score||0)*100),            desk: Math.round((dCats.seo?.score||0)*100) },
+    { key:'accessibility',  label:'Достъпност',   mob: Math.round((mCats.accessibility?.score||0)*100),  desk: Math.round((dCats.accessibility?.score||0)*100) },
+    { key:'best-practices', label:'Best Practices',mob: Math.round((mCats['best-practices']?.score||0)*100), desk: Math.round((dCats['best-practices']?.score||0)*100) },
+  ];
+
+  document.getElementById('score-grid').innerHTML = cats.map(c => `
+    <div class="score-cell">
+      <div class="score-lbl" style="margin-bottom:12px">${c.label}</div>
+      <div style="display:flex;justify-content:center;gap:16px">
+        <div style="text-align:center">
+          <div class="score-num ${scoreColor(c.mob)}" style="font-size:32px">${c.mob}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:#888;text-transform:uppercase;margin-top:2px">Mobile</div>
+        </div>
+        <div style="text-align:center">
+          <div class="score-num ${scoreColor(c.desk)}" style="font-size:32px">${c.desk}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:#888;text-transform:uppercase;margin-top:2px">Desktop</div>
+        </div>
+      </div>
+      <div style="height:4px;background:#eee;margin-top:10px;border-radius:0">
+        <div style="height:100%;width:${c.mob}%;background:${scoreHex(c.mob)};transition:width .6s"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // Core Web Vitals
+  const vitals = [
+    {
+      id: 'largest-contentful-paint', name: 'LCP — Largest Contentful Paint',
+      good: 'под 2.5 сек', bad: 'над 4.0 сек',
+      why: 'Колко бързо се зарежда основното съдържание. Ключова метрика за Google ranking.',
+      fmt: v => fmtMs(v?.numericValue || 0),
+      pct: v => Math.min((v?.numericValue||0) / 8000 * 100, 100),
+      col: v => { const s=(v?.numericValue||9999); return s<2500?'#0cce6b':s<4000?'#ffa400':'#ff4e42'; }
+    },
+    {
+      id: 'total-blocking-time', name: 'TBT — Total Blocking Time',
+      good: 'под 200ms', bad: 'над 600ms',
+      why: 'Колко дълго страницата е блокирана. Засяга интерактивността.',
+      fmt: v => fmtMs(v?.numericValue || 0),
+      pct: v => Math.min((v?.numericValue||0) / 1000 * 100, 100),
+      col: v => { const s=(v?.numericValue||9999); return s<200?'#0cce6b':s<600?'#ffa400':'#ff4e42'; }
+    },
+    {
+      id: 'cumulative-layout-shift', name: 'CLS — Cumulative Layout Shift',
+      good: 'под 0.1', bad: 'над 0.25',
+      why: 'Мести ли се страницата докато се зарежда. Лошо CLS = случайни кликове.',
+      fmt: v => (v?.numericValue||0).toFixed(3),
+      pct: v => Math.min((v?.numericValue||0) / 0.5 * 100, 100),
+      col: v => { const s=(v?.numericValue||9999); return s<0.1?'#0cce6b':s<0.25?'#ffa400':'#ff4e42'; }
+    },
+    {
+      id: 'speed-index', name: 'Speed Index',
+      good: 'под 3.4 сек', bad: 'над 5.8 сек',
+      why: 'Колко бързо се визуализира съдържанието.',
+      fmt: v => fmtMs(v?.numericValue || 0),
+      pct: v => Math.min((v?.numericValue||0) / 10000 * 100, 100),
+      col: v => { const s=(v?.numericValue||9999); return s<3400?'#0cce6b':s<5800?'#ffa400':'#ff4e42'; }
+    },
+    {
+      id: 'first-contentful-paint', name: 'FCP — First Contentful Paint',
+      good: 'под 1.8 сек', bad: 'над 3.0 сек',
+      why: 'Кога потребителят вижда първото съдържание.',
+      fmt: v => fmtMs(v?.numericValue || 0),
+      pct: v => Math.min((v?.numericValue||0) / 6000 * 100, 100),
+      col: v => { const s=(v?.numericValue||9999); return s<1800?'#0cce6b':s<3000?'#ffa400':'#ff4e42'; }
+    },
+  ];
+
+  document.getElementById('vitals-grid').innerHTML = vitals.map(v => {
+    const audit = mAudit[v.id];
+    const val = audit;
+    const color = v.col(val);
+    const pct = v.pct(val);
+    const display = v.fmt(val);
+    return `
+      <div class="vital-row">
+        <div class="vital-name">${v.name}</div>
+        <div class="vital-val" style="color:${color}">${display}</div>
+        <div class="vital-ref">✓ ${v.good}<br/>✗ ${v.bad}</div>
+        <div class="vital-bar"><div class="vital-fill" style="width:${pct}%;background:${color}"></div></div>
+        <div style="font-size:10px;color:#888;flex:1;min-width:140px;line-height:1.4">${v.why}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Opportunities
+  const oppKeys = ['render-blocking-resources','unused-css-rules','unused-javascript','uses-optimized-images','uses-webp-images','uses-text-compression','uses-responsive-images','efficient-animated-content'];
+  const opps = oppKeys.filter(k => { const a = mAudit[k]; return a && a.score !== null && a.score < 1 && a.details?.type === 'opportunity'; }).map(k => mAudit[k]);
+
+  if (opps.length > 0) {
+    document.getElementById('opportunities-wrap').style.display = 'block';
+    document.getElementById('opportunities-list').innerHTML = opps.slice(0,6).map(a => {
+      const save = a.details?.overallSavingsMs ? `Спестява ~${fmtMs(a.details.overallSavingsMs)}` : '';
+      return `
+        <div class="opp-row">
+          <div class="opp-save">${save || '!'}</div>
+          <div>
+            <div class="opp-title">${a.title}</div>
+            <div class="opp-desc">${a.description?.split('.')[0] || ''}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+async function downloadPDF() {
+  if (!window._psiData) return;
+  const { url, mob, desk } = window._psiData;
+  const mCats  = mob.lighthouseResult?.categories || {};
+  const dCats  = desk.lighthouseResult?.categories || {};
+  const mAudit = mob.lighthouseResult?.audits || {};
+
+  const scoreRow = (label, m, d) => `
+    <tr>
+      <td style="padding:8px 12px;font-weight:600;font-size:12px">${label}</td>
+      <td style="padding:8px 12px;font-family:monospace;font-weight:700;font-size:14px;color:${scoreHex(m)};text-align:center">${m}/100</td>
+      <td style="padding:8px 12px;font-family:monospace;font-weight:700;font-size:14px;color:${scoreHex(d)};text-align:center">${d}/100</td>
+    </tr>
+  `;
+
+  const perf_m  = Math.round((mCats.performance?.score||0)*100);
+  const seo_m   = Math.round((mCats.seo?.score||0)*100);
+  const acc_m   = Math.round((mCats.accessibility?.score||0)*100);
+  const bp_m    = Math.round((mCats['best-practices']?.score||0)*100);
+  const perf_d  = Math.round((dCats.performance?.score||0)*100);
+  const seo_d   = Math.round((dCats.seo?.score||0)*100);
+  const acc_d   = Math.round((dCats.accessibility?.score||0)*100);
+  const bp_d    = Math.round((dCats['best-practices']?.score||0)*100);
+  const lcp = mAudit['largest-contentful-paint'];
+  const tbt = mAudit['total-blocking-time'];
+  const cls = mAudit['cumulative-layout-shift'];
+  const si  = mAudit['speed-index'];
+  const fcp = mAudit['first-contentful-paint'];
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',sans-serif;background:white;color:#111;padding:32px;font-size:13px}
+    h1{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
+    .meta{font-size:10px;color:#888;font-family:monospace;text-transform:uppercase;letter-spacing:.08em}
+    .yellow-bar{height:6px;background:#f5e642;margin:20px 0}
+    table{width:100%;border-collapse:collapse;margin-bottom:24px}
+    th{background:#111;color:white;padding:10px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-family:monospace}
+    td{border-bottom:1px solid #eee}
+    .section{font-family:monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#888;border-bottom:2px solid #111;padding:6px 0;margin:20px 0 12px}
+    .vital-good{color:#0cce6b;font-family:monospace;font-weight:700}
+    .vital-warn{color:#ffa400;font-family:monospace;font-weight:700}
+    .vital-bad {color:#ff4e42;font-family:monospace;font-weight:700}
+    .footer{margin-top:32px;padding-top:12px;border-top:2px solid #111;display:flex;justify-content:space-between;font-size:10px;color:#888;font-family:monospace}
+    .note{background:#fffde7;border-left:4px solid #f5e642;padding:8px 12px;font-size:11px;color:#555;margin-bottom:16px}
+  </style></head><body>
+  <div style="background:#111;color:white;padding:24px;margin:-32px -32px 0">
+    <div style="font-family:monospace;font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">QA Health Check · buildify.bg</div>
+    <h1 style="color:white;margin-bottom:4px">QA Health Check Report</h1>
+    <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:8px">${url}</div>
+    <div style="font-family:monospace;font-size:9px;color:rgba(255,255,255,.3)">${new Date().toLocaleDateString('bg-BG',{day:'numeric',month:'long',year:'numeric'})} · Google PageSpeed Insights API</div>
+  </div>
+  <div style="height:6px;background:#f5e642;margin-bottom:24px"></div>
+  <div class="note">Данните са получени от Google PageSpeed Insights API — същия инструмент на pagespeed.web.dev. Резултатите се базират на симулация в Google Chrome.</div>
+  <div class="section">Оценки по категории</div>
+  <table>
+    <tr><th>Категория</th><th style="text-align:center">Mobile</th><th style="text-align:center">Desktop</th></tr>
+    ${scoreRow('Скорост (Performance)', perf_m, perf_d)}
+    ${scoreRow('SEO', seo_m, seo_d)}
+    ${scoreRow('Достъпност (Accessibility)', acc_m, acc_d)}
+    ${scoreRow('Best Practices', bp_m, bp_d)}
+  </table>
+  <div class="section">Core Web Vitals (Mobile)</div>
+  <table>
+    <tr><th>Метрика</th><th>Стойност</th><th>Референция</th><th>Статус</th></tr>
+    ${[
+      ['LCP', lcp, v => (v?.numericValue||0) < 2500 ? 'good' : (v?.numericValue||0) < 4000 ? 'warn' : 'bad', v => fmtMs(v?.numericValue||0), 'под 2.5 сек = добро'],
+      ['TBT', tbt, v => (v?.numericValue||0) < 200  ? 'good' : (v?.numericValue||0) < 600  ? 'warn' : 'bad', v => fmtMs(v?.numericValue||0), 'под 200ms = добро'],
+      ['CLS', cls, v => (v?.numericValue||0) < 0.1  ? 'good' : (v?.numericValue||0) < 0.25 ? 'warn' : 'bad', v => (v?.numericValue||0).toFixed(3), 'под 0.1 = добро'],
+      ['Speed Index', si, v => (v?.numericValue||0) < 3400 ? 'good' : (v?.numericValue||0) < 5800 ? 'warn' : 'bad', v => fmtMs(v?.numericValue||0), 'под 3.4 сек = добро'],
+      ['FCP', fcp, v => (v?.numericValue||0) < 1800 ? 'good' : (v?.numericValue||0) < 3000 ? 'warn' : 'bad', v => fmtMs(v?.numericValue||0), 'под 1.8 сек = добро'],
+    ].map(([name, audit, cls2, fmt, ref]) => {
+      const status = cls2(audit);
+      const label = status==='good'?'✓ Добро':status==='warn'?'! Внимание':'✗ Лошо';
+      const cls3  = `vital-${status}`;
+      return `<tr><td style="padding:8px 12px;font-weight:600">${name}</td><td style="padding:8px 12px" class="${cls3}">${fmt(audit)}</td><td style="padding:8px 12px;font-size:11px;color:#888">${ref}</td><td style="padding:8px 12px" class="${cls3}">${label}</td></tr>`;
+    }).join('')}
+  </table>
+  <div class="footer">
+    <span>■ buildify.bg · QA тестване от 150 лв.</span>
+    <span>buildify.bg/kontakt</span>
+  </div>
+  </body></html>`;
+
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  setTimeout(() => win.print(), 600);
+}
+
+document.getElementById('check-btn')?.addEventListener('click', runCheck);
+document.getElementById('site-url')?.addEventListener('keydown', e => { if (e.key === 'Enter') runCheck(); });
+document.getElementById('pdf-btn')?.addEventListener('click', downloadPDF);
+</script>
+
+</BaseLayout>

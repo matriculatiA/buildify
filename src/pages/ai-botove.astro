@@ -1,0 +1,686 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI ботове и чатботове за бизнес",
+  "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "description": "Разработка на AI чатботове за малкия и среден бизнес в България. Отговаря на клиенти 24/7 без теб.",
+  "areaServed": "Bulgaria"
+};
+
+
+const faqs = [
+  {
+    q: "Ще звучи ли роботски?",
+    a: "Не. Ботът се обучава с твой тон и начин на говорене. Ако пишеш неформално — ботът пише неформално. Ако си формален — същото. Повечето клиенти не разбират, че говорят с бот."
+  },
+  {
+    q: "Какво става ако не знае отговора?",
+    a: "Ботът е конфигуриран да казва честно \"не знам\" и да пренасочи клиента към теб — с линк за контакт, телефон или имейл. Никога не измисля отговори."
+  },
+  {
+    q: "Трябва ли ми ChatGPT акаунт или нещо друго?",
+    a: "Не. Ние управляваме всичко — API ключове, хостинг на бота, интеграцията. Ти просто получаваш работещ бот в сайта."
+  },
+  {
+    q: "Колко дълго трае обучението и инсталацията?",
+    a: "При готови материали — 3 до 5 работни дни. Ако трябва да събираме информацията заедно — до 1 седмица. Интеграцията в сайта е 1 ред код."
+  },
+  {
+    q: "Мога ли да го обновявам сам след това?",
+    a: "С пакета Поддръжка — ние го обновяваме месечно. При еднократна инсталация получаваш документация и инструкции. За по-сложни промени — свържи се с нас."
+  },
+  {
+    q: "Работи ли само на сайт или и в социалните мрежи?",
+    a: "Основната интеграция е в сайта. При нужда можем да го свържем и с Facebook Messenger или WhatsApp — обсъждаме при запитване."
+  },
+];
+---
+
+<BaseLayout
+  title="AI бот за бизнес | Чатбот разработка | buildify.bg"
+  description="Разработваме AI чатботове за бизнеса ти. Отговаря на клиенти 24/7, взима запитвания и записва часове. Интеграция в сайта от 1 ден."
+  schema={schema}
+>
+
+  <!-- ░░░ 01 HERO ░░░ -->
+  <section class="border-b-2 border-ink grid md:grid-cols-2 min-h-[60vh]">
+    <div class="bg-ink text-white px-8 md:px-14 py-16 flex flex-col justify-between">
+      <span class="font-mono text-xs text-white/25 uppercase tracking-widest">buildify.bg / AI ботове</span>
+      <div>
+        <h1 class="font-bold text-white leading-tight tracking-tightest mb-5" style="font-size:clamp(2.5rem,6vw,4.5rem)">
+          Отговаря на<br/>клиентите ти.<br/>
+          <span class="bg-yellow text-ink px-2">Денонощно.</span>
+        </h1>
+        <p class="text-white/40 text-base leading-relaxed max-w-sm">
+          Интелигентен AI асистент, обучен на твоя бизнес. Отговаря на въпроси, взима запитвания и насочва клиентите към запитване или покупка.
+        </p>
+      </div>
+      <a href="/kontakt" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors w-fit">
+        Заяви демо →
+      </a>
+    </div>
+    <div class="bg-cream px-8 md:px-14 py-16 flex flex-col justify-center gap-6 border-t-2 md:border-t-0 md:border-l-2 border-ink">
+      {[
+        { icon: "check", title: "ГУБИШ ЗАПИТВАНИЯ",    desc: "Клиент пише в 22:00 — няма кой да отговори. Ботът е там." },
+        { icon: "clock", title: "24/7 БЕЗ ТЕБ",        desc: "Работи докато спиш, в събота, на празник." },
+        { icon: "seo",   title: "ОБУЧЕН НА БИЗНЕСА ТИ",desc: "Знае цените, услугите и правилата ти." },
+      ].map(item => (
+        <div class="flex gap-4 items-start border-l-4 border-yellow pl-4">
+          <div class="shrink-0 mt-0.5"><Icon name={item.icon} size={20} /></div>
+          <div>
+            <div class="font-mono font-bold text-xs uppercase tracking-widest text-ink mb-1">{item.title}</div>
+            <div class="text-sm text-muted leading-relaxed">{item.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tech strip -->
+  <section class="bg-yellow border-b-2 border-ink">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-ink">
+      {[
+        { name: "Claude AI",     desc: "Най-добрият AI модел"  },
+        { name: "GPT-4o",        desc: "Алтернативен модел"    },
+        { name: "Твои данни",    desc: "Обучен на бизнеса ти"  },
+        { name: "1 ден",         desc: "Интеграция в сайта"    },
+      ].map(t => (
+        <div class="py-5 px-6 text-center">
+          <div class="font-mono font-bold text-ink text-base">{t.name}</div>
+          <div class="text-xs text-ink/50 mt-0.5">{t.desc}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ░░░ 02 LIVE DEMO ░░░ -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-yellow/20 px-8 py-5 flex items-center justify-between">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">01 · Живо демо — пробвай го сега</span>
+      <span class="font-mono text-xs text-yellow/50 uppercase tracking-widest">Без регистрация</span>
+    </div>
+
+    <div class="grid md:grid-cols-2">
+
+      <!-- Left: scenario selector -->
+      <div class="p-8 md:p-12 flex flex-col gap-7 border-b-2 md:border-b-0 md:border-r-2 border-white/10">
+        <div>
+          <h2 class="font-bold text-white leading-tight tracking-tight mb-3" style="font-size:clamp(1.6rem,3.5vw,2.4rem)">
+            Така изглежда при<br/><mark class="bg-yellow text-ink px-1 not-italic">твоя клиент.</mark>
+          </h2>
+          <p class="text-white/40 text-sm leading-relaxed">
+            Избери тип бизнес и задай въпрос. Точно така изглежда интегриран в твоя сайт.
+          </p>
+        </div>
+
+        <!-- Tabs -->
+        <div>
+          <div class="font-mono text-xs uppercase tracking-widest text-white/25 mb-3">Избери бизнес</div>
+          <div class="flex flex-col gap-2" id="ai-tabs">
+            <button class="ai-tab" data-persona="restaurant">
+              <span class="ai-tab-title">🍽️ Ресторант</span>
+              <span class="ai-tab-sub">Резервации, меню, доставки</span>
+            </button>
+            <button class="ai-tab" data-persona="salon">
+              <span class="ai-tab-title">✂️ Салон за красота</span>
+              <span class="ai-tab-sub">Часове, цени, стилисти</span>
+            </button>
+            <button class="ai-tab" data-persona="ecommerce">
+              <span class="ai-tab-title">🛒 Онлайн магазин</span>
+              <span class="ai-tab-sub">Доставки, връщания, поръчки</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 border-2 border-white/10 mt-auto">
+          <div class="p-4 text-center border-r border-white/10">
+            <div class="font-mono font-bold text-yellow text-xl">&lt; 1с</div>
+            <div class="font-mono text-xs text-white/30 uppercase mt-1">Отговор</div>
+          </div>
+          <div class="p-4 text-center border-r border-white/10">
+            <div class="font-mono font-bold text-yellow text-xl">24/7</div>
+            <div class="font-mono text-xs text-white/30 uppercase mt-1">Онлайн</div>
+          </div>
+          <div class="p-4 text-center">
+            <div class="font-mono font-bold text-yellow text-xl">∞</div>
+            <div class="font-mono text-xs text-white/30 uppercase mt-1">Разговори</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: chat widget -->
+      <div class="p-8 md:p-12 flex flex-col items-center justify-center bg-ink/60">
+        <div class="w-full max-w-sm">
+          <div class="ai-widget">
+            <div class="ai-wh" id="ai-wh">
+              <div class="ai-wh-avatar" id="ai-avatar">🍽️</div>
+              <div class="ai-wh-info">
+                <div class="ai-wh-name" id="ai-name">Ресторант Централ</div>
+                <div class="ai-wh-status">
+                  <span class="ai-dot"></span>
+                  <span id="ai-sub">Обичайно отговаря в рамките на минута</span>
+                </div>
+              </div>
+            </div>
+            <div class="ai-msgs" id="ai-msgs"></div>
+            <div class="ai-chips" id="ai-chips"></div>
+            <div class="ai-input-row">
+              <input id="ai-input" type="text" placeholder="Напишете въпрос..." class="ai-input" autocomplete="off" />
+              <button id="ai-send" class="ai-send">→</button>
+            </div>
+          </div>
+          <div class="mt-3 font-mono text-xs text-white/15 text-center uppercase tracking-widest">
+            buildify.bg · AI асистент демо
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░░ 03 КАК РАБОТИ ░░░ -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">02 · Процес</span>
+    </div>
+    <div class="grid md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+      {[
+        { num: "01", title: "Събираме информация", desc: "Предоставяш ни данни за бизнеса, услугите и честите въпроси." },
+        { num: "02", title: "Обучаваме бота",      desc: "Конфигурираме и тестваме AI модела с твоите данни." },
+        { num: "03", title: "Интегрираме",         desc: "Поставяме бота на сайта ти — 1 ред код, готово." },
+        { num: "04", title: "Оптимизираме",        desc: "Преглеждаме разговорите и подобряваме отговорите месечно." },
+      ].map(step => (
+        <div class="p-8 flex flex-col justify-between min-h-[180px]">
+          <span class="font-mono font-bold text-4xl text-ink/10">{step.num}</span>
+          <div>
+            <h3 class="font-bold text-base uppercase tracking-tight text-ink mb-2">{step.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{step.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ░░░ 04 ЗА КОГО ░░░ -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-yellow/20 px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">03 · За кого е</span>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
+      {[
+        {
+          icon: "clock",
+          title: "Получаваш едни и същи въпроси всеки ден",
+          desc: "Цени, работно време, наличност, доставка. Ботът отговаря вместо теб — точно, бързо, без да те откъсва от работата.",
+        },
+        {
+          icon: "check",
+          title: "Клиенти пишат извън работно време",
+          desc: "В 22:00, в събота, на празник. Докато спиш — ботът взима запитванията и ти ги предава сутринта.",
+        },
+        {
+          icon: "star",
+          title: "Не искаш да пропускаш потенциални клиенти",
+          desc: "Всяко неотговорено съобщение е изгубен клиент. Ботът не пропуска нито едно.",
+        },
+      ].map(item => (
+        <div class="p-8 md:p-10">
+          <div class="mb-5"><Icon name={item.icon} size={32} /></div>
+          <h3 class="font-bold text-base uppercase tracking-tight text-white mb-3">{item.title}</h3>
+          <p class="text-white/40 text-sm leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ░░░ 05 ПРЕДИ / СЛЕД ░░░ -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">04 · Разликата</span>
+    </div>
+    <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+
+      <!-- Без бот -->
+      <div class="p-8 md:p-12">
+        <div class="font-mono text-xs font-bold uppercase tracking-widest text-red-500 mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 bg-red-500 rounded-full inline-block"></span>
+          Без AI бот
+        </div>
+        <div class="space-y-5">
+          {[
+            { time: "22:14",  msg: "Клиент пита за цена и наличност" },
+            { time: "22:14",  msg: "Никой не отговаря — ти спиш" },
+            { time: "следващия ден", msg: "Клиентът вече е купил от конкурента" },
+            { time: "—",      msg: "Загубен клиент. Загубен приход." },
+          ].map((item, i) => (
+            <div class="flex gap-4 items-start">
+              <span class="font-mono text-xs text-muted/50 shrink-0 w-28 pt-0.5">{item.time}</span>
+              <div class={`text-sm leading-relaxed ${i === 3 ? 'font-bold text-red-600' : 'text-muted'}`}>
+                {item.msg}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- С бот -->
+      <div class="p-8 md:p-12 bg-ink">
+        <div class="font-mono text-xs font-bold uppercase tracking-widest text-yellow mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 bg-yellow rounded-full inline-block"></span>
+          С AI бот
+        </div>
+        <div class="space-y-5">
+          {[
+            { time: "22:14", msg: "Клиент пита за цена и наличност", hi: false },
+            { time: "22:14", msg: "Ботът отговаря веднага с точна информация", hi: false },
+            { time: "22:15", msg: "Клиентът задава още въпроси — получава отговори", hi: false },
+            { time: "22:17", msg: "Запитването е взето. Ти разбираш сутринта.", hi: true },
+          ].map(item => (
+            <div class="flex gap-4 items-start">
+              <span class="font-mono text-xs text-white/25 shrink-0 w-28 pt-0.5">{item.time}</span>
+              <div class={`text-sm leading-relaxed ${item.hi ? 'font-bold text-yellow' : 'text-white/60'}`}>
+                {item.msg}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ░░░ 06 FAQ ░░░ -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">05 · Въпроси</span>
+    </div>
+    <div class="divide-y-2 divide-ink" id="faq-list">
+      {faqs.map((faq, i) => (
+        <div class="faq-item">
+          <button class="faq-q" data-idx={i}>
+            <span>{faq.q}</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a" id={`faq-a-${i}`}>
+            <p>{faq.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ░░░ 07 ЦЕНИ ░░░ -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">06 · Цени</span>
+    </div>
+    <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+      {[
+        {
+          name: "Еднократна инсталация", price: "от 400 лв.",
+          desc: "Конфигурация, обучение и интеграция в сайта.",
+          features: ["Обучение на твоите данни", "Интеграция в сайта", "1 месец безплатна поддръжка", "Пълни права върху конфигурацията"],
+          featured: false,
+        },
+        {
+          name: "Инсталация + Поддръжка", price: "от 400 + 150 лв./мес.",
+          desc: "Препоръчан — ботът се подобрява с времето.",
+          features: ["Всичко от еднократния пакет", "Месечна оптимизация", "Добавяне на нови данни", "Приоритетна поддръжка", "Месечен отчет за разговорите"],
+          featured: true,
+        },
+      ].map(pkg => (
+        <div class={`p-8 md:p-12 ${pkg.featured ? 'bg-ink text-white' : ''}`}>
+          {pkg.featured && <span class="font-mono text-xs font-bold text-yellow uppercase tracking-widest block mb-4">Препоръчан</span>}
+          <h3 class={`font-bold text-xl uppercase tracking-tight mb-1 ${pkg.featured ? 'text-white' : 'text-ink'}`}>{pkg.name}</h3>
+          <div class={`font-mono font-bold text-2xl mb-2 ${pkg.featured ? 'text-yellow' : 'text-ink'}`}>{pkg.price}</div>
+          <p class={`text-sm mb-6 ${pkg.featured ? 'text-white/40' : 'text-muted'}`}>{pkg.desc}</p>
+          <ul class="space-y-2 mb-8">
+            {pkg.features.map(f => (
+              <li class="flex gap-3 items-start text-sm">
+                <Icon name="check" size={16} />
+                <span class={pkg.featured ? 'text-white/70' : 'text-muted'}>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="/kontakt" class={`inline-flex items-center gap-2 font-bold text-sm px-6 py-3 uppercase tracking-wide transition-colors ${pkg.featured ? 'bg-yellow text-ink hover:bg-yellow-dark' : 'bg-ink text-yellow hover:bg-ink/80'}`}>
+            Заяви демо →
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ░░░ 08 CTA ░░░ -->
+  <section class="bg-ink border-b-2 border-ink px-8 md:px-16 py-16">
+    <div class="max-w-3xl">
+      <h2 class="font-bold text-white leading-tight tracking-tightest mb-4" style="font-size:clamp(1.8rem,4vw,3rem)">
+        Готов да не пропускаш повече клиенти?
+      </h2>
+      <p class="text-white/40 mb-8">Правим безплатно демо с твоите данни. Без ангажименти.</p>
+      <a href="/kontakt" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+        Безплатно демо →
+      </a>
+    </div>
+  </section>
+
+  <!-- ░░░ STYLES ░░░ -->
+  <style is:global>
+    /* ── Demo tabs ── */
+    .ai-tab {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      padding: 12px 16px;
+      border: 2px solid rgba(255,255,255,.1);
+      background: transparent;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .ai-tab:hover { border-color: rgba(255,255,255,.25); }
+    .ai-tab.active { border-color: #f5e642; background: rgba(245,230,66,.08); }
+    .ai-tab-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.4);
+      display: block;
+    }
+    .ai-tab.active .ai-tab-title { color: #f5e642; }
+    .ai-tab-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,.25);
+      margin-top: 3px;
+      display: block;
+    }
+    .ai-tab.active .ai-tab-sub { color: rgba(255,255,255,.5); }
+
+    /* ── Widget ── */
+    .ai-widget {
+      border: 2px solid rgba(255,255,255,.15);
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      background: white;
+      overflow: hidden;
+    }
+    .ai-wh {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #111;
+      border-bottom: 2px solid rgba(255,255,255,.08);
+      flex-shrink: 0;
+    }
+    .ai-wh-avatar {
+      width: 38px; height: 38px;
+      border: 2px solid rgba(245,230,66,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+      background: rgba(245,230,66,.06);
+    }
+    .ai-wh-name { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; color:white; }
+    .ai-wh-status {
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      color: rgba(255,255,255,.35); margin-top: 2px;
+    }
+    .ai-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      box-shadow: 0 0 0 2px rgba(34,197,94,.25);
+    }
+    .ai-msgs {
+      flex: 1; overflow-y: auto; padding: 16px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: #f7f7f5;
+      scrollbar-width: thin; scrollbar-color: #ddd transparent;
+    }
+    .ai-mb {
+      align-self: flex-start; background: white;
+      border: 1px solid #e5e5e5; color: #111;
+      padding: 10px 13px; font-size: 13px; line-height: 1.55;
+      max-width: 86%; border-radius: 2px 10px 10px 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      animation: msgIn .2s ease;
+    }
+    .ai-mu {
+      align-self: flex-end; background: #111; color: #f5e642;
+      padding: 10px 13px; font-size: 13px; line-height: 1.55;
+      max-width: 86%; border-radius: 10px 2px 10px 10px;
+      animation: msgIn .2s ease;
+    }
+    @keyframes msgIn {
+      from { opacity:0; transform:translateY(6px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .ai-typing {
+      align-self: flex-start; background: white;
+      border: 1px solid #e5e5e5; padding: 12px 16px;
+      border-radius: 2px 10px 10px 10px;
+      display: flex; gap: 5px; align-items: center;
+    }
+    .ai-typing span {
+      width: 7px; height: 7px; background: #bbb;
+      border-radius: 50%; animation: aiDot 1.2s infinite;
+    }
+    .ai-typing span:nth-child(2) { animation-delay: .18s; }
+    .ai-typing span:nth-child(3) { animation-delay: .36s; }
+    @keyframes aiDot {
+      0%,80%,100% { transform:scale(.65); opacity:.4; }
+      40%         { transform:scale(1);   opacity:1; }
+    }
+    .ai-chips {
+      padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 5px;
+      background: white; border-top: 1px solid #ebebeb;
+      flex-shrink: 0; min-height: 40px;
+    }
+    .ai-chip {
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      font-weight: 700; padding: 4px 10px;
+      border: 1.5px solid #ddd; background: white;
+      color: #444; cursor: pointer; border-radius: 2px;
+      transition: all .12s; white-space: nowrap;
+    }
+    .ai-chip:hover { border-color:#111; color:#111; background:#f5f5f5; }
+    .ai-input-row {
+      display: flex; border-top: 2px solid #e5e5e5;
+      flex-shrink: 0; background: white;
+    }
+    .ai-input {
+      flex: 1; padding: 13px 14px; font-size: 13px;
+      font-family: 'Space Grotesk', sans-serif; color: #111;
+      border: none; outline: none; background: transparent;
+    }
+    .ai-input::placeholder { color: #aaa; }
+    .ai-send {
+      background: #111; color: #f5e642; border: none;
+      padding: 0 18px; font-family: 'Space Mono', monospace;
+      font-weight: 700; font-size: 16px; cursor: pointer;
+      flex-shrink: 0; transition: background .12s;
+    }
+    .ai-send:hover { background: #222; }
+
+    /* ── FAQ ── */
+    .faq-item {}
+    .faq-q {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      padding: 20px 32px; text-align: left;
+      background: transparent; border: none; cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 15px; color: #111;
+      transition: background .12s;
+    }
+    .faq-q:hover { background: rgba(0,0,0,.02); }
+    .faq-arrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 20px; font-weight: 400; color: #888;
+      flex-shrink: 0; transition: transform .2s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); color: #111; }
+    .faq-a {
+      display: none; padding: 0 32px 20px;
+    }
+    .faq-item.open .faq-a { display: block; }
+    .faq-a p { font-size: 14px; color: #666; line-height: 1.7; max-width: 640px; }
+  </style>
+
+  <!-- ░░░ SCRIPTS ░░░ -->
+  <script>
+  /* ─── Demo chatbot ─── */
+  const AI_PERSONAS = {
+    restaurant: {
+      name: 'Ресторант Централ', sub: 'Обичайно отговаря в рамките на минута', avatar: '🍽️',
+      greeting: 'Здравейте! Добре дошли в Ресторант Централ. С какво мога да ви помогна? 😊',
+      suggestions: ['Имате ли свободна маса?', 'Какво е менюто?', 'Работите ли в неделя?', 'Правите ли доставки?'],
+      rules: [
+        { keys: ['маса','резерв','запаз','свободн'], reply: 'Да, имаме свободни маси! За колко човека и на каква дата бихте желали да резервирате?' },
+        { keys: ['меню','ядене','храна','ястие','блюд'], reply: 'Нашето меню включва традиционна българска кухня и европейски специалитети. Обядно меню от 12.00 лв. Изпратете ни имейл за пълното меню.' },
+        { keys: ['неделя','събота','работ','часов','кога','откри'], reply: 'Работим всеки ден от 11:00 до 23:00, включително събота и неделя. 🕐' },
+        { keys: ['доставк','дома','адрес','куриер','вкъщи'], reply: 'Да, правим доставки в радиус 5 км! Минимална поръчка 25 лв., доставка 3.90 лв. Времетраене: 40-50 мин.' },
+        { keys: ['цена','колко','струва','лв'], reply: 'Предястия от 6 лв., основни ястия от 12 лв., десерти от 5 лв. Дневно обедно меню от 12 лв. с напитка.' },
+      ],
+      fallback: 'Благодаря за въпроса! За повече информация се свържете на тел. 0888 123 456. 😊'
+    },
+    salon: {
+      name: 'Beauty Studio BG', sub: 'Онлайн · Отговаряме веднага', avatar: '✂️',
+      greeting: 'Здравейте! Добре дошли в Beauty Studio ✨ Как мога да ви помогна днес?',
+      suggestions: ['Цена за подстригване?', 'Свободен час в петък?', 'Правите ли боядисване?', 'Колко трае процедурата?'],
+      rules: [
+        { keys: ['цена','колко','струва','лв','тариф'], reply: 'Нашите цени: Подстригване дама — 35 лв., Боядисване — от 60 лв., Кератин — от 120 лв., Маникюр — 25 лв. Имате ли конкретна процедура?' },
+        { keys: ['час','запаз','резерв','свободн','запис','петък','събота','понеделник','вторник','сряда','четвъртък'], reply: 'Имаме свободни часове тази седмица! Кой ден предпочитате — сутрин или следобед?' },
+        { keys: ['боядис','цвят','кичур','балеаж','руса','тъмна'], reply: 'Да, правим пълно боядисване, кичури и балеаж 🎨 От 60 до 200 лв. спрямо дължина. Препоръчваме кратка консултация преди процедурата.' },
+        { keys: ['трае','времетраен','минут','дълго'], reply: 'Подстригване: ~60 мин. Боядисване: 2-3 ч. Маникюр: 60 мин. Кератин: 3-4 ч. Ще уточним при резервацията.' },
+        { keys: ['стилист','майстор','кой'], reply: 'Работим с трима стилисти — Мария (боядисване), Елена (кератин) и Виктор (мъжки прически). Предпочитате ли конкретен?' },
+      ],
+      fallback: 'Радваме се на интереса ви! Свържете се на 0888 456 789 за резервации. До скоро! 💇'
+    },
+    ecommerce: {
+      name: 'ShopBG Онлайн', sub: 'Поддръжка · Пон–Пет 9:00–18:00', avatar: '🛒',
+      greeting: 'Здравейте! Добре дошли в ShopBG 🛒 Как мога да ви помогна с вашата поръчка?',
+      suggestions: ['Кога пристига поръчката?', 'Мога ли да върна продукт?', 'Безплатна доставка?', 'Как да следя пратката?'],
+      rules: [
+        { keys: ['пристига','доставк','кога','дни','срок','бърз'], reply: 'Доставката е 2-3 работни дни след потвърждение. При поръчка до 14:00 — изпращаме същия ден! Имате ли номер на поръчка?' },
+        { keys: ['върн','рекламац','дефект','счупен','повреден','замен','отказ'], reply: 'Приемаме връщания до 14 дни от получаването без основание. Продуктът трябва да е в оригинална опаковка. Пишете ни с номера на поръчката. 👍' },
+        { keys: ['безплатн','цена доставка','доставката колко'], reply: 'Безплатна доставка при поръчки над 80 лв.! Под тази сума — 5.99 лв. с Speedy или Econt.' },
+        { keys: ['следя','проследя','track','пратка','статус','номер'], reply: 'Изпращаме SMS с tracking номер при изпращане. Проследявате на сайта на Speedy/Econt с този номер.' },
+        { keys: ['плащ','карта','наложен','банков','начин'], reply: 'Приемаме: наложен платеж, банков превод и карта онлайн (Visa/Mastercard). Всички плащания са защитени с 3D Secure. 🔒' },
+      ],
+      fallback: 'За допълнителна помощ — тел. 0700 12 345. Работим Пон-Пет 9:00-18:00. 🙂'
+    }
+  };
+
+  let aiPersona = 'restaurant';
+  let aiTyping  = false;
+
+  function aiMatch(text) {
+    const lower = text.toLowerCase();
+    const p = AI_PERSONAS[aiPersona];
+    for (const rule of p.rules) {
+      if (rule.keys.some(k => lower.includes(k))) return rule.reply;
+    }
+    return p.fallback;
+  }
+
+  function aiAddMsg(text, isUser) {
+    const msgs = document.getElementById('ai-msgs');
+    const div  = document.createElement('div');
+    div.className = isUser ? 'ai-mu' : 'ai-mb';
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function aiShowTyping() {
+    const msgs = document.getElementById('ai-msgs');
+    const div  = document.createElement('div');
+    div.className = 'ai-typing';
+    div.id = 'ai-typing';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function aiHideTyping() { document.getElementById('ai-typing')?.remove(); }
+
+  function aiSend(text) {
+    if (!text.trim() || aiTyping) return;
+    document.getElementById('ai-input').value = '';
+    document.getElementById('ai-chips').innerHTML = '';
+    aiAddMsg(text, true);
+    aiTyping = true;
+    aiShowTyping();
+    setTimeout(() => {
+      aiHideTyping();
+      aiAddMsg(aiMatch(text), false);
+      aiTyping = false;
+    }, 700 + Math.random() * 500);
+  }
+
+  function aiRenderChips() {
+    const container = document.getElementById('ai-chips');
+    const p = AI_PERSONAS[aiPersona];
+    container.innerHTML = p.suggestions.map(s => `<button class="ai-chip">${s}</button>`).join('');
+  }
+
+  function aiInit(persona) {
+    aiPersona = persona;
+    aiTyping  = false;
+    const p = AI_PERSONAS[persona];
+    document.getElementById('ai-avatar').textContent = p.avatar;
+    document.getElementById('ai-name').textContent   = p.name;
+    document.getElementById('ai-sub').textContent    = p.sub;
+    document.getElementById('ai-msgs').innerHTML     = '';
+    aiShowTyping();
+    setTimeout(() => {
+      aiHideTyping();
+      aiAddMsg(p.greeting, false);
+      aiRenderChips();
+    }, 550);
+  }
+
+  // Chip clicks via delegation on container
+  document.getElementById('ai-chips').addEventListener('click', e => {
+    const chip = e.target.closest('.ai-chip');
+    if (chip) aiSend(chip.textContent);
+  });
+
+  // Tab switching — track active to avoid querying all
+  let activeTab = null;
+  document.querySelectorAll('.ai-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeTab?.classList.remove('active');
+      tab.classList.add('active');
+      activeTab = tab;
+      aiInit(tab.dataset.persona);
+    });
+  });
+
+  document.getElementById('ai-send').addEventListener('click', () => aiSend(document.getElementById('ai-input').value));
+  document.getElementById('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') aiSend(e.target.value); });
+
+  activeTab = document.querySelector('.ai-tab[data-persona="restaurant"]');
+  activeTab?.classList.add('active');
+  aiInit('restaurant');
+
+  // FAQ accordion — track open item to avoid querying all
+  let openFaq = null;
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      if (openFaq && openFaq !== item) openFaq.classList.remove('open');
+      item.classList.toggle('open');
+      openFaq = item.classList.contains('open') ? item : null;
+    });
+  });
+  </script>
+
+</BaseLayout>

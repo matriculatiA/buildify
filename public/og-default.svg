@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#111111"/>
+  <!-- Yellow accent bar top -->
+  <rect width="1200" height="8" fill="#F5E642"/>
+  <!-- Yellow accent bar bottom -->
+  <rect y="622" width="1200" height="8" fill="#F5E642"/>
+  <!-- Border lines -->
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#F5E642" stroke-width="2" stroke-opacity="0.2"/>
+
+  <!-- Logo text -->
+  <text x="80" y="140" font-family="monospace" font-size="72" font-weight="700" fill="#F5E642" letter-spacing="-2">buildify</text>
+  <text x="524" y="140" font-family="monospace" font-size="72" font-weight="700" fill="#ffffff">.</text>
+  <text x="554" y="140" font-family="monospace" font-size="72" font-weight="700" fill="#F5E642">bg</text>
+
+  <!-- Tagline -->
+  <text x="80" y="210" font-family="monospace" font-size="20" fill="#ffffff" fill-opacity="0.4" letter-spacing="4" text-transform="uppercase">ДИГИТАЛНИ ИНСТРУМЕНТИ ЗА БИЗНЕСА</text>
+
+  <!-- Divider -->
+  <rect x="80" y="250" width="200" height="2" fill="#F5E642" fill-opacity="0.4"/>
+
+  <!-- Services -->
+  <text x="80" y="330" font-family="monospace" font-size="28" font-weight="700" fill="#ffffff">Уебсайтове</text>
+  <text x="80" y="375" font-family="monospace" font-size="28" font-weight="700" fill="#ffffff">AI ботове</text>
+  <text x="80" y="420" font-family="monospace" font-size="28" font-weight="700" fill="#ffffff">QA тестване</text>
+  <text x="80" y="465" font-family="monospace" font-size="28" font-weight="700" fill="#ffffff">Плъгини</text>
+
+  <!-- Right side arrow decoration -->
+  <text x="900" y="360" font-family="monospace" font-size="180" font-weight="700" fill="#F5E642" fill-opacity="0.15">→</text>
+
+  <!-- URL -->
+  <text x="80" y="560" font-family="monospace" font-size="18" fill="#F5E642" fill-opacity="0.6" letter-spacing="2">buildify.bg</text>
+</svg>

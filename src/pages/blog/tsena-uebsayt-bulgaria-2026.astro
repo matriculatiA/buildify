@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Колко струва изработката на уебсайт в България за 2026?",
+  "author": { "@type": "Organization", "name": "buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-15",
+  "dateModified": "2026-03-15"
+};
+---
+
+<BaseLayout
+  title="Колко струва изработката на уебсайт в България за 2026? | buildify.bg"
+  description="Пълен ценови наръчник за изработка на уебсайт в България. Реални цени, сравнение на опции, какво трябва да е включено. Актуално за 2026."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">SEO</span>
+        <span class="font-mono text-xs text-white/25">Март 2026</span>
+        <span class="font-mono text-xs text-white/25">6 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Колко струва изработката<br/>
+        на уебсайт в <mark class="bg-yellow text-ink px-2 not-italic">България за 2026?</mark>
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Получаваш оферти от 300 до 25 000 лв. за "сайт". Ето защо разликата е толкова голяма и как да не надплатиш.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- SECTION 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Защо цените са толкова различни</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Питаш "Колко струва сайт?" е като да питаш "Колко струва кола?". Зависи дали искаш Dacia или BMW. И двете са коли, но разликата е огромна.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Пет фактора определят цената: брой страници, custom vs. шаблонен дизайн, функционалност, кой го прави и дали SEO е включен. Последното е най-честата грешка - сайт без SEO е като магазин в необитаем квартал.
+        </p>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Сайт без SEO е като магазин в необитаем квартал. Красив, скъп и невидим."
+        </p>
+      </div>
+
+      <!-- SECTION 02 - PRICE TABLE -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Реални цени за 2026</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Тип</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Цена</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">За кого</span>
+          </div>
+          {[
+            { type: "Landing page",            price: "300-800 лв.",       who: "Стартиращ бизнес, промо страница" },
+            { type: "Бизнес сайт (5-10 стр.)", price: "800-3 000 лв.",    who: "Малък и среден бизнес" },
+            { type: "Корпоративен сайт",        price: "3 000-10 000 лв.", who: "По-голям бизнес, CMS, многоезичен" },
+            { type: "E-commerce",               price: "2 500-25 000+ лв.", who: "Онлайн магазин с плащания" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.type}</span>
+              <span class="font-mono font-bold text-sm text-ink">{row.price}</span>
+              <span class="text-xs text-muted leading-relaxed">{row.who}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "73%", lbl: "Сайтове без SEO оптимизация" },
+          { val: "48h", lbl: "Средно за оферта от buildify.bg" },
+          { val: "0",   lbl: "Скрити такси при нас" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- SECTION 03 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Агенция, фрийлансър или Wix?</span>
+        </div>
+        <div class="space-y-4">
+          {[
+            { icon: "link-broken", name: "Конструктор (Wix, Squarespace)", pro: "Евтино, сам го правиш", con: "Лоша скорост, ограничен SEO, зависиш от платформата", verdict: "За хоби проект или MVP тест" },
+            { icon: "web",         name: "Фрийлансър",                    pro: "Средна цена, директен контакт", con: "Голяма разлика в качеството, рисков ако изчезне", verdict: "За малки проекти с нисък бюджет" },
+            { icon: "check",       name: "Агенция / buildify.bg",         pro: "Качество, SEO включен, отговорност", con: "По-висока начална инвестиция", verdict: "За сериозен бизнес, иска резултати" },
+          ].map(opt => (
+            <div class="bg-white border-2 border-ink p-5">
+              <div class="flex gap-3 items-center mb-3">
+                <Icon name={opt.icon} size={22} />
+                <span class="font-bold text-base uppercase tracking-tight text-ink">{opt.name}</span>
+              </div>
+              <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="flex gap-2 text-muted"><span class="text-green-600 font-bold shrink-0">+</span>{opt.pro}</div>
+                <div class="flex gap-2 text-muted"><span class="text-red-500 font-bold shrink-0">-</span>{opt.con}</div>
+              </div>
+              <div class="font-mono text-xs text-ink/40 uppercase tracking-wide mt-3 border-t border-border pt-2">{opt.verdict}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 04 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Какво ТРЯБВА да е включено</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">Много оферти изглеждат евтино докато не видиш какво липсва:</p>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          {[
+            "SEO оптимизация - мета тагове, schema markup, sitemap",
+            "Mobile-responsive дизайн на всички устройства",
+            "SSL сертификат (https://)",
+            "Базова скоростна оптимизация",
+            "Google Analytics и Search Console настройка",
+            "Обучение как да управляваш сайта",
+          ].map((item, i) => (
+            <div class="flex gap-4 items-center px-5 py-4 bg-white">
+              <span class="font-mono font-bold text-sm bg-ink text-yellow px-2 py-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <span class="text-sm text-ink">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Уебсайтове</div>
+            <div class="font-bold text-white text-xl tracking-tight">Вземи безплатна оценка за проекта си</div>
+            <p class="text-white/40 text-sm mt-1">30 минути разговор. Конкретна цена и срок. Без задължения.</p>
+          </div>
+          <a href="/kontakt" class="shrink-0 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+            Безплатна консултация →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Защо сайтът ти губи клиенти заради технически грешки?",
+  "author": { "@type": "Organization", "name": "buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-02-20",
+  "dateModified": "2026-02-20"
+};
+---
+
+<BaseLayout
+  title="Защо сайтът ти губи клиенти заради технически грешки? | buildify.bg"
+  description="Счупени форми, бавно зареждане, мобилни бъгове - как тези невидими технически грешки блокират продажбите ти и как да ги хванеш навреме."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">QA</span>
+        <span class="font-mono text-xs text-white/25">Февруари 2026</span>
+        <span class="font-mono text-xs text-white/25">4 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Защо сайтът ти губи клиенти<br/>
+        заради <mark class="bg-yellow text-ink px-2 not-italic">технически грешки?</mark>
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Повечето собственици разбират за проблемите в сайта от недоволен клиент. Или не разбират никога. Ето какво се случва зад кулисите.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- SECTION 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Невидимите убийци на продажбите</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Клиент отваря сайта ти в неделя вечер. Попълва формата за контакт и натиска изпрати. Нищо не се случва. Страницата се презарежда. Той опитва два пъти, решава че фирмата не работи добре и отваря следващия резултат в Google.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          <strong>Ти не разбираш за това.</strong> Формата изглежда наред на твоя компютър. Но на iPhone Safari се чупи от 6 месеца.
+        </p>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "30%", lbl: "Изгубени запитвания заради счупени форми" },
+          { val: "7s",  lbl: "Зареждане = половината посетители напускат" },
+          { val: "70%", lbl: "От трафика е от мобилни устройства" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Сайтът изглежда наред на твоя компютър. За клиентите може да е счупен от месеци."
+        </p>
+      </div>
+
+      <!-- SECTION 02 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Четирите най-чести проблема</span>
+        </div>
+        <div class="space-y-4">
+          {[
+            { icon: "form-broken", title: "Счупена контактна форма",  impact: "Критично",       desc: "Потребителят попълва формата, натиска Изпрати и нищо не се случва. При 100 запитвания, 20-30% се губят заради форми с проблеми." },
+            { icon: "speed",       title: "Бавно зареждане",          impact: "Много сериозно", desc: "Всяка секунда забавяне намалява конверсията с 7%. Сайт зареждащ се за 5 секунди губи над 50% от посетителите." },
+            { icon: "mobile-broken", title: "Счупена мобилна версия", impact: "Сериозно",       desc: "70% от трафика е мобилен. Ако на телефон бутоните са твърде малки или менюто не работи - губиш мнозинството." },
+            { icon: "link-broken", title: "404 грешки",               impact: "Умерено",        desc: "Линк към несъществуваща страница. Лошо за потребителя, лошо за SEO. Google наказва сайтове с много 404 грешки." },
+          ].map(err => (
+            <div class="flex gap-5 items-start bg-white border-2 border-ink p-5">
+              <div class="shrink-0 mt-0.5"><Icon name={err.icon} size={28} /></div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="font-bold text-base uppercase tracking-tight text-ink">{err.title}</span>
+                  <span class="font-mono text-xs font-bold text-ink/40 uppercase">{err.impact}</span>
+                </div>
+                <p class="text-muted text-sm leading-relaxed">{err.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 03 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Провери сам - 5 минути</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">
+          Без специални инструменти. Само телефон и браузър:
+        </p>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          {[
+            "Отвори сайта от iPhone и от Android телефон",
+            "Попълни контактната форма с реален имейл и провери дали го получаваш",
+            "Тествай в Chrome, Safari и Firefox",
+            "Провери скоростта на pagespeed.web.dev (безплатно)",
+            "Погледни Google Search Console за crawl грешки",
+          ].map((check, i) => (
+            <div class="flex gap-4 items-center px-5 py-4 bg-white">
+              <span class="font-mono font-bold text-sm bg-ink text-yellow px-2 py-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <span class="text-sm text-ink">{check}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / QA тестване</div>
+            <div class="font-bold text-white text-xl tracking-tight">Искаш пълна проверка на сайта?</div>
+            <p class="text-white/40 text-sm mt-1">Доклад с всяка грешка и как да се оправи. Стартира от 150 лв.</p>
+          </div>
+          <a href="/qa-testing" class="shrink-0 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+            QA тест от 150 лв. →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

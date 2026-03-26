@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Контакти - Безплатна консултация | buildify.bg"
+  description="Свържи се с buildify.bg за безплатна консултация. Отговаряме до 48 часа."
+>
+
+  <!-- Header -->
+  <section class="grid md:grid-cols-2 border-b-2 border-ink min-h-[30vh]">
+    <div class="bg-ink p-10 md:p-16 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-yellow/20">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30">buildify.bg / контакт</span>
+      <div>
+        <h1 class="font-bold text-5xl md:text-6xl text-white uppercase tracking-tightest leading-tight mb-4">
+          Да<br/><span class="text-yellow">поговорим.</span>
+        </h1>
+        <p class="text-white/40 text-base">30 минути безплатно. Без задължения. Отговаряме до 48 часа.</p>
+      </div>
+    </div>
+    <div class="bg-cream p-10 md:p-16 flex flex-col justify-center gap-4">
+      {[
+        'Безплатен преглед на текущото ти онлайн присъствие',
+        'Конкретна цена и срок — не "зависи"',
+        'Отговор на въпроси без продаване',
+        'Без договори при стартова консултация',
+      ].map(item => (
+        <div class="flex items-start gap-3 border-l-4 border-yellow pl-4 py-1">
+          <span class="font-mono text-xs text-yellow shrink-0 mt-0.5">✓</span>
+          <span class="text-sm font-semibold text-ink">{item}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="bg-cream border-b-2 border-ink p-10 md:p-16">
+    <div class="max-w-2xl">
+
+      <!-- Success message (hidden by default) -->
+      <div id="form-success" style="display:none" class="bg-ink border-2 border-ink p-8 mb-6 text-center">
+        <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-3">✓ Съобщението е изпратено</div>
+        <p class="text-white/60 text-sm">Ще се свържем с теб до 48 часа.</p>
+      </div>
+
+      <form
+        id="contact-form"
+        class="border-2 border-ink"
+      >
+        <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-b-2 border-ink">
+          <div class="p-6 flex flex-col gap-2">
+            <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Твоето име *</label>
+            <input
+              type="text" name="name" required placeholder="Иван Иванов"
+              class="bg-transparent font-semibold text-ink placeholder:text-ink/20 outline-none text-base"
+            />
+          </div>
+          <div class="p-6 flex flex-col gap-2">
+            <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Имейл *</label>
+            <input
+              type="email" name="email" required placeholder="ivan@firma.bg"
+              class="bg-transparent font-semibold text-ink placeholder:text-ink/20 outline-none text-base"
+            />
+          </div>
+        </div>
+
+        <div class="p-6 flex flex-col gap-2 border-b-2 border-ink">
+          <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Телефон (незадължително)</label>
+          <input
+            type="tel" name="phone" placeholder="+359 88 888 8888"
+            class="bg-transparent font-semibold text-ink placeholder:text-ink/20 outline-none text-base"
+          />
+        </div>
+
+        <div class="p-6 flex flex-col gap-2 border-b-2 border-ink">
+          <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Интересувам се от</label>
+          <select name="service" class="bg-transparent font-semibold text-ink outline-none text-base cursor-pointer">
+            <option value="">Избери...</option>
+            <option>Уебсайт</option>
+            <option>Плъгин</option>
+            <option>AI бот</option>
+            <option>Не знам още</option>
+          </select>
+        </div>
+
+        <div class="p-6 flex flex-col gap-2 border-b-2 border-ink">
+          <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Съобщение</label>
+          <textarea
+            name="message" rows="4"
+            placeholder="Разкажи накратко какво ти трябва..."
+            class="bg-transparent font-semibold text-ink placeholder:text-ink/20 outline-none text-base resize-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          id="submit-btn"
+          class="w-full bg-yellow text-ink font-bold uppercase tracking-wider py-5 text-sm hover:bg-yellow-dark transition-colors"
+        >
+          Изпрати запитване →
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Изпраща...';
+    btn.disabled = true;
+
+    const data = new FormData(this);
+    try {
+      const res = await fetch('https://formspree.io/f/xjgpvgle', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        btn.textContent = 'Грешка — опитай отново';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Грешка — опитай отново';
+      btn.disabled = false;
+    }
+  });
+</script>

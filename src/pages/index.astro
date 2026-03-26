@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "buildify.bg",
+  "url": "https://buildify.bg",
+  "description": "Изработка на уебсайтове за малкия бизнес в България. SEO-ready, бързи, без скрити такси.",
+};
+
+const services = [
+  { num: '01', icon: 'web',    title: 'Уебсайтове',  desc: 'Сайт, който се намира в Google и превръща посетителите в клиенти.',  href: '/websites'  },
+  { num: '02', icon: 'plugin', title: 'Плъгини',     desc: 'Резервации, калкулатори, форми — точно каквото ти трябва.',           href: '/plugini'   },
+  { num: '03', icon: 'bot',    title: 'AI ботове',   desc: 'Асистент, обучен на твоя бизнес. Отговаря на клиенти 24/7.',          href: '/ai-botove' },
+];
+---
+
+<BaseLayout
+  title="buildify.bg | Изработка на уебсайтове в България"
+  description="Правим уебсайтове за малкия бизнес в България. SEO-ready от ден 1, мобилна версия, без скрити такси. Богдан Димитров, Бургас."
+  schema={schema}
+>
+
+<!-- HERO -->
+<section class="border-b-2 border-ink">
+  <div class="flex flex-col md:grid md:grid-cols-2 md:min-h-[92vh]">
+
+    <!-- LEFT black -->
+    <div class="bg-ink flex flex-col justify-between px-7 py-10 md:px-16 md:py-16 md:border-r-2 border-ink">
+      <p class="font-mono text-xs uppercase tracking-widest text-white/25">
+        buildify.bg — Бургас, България — 2026
+      </p>
+
+      <div class="py-10 md:py-0">
+        <h1 class="font-sans font-bold text-white leading-[1.0] tracking-tightest mb-6"
+            style="font-size: clamp(2.8rem, 10vw, 5.5rem)">
+          Сайт, който<br/>
+          <mark class="bg-yellow text-ink px-2 not-italic">носи клиенти.</mark><br/>
+          Не само изглежда добре.
+        </h1>
+        <p class="text-white/40 text-base leading-relaxed max-w-sm">
+          Правим уебсайтове, плъгини и AI ботове за малкия бизнес в България. Бързо, честно, с резултати.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <a href="/kontakt"
+           class="flex items-center justify-between bg-yellow text-ink font-bold uppercase tracking-wider text-sm px-6 py-4 hover:bg-yellow-dark transition-colors group">
+          Безплатна консултация
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+        <a href="#uslugi"
+           class="flex items-center justify-between border-2 border-white/20 text-white/60 font-semibold uppercase tracking-wider text-sm px-6 py-4 hover:border-yellow hover:text-yellow transition-colors group">
+          Виж услугите
+          <span class="group-hover:translate-y-0.5 transition-transform">↓</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT cream — desktop only -->
+    <div class="hidden md:flex bg-cream flex-col border-t-2 md:border-t-0 border-ink">
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 border-b-2 border-ink divide-x-2 divide-y-2 divide-ink">
+        {[
+          { val: '7+',   label: 'Години опит в уеб разработка' },
+          { val: '48ч',  label: 'Максимален отговор на запитване' },
+          { val: '0',    label: 'Скрити такси — цената е цената' },
+          { val: 'SEO',  label: 'Включено от ден 1 — не като добавка' },
+        ].map(s => (
+          <div class="p-8">
+            <span class="font-mono font-bold text-3xl text-ink block">{s.val}</span>
+            <span class="text-xs uppercase tracking-widest text-muted font-semibold block mt-1">{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Services list -->
+      <div class="flex flex-col divide-y-2 divide-ink flex-1">
+        {services.map(s => (
+          <a href={s.href}
+             class="group flex items-center justify-between px-10 py-5 hover:bg-ink transition-colors duration-200 flex-1">
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-muted group-hover:text-white/30 transition-colors w-6 shrink-0">{s.num}</span>
+              <div>
+                <span class="font-bold text-lg uppercase tracking-tight group-hover:text-yellow transition-colors block">{s.title}</span>
+                <span class="text-xs text-muted group-hover:text-white/40 transition-colors mt-0.5 block">{s.desc}</span>
+              </div>
+            </div>
+            <span class="text-xl text-muted group-hover:text-yellow group-hover:translate-x-1 transition-all duration-200 shrink-0">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOBILE услуги -->
+<div class="md:hidden bg-cream border-b-2 border-ink">
+  <div class="grid grid-cols-2 border-b-2 border-ink">
+    {[
+      { val: '7+', label: 'Год. опит' },
+      { val: '0',  label: 'Скрити такси' },
+    ].map(s => (
+      <div class="p-5 border-r-2 last:border-r-0 border-ink">
+        <span class="font-mono font-bold text-2xl text-ink block">{s.val}</span>
+        <span class="text-xs uppercase tracking-widest text-muted font-semibold block mt-0.5">{s.label}</span>
+      </div>
+    ))}
+  </div>
+  <div class="flex flex-col divide-y-2 divide-ink">
+    {services.map(s => (
+      <a href={s.href}
+         class="group flex items-center justify-between px-6 py-4 hover:bg-ink transition-colors duration-200">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs text-muted group-hover:text-white/30 w-5 shrink-0">{s.num}</span>
+          <span class="font-bold text-base uppercase tracking-tight group-hover:text-yellow transition-colors">{s.title}</span>
+        </div>
+        <span class="text-lg text-muted group-hover:text-yellow transition-colors shrink-0">→</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="bg-yellow border-b-2 border-ink overflow-hidden py-3">
+  <div class="flex whitespace-nowrap" style="animation: marquee 22s linear infinite">
+    {Array(6).fill(null).map(() => (
+      <span class="inline-flex items-center gap-5 pr-10 font-mono font-bold text-xs text-ink uppercase tracking-widest shrink-0">
+        <span class="w-1.5 h-1.5 bg-ink rounded-full inline-block"></span> Уебсайтове от 700 лв.
+        <span class="w-1.5 h-1.5 bg-ink rounded-full inline-block"></span> SEO included
+        <span class="w-1.5 h-1.5 bg-ink rounded-full inline-block"></span> AI Ботове
+        <span class="w-1.5 h-1.5 bg-ink rounded-full inline-block"></span> Плъгини по мярка
+        <span class="w-1.5 h-1.5 bg-ink rounded-full inline-block"></span> buildify.bg
+      </span>
+    ))}
+  </div>
+</div>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="border-b-2 border-ink">
+  <div class="grid md:grid-cols-2">
+    <div class="bg-cream px-8 md:px-14 py-12 border-b-2 md:border-b-0 md:border-r-2 border-ink">
+      <div class="font-mono text-xs uppercase tracking-widest text-muted font-bold mb-6">Познато ли е това?</div>
+      <div class="space-y-4">
+        {[
+          'Имаш сайт, но никой не те намира в Google',
+          'Клиентите звънят "не можах да намеря контактна форма"',
+          'Сайтът изглежда зле на телефон',
+          'Плащаш поддръжка, но не знаеш за какво точно',
+        ].map(prob => (
+          <div class="flex gap-3 items-start">
+            <span class="font-mono text-sm text-ink/20 shrink-0 mt-0.5">✗</span>
+            <span class="text-sm text-ink leading-relaxed">{prob}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="bg-ink px-8 md:px-14 py-12">
+      <div class="font-mono text-xs uppercase tracking-widest text-yellow/40 font-bold mb-6">Така работим ние</div>
+      <div class="space-y-4">
+        {[
+          'SEO оптимизация включена от ден 1 — не като добавка',
+          'Тестваме всяка форма, всяка страница преди пускане',
+          'Mobile-first — правим за телефон, после за компютър',
+          'Фиксирана цена. Без изненади след подписване.',
+        ].map(sol => (
+          <div class="flex gap-3 items-start">
+            <span class="font-mono text-sm text-yellow shrink-0 mt-0.5">✓</span>
+            <span class="text-sm text-white/70 leading-relaxed">{sol}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- УСЛУГИ КАРТИ -->
+<section id="uslugi" class="scroll-mt-14 border-b-2 border-ink">
+  <div class="flex items-center justify-between px-8 py-5 border-b-2 border-ink bg-cream">
+    <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Услуги</span>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-[auto]">
+    {[
+      { num: '01', icon: 'web',    title: 'Уебсайтове',  href: '/websites',   price: 'от 700 лв.',
+        desc: 'Бързи, SEO-оптимизирани сайтове за малкия бизнес. Намират се в Google, работят на телефон, превръщат посетителите в клиенти.',
+        tags: ['Landing page', 'Бизнес сайт', 'SEO included'] },
+      { num: '02', icon: 'plugin', title: 'Плъгини',     href: '/plugini',    price: 'от 300 лв.',
+        desc: 'Резервационна система, ценови калкулатор, онлайн поръчки — конкретна функционалност вградена директно в сайта.',
+        tags: ['Резервации', 'Калкулатори', 'По мярка'] },
+      { num: '03', icon: 'bot',    title: 'AI ботове',   href: '/ai-botove',  price: 'от 400 лв.',
+        desc: 'Чатбот, обучен на информацията за твоя бизнес. Отговаря на клиенти 24/7, приема запитвания, пази работното ти време.',
+        tags: ['24/7 отговор', 'Custom обучение', 'Интеграция'] },
+    ].map((s, i) => (
+      <a href={s.href}
+         class={`group block px-6 py-7 md:p-10 border-b-2 border-ink bg-cream hover:bg-ink transition-colors duration-200
+           ${i === 0 ? 'md:border-r-2' : ''}
+           ${i === 2 ? 'md:col-span-2 md:border-b-0' : ''}`}>
+        <div class="flex items-start justify-between mb-5">
+          <Icon name={s.icon} size={40} />
+          <span class="font-mono text-xs font-bold border-2 border-ink group-hover:border-yellow text-ink group-hover:text-yellow px-3 py-1 transition-colors">{s.price}</span>
+        </div>
+        <h2 class="font-bold text-xl md:text-2xl uppercase tracking-tight text-ink group-hover:text-yellow transition-colors mb-2">{s.title}</h2>
+        <p class="text-muted text-sm leading-relaxed group-hover:text-white/40 transition-colors mb-5">{s.desc}</p>
+        <div class="flex flex-wrap gap-2">
+          {s.tags.map(t => (
+            <span class="text-xs font-mono border border-ink/20 group-hover:border-white/20 text-muted group-hover:text-white/40 px-2.5 py-1 transition-colors">{t}</span>
+          ))}
+        </div>
+        <div class="mt-5 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted group-hover:text-yellow transition-colors">
+          Виж повече <span class="group-hover:translate-x-1 transition-transform inline-block">→</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<!-- КАК РАБОТИМ -->
+<section class="border-b-2 border-ink">
+  <div class="flex flex-col md:grid md:grid-cols-4">
+    <div class="bg-ink px-8 py-10 md:p-10 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-ink">
+      <h2 class="font-bold text-2xl uppercase tracking-tight text-yellow leading-tight">
+        Как<br/>работим
+      </h2>
+      <p class="font-mono text-xs text-white/25 uppercase tracking-widest mt-4">3 стъпки. Без изненади.</p>
+    </div>
+    {[
+      { num: '01', title: 'Разговор',    desc: '30 мин. безплатна консултация. Казваш какво искаш, ние казваме честно дали може и на каква цена.' },
+      { num: '02', title: 'Изграждане', desc: 'Правим, тестваме, показваме. Ти одобряваш. Нищо не се пуска без твоето окей.' },
+      { num: '03', title: 'Пускане',    desc: 'Деплойваме, проверяваме, предаваме. Получаваш продукт, не обещание.' },
+    ].map((step, i) => (
+      <div class={`px-8 py-10 md:p-10 bg-cream flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-ink last:border-r-0 ${i === 2 ? 'border-b-0' : ''}`}>
+        <span class="font-mono font-bold text-5xl text-ink/10">{step.num}</span>
+        <div class="mt-6 md:mt-0">
+          <h3 class="font-bold text-xl uppercase tracking-tight text-ink mb-2">{step.title}</h3>
+          <p class="text-muted text-sm leading-relaxed">{step.desc}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
+<!-- БЛОГ -->
+<section class="border-b-2 border-ink">
+  <div class="flex items-center justify-between px-8 py-5 border-b-2 border-ink bg-ink">
+    <h2 class="font-bold text-sm uppercase tracking-widest text-yellow">От блога</h2>
+    <a href="/blog" class="font-mono text-xs text-white/30 hover:text-yellow transition-colors uppercase tracking-widest">Всички →</a>
+  </div>
+  <div class="flex flex-col md:grid md:grid-cols-3">
+    {[
+      { cat: 'SEO', title: 'Колко струва изработката на уебсайт в България за 2026?', date: 'Март 2026',   slug: '/blog/tsena-uebsayt-bulgaria-2026' },
+      { cat: 'AI',  title: 'Кога имаш нужда от AI бот за бизнеса си?',                date: 'Февр. 2026', slug: '/blog/koga-ti-trqbva-ai-bot' },
+      { cat: 'QA',  title: 'Защо сайтът ти губи клиенти заради технически грешки?',  date: 'Февр. 2026', slug: '/blog/sayt-gubi-klienti-tehniches-greshki' },
+    ].map((post, i) => (
+      <a href={post.slug}
+         class="group flex flex-col justify-between p-8 bg-cream hover:bg-ink transition-colors duration-200 border-b-2 md:border-b-0 md:border-r-2 border-ink last:border-r-0 last:border-b-0">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="inline-block text-xs font-bold uppercase tracking-widest bg-ink text-yellow group-hover:bg-yellow group-hover:text-ink px-3 py-1 transition-colors">{post.cat}</span>
+            <span class="font-mono text-xs text-muted group-hover:text-white/30 transition-colors">{post.date}</span>
+          </div>
+          <h3 class="font-bold text-base leading-snug text-ink group-hover:text-yellow transition-colors">{post.title}</h3>
+        </div>
+        <div class="flex items-center justify-between mt-6 pt-4 border-t-2 border-ink/20 group-hover:border-yellow/20 transition-colors">
+          <span class="text-xs font-bold uppercase tracking-widest text-muted group-hover:text-yellow transition-colors">Прочети</span>
+          <span class="text-muted group-hover:text-yellow group-hover:translate-x-1 transition-all">→</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<!-- ФИНАЛЕН CTA -->
+<section class="bg-ink">
+  <div class="flex flex-col md:grid md:grid-cols-2">
+    <div class="px-8 py-16 md:px-16 md:py-24 border-b-2 md:border-b-0 md:border-r-2 border-white/10">
+      <p class="font-mono text-xs uppercase tracking-widest text-white/20 mb-6">buildify.bg — Бургас</p>
+      <h2 class="font-bold text-white uppercase tracking-tightest leading-[1.0]"
+          style="font-size: clamp(2.5rem, 7vw, 5rem)">
+        Имаш проект?<br/>
+        <span class="text-yellow">Говорим.</span>
+      </h2>
+    </div>
+    <div class="px-8 py-16 md:px-16 md:py-24 flex flex-col justify-between gap-8">
+      <p class="text-white/40 text-lg leading-relaxed">
+        30 минути разговор. Казваш какво искаш — получаваш конкретна цена и срок. Без задължения.
+      </p>
+      <div class="flex flex-col gap-3">
+        <a href="/kontakt"
+           class="flex items-center justify-between bg-yellow text-ink font-bold uppercase tracking-wider text-sm px-8 py-5 hover:bg-yellow-dark transition-colors group">
+          Заяви консултация
+          <span class="group-hover:translate-x-1 transition-transform text-xl">→</span>
+        </a>
+        <p class="font-mono text-xs text-white/20 leading-relaxed">
+          Отговаряме до 48 часа.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+</style>
