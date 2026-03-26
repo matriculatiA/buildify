@@ -1,25 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --color-ink: #111111;
+  --color-cream: #f0ede6;
+  --color-paper: #e8e4dc;
+  --color-yellow: #f5e642;
+  --color-yellow-dark: #d4c30a;
+  --color-muted: #888888;
+  --color-border: #cccccc;
+}
 
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply font-sans bg-cream text-ink antialiased; }
-  * { @apply box-border; }
+  body { font-family: var(--font-sans); background: var(--color-cream); color: var(--color-ink); -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-
-  /* Brutalist border utilities */
-  .border-ink-1 { border: 1px solid #111; }
-  .border-ink-2 { border: 2px solid #111; }
-
-  /* Hover lift */
   .hover-lift { transition: transform 0.15s ease; }
   .hover-lift:hover { transform: translate(-2px, -2px); }
-
-  /* Yellow highlight */
   .highlight { background: #f5e642; padding: 0 4px; }
 }
