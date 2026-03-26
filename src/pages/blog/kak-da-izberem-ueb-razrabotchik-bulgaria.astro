@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Как да изберем уеб разработчик в България — 7 въпроса преди да подпишеш",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-20",
+  "dateModified": "2026-03-20",
+  "description": "Практичен наръчник за избор на уеб разработчик в България. 7 въпроса, които трябва да зададеш преди да подпишеш договор — и червените флагове, на които да внимаваш.",
+  "keywords": "уеб разработчик България, как да изберем уеб агенция, изработка на сайт България"
+};
+---
+
+<BaseLayout
+  title="Как да изберем уеб разработчик в България — 7 въпроса | buildify.bg"
+  description="Практичен наръчник за избор на уеб разработчик в България. 7 въпроса, които трябва да зададеш преди да подпишеш — и червените флагове, на които да внимаваш."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Уебсайтове</span>
+        <span class="font-mono text-xs text-white/25">Март 2026</span>
+        <span class="font-mono text-xs text-white/25">8 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Как да изберем уеб разработчик<br/>
+        в <mark class="bg-yellow text-ink px-2 not-italic">България</mark> —<br/>
+        7 въпроса преди да подпишеш
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Получаваш оферти от 5 различни фирми. Цените се различават 4 пъти. Всички обещават едно и също.
+        Ето как да разбереш кой реално знае какво прави.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- SECTION 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Защо изборът е толкова труден</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Пазарът на уеб разработка в България е нерегулиран. Всеки може да се нарече "уеб дизайнер" или "уеб агенция" —
+          без сертификат, без минимален стандарт, без отговорност. Резултатът: огромна разлика в качеството при
+          привидно еднакви оферти.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Типичният сценарий: плащаш 800 лв. за сайт, получаваш нещо, което изглежда добре на екранна снимка,
+          но зарежда за 8 секунди, не се вижда в Google и формата за контакт не работи на iPhone. След 6 месеца
+          разработчикът не отговаря на телефона.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Тези 7 въпроса не са теоретични — всеки от тях разкрива нещо конкретно за начина на работа на дадена агенция или фрийлансър.
+        </p>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Евтиният сайт е като евтиният ВиК — плащаш веднъж сега, плащаш двойно след 3 месеца."
+        </p>
+      </div>
+
+      <!-- SECTION 02 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">7-те въпроса</span>
+        </div>
+
+        <div class="space-y-8">
+          {[
+            {
+              num: "01",
+              q: "Мога ли да видя сайтове, които сте направили — и да проверя скоростта им?",
+              why: "Всяка агенция има портфолио. Но реалният тест е да отвориш тези сайтове на телефона си и да измериш скоростта с Google PageSpeed Insights (безплатен инструмент). Ако резултатите са под 70 точки — това е стандартът, с който ще получиш и твоя сайт.",
+              red: '„Клиентите ни не позволяват да показваме сайтовете им." — Ако нямат нито един публичен пример, това е проблем.',
+            },
+            {
+              num: "02",
+              q: "SEO включен ли е в цената — и какво точно означава това при вас?",
+              why: '„SEO included" може да означава всичко от Schema markup и sitemap до просто попълнени мета тагове. Питай конкретно: XML sitemap, Schema markup, Google Search Console настройка, Core Web Vitals оптимизация. Ако не знаят какво е schema markup — SEO не е включен реално.',
+              red: '„SEO е отделна услуга" или неясни отговори за конкретни технически детайли.',
+            },
+            {
+              num: "03",
+              q: "Кой реално ще прави сайта — вие или ще го аутсорсвате?",
+              why: 'Много агенции взимат проекта, а после го предават на фрийлансъри в чужбина или на джуниор разработчици. Нищо лошо в това — ако знаеш за него. Проблемът е когато комуникацията е с „мениджър", а изпълнението е от някой, когото никога не срещаш.',
+              red: "Уклончиви отговори. Ако питаш директно и не получиш директен отговор — имаш отговора си.",
+            },
+            {
+              num: "04",
+              q: "Как изглежда процесът — стъпка по стъпка?",
+              why: "Сериозните разработчици имат ясен процес: бриф → дизайн → разработка → тестване → пускане. Знаят колко взимат ревизии, кога се плаща, как се комуникират промени. Липсата на процес е сигнал за хаотична работа.",
+              red: '„Правим го докато стане добре" без конкретни стъпки и срокове.',
+            },
+            {
+              num: "05",
+              q: "Какво се случва след пускането — поддръжка, хостинг, обновявания?",
+              why: "Сайтът не е еднократна покупка. Плъгините остаряват, хостингът изтича, нещо се чупи. Питай: Хостингът включен ли е? На чие име ще е домейнът? Ако искам да сменя агенцията след година — мога ли да взема сайта?",
+              red: "Домейнът и хостингът са на тяхно име. Това те прави зависим от тях завинаги.",
+            },
+            {
+              num: "06",
+              q: "Цената фиксирана ли е — и какво не е включено?",
+              why: "Питай не само какво е включено, а изрично какво НЕ е включено. Много оферти са ниски, защото изключват неща, които ти изглеждат очевидни: мобилна версия, контактна форма, SSL сертификат, качване на съдържание.",
+              red: '„Зависи колко ревизии ще искаш" или „допълнителните функции се таксуват отделно" без ясни граници.',
+            },
+            {
+              num: "07",
+              q: "Имате ли опит в моя бранш или с подобни проекти?",
+              why: "Не е задължително условие, но е предимство. Агенция, правила сайтове за ресторанти, знае кои секции конвертират. Агенция с опит в онлайн магазини разбира нуждите от продуктови снимки, филтри, плащания. Питай за конкретни примери.",
+              red: '„Правим всякакви сайтове" без конкретни примери в твоя бранш.',
+            },
+          ].map(item => (
+            <div class="border-2 border-ink">
+              <div class="bg-ink px-6 py-4 flex items-center gap-3">
+                <span class="font-mono font-bold text-yellow text-sm shrink-0">{item.num}</span>
+                <p class="font-bold text-white text-base leading-snug">&bdquo;{item.q}&ldquo;</p>
+              </div>
+              <div class="px-6 py-5 bg-white space-y-3">
+                <p class="text-sm text-ink/80 leading-relaxed"><strong class="text-ink">Защо го питаш:</strong> {item.why}</p>
+                <p class="text-sm text-red-600 leading-relaxed font-mono border-l-2 border-red-300 pl-3">⚠ Червен флаг: {item.red}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "60%", lbl: "Клиенти не питат за SEO при поръчка" },
+          { val: "3×",  lbl: "По-скъпо излиза пренаправянето на лош сайт" },
+          { val: "48ч", lbl: "Максимален отговор от buildify.bg" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- SECTION 03 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Агенция срещу фрийлансър</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-6">
+          Нито едното не е по-добро автоматично. Зависи от проекта и бюджета.
+        </p>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3 gap-2">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Агенция</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Фрийлансър</span>
+          </div>
+          {[
+            ["Цена", "По-висока", "По-ниска"],
+            ["Процес", "Структуриран", "Зависи от човека"],
+            ["Комуникация", "Мениджър / екип", "Директна"],
+            ["Риск при болест/отсъствие", "Нисък", "Висок"],
+            ["Специализация", "По-широка", "Концентрирана"],
+            ["Отговорност", "Фирмена", "Лична"],
+          ].map(([aspect, agency, free], i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{aspect}</span>
+              <span class="text-sm text-muted">{agency}</span>
+              <span class="text-sm text-muted">{free}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 04 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Контролен списък преди подписване</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">Преди да платиш аванс, трябва да имаш писмено потвърждение за:</p>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          {[
+            "Точен списък с страници и функционалности включени в цената",
+            "Срок за изпълнение с конкретна крайна дата",
+            'Брой безплатни ревизии и какво означава „ревизия"',
+            "На чие име е домейнът и хостингът",
+            "Какво се случва ако срокът не се спази",
+            "Достъп до изходния код и хостинг панела след приключване",
+            "Условия за поддръжка след пускането",
+          ].map((item, i) => (
+            <div class="flex gap-4 items-start px-5 py-4 bg-white">
+              <span class="font-mono font-bold text-sm bg-ink text-yellow px-2 py-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <span class="text-sm text-ink leading-relaxed">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Консултация</div>
+            <div class="font-bold text-white text-xl tracking-tight">Искаш честна оценка на проекта си?</div>
+            <p class="text-white/40 text-sm mt-1">Задаваме точно тези въпроси — и отговаряме на всички директно.</p>
+          </div>
+          <a href="/kontakt" class="shrink-0 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+            Безплатна консултация →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

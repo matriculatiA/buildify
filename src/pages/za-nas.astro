@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "buildify.bg",
+  "url": "https://buildify.bg",
+  "logo": "https://buildify.bg/favicon.svg",
+  "description": "Дигитална агенция от Бургас. Правим уебсайтове, AI ботове и плъгини за малкия бизнес в България.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Бургас",
+    "addressCountry": "BG"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Bulgaria"
+  },
+  "knowsAbout": ["Уеб разработка", "SEO", "AI ботове", "WordPress плъгини", "QA тестване"],
+  "foundingDate": "2019",
+  "slogan": "Дигитални инструменти за бизнеса."
+};
+---
+
+<BaseLayout
+  title="За нас — buildify.bg | Дигитална агенция Бургас"
+  description="buildify.bg е дигитална агенция от Бургас с 7+ години опит. Правим уебсайтове, AI ботове и плъгини за малкия бизнес в България. Честно, бързо, с резултати."
+  schema={schema}
+>
+
+<!-- HEADER -->
+<section class="grid md:grid-cols-2 border-b-2 border-ink">
+  <div class="bg-ink px-8 py-14 md:px-16 md:py-20 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-ink">
+    <span class="font-mono text-xs uppercase tracking-widest text-white/25">buildify.bg / за нас</span>
+    <div>
+      <h1 class="font-bold text-white uppercase tracking-tightest leading-[1.0] mb-4"
+          style="font-size: clamp(2.5rem, 8vw, 4.5rem)">
+        Дигитални<br/>
+        <span class="text-yellow">инструменти.</span><br/>
+        Реални резултати.
+      </h1>
+      <p class="text-white/40 text-base leading-relaxed max-w-sm">
+        Не продаваме сайтове. Правим дигитална инфраструктура, която носи клиенти на малкия бизнес в България.
+      </p>
+    </div>
+  </div>
+  <div class="bg-cream px-8 py-14 md:px-16 md:py-20 flex flex-col justify-center gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      {[
+        { val: '7+',  label: 'Години опит' },
+        { val: '40+', label: 'Реализирани проекта' },
+        { val: '0',   label: 'Скрити такси' },
+        { val: 'BG',  label: 'Фокус върху България' },
+      ].map(s => (
+        <div class="border-2 border-ink p-5">
+          <span class="font-mono font-bold text-3xl text-ink block">{s.val}</span>
+          <span class="text-xs uppercase tracking-widest text-muted font-semibold block mt-1">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- КОИ СМЕ -->
+<section class="border-b-2 border-ink">
+  <div class="px-8 py-5 border-b-2 border-ink bg-cream">
+    <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Кои сме ние</span>
+  </div>
+  <div class="grid md:grid-cols-2">
+
+    <div class="px-8 py-12 md:px-14 md:py-14 bg-cream border-b-2 md:border-b-0 md:border-r-2 border-ink flex flex-col gap-6">
+      <p class="text-ink text-base leading-relaxed">
+        buildify.bg е дигитална агенция от Бургас, специализирана в уеб решения за малкия и среден бизнес в България.
+        Работим с натрупан опит в <strong>уеб разработка, QA тестване и AI интеграции</strong> — разбираме системите отвътре,
+        не само как трябва да изглеждат отвън.
+      </p>
+      <p class="text-ink/70 text-base leading-relaxed">
+        Виждали сме десетки сайтове, направени красиво и скъпо, но технически счупени —
+        бавни, невидими за Google, с форми, които не работят на телефон.
+        Затова при нас техническото е стандарт: SEO, Core Web Vitals, правилна структура —
+        вградено в структурата — не закърпено след факта.
+      </p>
+      <p class="text-ink/70 text-base leading-relaxed">
+        Целта ни не е просто да предадем файлове. Целта е клиентите ти да намерят сайта ти в Google,
+        да се доверят и да се свържат с теб. Всичко друго е декорация.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {['Astro / Next.js', 'WordPress', 'SEO', 'QA тестване', 'AI интеграции', 'Бургас 🇧🇬'].map(tag => (
+          <span class="font-mono text-xs border border-ink/20 text-muted px-3 py-1.5">{tag}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="bg-ink flex flex-col divide-y-2 divide-white/10">
+      {[
+        { label: 'Основана', val: '2019' },
+        { label: 'Локация', val: 'Бургас, България' },
+        { label: 'Специализация', val: 'Малък и среден бизнес' },
+        { label: 'Езици', val: 'Български / English' },
+        { label: 'Подход', val: 'Technical-first, SEO в основата' },
+        { label: 'Цени', val: 'Договорени предварително, непроменени' },
+      ].map(row => (
+        <div class="px-10 py-5 flex items-center justify-between gap-4">
+          <span class="font-mono text-xs uppercase tracking-widest text-white/30">{row.label}</span>
+          <span class="font-semibold text-sm text-white text-right">{row.val}</span>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<!-- ПОДХОД -->
+<section class="border-b-2 border-ink">
+  <div class="px-8 py-5 border-b-2 border-ink bg-ink">
+    <span class="font-mono text-xs uppercase tracking-widest text-yellow font-bold">Как работим</span>
+  </div>
+  <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+
+    <div class="px-8 py-12 md:px-12 md:py-14 bg-cream flex flex-col gap-5">
+      <span class="font-mono font-bold text-6xl text-ink/8 block leading-none">01</span>
+      <h2 class="font-bold text-xl uppercase tracking-tight text-ink">Технически преди визуален</h2>
+      <p class="text-muted text-sm leading-relaxed">
+        Повечето агенции започват с "как да изглежда". Ние започваме с "как ще го намерят".
+        Структура, скорост, Schema markup, мобилна версия — всичко е наредено преди да се докоснем до цветове и шрифтове.
+      </p>
+      <p class="text-muted text-sm leading-relaxed">
+        Идваме от QA тестване — знаем точно как се чупят сайтове под реален трафик и на реални устройства.
+        Тестваме всяка форма, всяка страница, всеки бутон преди пускане.
+      </p>
+    </div>
+
+    <div class="px-8 py-12 md:px-12 md:py-14 bg-cream flex flex-col gap-5">
+      <span class="font-mono font-bold text-6xl text-ink/8 block leading-none">02</span>
+      <h2 class="font-bold text-xl uppercase tracking-tight text-ink">Директно и без излишно</h2>
+      <p class="text-muted text-sm leading-relaxed">
+        Не работим с десетки клиенти едновременно. Ангажираме се с ограничен брой проекта,
+        за да сме сигурни, че всеки получава пълно внимание — не шаблонно изпълнение.
+      </p>
+      <p class="text-muted text-sm leading-relaxed">
+        Цената се договаря предварително и не се мести. Срокът се спазва.
+        Ако нещо не е наред след пускането — оправяме го. Без допълнително таксуване за очевидни грешки.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- СТЕК / УСЛУГИ -->
+<section class="border-b-2 border-ink">
+  <div class="px-8 py-5 border-b-2 border-ink bg-cream">
+    <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Какво правим</span>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+    {[
+      {
+        title: 'Уебсайтове',
+        href: '/websites',
+        items: [
+          'Landing pages',
+          'Бизнес сайтове',
+          'Корпоративни сайтове',
+          'SEO оптимизация',
+          'Core Web Vitals',
+        ],
+      },
+      {
+        title: 'Плъгини & функционалност',
+        href: '/plugini',
+        items: [
+          'Резервационни системи',
+          'Ценови калкулатори',
+          'Онлайн поръчки',
+          'Персонализирани форми',
+          'Интеграции с външни API',
+        ],
+      },
+      {
+        title: 'AI & автоматизация',
+        href: '/ai-botove',
+        items: [
+          'AI чатботове',
+          'Обучение на бизнес данни',
+          '24/7 клиентски отговори',
+          'Интеграция в сайт',
+          'QA тестване',
+        ],
+      },
+    ].map(service => (
+      <div class="px-8 py-10 md:px-10 bg-cream flex flex-col gap-5">
+        <h3 class="font-bold text-base uppercase tracking-tight text-ink">{service.title}</h3>
+        <ul class="flex flex-col gap-2">
+          {service.items.map(item => (
+            <li class="flex items-center gap-3 text-sm text-muted">
+              <span class="text-yellow font-bold shrink-0">→</span>{item}
+            </li>
+          ))}
+        </ul>
+        <a href={service.href} class="font-mono text-xs uppercase tracking-widest text-muted hover:text-ink transition-colors mt-auto pt-2">
+          Виж услугата →
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section class="bg-yellow border-b-2 border-ink px-8 py-14 md:px-16">
+  <p class="font-bold text-ink uppercase tracking-tightest leading-[1.05] max-w-3xl"
+     style="font-size: clamp(1.6rem, 4vw, 2.8rem)">
+    "Сайт без SEO е като магазин в необитаем квартал.<br/>
+    Красив, скъп и невидим."
+  </p>
+  <p class="font-mono text-xs uppercase tracking-widest text-ink/50 mt-5">buildify.bg</p>
+</section>
+
+<!-- CTA -->
+<section class="bg-ink">
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 px-8 py-12 md:px-16">
+    <div>
+      <p class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg — Бургас</p>
+      <h2 class="font-bold text-white text-2xl md:text-3xl uppercase tracking-tightest leading-tight">
+        Имаш проект? Говорим.
+      </h2>
+      <p class="text-white/40 text-sm mt-2">Обясняваш какво искаш — получаваш конкретни числа. Не "ще видим".</p>
+    </div>
+    <a
+      href="/kontakt"
+      class="shrink-0 bg-yellow text-ink font-bold text-sm px-8 py-5 uppercase tracking-wider hover:bg-yellow-dark transition-colors whitespace-nowrap"
+    >
+      Свържи се →
+    </a>
+  </div>
+</section>
+
+</BaseLayout>

@@ -22,6 +22,7 @@ const navLinks = [
   { href: '/plugini',   label: 'Плъгини'    },
   { href: '/ai-botove', label: 'AI ботове'  },
   { href: '/blog',      label: 'Блог'       },
+  { href: '/za-nas',    label: 'За нас'     },
 ];
 
 const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
@@ -53,15 +54,29 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "LocalBusiness",
     "name": "buildify.bg",
     "url": "https://buildify.bg",
-    "logo": "https://buildify.bg/logo.svg",
+    "logo": "https://buildify.bg/favicon.svg",
+    "image": "https://buildify.bg/og-default.svg",
+    "description": "Дигитална агенция от Бургас. Уебсайтове, AI ботове и плъгини за малкия бизнес в България.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Бургас",
+      "addressRegion": "Бургас",
+      "addressCountry": "BG"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Bulgaria"
+    },
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "availableLanguage": "Bulgarian"
-    }
+      "availableLanguage": "Bulgarian",
+      "url": "https://buildify.bg/kontakt"
+    },
+    "sameAs": []
   }
   </script>
 </head>
@@ -169,6 +184,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
         <p class="text-xs font-bold uppercase tracking-widest text-white/30 mb-5">Компания</p>
         <ul class="space-y-3">
           {[
+            ['За нас',     '/za-nas'],
             ['Блог',       '/blog'],
             ['Контакти',   '/kontakt'],
           ].map(([label, href]) => (
