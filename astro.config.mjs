@@ -1,9 +1,12 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://buildify.bg',
-  integrations: [sitemap(), tailwind()],
+  integrations: [sitemap()],
   output: 'static',
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
