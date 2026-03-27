@@ -22,7 +22,7 @@ const navLinks = [
   { href: '/plugins',   label: 'Плъгини'    },
   { href: '/ai-bots',   label: 'AI ботове'  },
   { href: '/blog',      label: 'Блог'       },
-  { href: '/za-nas',    label: 'За нас'     },
+  { href: '/about',    label: 'За нас'     },
 ];
 
 const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
@@ -74,7 +74,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
       "@type": "ContactPoint",
       "contactType": "customer service",
       "availableLanguage": "Bulgarian",
-      "url": "https://buildify.bg/kontakt"
+      "url": "https://buildify.bg/contact"
     },
     "sameAs": []
   }
@@ -108,7 +108,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
       <!-- CTA + hamburger -->
       <div class="flex items-stretch ml-auto md:ml-0">
         <a
-          href="/kontakt"
+          href="/contact"
           class="flex items-center px-4 md:px-6 bg-yellow text-ink text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-yellow-dark transition-colors"
         >
           <span class="hidden sm:inline">Консултация </span>→
@@ -130,7 +130,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
 
     <!-- Mobile dropdown -->
     <div id="mob-nav" class="hidden md:hidden bg-ink border-t border-white/10">
-      {[...navLinks, { href: '/kontakt', label: 'Контакти' }].map(link => (
+      {[...navLinks, { href: '/contact', label: 'Контакти' }].map(link => (
         <a
           href={link.href}
           class="flex items-center justify-between px-6 py-4 text-sm font-semibold text-white/60 hover:text-white hover:bg-white/5 border-b border-white/10 uppercase tracking-wide transition-colors"
@@ -183,9 +183,9 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
         <p class="text-xs font-bold uppercase tracking-widest text-white/30 mb-5">Компания</p>
         <ul class="space-y-3">
           {[
-            ['За нас',     '/za-nas'],
+            ['За нас',     '/about'],
             ['Блог',       '/blog'],
-            ['Контакти',   '/kontakt'],
+            ['Контакти',   '/contact'],
           ].map(([label, href]) => (
             <li>
               <a href={href} class="text-sm text-white/50 hover:text-yellow transition-colors flex items-center gap-2">
@@ -202,7 +202,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
         <div>
           <p class="text-white/50 text-sm mb-5">Готов за нов проект? 30 минути безплатно.</p>
           <a
-            href="/kontakt"
+            href="/contact"
             class="inline-block bg-yellow text-ink text-sm font-bold uppercase tracking-wider px-5 py-3 hover:bg-yellow-dark transition-colors"
           >
             Свържи се →

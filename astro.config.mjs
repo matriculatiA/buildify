@@ -9,5 +9,7 @@ export default defineConfig({
   redirects: {
     '/plugini':   '/plugins',
     '/ai-botove': '/ai-bots',
+    '/kontakt':   '/contact',
+    '/za-nas':    '/about',
   },
 });
