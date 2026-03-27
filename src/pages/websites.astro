@@ -127,6 +127,98 @@ const packages = [
     </div>
   </section>
 
+  <!-- PORTFOLIO -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-white/10 px-8 py-5 flex items-center justify-between">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">Примерни проекти</span>
+      <span class="font-mono text-xs text-white/20">Demo сайтове — виж живо</span>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
+      {[
+        {
+          href: '/demo/restoran',
+          label: 'Ресторант / Механа',
+          url: 'buildify.bg/demo/restoran',
+          color: '#1a2e1a',
+          accent: '#c8902a',
+          desc: 'Меню, резервации, работно време, отзиви. Топъл и автентичен дизайн.',
+          tags: ['Меню', 'Резервации', 'Галерия', 'Отзиви'],
+          preview: [
+            { h: '14px', w: '60%', c: '#c8902a' },
+            { h: '8px',  w: '90%', c: 'rgba(255,255,255,.15)' },
+            { h: '8px',  w: '75%', c: 'rgba(255,255,255,.10)' },
+            { h: '40px', w: '45%', c: '#c8902a' },
+          ],
+        },
+        {
+          href: '/demo/dentalen-kabinet',
+          label: 'Дентален кабинет',
+          url: 'buildify.bg/demo/dentalen-kabinet',
+          color: '#0c1a2e',
+          accent: '#0ea5e9',
+          desc: 'Услуги, цени, запис на час, екип. Чист медицински стил.',
+          tags: ['Услуги', 'Запис на час', 'Екип', 'Цени'],
+          preview: [
+            { h: '12px', w: '50%', c: '#0ea5e9' },
+            { h: '10px', w: '80%', c: 'rgba(255,255,255,.2)' },
+            { h: '8px',  w: '65%', c: 'rgba(255,255,255,.12)' },
+            { h: '36px', w: '50%', c: '#0ea5e9' },
+          ],
+        },
+        {
+          href: '/demo/advokat',
+          label: 'Адвокатска кантора',
+          url: 'buildify.bg/demo/advokat',
+          color: '#0f1e35',
+          accent: '#c9a84c',
+          desc: 'Практики, екип, контакти, форма за запитване. Авторитетен корпоративен вид.',
+          tags: ['Практики', 'Екип', 'Консултация', 'Форма'],
+          preview: [
+            { h: '10px', w: '40%', c: '#c9a84c' },
+            { h: '14px', w: '70%', c: 'rgba(255,255,255,.2)' },
+            { h: '8px',  w: '55%', c: 'rgba(255,255,255,.12)' },
+            { h: '36px', w: '52%', c: '#c9a84c' },
+          ],
+        },
+      ].map(demo => (
+        <div class="p-8 flex flex-col gap-6">
+          {/* Browser mockup */}
+          <a href={demo.href} target="_blank" class="block group">
+            <div class="border-2 border-white/10 overflow-hidden group-hover:border-yellow/40 transition-colors">
+              {/* Browser chrome */}
+              <div class="flex items-center gap-1.5 px-3 py-2.5 border-b border-white/10" style={`background:${demo.color}`}>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
+                <span class="font-mono text-[9px] text-white/20 ml-2 truncate">{demo.url}</span>
+              </div>
+              {/* Page preview */}
+              <div class="p-5 flex flex-col gap-2.5" style={`background:${demo.color};min-height:140px`}>
+                {demo.preview.map(el => (
+                  <div style={`height:${el.h};width:${el.w};background:${el.c};border-radius:2px`}></div>
+                ))}
+              </div>
+              {/* Hover overlay */}
+              <div class="flex items-center justify-center gap-2 py-3 border-t border-white/10 font-mono text-xs font-bold uppercase tracking-widest text-white/30 group-hover:text-yellow group-hover:bg-yellow/5 transition-all" style={`background:${demo.color}`}>
+                Виж живото демо →
+              </div>
+            </div>
+          </a>
+          {/* Info */}
+          <div>
+            <div class="font-bold text-sm uppercase tracking-tight text-white mb-2">{demo.label}</div>
+            <p class="text-white/40 text-xs leading-relaxed mb-4">{demo.desc}</p>
+            <div class="flex flex-wrap gap-2">
+              {demo.tags.map(tag => (
+                <span class="font-mono text-[10px] uppercase tracking-wide border border-white/10 text-white/30 px-2 py-0.5">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">

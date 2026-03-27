@@ -1,0 +1,223 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+---
+<DemoLayout title="Адвокатска Кантора Петров и Партньори — Бургас" accent="#c9a84c">
+<style>
+  :root { --navy: #0f1e35; --gold: #c9a84c; --light-gold: #f5e9c8; --cream: #faf8f4; --text: #1e293b; }
+  a { text-decoration: none; }
+  .btn { background:var(--gold);color:#0f1e35;font-weight:700;padding:14px 32px;display:inline-block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s;border:none;cursor:pointer; }
+  .btn:hover { background:#b8943a; }
+  .btn-ghost { border:2px solid rgba(255,255,255,.3);color:white;font-weight:700;padding:12px 28px;display:inline-block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s; }
+  .btn-ghost:hover { border-color:var(--gold);color:var(--gold); }
+  section { padding:80px 24px; }
+  .container { max-width:1100px;margin:0 auto; }
+  .tag { font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block; }
+  input,select,textarea { outline:none;font-family:Inter,sans-serif; }
+</style>
+
+<!-- NAV -->
+<nav style="background:var(--navy);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:76px;position:sticky;top:32px;z-index:100;border-bottom:1px solid rgba(201,168,76,.2)">
+  <div>
+    <div style="color:white;font-size:17px;font-weight:800;letter-spacing:.02em;line-height:1">ПЕТРОВ И ПАРТНЬОРИ</div>
+    <div style="color:var(--gold);font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-top:3px">Адвокатска кантора · Бургас</div>
+  </div>
+  <div style="display:flex;gap:32px;align-items:center">
+    {['Практики', 'Екип', 'За нас', 'Контакти'].map(l => (
+      <a href="#" style="color:rgba(255,255,255,.6);font-size:13px;font-weight:500;letter-spacing:.04em;display:none;transition:color .2s" class="nav-link">{l}</a>
+    ))}
+    <a href="#konsultaciq" class="btn" style="padding:10px 24px">Безплатна консултация</a>
+  </div>
+</nav>
+<style>@media(min-width:768px){.nav-link{display:block!important}}</style>
+
+<!-- HERO -->
+<div style="background:var(--navy);padding:100px 24px 80px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05) 0%,transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(201,168,76,.08) 0%,transparent 60%)"></div>
+  <div style="position:absolute;right:0;top:0;bottom:0;width:40%;background:linear-gradient(90deg,transparent,rgba(201,168,76,.04));pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1;max-width:800px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px">
+      <div style="height:1px;width:40px;background:var(--gold)"></div>
+      <span style="color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Основана 1998 · Бургас</span>
+    </div>
+    <h1 style="color:white;font-size:clamp(2.2rem,5vw,4rem);font-weight:900;line-height:1.08;margin-bottom:28px;letter-spacing:-.02em">
+      Правна защита,<br/>на която можете<br/><span style="color:var(--gold)">да разчитате</span>
+    </h1>
+    <p style="color:rgba(255,255,255,.55);font-size:17px;line-height:1.8;max-width:560px;margin-bottom:44px">
+      25 години опит в гражданско, търговско и трудово право. Повече от 2000 успешно приключени дела. Работим с физически лица и фирми.
+    </p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px">
+      <a href="#konsultaciq" class="btn">Безплатна консултация →</a>
+      <a href="#praktiki" class="btn-ghost">Нашите практики</a>
+    </div>
+    <div style="display:flex;gap:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap">
+      {[['25г.', 'Опит'], ['2000+', 'Дела'], ['4', 'Адвокати'], ['98%', 'Успех']].map(([n,l]) => (
+        <div>
+          <div style="color:var(--gold);font-size:2rem;font-weight:800;line-height:1">{n}</div>
+          <div style="color:rgba(255,255,255,.35);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px">{l}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<!-- ПРАКТИКИ -->
+<section id="praktiki" style="background:var(--cream)">
+  <div class="container">
+    <div style="margin-bottom:56px">
+      <span class="tag">Правни практики</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--navy);max-width:500px;line-height:1.2">Специализирани в ключови области на правото</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;background:#e2d9c4">
+      {[
+        { icon: '⚖️', title: 'Гражданско право',   items: ['Облигационни отношения', 'Семейно и наследствено право', 'Вещно право', 'Деликтна отговорност'] },
+        { icon: '🏢', title: 'Търговско право',     items: ['Дружествено право', 'Договорно право', 'Търговски спорове', 'Несъстоятелност'] },
+        { icon: '🏠', title: 'Недвижими имоти',     items: ['Покупко-продажба', 'Наемни отношения', 'Съдебна делба', 'Вещни права'] },
+        { icon: '👔', title: 'Трудово право',        items: ['Трудови договори', 'Незаконно уволнение', 'Трудови спорове', 'Обезщетения'] },
+        { icon: '🔒', title: 'Наказателно право',   items: ['Защита на обвиняеми', 'Частно обвинение', 'Жалби и протести', 'Реабилитация'] },
+        { icon: '🌍', title: 'Административно',     items: ['Административни спорове', 'Обжалване на актове', 'Разрешителни режими', 'EU право'] },
+      ].map(p => (
+        <div style="background:white;padding:36px 32px">
+          <div style="font-size:28px;margin-bottom:16px">{p.icon}</div>
+          <h3 style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:16px;text-transform:uppercase;letter-spacing:.04em">{p.title}</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+            {p.items.map(item => (
+              <li style="display:flex;gap:8px;font-size:13px;color:#475569">
+                <span style="color:var(--gold);flex-shrink:0">›</span>{item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ЕКИП -->
+<section style="background:var(--navy)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px">
+      <span class="tag">Екипът</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:white;margin-bottom:12px">Нашите адвокати</h2>
+      <p style="color:rgba(255,255,255,.4);font-size:15px">Специалисти с доказан опит в своите области</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+      {[
+        { name: 'Адв. Христо Петров', role: 'Управляващ съдружник', exp: '25г. опит', area: 'Търговско и гражданско право' },
+        { name: 'Адв. Елена Иванова', role: 'Съдружник',             exp: '18г. опит', area: 'Семейно и наследствено право' },
+        { name: 'Адв. Димитър Стоев', role: 'Старши адвокат',        exp: '12г. опит', area: 'Трудово и административно право' },
+        { name: 'Адв. Мария Колева',  role: 'Адвокат',               exp: '8г. опит',  area: 'Недвижими имоти и вещно право' },
+      ].map(a => (
+        <div style="border:1px solid rgba(201,168,76,.2);padding:32px;position:relative">
+          <div style="width:60px;height:60px;background:linear-gradient(135deg,var(--gold),#8a6520);border-radius:50%;margin-bottom:20px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:22px;font-weight:800">
+            {a.name.split(' ')[1][0]}{a.name.split(' ')[2][0]}
+          </div>
+          <h3 style="color:white;font-size:15px;font-weight:700;margin-bottom:4px">{a.name}</h3>
+          <div style="color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">{a.role}</div>
+          <div style="color:rgba(255,255,255,.4);font-size:12px;margin-bottom:4px">{a.exp}</div>
+          <div style="color:rgba(255,255,255,.5);font-size:13px">{a.area}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ПРОЦЕС -->
+<section style="background:white">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px">
+      <span class="tag">Как работим</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--navy)">Ясен процес, без изненади</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;position:relative">
+      {[
+        { n: '01', title: 'Консултация',   desc: 'Безплатна 30-минутна среща. Анализираме казуса и обясняваме възможностите.' },
+        { n: '02', title: 'Стратегия',     desc: 'Изготвяме правна стратегия с ясен план, срокове и прогноза за изхода.' },
+        { n: '03', title: 'Представителство', desc: 'Поемаме пълното правно представителство — документи, съдебни заседания, преговори.' },
+        { n: '04', title: 'Решение',       desc: 'Информираме ви за всяко развитие. Постигаме най-добрия възможен резултат.' },
+      ].map((s, i) => (
+        <div style={`padding:40px 32px;border-right:${i < 3 ? '1px solid #e2e8f0' : 'none'};background:${i % 2 === 0 ? 'white' : '#faf8f4'}`}>
+          <div style="font-size:40px;font-weight:900;color:#e2d9c4;font-family:monospace;margin-bottom:16px">{s.n}</div>
+          <h3 style="font-size:16px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">{s.title}</h3>
+          <p style="font-size:13px;color:#64748b;line-height:1.7">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- КОНСУЛТАЦИЯ -->
+<section id="konsultaciq" style="background:var(--cream)">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+    <div>
+      <span class="tag">Свържете се с нас</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--navy);margin-bottom:20px;line-height:1.2">Безплатна първа консултация</h2>
+      <p style="color:#475569;line-height:1.8;margin-bottom:32px">Изпратете ни кратко описание на казуса. Ще се свържем с вас до 24 часа за насрочване на среща.</p>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        {[
+          ['📍', 'ул. Богориди 12, ет.3, Бургас'],
+          ['📞', '+359 56 789 012'],
+          ['✉️', 'office@petrov-law.bg'],
+          ['🕐', 'Пон–Пет: 9:00–18:00'],
+        ].map(([icon, text]) => (
+          <div style="display:flex;gap:12px;align-items:center">
+            <span style="font-size:18px;flex-shrink:0">{icon}</span>
+            <span style="font-size:14px;color:var(--text)">{text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style="background:white;padding:40px;border:1px solid #e2d9c4">
+      <form style="display:grid;gap:18px">
+        {[
+          ['Вашето име', 'text', 'Иван Иванов'],
+          ['Имейл адрес', 'email', 'ivan@example.com'],
+          ['Телефон', 'tel', '+359 88...'],
+        ].map(([label, type, placeholder]) => (
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#94a3b8;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">{label}</label>
+            <input type={type} placeholder={placeholder as string} style="width:100%;padding:12px 16px;border:1px solid #ddd;font-size:14px;background:#fafaf8" />
+          </div>
+        ))}
+        <div>
+          <label style="font-size:11px;font-weight:700;color:#94a3b8;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Област на правото</label>
+          <select style="width:100%;padding:12px 16px;border:1px solid #ddd;font-size:14px;background:#fafaf8">
+            {['Гражданско право','Търговско право','Трудово право','Недвижими имоти','Наказателно право','Друго'].map(o => <option>{o}</option>)}
+          </select>
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;color:#94a3b8;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Кратко описание на казуса</label>
+          <textarea placeholder="Опишете накратко ситуацията..." rows={4} style="width:100%;padding:12px 16px;border:1px solid #ddd;font-size:14px;resize:vertical;background:#fafaf8;font-family:Inter,sans-serif"></textarea>
+        </div>
+        <button type="submit" class="btn" style="width:100%;padding:16px;font-size:14px;text-align:center">Изпрати запитване →</button>
+        <p style="font-size:11px;color:#94a3b8;text-align:center;line-height:1.5">Отговаряме до 24 часа. Пълна конфиденциалност.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--navy);padding:48px 24px">
+  <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:32px">
+    <div>
+      <div style="color:var(--gold);font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px">Петров и Партньори</div>
+      <div style="color:rgba(255,255,255,.3);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Адвокатска кантора</div>
+      <p style="color:rgba(255,255,255,.35);font-size:13px;line-height:1.7">25 години правна защита в Бургас и страната.</p>
+    </div>
+    {[
+      ['Практики', ['Гражданско право', 'Търговско право', 'Трудово право', 'Недвижими имоти', 'Наказателно право']],
+      ['Кантора', ['За нас', 'Екипът', 'Новини', 'Контакти', 'Безплатна консултация']],
+    ].map(([title, items]) => (
+      <div>
+        <div style="color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px">{title}</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.35);font-size:13px">{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <span style="color:rgba(255,255,255,.2);font-size:12px">© 2026 Петров и Партньори · Адвокатска кантора · Бургас</span>
+    <span style="color:rgba(255,255,255,.2);font-size:12px">Адвокатска колегия Бургас · ЕИК 123456789</span>
+  </div>
+</footer>
+</DemoLayout>

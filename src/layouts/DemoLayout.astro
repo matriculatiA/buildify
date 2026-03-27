@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  accent?: string;
+  bg?: string;
+}
+const { title, accent = '#f5e642', bg = '#111' } = Astro.props;
+---
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; }
+    .serif { font-family: 'Playfair Display', serif; }
+  </style>
+</head>
+<body>
+  <!-- Demo Banner -->
+  <div style={`background:${accent};color:#111;font-size:11px;font-weight:700;text-align:center;padding:8px;letter-spacing:.08em;text-transform:uppercase;font-family:monospace`}>
+    Demo сайт от <a href="https://buildify.bg/websites" style="color:#111;text-decoration:underline">buildify.bg</a> — не е реален клиент
+  </div>
+
+  <slot />
+</body>
+</html>

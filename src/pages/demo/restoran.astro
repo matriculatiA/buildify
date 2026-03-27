@@ -1,0 +1,232 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+---
+<DemoLayout title="Механа Загорето — Автентична българска кухня" accent="#e8a030">
+<style>
+  :root { --green: #1a2e1a; --gold: #c8902a; --cream: #f5f0e8; --text: #2a1a0a; }
+  a { text-decoration: none; }
+  .btn-primary { background: var(--gold); color: white; font-weight: 700; padding: 14px 32px; display: inline-block; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; transition: background .2s; cursor: pointer; border: none; }
+  .btn-primary:hover { background: #a87020; }
+  .btn-outline { border: 2px solid white; color: white; font-weight: 700; padding: 12px 28px; display: inline-block; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; transition: all .2s; }
+  .btn-outline:hover { background: white; color: var(--green); }
+  section { padding: 80px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+</style>
+
+<!-- NAV -->
+<nav style="background:var(--green);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:22px">🍽</span>
+    <span class="serif" style="color:white;font-size:20px;font-weight:700">Механа Загорето</span>
+  </div>
+  <div style="display:none;gap:32px" class="nav-links">
+    {['Меню', 'За нас', 'Галерия', 'Резервация', 'Контакти'].map(l => (
+      <a href="#" style="color:rgba(255,255,255,.7);font-size:14px;font-weight:500;transition:color .2s" onmouseover="this.style.color='#c8902a'" onmouseout="this.style.color='rgba(255,255,255,.7)'">{l}</a>
+    ))}
+  </div>
+  <a href="#rezervacia" class="btn-primary" style="padding:10px 24px;font-size:13px">Резервирай маса</a>
+</nav>
+<style>@media(min-width:768px){.nav-links{display:flex!important}}</style>
+
+<!-- HERO -->
+<div style="background:linear-gradient(135deg,#0f1e0f 0%,#1a2e1a 40%,#2d4a1e 100%);min-height:90vh;display:flex;align-items:center;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2220%22 cy=%2220%22 r=%2240%22 fill=%22rgba(200,144,42,.06)%22/><circle cx=%2280%22 cy=%2280%22 r=%2260%22 fill=%22rgba(200,144,42,.04)%22/></svg>');background-size:cover"></div>
+  <div class="container" style="position:relative;z-index:1;padding:60px 24px">
+    <span class="tag" style="font-size:12px">★ ★ ★ ★ ★ &nbsp;&nbsp; Отворени от 1994</span>
+    <h1 class="serif" style="color:white;font-size:clamp(2.8rem,7vw,5.5rem);line-height:1.05;margin-bottom:24px;max-width:700px">
+      Автентична<br/>българска кухня<br/><span style="color:var(--gold)">от сърцето на Балкана</span>
+    </h1>
+    <p style="color:rgba(255,255,255,.65);font-size:18px;line-height:1.7;max-width:520px;margin-bottom:40px">
+      Домашно приготвени ястия по стари рецепти, уютна атмосфера и вина от собствено лозе. Всяка хапка — история.
+    </p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="#rezervacia" class="btn-primary">Резервирай маса →</a>
+      <a href="#menu" class="btn-outline">Виж менюто</a>
+    </div>
+    <div style="display:flex;gap:40px;margin-top:56px;flex-wrap:wrap">
+      {[['30+', 'Години традиция'], ['200+', 'Места за гости'], ['50+', 'Ястия в менюто']].map(([n,l]) => (
+        <div>
+          <div class="serif" style="color:var(--gold);font-size:2.2rem;font-weight:700">{n}</div>
+          <div style="color:rgba(255,255,255,.5);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-top:4px">{l}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<!-- INFO BAR -->
+<div style="background:var(--gold)">
+  <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:0">
+    {[
+      ['🕐', 'Работно време', 'Пон–Пет: 11:00–23:00\nСаб–Нед: 11:00–24:00'],
+      ['📍', 'Адрес', 'ул. Витоша 42, Бургас\nдо Морската градина'],
+      ['📞', 'Телефон', '+359 56 123 456\nhello@zagoreto.bg'],
+      ['🅿', 'Паркинг', 'Безплатен паркинг\nза гостите ни'],
+    ].map(([icon, title, info]) => (
+      <div style="padding:24px 28px;border-right:1px solid rgba(255,255,255,.3)">
+        <div style="font-size:20px;margin-bottom:8px">{icon}</div>
+        <div style="font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:rgba(0,0,0,.6);margin-bottom:4px">{title}</div>
+        <div style="font-size:13px;color:#1a0a00;line-height:1.5;white-space:pre-line">{info}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu" style="background:var(--cream)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px">
+      <span class="tag">Нашето меню</span>
+      <h2 class="serif" style="font-size:clamp(2rem,4vw,3rem);color:var(--text);margin-bottom:16px">Вкусове от България</h2>
+      <p style="color:#666;max-width:500px;margin:0 auto;line-height:1.7">Готвим с продукти от местни фермери. Без консерванти, без компромиси.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px">
+      {[
+        { cat: '🥗 Студени предястия', items: [['Шопска салата', '8 лв.'], ['Кьопоолу', '9 лв.'], ['Сирене по Шопски', '11 лв.'], ['Луканка с краставички', '12 лв.']] },
+        { cat: '🍲 Основни ястия', items: [['Кавърма с наденица', '22 лв.'], ['Агнешко на фурна', '28 лв.'], ['Пълнени чушки', '18 лв.'], ['Гювеч с телешко', '24 лв.']] },
+        { cat: '🔥 Скара', items: [['Кюфтета (3 бр.)', '14 лв.'], ['Свинска пържола', '20 лв.'], ['Пилешко филе', '16 лв.'], ['Мешана скара', '32 лв.']] },
+      ].map(cat => (
+        <div style="background:white;border:1px solid #e8e0d0;overflow:hidden">
+          <div style="background:var(--green);padding:16px 24px">
+            <h3 style="color:white;font-size:15px;font-weight:700">{cat.cat}</h3>
+          </div>
+          <div style="padding:8px 0">
+            {cat.items.map(([name, price]) => (
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;border-bottom:1px solid #f0ebe0">
+                <span style="font-size:14px;color:var(--text)">{name}</span>
+                <span style="font-weight:700;color:var(--gold);font-size:14px">{price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="#" class="btn-primary">Виж пълното меню →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section style="background:var(--green)">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <div>
+      <span class="tag">За нас</span>
+      <h2 class="serif" style="color:white;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:24px">Три поколения на трапезата</h2>
+      <p style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:20px">
+        Механа Загорето е основана от баба Мария Петрова през 1994 година с мечтата да съхрани автентичния вкус на родопската кухня. Днес, три десетилетия по-късно, продължаваме традицията с рецептите, предадени от поколение на поколение.
+      </p>
+      <p style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:32px">
+        Всяко ястие се приготвя с пресни, сезонни продукти от местни производители. Виното ни е от собственото ни лозе в Cotele — бяло и червено, отлежало в дъбови бурета.
+      </p>
+      <div style="display:flex;gap:12px">
+        <a href="#rezervacia" class="btn-primary">Резервирай →</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      {[
+        { n: '⭐ 4.9', t: 'Google рейтинг' },
+        { n: '1200+', t: 'Отзива' },
+        { n: '30г.', t: 'Традиция' },
+        { n: '100%', t: 'Домашно готвене' },
+      ].map(s => (
+        <div style="background:rgba(255,255,255,.07);padding:24px;text-align:center;border:1px solid rgba(255,255,255,.1)">
+          <div class="serif" style="color:var(--gold);font-size:1.8rem;font-weight:700;margin-bottom:8px">{s.n}</div>
+          <div style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.08em">{s.t}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section style="background:white">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px">
+      <span class="tag">Отзиви</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text)">Какво казват гостите</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      {[
+        { name: 'Мария С.', stars: 5, text: 'Най-добрите кюфтета, които съм яла! Атмосферата е невероятна, усещаш се като у дома. Определено ще се върна.' },
+        { name: 'Георги П.', stars: 5, text: 'Идеално място за семейна вечеря. Храната е приготвена с любов, порциите са огромни, а цените — много разумни.' },
+        { name: 'Ана Д.', stars: 5, text: 'Отбелязахме рождения ден на мама тук. Персоналът беше изключителен, изненадаха ни с торта. Пет звезди!' },
+      ].map(r => (
+        <div style="border:1px solid #e8e0d0;padding:28px;position:relative">
+          <div style="color:var(--gold);font-size:18px;margin-bottom:12px">{'★'.repeat(r.stars)}</div>
+          <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:16px;font-style:italic">"{r.text}"</p>
+          <div style="font-weight:700;font-size:13px;color:var(--text)">{r.name}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- REZERVACIA -->
+<section id="rezervacia" style="background:var(--cream)">
+  <div class="container" style="max-width:700px">
+    <div style="text-align:center;margin-bottom:48px">
+      <span class="tag">Резервация</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);margin-bottom:16px">Запазете маса</h2>
+      <p style="color:#666">Обаждаме се за потвърждение до 30 минути.</p>
+    </div>
+    <form style="display:grid;gap:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Вашето име</label>
+          <input type="text" placeholder="Иван Иванов" style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none" />
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Телефон</label>
+          <input type="tel" placeholder="+359 88 888 8888" style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none" />
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Дата</label>
+          <input type="date" style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none" />
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Час</label>
+          <select style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
+            {['12:00','13:00','14:00','18:00','19:00','20:00','21:00'].map(h => <option>{h}</option>)}
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Гости</label>
+          <select style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
+            {['1','2','3','4','5','6','7','8+'].map(n => <option>{n} {n==='1'?'гост':'гости'}</option>)}
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;padding:18px;font-size:15px">Изпрати резервация →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--green);padding:48px 24px">
+  <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:40px">
+    <div>
+      <div class="serif" style="color:white;font-size:22px;font-weight:700;margin-bottom:16px">Механа Загорето</div>
+      <p style="color:rgba(255,255,255,.5);font-size:13px;line-height:1.7">Автентична българска кухня от 1994 г. Добре дошли на нашата трапеза.</p>
+    </div>
+    {[
+      ['Меню', ['Студени предястия', 'Супи', 'Основни', 'Скара', 'Десерти', 'Вина']],
+      ['Контакти', ['ул. Витоша 42, Бургас', '+359 56 123 456', 'hello@zagoreto.bg', 'Пон–Нед: 11:00–24:00']],
+    ].map(([title, items]) => (
+      <div>
+        <div style="color:var(--gold);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">{title}</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.5);font-size:13px">{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;color:rgba(255,255,255,.3);font-size:12px">
+    © 2026 Механа Загорето · Всички права запазени
+  </div>
+</footer>
+</DemoLayout>
