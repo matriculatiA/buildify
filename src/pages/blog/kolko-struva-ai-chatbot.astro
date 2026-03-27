@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Колко струва AI чатбот за малкия бизнес в България?",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-27",
+  "dateModified": "2026-03-27",
+  "description": "Реални цени за AI чатбот в България за 2026. Еднократна инсталация, месечна поддръжка, ROI. Кога се изплаща и как да не надплатиш.",
+  "keywords": "колко струва AI чатбот, AI чатбот цена българия, AI бот за сайт цена"
+};
+---
+
+<BaseLayout
+  title="Колко струва AI чатбот за малкия бизнес? | buildify.bg"
+  description="Реални цени за AI чатбот в България за 2026. Еднократна инсталация, месечна поддръжка, ROI. Кога се изплаща и как да не надплатиш."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">AI</span>
+        <span class="font-mono text-xs text-white/25">Март 2026</span>
+        <span class="font-mono text-xs text-white/25">5 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Колко струва<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">AI чатбот</mark><br/>
+        за малкия бизнес?
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Оферти от 50€ до 5 000€ за "AI бот". Ето какво реално се крие зад цената
+        и кога инвестицията се изплаща.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- SECTION 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Защо цените са толкова различни</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          "AI чатбот" може да означава много различни неща. Има плъгин за 20€/месец, който лепва готов бот
+          на сайта ти без никаква настройка. И има персонализиран асистент, обучен с твоите продукти,
+          цени и процедури, интегриран с CRM системата ти — за 3 000€.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Разликата не е само в цената — в единия случай ботът отговаря с общи фрази и вреди на
+          впечатлението. В другия — работи като добре обучен служител, който познава бизнеса ти.
+        </p>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "67%", lbl: "Клиенти очакват отговор под 1 час" },
+          { val: "3-4×", lbl: "Месеца среден ROI период" },
+          { val: "80%", lbl: "Запитвания са повтарящи се въпроси" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Евтиният бот отговаря. Добрият бот продава. Разликата е в обучението."
+        </p>
+      </div>
+
+      <!-- SECTION 02 - PRICE TABLE -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Реални цени за 2026</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Тип</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Цена</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Подходящ за</span>
+          </div>
+          {[
+            { type: "Готов плъгин (Tidio, Crisp)",  price: "20-80€/мес.",    who: "Стартиращ бизнес, тест на концепцията" },
+            { type: "Персонализиран AI бот",         price: "200-500€ + абонамент", who: "Малък и среден бизнес" },
+            { type: "Интегриран бот (CRM, ERP)",     price: "800-3 000€+",   who: "По-сложни процеси, е-commerce" },
+            { type: "Enterprise решение",             price: "По заявка",     who: "Голям обем, множество канали" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.type}</span>
+              <span class="font-mono font-bold text-sm text-ink">{row.price}</span>
+              <span class="text-xs text-muted leading-relaxed">{row.who}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 03 - WHAT AFFECTS PRICE -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Какво определя цената</span>
+        </div>
+        <div class="space-y-3">
+          {[
+            { icon: "bot",   title: "Обем на обучението",          desc: "Колко информация трябва да знае ботът — продукти, цени, процедури, FAQ. Повече данни = повече работа по настройката." },
+            { icon: "web",   title: "Интеграции",                   desc: "Само сайт или и Facebook, Instagram, WhatsApp? Всеки допълнителен канал добавя към цената." },
+            { icon: "clock", title: "Поддръжка и обновявания",      desc: "Ботът трябва да се обновява когато се сменят цени, продукти, процедури. Месечният абонамент покрива това." },
+            { icon: "seo",   title: "Модел зад бота",               desc: "GPT-4o, Claude, Gemini — различни възможности и цени. По-мощният модел = по-добри отговори, но по-висока месечна такса." },
+          ].map(item => (
+            <div class="flex gap-4 items-start bg-white border-2 border-ink p-5">
+              <div class="shrink-0 mt-0.5"><Icon name={item.icon} size={22} /></div>
+              <div>
+                <div class="font-bold text-sm uppercase tracking-tight text-ink mb-1">{item.title}</div>
+                <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 04 - ROI -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога се изплаща</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">
+          Реален пример: зъболекарска практика с 40 запитвания на месец.
+        </p>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Средна стойност на нов пациент",    v: "150€" },
+            { k: "Запитвания губени извън работно време", v: "~30% = 12/мес." },
+            { k: "Ако ботът задържи половината",       v: "6 нови пациента" },
+            { k: "Приход от тях",                       v: "900€/мес." },
+            { k: "Цена на бота",                        v: "200€ инсталация + 75€/мес." },
+            { k: "ROI от първи месец",                  v: "825€ печалба" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink">{row.k}</span>
+              <span class="font-mono font-bold text-sm text-ink">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/70 text-sm leading-relaxed">
+          Това е консервативна сметка. Ботът работи и в събота, в неделя, на 23:00.
+          Не иска увеличение и не излиза в отпуск.
+        </p>
+      </div>
+
+      <!-- SECTION 05 - WHEN NOT -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">05</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога не си струва</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          {[
+            "Получаваш под 5 запитвания на ден — разходът не се оправдава",
+            "Всяко запитване е уникално и изисква специализирано мнение",
+            "Нямаш документирана информация за обучение (цени, процедури, FAQ)",
+            "Клиентите ти предпочитат само телефонен контакт",
+          ].map(item => (
+            <div class="flex gap-4 items-center px-5 py-4 bg-white">
+              <span class="text-red-500 font-bold shrink-0 font-mono text-sm">✕</span>
+              <span class="text-sm text-ink">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / AI ботове</div>
+            <div class="font-bold text-white text-xl tracking-tight">Безплатен анализ дали ти трябва бот</div>
+            <p class="text-white/40 text-sm mt-1">Казваме ти честно дали инвестицията ще се изплати. Без задължения.</p>
+          </div>
+          <a href="/kontakt" class="shrink-0 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+            Безплатен анализ →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>
