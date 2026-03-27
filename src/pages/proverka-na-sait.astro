@@ -4,17 +4,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const schema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Безплатен QA Health Check за сайтове",
-  "url": "https://buildify.bg/qa-check",
-  "description": "Безплатен технически одит на уебсайт. Реални данни от Google PageSpeed Insights — скорост, SEO, достъпност, Core Web Vitals.",
+  "name": "Безплатна проверка на сайт — скорост и мобилна версия",
+  "url": "https://buildify.bg/proverka-na-sait",
+  "description": "Провери безплатно дали сайтът ти е бърз, работи на мобилни устройства и няма технически грешки. Реални данни от Google.",
   "applicationCategory": "WebApplication",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
 };
 ---
 
 <BaseLayout
-  title="Безплатен QA Check за сайт — реални данни от Google | buildify.bg"
-  description="Провери сайта си с реални данни от Google PageSpeed Insights. Скорост, SEO, Core Web Vitals, достъпност. Безплатно, без регистрация."
+  title="Безплатна проверка на сайт — скорост, мобилна версия, грешки | buildify.bg"
+  description="Провери безплатно дали сайтът ти е бърз и работи на телефон. Реални данни от Google — скорост, SEO, Core Web Vitals. Без регистрация."
   schema={schema}
 >
 
@@ -132,7 +132,7 @@ const schema = {
     <!-- Report header -->
     <div class="bg-ink border-b-2 border-ink px-8 py-8">
       <div class="max-w-5xl mx-auto">
-        <div class="font-mono text-xs text-white/30 uppercase tracking-widest mb-3">Google PageSpeed Insights · buildify.bg/qa-check</div>
+        <div class="font-mono text-xs text-white/30 uppercase tracking-widest mb-3">Google PageSpeed Insights · buildify.bg/proverka-na-sait</div>
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div class="font-bold text-white text-xl mb-1" id="report-url-display">—</div>

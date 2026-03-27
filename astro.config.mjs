@@ -7,9 +7,11 @@ export default defineConfig({
   integrations: [sitemap(), tailwind()],
   output: 'static',
   redirects: {
-    '/plugini':   '/plugins',
-    '/ai-botove': '/ai-bots',
-    '/kontakt':   '/contact',
-    '/za-nas':    '/about',
+    '/plugini':    '/plugins',
+    '/ai-botove':  '/ai-bots',
+    '/kontakt':    '/contact',
+    '/za-nas':     '/about',
+    '/qa-testing': '/contact',
+    '/qa-check':   '/proverka-na-sait',
   },
 });
