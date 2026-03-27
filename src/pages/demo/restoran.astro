@@ -43,24 +43,25 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   .menu-panel.active { display: grid; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* Review carousel */
-  .reviews-track { display: flex; gap: 24px; overflow: hidden; }
-  .review-card { min-width: 300px; flex-shrink: 0; border: 1px solid #e8e0d0; padding: 28px; position: relative; transition: transform .3s, box-shadow .3s; }
-  .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.12); }
-
-  /* Gallery */
-  .gallery-item { overflow: hidden; cursor: pointer; position: relative; aspect-ratio: 4/3; background: var(--green); }
-  .gallery-item .overlay { position: absolute; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; }
-  .gallery-item:hover .overlay { opacity: 1; }
-  .gallery-item .fake-img { width: 100%; height: 100%; transition: transform .5s; }
-  .gallery-item:hover .fake-img { transform: scale(1.08); }
+  /* Review cards */
+  .review-card { border: 1px solid #e8e0d0; padding: 28px; background: white; transition: transform .3s, box-shadow .3s; }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
 
   /* Sticky nav scroll effect */
-  #restoran-nav.scrolled { background: rgba(13,24,13,.97) !important; backdrop-filter: blur(16px); box-shadow: 0 4px 32px rgba(0,0,0,.5) !important; }
+  #restoran-nav { border-bottom: 1px solid transparent; }
+  #restoran-nav.scrolled { background: rgba(10,20,10,.98) !important; border-bottom-color: rgba(200,144,42,.2) !important; box-shadow: 0 4px 32px rgba(0,0,0,.6) !important; }
+
+  /* Reviews grid */
+  .review-card { border: 1px solid #e8e0d0; padding: 28px; transition: transform .3s, box-shadow .3s; background: white; }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
+
+  /* Features strip */
+  .feature-strip-item { padding: 40px 32px; border-right: 1px solid rgba(200,144,42,.2); transition: background .3s; cursor: default; }
+  .feature-strip-item:hover { background: rgba(200,144,42,.06); }
 </style>
 
 <!-- NAV -->
-<nav id="restoran-nav" style="background:transparent;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;transition:background .45s,box-shadow .45s">
+<nav id="restoran-nav" style="background:rgba(10,20,10,.82);backdrop-filter:blur(12px);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;transition:background .4s,box-shadow .4s,border-color .4s">
   <div style="display:flex;align-items:center;gap:8px">
     <span style="font-size:22px">🍽</span>
     <span class="serif" style="color:white;font-size:20px;font-weight:700;font-family:'Playfair Display',serif">Механа Загорето</span>
@@ -111,21 +112,17 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:11px;letter-spacing:.1em;text-transform:uppercase">
-    <span>Скролирай</span>
-    <div id="scroll-arrow" style="width:2px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollBounce 1.5s ease-in-out infinite"></div>
-  </div>
+  <!-- Scroll chevron (bottom center, no text) -->
+  <a href="#info-bar" style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;gap:0;transition:color .2s;text-decoration:none" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:chevronBounce 2s ease-in-out infinite"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
 </div>
 <style>
-  @keyframes scrollBounce {
-    0%,100% { transform: scaleY(1); opacity: 1; }
-    50% { transform: scaleY(.6); opacity: .5; }
-  }
+  @keyframes chevronBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 </style>
 
 <!-- INFO BAR -->
-<div style="background:var(--gold)" class="reveal">
+<div id="info-bar" style="background:var(--gold)" class="reveal">
   <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:0">
     {[
       ['🕐', 'Работно време', 'Пон–Пет: 11:00–23:00\nСаб–Нед: 11:00–24:00'],
@@ -244,33 +241,36 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   </div>
 </section>
 
-<!-- GALLERY -->
-<section style="background:var(--cream);padding:80px 24px">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:40px" class="reveal">
-      <span class="tag">Атмосфера</span>
-      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);font-family:'Playfair Display',serif">Усетете духа на механата</h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:12px">
-      {[
-        { bg: 'linear-gradient(135deg,#2d1a0a,#4a2e10)', emoji: '🍽', label: 'Уютна зала', span: 'col-span-2' },
-        { bg: 'linear-gradient(135deg,#1a2e1a,#2d4a1e)', emoji: '🌿', label: 'Градинска тераса', span: '' },
-        { bg: 'linear-gradient(135deg,#3d1f00,#6b3800)', emoji: '🥩', label: 'Скара на жар', span: '' },
-        { bg: 'linear-gradient(135deg,#1a1a0a,#3d3d1a)', emoji: '🍷', label: 'Наш избор', span: '' },
-        { bg: 'linear-gradient(135deg,#0a1a0a,#1a3a1a)', emoji: '🎵', label: 'Живa музика', span: 'col-span-2' },
-      ].map((item, i) => (
-        <div class="gallery-item reveal" style={`${i===0?'grid-column:span 2':''}${i===4?'grid-column:span 2':''};background:${item.bg};border-radius:2px`}>
-          <div class="fake-img" style={`background:${item.bg};width:100%;height:200px;display:flex;align-items:center;justify-content:center`}>
-            <span style="font-size:64px;opacity:.6">{item.emoji}</span>
-          </div>
-          <div class="overlay">
-            <span style="color:white;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase">{item.label}</span>
-          </div>
-        </div>
-      ))}
-    </div>
+<!-- ATMOSPHERE STRIP -->
+<div style="background:var(--green);border-top:1px solid rgba(200,144,42,.15);border-bottom:1px solid rgba(200,144,42,.15)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+    {[
+      { n: '30+', label: 'Години традиция', desc: 'Основана от баба Мария Петрова през 1994 г.' },
+      { n: '50+', label: 'Ястия в менюто', desc: 'Рецепти предавани от поколение на поколение.' },
+      { n: '100%', label: 'Локални продукти', desc: 'Само от местни фермери и собственото ни лозе.' },
+      { n: '4.9★', label: 'Google рейтинг', desc: 'Над 1200 отзива от доволни гости.' },
+    ].map(item => (
+      <div class="feature-strip-item reveal">
+        <div class="serif" style="color:var(--gold);font-size:2rem;font-weight:700;font-family:'Playfair Display',serif;line-height:1;margin-bottom:8px">{item.n}</div>
+        <div style="font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:white;margin-bottom:6px">{item.label}</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.6">{item.desc}</p>
+      </div>
+    ))}
   </div>
-</section>
+</div>
+
+<!-- QUOTE / ATMOSPHERE -->
+<div style="background:#0a140a;padding:80px 24px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(200,144,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,144,42,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1;max-width:800px;margin:0 auto;text-align:center">
+    <div style="width:48px;height:2px;background:var(--gold);margin:0 auto 32px"></div>
+    <blockquote class="serif reveal" style="font-size:clamp(1.4rem,3vw,2.2rem);color:rgba(255,255,255,.85);line-height:1.6;font-style:italic;margin:0 0 32px;font-family:'Playfair Display',serif">
+      „Истинската българска кухня не е само храна — тя е спомен, история, семейство. Всяко ястие в Загорето носи душата на Балкана."
+    </blockquote>
+    <div style="width:48px;height:2px;background:var(--gold);margin:0 auto 24px"></div>
+    <div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700">Мария Петрова, основател 1994</div>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section style="background:var(--green)">
@@ -302,41 +302,43 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   </div>
 </section>
 
-<!-- REVIEWS - Carousel -->
-<section style="background:white;overflow:hidden">
+<!-- REVIEWS -->
+<section style="background:var(--cream)">
   <div class="container">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:40px" class="reveal">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px" class="reveal">
       <div>
         <span class="tag">Отзиви</span>
         <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);font-family:'Playfair Display',serif">Какво казват гостите</h2>
       </div>
-      <div style="display:flex;gap:8px">
-        <button id="prev-review" onclick="moveCarousel(-1)" style="width:44px;height:44px;border:2px solid #ddd;background:white;font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='#ddd';this.style.color='inherit'">‹</button>
-        <button id="next-review" onclick="moveCarousel(1)" style="width:44px;height:44px;border:2px solid #ddd;background:white;font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='#ddd';this.style.color='inherit'">›</button>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="color:var(--gold);font-size:22px">★★★★★</div>
+        <div>
+          <div style="font-weight:800;font-size:20px;color:var(--text)">4.9</div>
+          <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.06em">1200+ отзива</div>
+        </div>
       </div>
     </div>
-    <div style="overflow:hidden">
-      <div class="reviews-track" id="reviews-track">
-        {[
-          { name: 'Мария С.', stars: 5, text: 'Най-добрите кюфтета, които съм яла! Атмосферата е невероятна, усещаш се като у дома. Определено ще се върна.', date: 'Февруари 2026' },
-          { name: 'Георги П.', stars: 5, text: 'Идеално място за семейна вечеря. Храната е приготвена с любов, порциите са огромни, а цените — много разумни.', date: 'Януари 2026' },
-          { name: 'Ана Д.', stars: 5, text: 'Отбелязахме рождения ден на мама тук. Персоналът беше изключителен, изненадаха ни с торта. Пет звезди!', date: 'Март 2026' },
-          { name: 'Петко М.', stars: 5, text: 'Агнешкото на фурна е легендарно. Идвам тук от 15 години и никога не съм разочарован. Домашното вино е великолепно.', date: 'Февруари 2026' },
-          { name: 'Силвия Н.', stars: 5, text: 'Организирахме корпоративна вечеря за 40 човека. Всичко беше перфектно — от храната до обслужването. Благодаря!', date: 'Март 2026' },
-        ].map(r => (
-          <div class="review-card">
-            <div style="color:var(--gold);font-size:18px;margin-bottom:12px">{'★'.repeat(r.stars)}</div>
-            <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:16px;font-style:italic">"{r.text}"</p>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div style="font-weight:700;font-size:13px;color:var(--text)">{r.name}</div>
-              <div style="font-size:11px;color:#aaa">{r.date}</div>
-            </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      {[
+        { name: 'Мария С.', stars: 5, text: 'Най-добрите кюфтета, които съм яла! Атмосферата е невероятна, усещаш се като у дома. Определено ще се върна.', date: 'Февруари 2026', via: 'Google' },
+        { name: 'Георги П.', stars: 5, text: 'Идеално място за семейна вечеря. Храната е приготвена с любов, порциите са огромни, а цените — много разумни.', date: 'Януари 2026', via: 'Google' },
+        { name: 'Ана Д.', stars: 5, text: 'Отбелязахме рождения ден на мама тук. Персоналът беше изключителен, изненадаха ни с торта. Пет звезди!', date: 'Март 2026', via: 'TripAdvisor' },
+        { name: 'Петко М.', stars: 5, text: 'Агнешкото на фурна е легендарно. Идвам тук от 15 години и никога не съм разочарован. Домашното вино е великолепно.', date: 'Февруари 2026', via: 'Google' },
+        { name: 'Силвия Н.', stars: 5, text: 'Организирахме корпоративна вечеря за 40 човека. Всичко беше перфектно — от храната до обслужването. Благодаря!', date: 'Март 2026', via: 'Facebook' },
+      ].map((r, i) => (
+        <div class={`review-card reveal reveal-delay-${Math.min(i,3)}`}>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+            <div style="color:var(--gold);font-size:16px;letter-spacing:2px">{'★'.repeat(r.stars)}</div>
+            <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#bbb;border:1px solid #e8e0d0;padding:2px 8px">{r.via}</span>
           </div>
-        ))}
-      </div>
+          <p style="font-size:14px;color:#555;line-height:1.75;margin-bottom:20px;font-style:italic">„{r.text}"</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid #f0ebe0">
+            <div style="font-weight:700;font-size:13px;color:var(--text)">{r.name}</div>
+            <div style="font-size:11px;color:#bbb">{r.date}</div>
+          </div>
+        </div>
+      ))}
     </div>
-    <!-- Dots -->
-    <div id="review-dots" style="display:flex;gap:8px;justify-content:center;margin-top:24px"></div>
   </div>
 </section>
 
@@ -440,41 +442,5 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
     document.getElementById('panel-' + idx)?.classList.add('active');
   }
 
-  // --- Review carousel ---
-  let carouselIdx = 0;
-  const track = document.getElementById('reviews-track');
-  const dotsContainer = document.getElementById('review-dots');
-  const totalReviews = 5;
-  const visibleCount = () => window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-
-  function buildDots() {
-    if (!dotsContainer) return;
-    dotsContainer.innerHTML = '';
-    const maxIdx = totalReviews - visibleCount();
-    for (let i = 0; i <= maxIdx; i++) {
-      const dot = document.createElement('div');
-      dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i === carouselIdx ? '#c8902a' : '#ddd'};cursor:pointer;transition:background .2s`;
-      dot.onclick = () => { carouselIdx = i; updateCarousel(); };
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  function updateCarousel() {
-    if (!track) return;
-    const cardWidth = 324; // 300px + 24px gap
-    track.style.transform = `translateX(-${carouselIdx * cardWidth}px)`;
-    track.style.transition = 'transform .4s cubic-bezier(.25,.46,.45,.94)';
-    buildDots();
-  }
-
-  function moveCarousel(dir) {
-    const max = totalReviews - visibleCount();
-    carouselIdx = Math.max(0, Math.min(max, carouselIdx + dir));
-    updateCarousel();
-  }
-
-  buildDots();
-  // Auto-advance
-  setInterval(() => moveCarousel(carouselIdx >= totalReviews - visibleCount() ? -(totalReviews - visibleCount()) : 1), 5000);
 </script>
 </DemoLayout>
