@@ -209,6 +209,7 @@ const schema = {
 
 <script>
 const PSI_API = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+const API_KEY = 'AIzaSyAzW9dxYLeEdPUmj1TZIlnbgjkB3DiBn-Q';
 
 const S_GOOD = 90, S_WARN = 50;
 function scoreColor(n) { return n >= S_GOOD ? 's-green'  : n >= S_WARN ? 's-orange' : 's-red'; }
@@ -259,8 +260,8 @@ async function runCheck() {
   try {
     // Fetch both mobile and desktop
     const [mobRes, deskRes] = await Promise.all([
-      fetch(`${PSI_API}?url=${encodeURIComponent(url)}&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices`),
-      fetch(`${PSI_API}?url=${encodeURIComponent(url)}&strategy=desktop&category=performance&category=seo&category=accessibility&category=best-practices`)
+      fetch(`${PSI_API}?url=${encodeURIComponent(url)}&strategy=mobile&key=${API_KEY}&category=performance&category=seo&category=accessibility&category=best-practices`),
+      fetch(`${PSI_API}?url=${encodeURIComponent(url)}&strategy=desktop&key=${API_KEY}&category=performance&category=seo&category=accessibility&category=best-practices`)
     ]);
 
     clearInterval(stInt);
