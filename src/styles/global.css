@@ -10,10 +10,5 @@
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
-  .border-ink-1 { border: 1px solid #111; }
-  .border-ink-2 { border: 2px solid #111; }
-  .hover-lift { transition: transform 0.15s ease; }
-  .hover-lift:hover { transform: translate(-2px, -2px); }
   .highlight { background: #f5e642; padding: 0 4px; }
 }

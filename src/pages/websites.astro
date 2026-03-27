@@ -10,25 +10,25 @@ const schema = {
   "description": "Изработка на бизнес уебсайтове и landing pages оптимизирани за Google. SEO в структурата, Core Web Vitals зелено, прозрачни цени.",
   "areaServed": "Bulgaria",
   "offers": [
-    { "@type": "Offer", "name": "Landing page",    "price": "700",  "priceCurrency": "BGN" },
-    { "@type": "Offer", "name": "Бизнес сайт",     "price": "1500", "priceCurrency": "BGN" },
-    { "@type": "Offer", "name": "Корпоративен сайт","price": "3500", "priceCurrency": "BGN" }
+    { "@type": "Offer", "name": "Landing page",    "price": "350",  "priceCurrency": "EUR" },
+    { "@type": "Offer", "name": "Бизнес сайт",     "price": "750",  "priceCurrency": "EUR" },
+    { "@type": "Offer", "name": "Корпоративен сайт","price": "1800", "priceCurrency": "EUR" }
   ]
 };
 
 const packages = [
   {
-    name: "Landing page", price: "от 700 лв.", for: "Промоция / един продукт / услуга",
+    name: "Landing page", price: "от 350€", for: "Промоция / един продукт / услуга",
     features: ["До 5 секции", "Контактна форма", "Mobile-first дизайн", "SEO оптимизация", "Готов до 7 дни"],
     featured: false,
   },
   {
-    name: "Бизнес сайт", price: "от 1 500 лв.", for: "Малък и среден бизнес",
+    name: "Бизнес сайт", price: "от 750€", for: "Малък и среден бизнес",
     features: ["До 8 страници", "Блог / новини", "Google Analytics", "Schema markup", "Core Web Vitals", "Готов до 3 седмици"],
     featured: true,
   },
   {
-    name: "Корпоративен", price: "от 3 500 лв.", for: "По-сложни проекти",
+    name: "Корпоративен", price: "от 1 800€", for: "По-сложни проекти",
     features: ["Неограничени страници", "Многоезичност", "CMS за редакция", "E-commerce / резервации", "Приоритетна поддръжка"],
     featured: false,
   },
@@ -37,7 +37,7 @@ const packages = [
 
 <BaseLayout
   title="Изработка на уебсайт за бизнес в Бургас | buildify.bg"
-  description="Изработка на бизнес уебсайтове оптимизирани за Google. SEO вграден в кода, Core Web Vitals зелено, прозрачни цени. От 700 лв."
+  description="Изработка на бизнес уебсайтове оптимизирани за Google. SEO вграден в кода, Core Web Vitals зелено, прозрачни цени. От 350€."
   schema={schema}
 >
 
@@ -135,7 +135,7 @@ const packages = [
     <div class="divide-y-2 divide-ink">
       {[
         { q: "Колко отнема изработката?",             a: "Landing page - 5-7 работни дни. Бизнес сайт - 2-3 седмици. Включваме те в процеса на всяка стъпка." },
-        { q: "Нужен ли ми е хостинг отделно?",       a: "Не - деплойваме безплатно на Cloudflare Pages. Плащаш само за домейна (~20 лв./год.)." },
+        { q: "Нужен ли ми е хостинг отделно?",       a: "Не - деплойваме безплатно на Cloudflare Pages. Плащаш само за домейна (~10€/год.)." },
         { q: "Мога ли да редактирам сайта сам?",     a: "Да. При бизнес и корпоративен пакет интегрираме CMS панел за редакция без технически знания." },
         { q: "Правите ли и дизайна?",                a: "Да - дизайн, разработка и SEO са в пакета. Ако имаш съществуващ бранд, работим с него." },
       ].map(faq => (
