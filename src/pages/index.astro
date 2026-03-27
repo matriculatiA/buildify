@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icons.astro';
+import { posts } from '../data/posts';
+const latestPosts = posts.slice(0, 3);
 
 const schema = {
   "@context": "https://schema.org",
@@ -251,12 +253,8 @@ const services = [
     <a href="/blog" class="font-mono text-xs text-white/30 hover:text-yellow transition-colors uppercase tracking-widest">Всички →</a>
   </div>
   <div class="flex flex-col md:grid md:grid-cols-3">
-    {[
-      { cat: 'SEO', title: 'Колко струва изработката на уебсайт в България за 2026?', date: 'Март 2026',   slug: '/blog/tsena-uebsayt-bulgaria-2026' },
-      { cat: 'AI',  title: 'Кога имаш нужда от AI бот за бизнеса си?',                date: 'Февр. 2026', slug: '/blog/koga-ti-trqbva-ai-bot' },
-      { cat: 'QA',  title: 'Защо сайтът ти губи клиенти заради технически грешки?',  date: 'Февр. 2026', slug: '/blog/sayt-gubi-klienti-tehniches-greshki' },
-    ].map((post, i) => (
-      <a href={post.slug}
+    {latestPosts.map((post, i) => (
+      <a href={`/blog/${post.slug}`}
          class="group flex flex-col justify-between p-8 bg-cream hover:bg-ink transition-colors duration-200 border-b-2 md:border-b-0 md:border-r-2 border-ink last:border-r-0 last:border-b-0">
         <div>
           <div class="flex items-center justify-between mb-5">
