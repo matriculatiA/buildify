@@ -30,15 +30,12 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   .btn-outline:hover { background: var(--blue); color: white; }
 
   /* Service cards */
-  .service-card { border: 1px solid #e2e8f0; padding: 28px; transition: all .3s; position: relative; overflow: hidden; cursor: default; }
-  .service-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--sky), #0284c7); opacity: 0; transition: opacity .3s; }
-  .service-card:hover::before { opacity: 1; }
-  .service-card > * { position: relative; z-index: 1; }
-  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(14,165,233,.25); }
-  .service-card:hover .sc-icon { filter: brightness(0) invert(1); }
-  .service-card:hover .sc-title { color: white; }
-  .service-card:hover .sc-desc { color: rgba(255,255,255,.8); }
-  .service-card:hover .sc-price { color: #bae6fd; }
+  .service-card { background: white; padding: 32px 28px 28px; position: relative; overflow: hidden; cursor: default; transition: box-shadow .3s, transform .3s; border-bottom: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; }
+  .service-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--sky); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.25,.46,.45,.94); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-card:hover { box-shadow: 0 8px 32px rgba(14,165,233,.12); transform: translateY(-3px); }
+  .service-num { position: absolute; top: 16px; right: 20px; font-size: 56px; font-weight: 900; color: #f0f9ff; font-family: monospace; line-height: 1; user-select: none; transition: color .3s; }
+  .service-card:hover .service-num { color: #e0f2fe; }
 
   /* Floating CTA */
   #float-cta { position: fixed; bottom: 32px; right: 32px; z-index: 200; background: var(--sky); color: white; font-weight: 700; font-size: 13px; padding: 14px 24px; letter-spacing: .04em; box-shadow: 0 8px 32px rgba(14,165,233,.5); transition: transform .2s, box-shadow .2s; cursor: pointer; display: flex; align-items: center; gap: 8px; border: none; }
@@ -59,9 +56,10 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   .review-card { background: white; border: 1px solid #e2e8f0; padding: 28px; transition: transform .3s, box-shadow .3s; }
   .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.1); }
 
-  /* Nav scroll */
-  #dental-nav { transition: box-shadow .3s; }
-  #dental-nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.15) !important; }
+  /* Nav smart hide */
+  #dental-nav { transition: transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .3s; }
+  #dental-nav.hidden { transform: translateY(-110%); }
+  #dental-nav.shadow { box-shadow: 0 4px 24px rgba(0,0,0,.12) !important; }
 
   /* Pulse animation for float button */
   @keyframes pulse { 0%, 100% { box-shadow: 0 8px 32px rgba(14,165,233,.5); } 50% { box-shadow: 0 8px 48px rgba(14,165,233,.8); } }
@@ -128,16 +126,16 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
     </div>
 
     <!-- Right: checklist cards -->
-    <div style="display:grid;gap:12px" class="reveal-right">
+    <div style="display:grid;gap:10px" class="reveal-right">
       {[
-        { icon: '🎁', text: 'Безплатен преглед при първо посещение', color: '#dcfce7', border: '#86efac' },
-        { icon: '📅', text: 'Работим в събота 9:00–14:00', color: '#fef3c7', border: '#fcd34d' },
-        { icon: '💳', text: 'Плащане на части без лихва', color: '#ede9fe', border: '#c4b5fd' },
-        { icon: '🚨', text: 'Спешни случаи — в деня на обаждането', color: '#fee2e2', border: '#fca5a5' },
-      ].map(item => (
-        <div style={`background:${item.color};border:2px solid ${item.border};padding:16px 20px;display:flex;gap:12px;align-items:center;transition:transform .2s`} onmouseover="this.style.transform='translateX(6px)'" onmouseout="this.style.transform='translateX(0)'">
-          <span style="font-size:22px;flex-shrink:0">{item.icon}</span>
-          <span style="font-size:14px;color:var(--text);font-weight:600">{item.text}</span>
+        'Безплатен преглед при първо посещение',
+        'Работим в събота 9:00–14:00',
+        'Плащане на части без лихва',
+        'Спешни случаи — в деня на обаждането',
+      ].map(text => (
+        <div style="background:white;border-left:3px solid var(--sky);padding:16px 20px;display:flex;gap:14px;align-items:center;box-shadow:0 2px 8px rgba(14,165,233,.07);transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateX(6px)';this.style.boxShadow='0 4px 16px rgba(14,165,233,.16)'" onmouseout="this.style.transform='translateX(0)';this.style.boxShadow='0 2px 8px rgba(14,165,233,.07)'">
+          <span style="width:22px;height:22px;background:var(--sky);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;flex-shrink:0">✓</span>
+          <span style="font-size:14px;color:var(--text);font-weight:600">{text}</span>
         </div>
       ))}
     </div>
@@ -152,21 +150,23 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
       <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--dark);margin-bottom:16px">Пълна дентална грижа</h2>
       <p style="color:#64748b;max-width:480px;margin:0 auto;line-height:1.7">Задръжте мишката върху услуга за повече информация</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));background:#e2e8f0">
       {[
-        { icon: '🔍', title: 'Профилактика',      desc: 'Годишен преглед, почистване на зъбен камък, полиране. Препоръчваме 2 пъти годишно.', price: 'от 40 лв.', extra: 'Включва: преглед, рентгенова снимка, консултация, почистване' },
-        { icon: '🦷', title: 'Лечение на кариес', desc: 'Модерни фотополимерни пломби в цвета на зъба. Безболезнена анестезия.', price: 'от 80 лв.', extra: 'Гаранция 2 години. Процедурата отнема 30–45 минути.' },
-        { icon: '⚡', title: 'Избелване',          desc: 'Клинично избелване с LED технология. Резултат след 1 час. Устойчив ефект 2+ години.', price: 'от 280 лв.', extra: 'До 8 нюанса по-бели. Безопасно за емайла.' },
-        { icon: '👑', title: 'Коронки и мостове',  desc: 'Циркониеви коронки с 10-годишна гаранция. Цвят, форма и усещане като естествен зъб.', price: 'от 350 лв.', extra: '10-годишна гаранция. CAD/CAM технология.' },
-        { icon: '📐', title: 'Ортодонция',          desc: 'Брекети и прозрачни шини за деца и възрастни. Индивидуален план за лечение.', price: 'от 1200 лв.', extra: 'Invisalign сертифициран кабинет. Онлайн наблюдение.' },
-        { icon: '🔩', title: 'Зъбни импланти',     desc: 'Швейцарски импланти Straumann. Доживотна гаранция. Процедурата — под 1 час.', price: 'от 1500 лв.', extra: 'Straumann & Nobel импланти. Доживотна гаранция.' },
-      ].map(s => (
-        <div class="service-card reveal">
-          <div class="sc-icon" style="font-size:32px;margin-bottom:16px;display:block;transition:filter .3s">{s.icon}</div>
-          <h3 class="sc-title" style="font-size:17px;font-weight:700;color:var(--dark);margin-bottom:10px;transition:color .3s">{s.title}</h3>
-          <p class="sc-desc" style="font-size:13px;color:#64748b;line-height:1.7;margin-bottom:16px;transition:color .3s">{s.desc}</p>
-          <div class="sc-price" style="font-size:14px;font-weight:700;color:var(--blue);transition:color .3s">{s.price}</div>
-          <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;color:rgba(255,255,255,.7);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s" class="sc-extra">{s.extra}</div>
+        { icon: '🔍', title: 'Профилактика',      desc: 'Годишен преглед, почистване на зъбен камък, полиране. Препоръчваме 2 пъти годишно.', price: 'от 40 лв.' },
+        { icon: '🦷', title: 'Лечение на кариес', desc: 'Фотополимерни пломби в цвета на зъба. Безболезнена анестезия. Гаранция 2 години.', price: 'от 80 лв.' },
+        { icon: '⚡', title: 'Избелване',          desc: 'LED технология — до 8 нюанса по-бели за 1 час. Устойчив ефект 2+ години.', price: 'от 280 лв.' },
+        { icon: '👑', title: 'Коронки и мостове',  desc: 'Циркониеви коронки с 10-годишна гаранция. CAD/CAM технология.', price: 'от 350 лв.' },
+        { icon: '📐', title: 'Ортодонция',          desc: 'Брекети и прозрачни Invisalign шини. Индивидуален план за деца и възрастни.', price: 'от 1200 лв.' },
+        { icon: '🔩', title: 'Зъбни импланти',     desc: 'Швейцарски импланти Straumann. Доживотна гаранция. Под 1 час процедура.', price: 'от 1500 лв.' },
+      ].map((s, i) => (
+        <div class="service-card reveal" style={`transition-delay:${(i%3)*.1}s`}>
+          <div class="service-num">{String(i+1).padStart(2,'0')}</div>
+          <div style="position:relative;z-index:1">
+            <div style="width:48px;height:48px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">{s.icon}</div>
+            <h3 style="font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px">{s.title}</h3>
+            <p style="font-size:13px;color:#64748b;line-height:1.75;margin-bottom:20px">{s.desc}</p>
+            <div style="display:inline-block;background:var(--light);color:var(--blue);font-size:12px;font-weight:700;padding:5px 14px;letter-spacing:.02em">{s.price}</div>
+          </div>
         </div>
       ))}
     </div>
@@ -351,18 +351,20 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   }, { threshold: 0.1 });
   allReveal.forEach(r => revealIO.observe(r));
 
-  // --- Nav scroll ---
+  // --- Nav smart hide (hide on scroll down, show on scroll up) ---
   const nav = document.getElementById('dental-nav');
+  let lastY = 0;
   window.addEventListener('scroll', () => {
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // --- Service card extra text ---
-  document.querySelectorAll('.service-card').forEach(card => {
-    const extra = card.querySelector('.sc-extra') as HTMLElement | null;
-    card.addEventListener('mouseenter', () => { if (extra) { extra.style.opacity = '1'; extra.style.transform = 'translateY(0)'; } });
-    card.addEventListener('mouseleave', () => { if (extra) { extra.style.opacity = '0'; extra.style.transform = 'translateY(8px)'; } });
-  });
+    if (!nav) return;
+    const y = window.scrollY;
+    if (y > lastY && y > 120) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+      nav.classList.toggle('shadow', y > 40);
+    }
+    lastY = y;
+  }, { passive: true });
 
   // --- Progress bars ---
   const progressIO = new IntersectionObserver((entries) => {

@@ -65,6 +65,7 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 </style>
 
 <!-- NAV -->
+<div id="scroll-progress" style="position:fixed;top:32px;left:0;height:3px;background:var(--gold);width:0%;z-index:200;transition:width .1s linear;pointer-events:none"></div>
 <nav id="law-nav" style="background:var(--navy);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:76px;position:sticky;top:32px;z-index:100;border-bottom:1px solid rgba(201,168,76,.15)">
   <div>
     <div style="color:white;font-size:16px;font-weight:800;letter-spacing:.04em;line-height:1;font-family:'Playfair Display',serif">ПЕТРОВ И ПАРТНЬОРИ</div>
@@ -363,10 +364,16 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   }, { threshold: 0.1 });
   allReveal.forEach(r => revealIO.observe(r));
 
-  // --- Nav scroll effect ---
+  // --- Nav scroll + progress bar ---
   const nav = document.getElementById('law-nav');
+  const progress = document.getElementById('scroll-progress');
   window.addEventListener('scroll', () => {
-    if (nav) nav.style.boxShadow = window.scrollY > 60 ? '0 4px 30px rgba(0,0,0,.4)' : 'none';
-  });
+    const y = window.scrollY;
+    if (nav) nav.style.boxShadow = y > 60 ? '0 4px 30px rgba(0,0,0,.5)' : 'none';
+    if (progress) {
+      const total = document.body.scrollHeight - window.innerHeight;
+      progress.style.width = (total > 0 ? (y / total) * 100 : 0) + '%';
+    }
+  }, { passive: true });
 </script>
 </DemoLayout>

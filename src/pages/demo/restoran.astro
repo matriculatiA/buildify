@@ -21,16 +21,18 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   .reveal-delay-2 { transition-delay: .2s; }
   .reveal-delay-3 { transition-delay: .3s; }
 
-  /* Floating particles */
-  @keyframes floatUp {
-    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+  /* Atmospheric orbs */
+  @keyframes drift {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+    33%  { transform: translateY(-28px) translateX(14px) scale(1.06); }
+    66%  { transform: translateY(-14px) translateX(-12px) scale(.95); }
   }
-  .particle {
+  .orb {
     position: absolute;
-    font-size: 24px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,144,42,.18) 0%, transparent 65%);
+    animation: drift ease-in-out infinite;
     pointer-events: none;
-    animation: floatUp linear infinite;
   }
 
   /* Menu tabs */
@@ -54,12 +56,11 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   .gallery-item:hover .fake-img { transform: scale(1.08); }
 
   /* Sticky nav scroll effect */
-  #restoran-nav { transition: background .3s, box-shadow .3s; }
-  #restoran-nav.scrolled { background: rgba(15,28,15,.95) !important; backdrop-filter: blur(12px); }
+  #restoran-nav.scrolled { background: rgba(13,24,13,.97) !important; backdrop-filter: blur(16px); box-shadow: 0 4px 32px rgba(0,0,0,.5) !important; }
 </style>
 
 <!-- NAV -->
-<nav id="restoran-nav" style="background:var(--green);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)">
+<nav id="restoran-nav" style="background:transparent;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;transition:background .45s,box-shadow .45s">
   <div style="display:flex;align-items:center;gap:8px">
     <span style="font-size:22px">🍽</span>
     <span class="serif" style="color:white;font-size:20px;font-weight:700;font-family:'Playfair Display',serif">Механа Загорето</span>
@@ -75,8 +76,13 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 
 <!-- HERO with floating particles -->
 <div style="background:linear-gradient(135deg,#0f1e0f 0%,#1a2e1a 40%,#2d4a1e 100%);min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden" id="hero">
-  <!-- Particles container -->
-  <div id="particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+  <!-- Atmospheric orbs -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
+    <div class="orb" style="width:480px;height:480px;left:-8%;top:5%;animation-duration:10s"></div>
+    <div class="orb" style="width:320px;height:320px;right:5%;top:25%;animation-duration:14s;animation-delay:-5s"></div>
+    <div class="orb" style="width:240px;height:240px;left:50%;bottom:10%;animation-duration:12s;animation-delay:-3s"></div>
+    <div class="orb" style="width:160px;height:160px;right:28%;top:65%;animation-duration:8s;animation-delay:-1.5s"></div>
+  </div>
 
   <!-- Subtle texture overlay -->
   <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(200,144,42,.06) 1px,transparent 1px);background-size:40px 40px;pointer-events:none"></div>
@@ -412,27 +418,6 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 </footer>
 
 <script>
-  // --- Floating Particles ---
-  const emojis = ['🍽','🥩','🍷','🌿','🫙','🥗','🔥'];
-  const container = document.getElementById('particles');
-  function spawnParticle() {
-    if (!container) return;
-    const el = document.createElement('div');
-    el.className = 'particle';
-    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    el.style.left = Math.random() * 100 + '%';
-    el.style.bottom = '-40px';
-    const dur = 8 + Math.random() * 12;
-    el.style.animationDuration = dur + 's';
-    el.style.animationDelay = Math.random() * 4 + 's';
-    el.style.fontSize = (16 + Math.random() * 20) + 'px';
-    el.style.opacity = (0.15 + Math.random() * 0.25).toString();
-    container.appendChild(el);
-    setTimeout(() => el.remove(), (dur + 4) * 1000);
-  }
-  for (let i = 0; i < 12; i++) setTimeout(spawnParticle, i * 600);
-  setInterval(spawnParticle, 2000);
-
   // --- Scroll reveal ---
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -443,8 +428,8 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   // --- Nav scroll effect ---
   const nav = document.getElementById('restoran-nav');
   window.addEventListener('scroll', () => {
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
 
   // --- Menu tabs ---
   function switchTab(btn) {
