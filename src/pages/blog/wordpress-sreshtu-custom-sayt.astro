@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WordPress срещу custom сайт — кое е по-добро за малкия бизнес?",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-27",
+  "dateModified": "2026-03-27",
+  "description": "WordPress или custom сайт? Честно сравнение за малкия бизнес — цена, скорост, поддръжка, SEO. Кога WordPress е достатъчен и кога си струва custom изработката.",
+  "keywords": "wordpress срещу custom сайт, wordpress или custom уебсайт, изработка на сайт българия"
+};
+---
+
+<BaseLayout
+  title="WordPress срещу custom сайт — кое е по-добро за малкия бизнес? | buildify.bg"
+  description="WordPress или custom сайт? Честно сравнение за малкия бизнес — цена, скорост, поддръжка, SEO. Кога WordPress е достатъчен и кога custom си струва повече."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Уебсайтове</span>
+        <span class="font-mono text-xs text-white/25">Март 2026</span>
+        <span class="font-mono text-xs text-white/25">6 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        WordPress срещу<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">custom сайт</mark> —<br/>
+        кое е по-добро?
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Всеки разработчик ти дава различен отговор. Ето честното сравнение —
+        без да продаваме нито едното.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- SECTION 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Грешният въпрос</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Повечето хора питат „WordPress или custom?" но реалният въпрос е по-различен:
+          <strong>какво трябва да прави сайтът ти и кой ще го поддържа след това?</strong>
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          WordPress захранва 43% от всички уебсайтове в света. Използват го The New York Times, Sony Music,
+          TechCrunch. Същевременно — повечето бавни, несигурни сайтове с хакнати форми също са WordPress.
+          Платформата не е проблемът. Начинът на изпълнение е.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Custom сайтът пък звучи впечатляващо, но „custom" може да означава всичко —
+          от добре написан Astro проект до 10 000 реда заплетен код, който никой друг не може да поддържа.
+        </p>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "WordPress или custom не е въпрос на технология. Въпрос е на бизнес нужди."
+        </p>
+      </div>
+
+      <!-- SECTION 02 - COMPARISON -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Директното сравнение</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3 gap-2">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">WordPress</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Custom</span>
+          </div>
+          {[
+            { aspect: "Начална цена",       wp: "По-ниска",               cu: "По-висока" },
+            { aspect: "Скорост",            wp: "Средна (с оптимизация)", cu: "Отлична" },
+            { aspect: "Сигурност",          wp: "Изисква поддръжка",      cu: "По-малко атаки" },
+            { aspect: "SEO потенциал",      wp: "Много добър",            cu: "Отличен" },
+            { aspect: "Лесна промяна",      wp: "Да — сам",               cu: "Нужен разработчик" },
+            { aspect: "Плъгини / добавки",  wp: "Хиляди готови",          cu: "Само специфични" },
+            { aspect: "Скалируемост",       wp: "Средна",                 cu: "Висока" },
+            { aspect: "Поддръжка",          wp: "По-честа",               cu: "По-рядка" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.aspect}</span>
+              <span class="text-sm text-muted">{row.wp}</span>
+              <span class="text-sm text-muted">{row.cu}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "43%", lbl: "От всички сайтове са WordPress" },
+          { val: "3×",  lbl: "По-бърз custom сайт спрямо средния WP" },
+          { val: "60%", lbl: "WP сайтове без редовни обновявания" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- SECTION 03 - WHEN WP -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога WordPress е правилният избор</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">
+          WordPress е отличен когато:
+        </p>
+        <div class="space-y-3">
+          {[
+            { icon: "check", title: "Ще добавяш съдържание сам",      desc: "Блог, новини, продукти — WP има удобен редактор. Не ти трябва разработчик за всяка промяна." },
+            { icon: "check", title: "Бюджетът е ограничен",           desc: "Добре направен WordPress сайт за малък бизнес е напълно достатъчен. Не плащай за custom ако нямаш нужда." },
+            { icon: "check", title: "Нуждаеш се от онлайн магазин",   desc: "WooCommerce е зряла платформа с хиляди плъгини за плащания, доставки, инвентар. Работи добре за повечето магазини." },
+            { icon: "check", title: "Екипът ти ще управлява сайта",   desc: "WordPress admin панелът е познат на повечето маркетинг специалисти. Не е нужно обучение от нулата." },
+          ].map(item => (
+            <div class="flex gap-4 items-start bg-white border-2 border-ink p-5">
+              <div class="shrink-0 mt-0.5"><Icon name={item.icon} size={22} /></div>
+              <div>
+                <div class="font-bold text-sm uppercase tracking-tight text-ink mb-1">{item.title}</div>
+                <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 04 - WHEN CUSTOM -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога custom сайтът си струва</span>
+        </div>
+        <p class="text-ink/70 text-base leading-relaxed mb-6">
+          Custom разработката се оправдава когато:
+        </p>
+        <div class="space-y-3">
+          {[
+            { icon: "speed",      title: "Скоростта е критична",          desc: "Landing pages, платени реклами, висококонкурентни пазари — всяка секунда забавяне = загубени пари. Custom сайт зарежда 2-3× по-бързо от типичния WordPress." },
+            { icon: "seo",        title: "SEO е основният ти канал",       desc: "Custom код означава пълен контрол над структурата, schema markup, Core Web Vitals. Без ненужни плъгини, без bloat, без компромиси." },
+            { icon: "web",        title: "Имаш специфична функционалност", desc: "Резервационна система, конфигуратор на продукти, специален калкулатор — ако нужното ти не съществува като плъгин, custom е единственият вариант." },
+            { icon: "link-broken", title: "WordPress ти е давал проблеми", desc: "Хакнат сайт, бавно зареждане дори след оптимизация, конфликти между плъгини — понякога clean slate е по-евтино от безкрайни поправки." },
+          ].map(item => (
+            <div class="flex gap-4 items-start bg-white border-2 border-ink p-5">
+              <div class="shrink-0 mt-0.5"><Icon name={item.icon} size={22} /></div>
+              <div>
+                <div class="font-bold text-sm uppercase tracking-tight text-ink mb-1">{item.title}</div>
+                <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- SECTION 05 - RED FLAGS -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">05</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Червените флагове и при двете</span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border-2 border-ink">
+            <div class="bg-ink px-5 py-3">
+              <span class="font-mono text-xs font-bold text-yellow uppercase tracking-widest">WordPress — внимавай за</span>
+            </div>
+            <div class="divide-y-2 divide-ink">
+              {[
+                "50+ инсталирани плъгина",
+                "Последно обновяване преди 6+ месеца",
+                "PageSpeed под 50 точки",
+                "Споделен хостинг за под 5€/мес.",
+                "Теми от съмнителни източници",
+              ].map(item => (
+                <div class="flex gap-3 items-center px-5 py-3 bg-white">
+                  <span class="text-red-500 font-bold shrink-0 font-mono text-sm">!</span>
+                  <span class="text-sm text-ink">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="border-2 border-ink">
+            <div class="bg-ink px-5 py-3">
+              <span class="font-mono text-xs font-bold text-yellow uppercase tracking-widest">Custom — внимавай за</span>
+            </div>
+            <div class="divide-y-2 divide-ink">
+              {[
+                "Само един разработчик знае кода",
+                "Без документация за поддръжка",
+                "Нямаш достъп до изходния код",
+                "Разработчикът е недостъпен",
+                "Прекалено скъп за прост сайт",
+              ].map(item => (
+                <div class="flex gap-3 items-center px-5 py-3 bg-white">
+                  <span class="text-red-500 font-bold shrink-0 font-mono text-sm">!</span>
+                  <span class="text-sm text-ink">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DECISION GUIDE -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">06</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кратко ръководство за решение</span>
+        </div>
+        <div class="bg-ink p-6 mb-4">
+          <p class="font-mono text-xs text-yellow uppercase tracking-widest mb-4">Избери WordPress ако:</p>
+          <ul class="space-y-2">
+            {[
+              "Бюджетът е под 1 000€",
+              "Ще добавяш съдържание сам редовно",
+              "Нуждаеш се от онлайн магазин с WooCommerce",
+              "Искаш бърз старт (1-2 седмици)",
+            ].map(item => (
+              <li class="flex gap-3 items-center text-sm text-white/70">
+                <span class="text-yellow font-mono font-bold shrink-0">→</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="border-2 border-ink p-6">
+          <p class="font-mono text-xs text-ink/50 uppercase tracking-widest mb-4">Избери custom ако:</p>
+          <ul class="space-y-2">
+            {[
+              "Скоростта и SEO са приоритет",
+              "Имаш специфична функционалност",
+              "Бюджетът позволява по-голяма инвестиция",
+              "WordPress ти е давал проблеми",
+            ].map(item => (
+              <li class="flex gap-3 items-center text-sm text-ink/70">
+                <span class="text-ink font-mono font-bold shrink-0">→</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Консултация</div>
+            <div class="font-bold text-white text-xl tracking-tight">Не знаеш кое е подходящо за теб?</div>
+            <p class="text-white/40 text-sm mt-1">Казваме ти честно — дори ако отговорът е „WordPress е достатъчен".</p>
+          </div>
+          <a href="/kontakt" class="shrink-0 bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+            Безплатна консултация →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>
