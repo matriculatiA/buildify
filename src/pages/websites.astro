@@ -2,42 +2,114 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icons.astro';
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Изработка на уебсайтове",
-  "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
-  "description": "Изработка на бизнес уебсайтове и landing pages оптимизирани за Google. SEO в структурата, Core Web Vitals зелено, прозрачни цени.",
-  "areaServed": "Bulgaria",
-  "offers": [
-    { "@type": "Offer", "name": "Landing page",    "price": "350",  "priceCurrency": "EUR" },
-    { "@type": "Offer", "name": "Бизнес сайт",     "price": "750",  "priceCurrency": "EUR" },
-    { "@type": "Offer", "name": "Корпоративен сайт","price": "1800", "priceCurrency": "EUR" }
-  ]
-};
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Изработка на уебсайтове",
+    "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+    "description": "Изработка на бизнес уебсайтове и landing pages оптимизирани за Google. SEO в структурата, Core Web Vitals зелено, прозрачни цени. Обслужваме Бургас и цяла България.",
+    "areaServed": ["Бургас", "България"],
+    "offers": [
+      { "@type": "Offer", "name": "Landing page",     "price": "350",  "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Бизнес сайт",      "price": "750",  "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Корпоративен сайт","price": "1800", "priceCurrency": "EUR" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Колко струва изработката на уебсайт в България?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Цените започват от 350€ за landing page, 750€ за бизнес сайт до 8 страници и от 1800€ за корпоративен проект. В цената са включени дизайн, разработка и SEO оптимизация. Хостингът е безплатен — деплойваме на Cloudflare Pages." }
+      },
+      {
+        "@type": "Question",
+        "name": "Колко отнема изработката на уебсайт?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Landing page — 5-7 работни дни. Бизнес сайт — 2-3 седмици. Корпоративен проект — 4-8 седмици в зависимост от обема." }
+      },
+      {
+        "@type": "Question",
+        "name": "WordPress или custom сайт — кое е по-добро за бизнес?",
+        "acceptedAnswer": { "@type": "Answer", "text": "За бизнес сайт с цел продажби — custom сайт с Astro е по-добър избор: без плъгини, без месечни абонаменти, максимална скорост и Core Web Vitals зелено. WordPress е подходящ за масови блогове с много автори. Ако вашият случай изисква WordPress — казваме го честно." }
+      },
+      {
+        "@type": "Question",
+        "name": "Нужен ли ми е хостинг отделно?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Не. Деплойваме безплатно на Cloudflare Pages. Плащате само за домейна (~10€/год.)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Правите ли SEO оптимизация?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Да — SEO е вградено в кода, не добавено след: Schema markup, sitemap, правилни мета тагове, структурирани заглавия (H1/H2/H3), оптимизирани изображения, бърза скорост. Правим и основно проучване на ключови думи за вашия бранш." }
+      },
+      {
+        "@type": "Question",
+        "name": "Работите ли само в Бургас?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Не — работим дистанционно с клиенти от цяла България. Базирани сме в Бургас, но процесът е изцяло онлайн: консултация по видео, дизайн в споделен файл, комуникация в чат." }
+      }
+    ]
+  }
+];
 
 const packages = [
   {
     name: "Landing page", price: "от 350€", for: "Промоция / един продукт / услуга",
-    features: ["До 5 секции", "Контактна форма", "Mobile-first дизайн", "SEO оптимизация", "Готов до 7 дни"],
+    features: ["До 5 секции", "Контактна форма", "Mobile-first дизайн", "SEO оптимизация", "Безплатен хостинг (Cloudflare)", "Готов до 7 дни"],
     featured: false,
   },
   {
     name: "Бизнес сайт", price: "от 750€", for: "Малък и среден бизнес",
-    features: ["До 8 страници", "Блог / новини", "Google Analytics", "Schema markup", "Core Web Vitals", "Готов до 3 седмици"],
+    features: ["До 8 страници", "Блог / новини", "Google Analytics 4", "Schema markup", "Core Web Vitals зелено", "Google Search Console", "Готов до 3 седмици"],
     featured: true,
   },
   {
     name: "Корпоративен", price: "от 1 800€", for: "По-сложни проекти",
-    features: ["Неограничени страници", "Многоезичност", "CMS за редакция", "E-commerce / резервации", "Приоритетна поддръжка"],
+    features: ["Неограничени страници", "Многоезичност", "CMS за редакция", "E-commerce / резервации", "Персонализирани интеграции", "Приоритетна поддръжка"],
     featured: false,
+  },
+];
+
+const industries = [
+  { icon: "🍽", name: "Ресторант / Заведение", desc: "Онлайн меню, резервации, работно време, отзиви. Клиентите намират заведението ви в Google Maps преди да излязат от вкъщи.", href: "/demo/restoran", demo: true },
+  { icon: "🦷", name: "Дентален кабинет / Лекар", desc: "Онлайн запис на час, услуги с цени, екип. Нови пациенти от Google всеки месец без да плащате реклама.", href: "/demo/dentalen-kabinet", demo: true },
+  { icon: "⚖️", name: "Адвокат / Юридически услуги", desc: "Практики, екип, форма за консултация. Позиция в Google по специализация и локация — преди клиентът да потърси конкурент.", href: "/demo/advokat", demo: true },
+  { icon: "✂️", name: "Козметичен салон / Фризьор", desc: "Галерия с процедури, ценоразпис, онлайн запис. Работи вместо вас 24/7 и пълни календара автоматично.", href: null, demo: false },
+  { icon: "🏨", name: "Хотел / Стаи под наем", desc: "Директни резервации без 15% комисионна на Booking.com. Снимки, удобства, наличност — всичко на вашия домейн.", href: null, demo: false },
+  { icon: "🔨", name: "Строителна фирма / Ремонти", desc: "Портфолио от реализирани проекти, услуги, контакти. Доверие и референции преди първата среща с клиента.", href: null, demo: false },
+  { icon: "📊", name: "Счетоводител / Консултант", desc: "Услуги, цени, опит. Позиция в Google по локация и специализация — без да разчитате само на препоръки.", href: null, demo: false },
+  { icon: "🛒", name: "Онлайн магазин", desc: "Малък e-commerce с плащане с карта, управление на наличности и автоматични имейл потвърждения. Без Shopify абонамент.", href: null, demo: false },
+];
+
+const steps = [
+  {
+    n: "01", title: "Безплатна консултация",
+    desc: "30-минутен разговор за вашия бизнес, целевата аудитория и конкурентите. Получавате реалистична оферта и времева рамка — без обвързване.",
+    detail: "Видео / телефон / лично в Бургас"
+  },
+  {
+    n: "02", title: "Структура и дизайн",
+    desc: "Изграждаме структурата на сайта (wireframe), цветова схема, типография. При нужда — помагаме с текстовете. Ревизии до одобрение.",
+    detail: "Включен в пакета"
+  },
+  {
+    n: "03", title: "Разработка и SEO",
+    desc: "Кодираме с Astro за максимална скорост. SEO е вграден в кода от нулата: Schema markup, мета тагове, H1/H2 структура, оптимизирани изображения.",
+    detail: "Core Web Vitals зелено гарантирано"
+  },
+  {
+    n: "04", title: "Публикуване и предаване",
+    desc: "Деплойваме на Cloudflare Pages (безплатно). Верифицираме домейна в Google Search Console. Обучаваме ви как да следите трафика.",
+    detail: "Cloudflare CDN + SSL без доп. разходи"
   },
 ];
 ---
 
 <BaseLayout
-  title="Изработка на уебсайт за бизнес в Бургас | buildify.bg"
-  description="Изработка на бизнес уебсайтове оптимизирани за Google. SEO вграден в кода, Core Web Vitals зелено, прозрачни цени. От 350€."
+  title="Изработка на уебсайт за бизнес | buildify.bg — Бургас и България"
+  description="Изработка на бизнес уебсайтове оптимизирани за Google. SEO в кода, Core Web Vitals зелено, безплатен хостинг. Ресторанти, кабинети, адвокати, магазини. От 350€."
   schema={schema}
 >
 
@@ -52,7 +124,7 @@ const packages = [
           Не само изглежда добре.
         </h1>
         <p class="text-white/40 text-base leading-relaxed max-w-sm">
-          Бързи, SEO-оптимизирани уебсайтове, които класират в Google и убеждават посетителите да станат клиенти.
+          Изработваме бизнес уебсайтове, оптимизирани за Google от нулата — бързи, мобилни, с вграден SEO. За Бургас и цяла България.
         </p>
       </div>
       <div class="flex flex-col sm:flex-row gap-3">
@@ -66,10 +138,10 @@ const packages = [
     </div>
     <div class="bg-cream px-8 md:px-14 py-16 flex flex-col justify-center gap-6 border-t-2 md:border-t-0 md:border-l-2 border-ink">
       {[
-        { icon: "speed",    title: "БЪРЗИНА",              desc: "Под 2 секунди зареждане. Core Web Vitals зелено. Google го обича." },
-        { icon: "seo",      title: "SEO В СТРУКТУРАТА",    desc: "Schema markup, sitemap, мета тагове — наредено преди публикуване, не след." },
-        { icon: "mobile-broken", title: "MOBILE-FIRST",   desc: "70%+ от трафика е мобилен. Правим сайта за телефона, после за desktop." },
-        { icon: "check",    title: "ОРИЕНТИРАН КЪМ ПРОДАЖБИ", desc: "Всяка секция има цел. CTA на правилното място." },
+        { icon: "speed",         title: "БЪРЗИНА",                   desc: "Под 2 секунди зареждане. Core Web Vitals зелено. Google класира бързите сайтове по-високо." },
+        { icon: "seo",           title: "SEO В СТРУКТУРАТА",         desc: "Schema markup, sitemap, мета тагове, H1/H2 — наредено преди публикуване, не добавено след." },
+        { icon: "mobile-broken", title: "MOBILE-FIRST",              desc: "70%+ от трафика е мобилен. Правим сайта за телефона — после го адаптираме за desktop." },
+        { icon: "check",         title: "ОРИЕНТИРАН КЪМ ПРОДАЖБИ",  desc: "Всяка секция има цел. CTA на правилното място. Посетителят знае какво да направи след това." },
       ].map(item => (
         <div class="flex gap-4 items-start border-l-4 border-yellow pl-4">
           <div class="shrink-0 mt-0.5"><Icon name={item.icon} size={20} /></div>
@@ -99,12 +171,266 @@ const packages = [
     </div>
   </section>
 
-  <!-- Packages -->
+  <!-- 01 · За кого правим сайтове -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">01 · За кого правим сайтове</span>
+    </div>
+    <div class="px-8 py-10 max-w-3xl">
+      <h2 class="font-bold text-2xl md:text-3xl tracking-tight text-ink mb-3">
+        Уебсайтове за малък и среден бизнес в България
+      </h2>
+      <p class="text-muted leading-relaxed">
+        Работим с бизнеси, при които сайтът трябва да работи — да носи клиенти, да отговаря на въпроси и да изгражда доверие. Не правим сайтове заради сайтовете.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-t-2 border-ink">
+      {industries.slice(0, 4).map(ind => (
+        <div class="p-6 flex flex-col gap-3 group hover:bg-ink/5 transition-colors">
+          <span class="text-2xl">{ind.icon}</span>
+          <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
+          <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
+          {ind.demo && ind.href && (
+            <a href={ind.href} target="_blank" class="font-mono text-xs text-yellow font-bold uppercase tracking-wide hover:underline">
+              Виж демо →
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-t-2 border-ink">
+      {industries.slice(4).map(ind => (
+        <div class="p-6 flex flex-col gap-3 group hover:bg-ink/5 transition-colors">
+          <span class="text-2xl">{ind.icon}</span>
+          <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
+          <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
+          <span class="font-mono text-xs text-muted/50 uppercase tracking-wide">Скоро демо</span>
+        </div>
+      ))}
+    </div>
+    <div class="border-t-2 border-ink px-8 py-6 flex items-center gap-4 flex-wrap">
+      <span class="text-sm text-muted">Не виждате вашия бранш?</span>
+      <a href="/contact" class="font-bold text-sm text-ink underline underline-offset-4 hover:text-yellow transition-colors">Пишете ни — правим за всеки бизнес →</a>
+    </div>
+  </section>
+
+  <!-- 02 · Как работим -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-white/10 px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">02 · Как работим</span>
+    </div>
+    <div class="px-8 py-10 max-w-3xl">
+      <h2 class="font-bold text-white leading-tight tracking-tightest mb-3" style="font-size:clamp(1.6rem,3.5vw,2.4rem)">
+        От заявка до публикуван сайт — 4 стъпки
+      </h2>
+      <p class="text-white/40 leading-relaxed">
+        Процесът е ясен и прозрачен. Знаете на всяка стъпка какво се случва, кога свършва и какво следва.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10 border-t-2 border-white/10">
+      {steps.map(step => (
+        <div class="p-8 flex flex-col gap-4">
+          <div class="font-mono text-4xl font-bold text-yellow/20 leading-none">{step.n}</div>
+          <h3 class="font-bold text-white uppercase tracking-tight text-sm">{step.title}</h3>
+          <p class="text-white/40 text-sm leading-relaxed flex-1">{step.desc}</p>
+          <div class="font-mono text-xs text-yellow/60 uppercase tracking-wide">{step.detail}</div>
+        </div>
+      ))}
+    </div>
+    <div class="border-t-2 border-white/10 px-8 py-6 flex items-center gap-4 flex-wrap">
+      <span class="text-white/30 text-sm">Средно 2-3 седмици от старт до публикуване</span>
+      <a href="/contact" class="inline-flex items-center gap-2 bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+        Започнете сега →
+      </a>
+    </div>
+  </section>
+
+  <!-- 03 · WordPress срещу custom сайт -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">03 · WordPress или custom сайт?</span>
+    </div>
+    <div class="px-8 py-10 max-w-3xl">
+      <h2 class="font-bold text-2xl md:text-3xl tracking-tight text-ink mb-3">
+        Честен отговор на най-честия въпрос
+      </h2>
+      <p class="text-muted leading-relaxed">
+        Много агенции продават само едното. Ние казваме кое е по-добро за вашия конкретен случай.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-t-2 border-ink">
+      {[
+        {
+          tool: "Wix / Squarespace",
+          verdict: "Не препоръчваме",
+          verdictColor: "text-red-500",
+          good: ["Бързо за старт", "Без технически знания", "Включен хостинг"],
+          bad: ["Бавна скорост — SEO страда", "Трудна оптимизация за Google", "Ограничен контрол над кода", "Месечен абонамент завинаги"],
+          for: "Временен сайт, тест на идея, нулев бюджет"
+        },
+        {
+          tool: "WordPress",
+          verdict: "Зависи от случая",
+          verdictColor: "text-yellow-600",
+          good: ["Масова платформа", "Много плъгини", "Подходящ за блогове", "Много разработчици"],
+          bad: ["Нуждае се от поддръжка и обновяване", "Плъгините конфликтуват", "По-бавен от custom", "Сигурностни рискове при занемаряване"],
+          for: "Голям блог с много автори, WooCommerce магазин"
+        },
+        {
+          tool: "Custom (Astro)",
+          verdict: "Препоръчваме за бизнес",
+          verdictColor: "text-green-600",
+          good: ["Максимална скорост (под 1с)", "Core Web Vitals зелено", "SEO от нулата в кода", "Без плъгини, без абонамент", "Безплатен хостинг на Cloudflare"],
+          bad: ["Изисква разработчик за промени", "По-скъпо от DIY инструменти"],
+          for: "Бизнес сайт, landing page, портфолио, кабинет"
+        },
+      ].map((col, i) => (
+        <div class={`p-8 ${i === 2 ? 'bg-ink' : ''}`}>
+          <div class="font-mono font-bold text-sm uppercase tracking-widest mb-1 text-muted">{col.tool}</div>
+          <div class={`font-bold text-base mb-6 ${i === 2 ? 'text-yellow' : col.verdictColor}`}>{col.verdict}</div>
+          <div class="mb-4">
+            <div class={`font-mono text-xs uppercase tracking-widest mb-2 ${i === 2 ? 'text-white/30' : 'text-muted'}`}>Плюсове</div>
+            <ul class="space-y-1.5">
+              {col.good.map(g => (
+                <li class={`text-xs flex gap-2 items-start ${i === 2 ? 'text-white/60' : 'text-muted'}`}>
+                  <span class="text-green-500 shrink-0 mt-0.5">✓</span>{g}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="mb-6">
+            <div class={`font-mono text-xs uppercase tracking-widest mb-2 ${i === 2 ? 'text-white/30' : 'text-muted'}`}>Минуси</div>
+            <ul class="space-y-1.5">
+              {col.bad.map(b => (
+                <li class={`text-xs flex gap-2 items-start ${i === 2 ? 'text-white/40' : 'text-muted/70'}`}>
+                  <span class="text-red-400 shrink-0 mt-0.5">✗</span>{b}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class={`font-mono text-xs uppercase tracking-wide border-t pt-4 ${i === 2 ? 'border-white/10 text-yellow/60' : 'border-ink/10 text-muted/60'}`}>
+            Подходящо за: {col.for}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="border-t-2 border-ink px-8 py-6 bg-paper">
+      <p class="text-sm text-muted max-w-2xl leading-relaxed">
+        <strong class="text-ink">Важно:</strong> Ако вашият случай изисква WordPress — казваме го директно и можем да препоръчаме добър разработчик. Не ни е цел да продадем custom сайт на всеки. Прочетете повече в нашата статия:&nbsp;
+        <a href="/blog/wordpress-sreshtu-custom-sayt" class="font-bold text-ink underline underline-offset-4 hover:text-yellow transition-colors">WordPress срещу custom сайт →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 04 · Примерни проекти -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-white/10 px-8 py-5 flex items-center justify-between">
+      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">04 · Примерни проекти</span>
+      <span class="font-mono text-xs text-white/20">Demo сайтове — виж живо</span>
+    </div>
+    <div class="px-8 py-8 max-w-2xl">
+      <h2 class="font-bold text-white tracking-tightest mb-2" style="font-size:clamp(1.4rem,3vw,2rem)">
+        Виж как изглежда реален сайт — преди да решиш
+      </h2>
+      <p class="text-white/35 text-sm leading-relaxed">
+        Всеки демо сайт е напълно функционален — различен стил, различна индустрия. Отваря се в нов таб.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10 border-t-2 border-white/10">
+      {[
+        {
+          href: '/demo/restoran',
+          label: 'Ресторант / Механа',
+          url: 'buildify.bg/demo/restoran',
+          color: '#1a2e1a',
+          accent: '#c8902a',
+          desc: 'Меню с табове, резервации, работно време, отзиви. Топъл автентичен дизайн.',
+          tags: ['Меню', 'Резервации', 'Отзиви'],
+          preview: [
+            { h: '14px', w: '60%', c: '#c8902a' },
+            { h: '8px',  w: '90%', c: 'rgba(255,255,255,.15)' },
+            { h: '8px',  w: '75%', c: 'rgba(255,255,255,.10)' },
+            { h: '40px', w: '45%', c: '#c8902a' },
+          ],
+        },
+        {
+          href: '/demo/dentalen-kabinet',
+          label: 'Дентален кабинет',
+          url: 'buildify.bg/demo/dentalen-kabinet',
+          color: '#0c1a2e',
+          accent: '#0ea5e9',
+          desc: 'Услуги с цени, запис на час, доверие. Чист медицински стил.',
+          tags: ['Услуги', 'Запис на час', 'Цени'],
+          preview: [
+            { h: '12px', w: '50%', c: '#0ea5e9' },
+            { h: '10px', w: '80%', c: 'rgba(255,255,255,.2)' },
+            { h: '8px',  w: '65%', c: 'rgba(255,255,255,.12)' },
+            { h: '36px', w: '50%', c: '#0ea5e9' },
+          ],
+        },
+        {
+          href: '/demo/advokat',
+          label: 'Адвокатска кантора',
+          url: 'buildify.bg/demo/advokat',
+          color: '#0f1e35',
+          accent: '#c9a84c',
+          desc: 'Практики, екип, форма за запитване. Авторитетен корпоративен стил.',
+          tags: ['Практики', 'Екип', 'Консултация'],
+          preview: [
+            { h: '10px', w: '40%', c: '#c9a84c' },
+            { h: '14px', w: '70%', c: 'rgba(255,255,255,.2)' },
+            { h: '8px',  w: '55%', c: 'rgba(255,255,255,.12)' },
+            { h: '36px', w: '52%', c: '#c9a84c' },
+          ],
+        },
+      ].map(demo => (
+        <div class="p-8 flex flex-col gap-6">
+          <a href={demo.href} target="_blank" class="block group">
+            <div class="border-2 border-white/10 overflow-hidden group-hover:border-yellow/40 transition-colors">
+              <div class="flex items-center gap-1.5 px-3 py-2.5 border-b border-white/10" style={`background:${demo.color}`}>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
+                <span class="font-mono text-[9px] text-white/20 ml-2 truncate">{demo.url}</span>
+              </div>
+              <div class="p-5 flex flex-col gap-2.5" style={`background:${demo.color};min-height:140px`}>
+                {demo.preview.map(el => (
+                  <div style={`height:${el.h};width:${el.w};background:${el.c};border-radius:2px`}></div>
+                ))}
+              </div>
+              <div class="flex items-center justify-center gap-2 py-3 border-t border-white/10 font-mono text-xs font-bold uppercase tracking-widest text-white/30 group-hover:text-yellow group-hover:bg-yellow/5 transition-all" style={`background:${demo.color}`}>
+                Виж живото демо →
+              </div>
+            </div>
+          </a>
+          <div>
+            <div class="font-bold text-sm uppercase tracking-tight text-white mb-2">{demo.label}</div>
+            <p class="text-white/40 text-xs leading-relaxed mb-4">{demo.desc}</p>
+            <div class="flex flex-wrap gap-2">
+              {demo.tags.map(tag => (
+                <span class="font-mono text-[10px] uppercase tracking-wide border border-white/10 text-white/30 px-2 py-0.5">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 05 · Пакети и цени -->
   <section id="paketi" class="scroll-mt-14 bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
-      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">01 · Пакети</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">05 · Пакети и цени</span>
     </div>
-    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+    <div class="px-8 py-10 max-w-3xl">
+      <h2 class="font-bold text-2xl md:text-3xl tracking-tight text-ink mb-3">
+        Колко струва изработката на уебсайт?
+      </h2>
+      <p class="text-muted leading-relaxed">
+        Прозрачни цени — без скрити такси. Хостингът е безплатен. Плащате само за домейна (~10€/год.). Разплащането е на части: аванс при старт, остатък при предаване.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-t-2 border-ink">
       {packages.map(pkg => (
         <div class={`p-8 ${pkg.featured ? 'bg-ink' : ''}`}>
           {pkg.featured && <span class="font-mono text-xs font-bold text-yellow uppercase tracking-widest block mb-4">Най-популярен</span>}
@@ -125,116 +451,52 @@ const packages = [
         </div>
       ))}
     </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section class="bg-ink border-b-2 border-ink">
-    <div class="border-b-2 border-white/10 px-8 py-5 flex items-center justify-between">
-      <span class="font-mono text-xs uppercase tracking-widest text-white/30 font-bold">Примерни проекти</span>
-      <span class="font-mono text-xs text-white/20">Demo сайтове — виж живо</span>
-    </div>
-    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
-      {[
-        {
-          href: '/demo/restoran',
-          label: 'Ресторант / Механа',
-          url: 'buildify.bg/demo/restoran',
-          color: '#1a2e1a',
-          accent: '#c8902a',
-          desc: 'Меню, резервации, работно време, отзиви. Топъл и автентичен дизайн.',
-          tags: ['Меню', 'Резервации', 'Галерия', 'Отзиви'],
-          preview: [
-            { h: '14px', w: '60%', c: '#c8902a' },
-            { h: '8px',  w: '90%', c: 'rgba(255,255,255,.15)' },
-            { h: '8px',  w: '75%', c: 'rgba(255,255,255,.10)' },
-            { h: '40px', w: '45%', c: '#c8902a' },
-          ],
-        },
-        {
-          href: '/demo/dentalen-kabinet',
-          label: 'Дентален кабинет',
-          url: 'buildify.bg/demo/dentalen-kabinet',
-          color: '#0c1a2e',
-          accent: '#0ea5e9',
-          desc: 'Услуги, цени, запис на час, екип. Чист медицински стил.',
-          tags: ['Услуги', 'Запис на час', 'Екип', 'Цени'],
-          preview: [
-            { h: '12px', w: '50%', c: '#0ea5e9' },
-            { h: '10px', w: '80%', c: 'rgba(255,255,255,.2)' },
-            { h: '8px',  w: '65%', c: 'rgba(255,255,255,.12)' },
-            { h: '36px', w: '50%', c: '#0ea5e9' },
-          ],
-        },
-        {
-          href: '/demo/advokat',
-          label: 'Адвокатска кантора',
-          url: 'buildify.bg/demo/advokat',
-          color: '#0f1e35',
-          accent: '#c9a84c',
-          desc: 'Практики, екип, контакти, форма за запитване. Авторитетен корпоративен вид.',
-          tags: ['Практики', 'Екип', 'Консултация', 'Форма'],
-          preview: [
-            { h: '10px', w: '40%', c: '#c9a84c' },
-            { h: '14px', w: '70%', c: 'rgba(255,255,255,.2)' },
-            { h: '8px',  w: '55%', c: 'rgba(255,255,255,.12)' },
-            { h: '36px', w: '52%', c: '#c9a84c' },
-          ],
-        },
-      ].map(demo => (
-        <div class="p-8 flex flex-col gap-6">
-          {/* Browser mockup */}
-          <a href={demo.href} target="_blank" class="block group">
-            <div class="border-2 border-white/10 overflow-hidden group-hover:border-yellow/40 transition-colors">
-              {/* Browser chrome */}
-              <div class="flex items-center gap-1.5 px-3 py-2.5 border-b border-white/10" style={`background:${demo.color}`}>
-                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-white/15 block"></span>
-                <span class="font-mono text-[9px] text-white/20 ml-2 truncate">{demo.url}</span>
-              </div>
-              {/* Page preview */}
-              <div class="p-5 flex flex-col gap-2.5" style={`background:${demo.color};min-height:140px`}>
-                {demo.preview.map(el => (
-                  <div style={`height:${el.h};width:${el.w};background:${el.c};border-radius:2px`}></div>
-                ))}
-              </div>
-              {/* Hover overlay */}
-              <div class="flex items-center justify-center gap-2 py-3 border-t border-white/10 font-mono text-xs font-bold uppercase tracking-widest text-white/30 group-hover:text-yellow group-hover:bg-yellow/5 transition-all" style={`background:${demo.color}`}>
-                Виж живото демо →
-              </div>
-            </div>
-          </a>
-          {/* Info */}
-          <div>
-            <div class="font-bold text-sm uppercase tracking-tight text-white mb-2">{demo.label}</div>
-            <p class="text-white/40 text-xs leading-relaxed mb-4">{demo.desc}</p>
-            <div class="flex flex-wrap gap-2">
-              {demo.tags.map(tag => (
-                <span class="font-mono text-[10px] uppercase tracking-wide border border-white/10 text-white/30 px-2 py-0.5">{tag}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
+    <div class="border-t-2 border-ink px-8 py-6 bg-paper flex items-center gap-4 flex-wrap">
+      <span class="text-sm text-muted">Не сте сигурни кой пакет е подходящ?</span>
+      <a href="/contact" class="font-bold text-sm text-ink underline underline-offset-4 hover:text-yellow transition-colors">Консултираме безплатно →</a>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- 06 · Въпроси -->
   <section class="bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
-      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">02 · Въпроси</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">06 · Въпроси</span>
     </div>
     <div class="divide-y-2 divide-ink">
       {[
-        { q: "Колко отнема изработката?",             a: "Landing page - 5-7 работни дни. Бизнес сайт - 2-3 седмици. Включваме те в процеса на всяка стъпка." },
-        { q: "Нужен ли ми е хостинг отделно?",       a: "Не - деплойваме безплатно на Cloudflare Pages. Плащаш само за домейна (~10€/год.)." },
-        { q: "Мога ли да редактирам сайта сам?",     a: "Да. При бизнес и корпоративен пакет интегрираме CMS панел за редакция без технически знания." },
-        { q: "Правите ли и дизайна?",                a: "Да - дизайн, разработка и SEO са в пакета. Ако имаш съществуващ бранд, работим с него." },
+        {
+          q: "Колко струва изработката на уебсайт в България?",
+          a: "Цените ни започват от 350€ за landing page, 750€ за бизнес сайт до 8 страници и от 1 800€ за корпоративен проект. В цената са включени дизайн, разработка и SEO. Хостингът е безплатен — деплойваме на Cloudflare Pages. Плащате само за домейна (~10€/год.). Разплащането е на два пъти — аванс при старт и остатък при предаване."
+        },
+        {
+          q: "Колко отнема изработката?",
+          a: "Landing page — 5-7 работни дни. Бизнес сайт — 2-3 седмици. Корпоративен проект — 4-8 седмици. Включваме ви в процеса на всяка стъпка — знаете точно в какъв етап сме."
+        },
+        {
+          q: "Правите ли SEO оптимизация?",
+          a: "Да — SEO е вградено в кода от нулата, не добавено след: правилна H1/H2/H3 структура, Schema markup, XML sitemap, мета тагове, оптимизирани изображения, бърза скорост. Правим и основно проучване на ключови думи за вашия бранш и локация. Важно: SEO отнема 3-6 месеца за резултати — не обещаваме магически класирания."
+        },
+        {
+          q: "WordPress или custom сайт — кое е по-добро за бизнес?",
+          a: "За бизнес сайт с цел продажби — custom с Astro е по-добър: без плъгини, без месечни абонаменти, максимална скорост и Core Web Vitals зелено. WordPress е добър избор за масови блогове с много автори или сложни WooCommerce магазини. Ако вашият случай изисква WordPress — казваме го честно."
+        },
+        {
+          q: "Нужен ли ми е хостинг отделно?",
+          a: "Не. Деплойваме безплатно на Cloudflare Pages — глобален CDN, SSL сертификат, автоматични обновявания. Плащате само за домейна (~10€/год. от Cloudflare Registrar или друг регистратор)."
+        },
+        {
+          q: "Мога ли да редактирам сайта сам след предаването?",
+          a: "Да. При бизнес и корпоративен пакет интегрираме CMS панел (Decap CMS или Keystatic) — редактирате текстове и снимки директно от браузъра без технически знания. За промени в дизайна или структурата — с удоволствие помагаме срещу договорена почасова ставка."
+        },
+        {
+          q: "Работите ли само в Бургас или и в останалата страна?",
+          a: "Работим с клиенти от цяла България. Базирани сме в Бургас, но целият процес е дистанционен: консултация по видео или телефон, дизайн в споделен файл, комуникация в чат. Ако предпочитате лична среща — сме на място в Бургас."
+        },
       ].map(faq => (
         <details class="group px-8 py-6">
-          <summary class="font-bold text-base uppercase tracking-tight text-ink cursor-pointer list-none flex justify-between items-center">
-            {faq.q}
-            <span class="font-mono text-yellow text-xl group-open:rotate-45 transition-transform">+</span>
+          <summary class="font-bold text-base uppercase tracking-tight text-ink cursor-pointer list-none flex justify-between items-center gap-4">
+            <span>{faq.q}</span>
+            <span class="font-mono text-yellow text-xl shrink-0 group-open:rotate-45 transition-transform">+</span>
           </summary>
           <p class="text-muted text-sm mt-4 leading-relaxed max-w-2xl">{faq.a}</p>
         </details>
@@ -248,10 +510,16 @@ const packages = [
       <h2 class="font-bold text-white leading-tight tracking-tightest mb-4" style="font-size:clamp(1.8rem,4vw,3rem)">
         Готов за нов сайт?
       </h2>
-      <p class="text-white/40 mb-8">Казваш какъв е бизнесът, ние казваме какво е реалистично и колко струва. Без маркетинг език.</p>
-      <a href="/contact" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
-        Безплатна консултация →
-      </a>
+      <p class="text-white/40 mb-2 leading-relaxed">Казваш какъв е бизнесът, ние казваме кой пакет е подходящ и колко ще струва. Без маркетинг език, без обвързване.</p>
+      <p class="text-white/25 text-sm mb-8">Отговаряме до 24 часа · Консултацията е безплатна · Работим от цяла България</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="/contact" class="inline-flex items-center gap-3 bg-yellow text-ink font-bold text-sm px-8 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors">
+          Безплатна консултация →
+        </a>
+        <a href="/proverka-na-sait" class="inline-flex items-center gap-3 border-2 border-white/20 text-white/50 font-semibold text-sm px-8 py-4 uppercase tracking-wide hover:border-yellow hover:text-yellow transition-colors">
+          Провери сегашния си сайт →
+        </a>
+      </div>
     </div>
   </section>
 
