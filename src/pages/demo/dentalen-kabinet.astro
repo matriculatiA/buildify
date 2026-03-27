@@ -3,23 +3,81 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 ---
 <DemoLayout title="Дентален Кабинет Д-р Иванова — Бургас" accent="#0ea5e9">
 <style>
-  :root { --blue: #0369a1; --light: #e0f2fe; --dark: #0c1a2e; --text: #1e293b; }
+  :root { --blue: #0369a1; --sky: #0ea5e9; --light: #e0f2fe; --dark: #0c1a2e; --text: #1e293b; }
+  * { box-sizing: border-box; }
   a { text-decoration: none; }
-  .btn { background:var(--blue);color:white;font-weight:700;padding:14px 32px;display:inline-block;font-size:14px;letter-spacing:.04em;border-radius:4px;transition:background .2s;border:none;cursor:pointer; }
-  .btn:hover { background:#0284c7; }
-  .btn-outline { border:2px solid var(--blue);color:var(--blue);font-weight:700;padding:12px 28px;display:inline-block;font-size:14px;border-radius:4px;transition:all .2s; }
-  .btn-outline:hover { background:var(--blue);color:white; }
-  section { padding:80px 24px; }
-  .container { max-width:1100px;margin:0 auto; }
-  .tag { font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;display:block; }
-  input,select,textarea { outline:none;font-family:Inter,sans-serif; }
-  input:focus,select:focus,textarea:focus { border-color:var(--blue)!important; }
+  section { padding: 80px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sky); margin-bottom: 12px; display: block; }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .delay-1 { transition-delay: .1s; }
+  .delay-2 { transition-delay: .2s; }
+  .delay-3 { transition-delay: .3s; }
+  .delay-4 { transition-delay: .4s; }
+  .delay-5 { transition-delay: .5s; }
+
+  /* Buttons */
+  .btn { background: var(--blue); color: white; font-weight: 700; padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; letter-spacing: .03em; transition: background .2s, transform .15s; border: none; cursor: pointer; }
+  .btn:hover { background: #0284c7; transform: translateY(-2px); }
+  .btn-outline { border: 2px solid var(--blue); color: var(--blue); font-weight: 700; padding: 12px 28px; display: inline-block; font-size: 14px; transition: all .2s; }
+  .btn-outline:hover { background: var(--blue); color: white; }
+
+  /* Service cards */
+  .service-card { border: 1px solid #e2e8f0; padding: 28px; transition: all .3s; position: relative; overflow: hidden; cursor: default; }
+  .service-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--sky), #0284c7); opacity: 0; transition: opacity .3s; }
+  .service-card:hover::before { opacity: 1; }
+  .service-card > * { position: relative; z-index: 1; }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(14,165,233,.25); }
+  .service-card:hover .sc-icon { filter: brightness(0) invert(1); }
+  .service-card:hover .sc-title { color: white; }
+  .service-card:hover .sc-desc { color: rgba(255,255,255,.8); }
+  .service-card:hover .sc-price { color: #bae6fd; }
+
+  /* Floating CTA */
+  #float-cta { position: fixed; bottom: 32px; right: 32px; z-index: 200; background: var(--sky); color: white; font-weight: 700; font-size: 13px; padding: 14px 24px; letter-spacing: .04em; box-shadow: 0 8px 32px rgba(14,165,233,.5); transition: transform .2s, box-shadow .2s; cursor: pointer; display: flex; align-items: center; gap: 8px; border: none; }
+  #float-cta:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 48px rgba(14,165,233,.6); }
+
+  /* Counter numbers */
+  .counter-num { font-size: 2.4rem; font-weight: 900; color: var(--sky); line-height: 1; }
+
+  /* Progress bars */
+  .progress-bar { height: 4px; background: #e2e8f0; border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--sky), var(--blue)); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(.25,.46,.45,.94); }
+
+  /* Checklist animated */
+  .check-item { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.08); opacity: 0; transform: translateX(-20px); transition: opacity .5s, transform .5s; }
+  .check-item.visible { opacity: 1; transform: translateX(0); }
+
+  /* Review cards */
+  .review-card { background: white; border: 1px solid #e2e8f0; padding: 28px; transition: transform .3s, box-shadow .3s; }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.1); }
+
+  /* Nav scroll */
+  #dental-nav { transition: box-shadow .3s; }
+  #dental-nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.15) !important; }
+
+  /* Pulse animation for float button */
+  @keyframes pulse { 0%, 100% { box-shadow: 0 8px 32px rgba(14,165,233,.5); } 50% { box-shadow: 0 8px 48px rgba(14,165,233,.8); } }
+  #float-cta { animation: pulse 3s ease-in-out infinite; }
+  #float-cta:hover { animation: none; }
 </style>
 
+<!-- Floating CTA -->
+<a href="#zapis" id="float-cta">
+  📞 Запишете час
+</a>
+
 <!-- NAV -->
-<nav style="background:white;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 1px 20px rgba(0,0,0,.08)">
+<nav id="dental-nav" style="background:white;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 1px 20px rgba(0,0,0,.08)">
   <div style="display:flex;align-items:center;gap:12px">
-    <div style="width:40px;height:40px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px">🦷</div>
+    <div style="width:42px;height:42px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;box-shadow:0 4px 12px rgba(14,165,233,.4)">🦷</div>
     <div>
       <div style="font-weight:800;font-size:16px;color:var(--dark);line-height:1">Д-р Иванова</div>
       <div style="font-size:11px;color:#94a3b8;letter-spacing:.04em">Дентален кабинет · Бургас</div>
@@ -27,51 +85,59 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   </div>
   <div style="display:flex;gap:28px;align-items:center">
     {['Услуги', 'Цени', 'За нас', 'Контакти'].map(l => (
-      <a href="#" style="color:#64748b;font-size:14px;font-weight:500;display:none" class="nav-link">{l}</a>
+      <a href="#" style="color:#64748b;font-size:14px;font-weight:500;display:none;transition:color .2s" class="nav-link" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='#64748b'">{l}</a>
     ))}
-    <a href="#zapis" class="btn" style="padding:10px 20px;font-size:13px">Запишете час</a>
+    <a href="#zapis" class="btn" style="padding:10px 20px;font-size:13px">Запишете час →</a>
   </div>
 </nav>
 <style>@media(min-width:768px){.nav-link{display:block!important}}</style>
 
 <!-- HERO -->
-<div style="background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 50%,#bae6fd 100%);padding:80px 24px 60px;position:relative;overflow:hidden">
-  <div style="position:absolute;right:-100px;top:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,.12) 0%,transparent 70%);pointer-events:none"></div>
+<div style="background:linear-gradient(160deg,#f0f9ff 0%,#e0f2fe 40%,#bae6fd 100%);padding:80px 24px 60px;position:relative;overflow:hidden">
+  <!-- Animated circles -->
+  <div style="position:absolute;right:-80px;top:-80px;width:480px;height:480px;border-radius:50%;border:2px solid rgba(14,165,233,.12);pointer-events:none;animation:rotate 20s linear infinite"></div>
+  <div style="position:absolute;right:-20px;top:-20px;width:320px;height:320px;border-radius:50%;border:2px solid rgba(14,165,233,.08);pointer-events:none;animation:rotate 14s linear infinite reverse"></div>
+  <div style="position:absolute;right:60px;top:60px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,.15) 0%,transparent 70%);pointer-events:none"></div>
+  <style>@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
+
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
     <div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:white;padding:8px 16px;border-radius:100px;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:24px">
         <span style="color:#f59e0b;font-size:14px">★★★★★</span>
         <span style="font-size:13px;color:#64748b;font-weight:500">4.9 · 320+ отзива в Google</span>
       </div>
-      <h1 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:var(--dark);line-height:1.1;margin-bottom:20px">
-        Вашата усмивка —<br/><span style="color:var(--blue)">нашата грижа</span>
+      <h1 class="reveal delay-1" style="font-size:clamp(2rem,4.5vw,3.4rem);font-weight:900;color:var(--dark);line-height:1.08;margin-bottom:20px">
+        Вашата усмивка —<br/><span style="color:var(--sky)">нашата грижа</span>
       </h1>
-      <p style="color:#475569;font-size:17px;line-height:1.7;margin-bottom:36px;max-width:480px">
-        Модерен дентален кабинет с 15 години опит. Безболезнено лечение, индивидуален подход, прозрачни цени. Работим с деца и възрастни.
+      <p class="reveal delay-2" style="color:#475569;font-size:17px;line-height:1.7;margin-bottom:36px;max-width:480px">
+        Модерен дентален кабинет с 15 години опит. Безболезнено лечение, индивидуален подход, прозрачни цени.
       </p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px">
+      <div class="reveal delay-3" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px">
         <a href="#zapis" class="btn">Запишете час →</a>
         <a href="#uslugi" class="btn-outline">Нашите услуги</a>
       </div>
-      <div style="display:flex;gap:32px;flex-wrap:wrap">
-        {[['15г.', 'Опит'], ['5000+', 'Пациенти'], ['100%', 'Безболезнено']].map(([n,l]) => (
+      <!-- Animated counters -->
+      <div class="reveal delay-4" style="display:flex;gap:40px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(14,165,233,.2)">
+        {[['15', 'г. опит'], ['5000', '+ пациенти'], ['100%', 'безболезнено']].map(([n,l], i) => (
           <div>
-            <div style="font-size:1.6rem;font-weight:800;color:var(--blue)">{n}</div>
-            <div style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em">{l}</div>
+            <div class="counter-num" data-target={n.replace(/\D/g,'')} data-suffix={n.replace(/\d/g,'')}>{n}</div>
+            <div style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-top:4px">{l}</div>
           </div>
         ))}
       </div>
     </div>
-    <div style="display:grid;gap:16px">
+
+    <!-- Right: checklist cards -->
+    <div style="display:grid;gap:12px" class="reveal-right">
       {[
-        { icon: '✓', text: 'Безплатен преглед при първо посещение' },
-        { icon: '✓', text: 'Работим в събота 9:00–14:00' },
-        { icon: '✓', text: 'Плащане на части без лихва' },
-        { icon: '✓', text: 'Спешни случаи — в деня на обаждането' },
+        { icon: '🎁', text: 'Безплатен преглед при първо посещение', color: '#dcfce7', border: '#86efac' },
+        { icon: '📅', text: 'Работим в събота 9:00–14:00', color: '#fef3c7', border: '#fcd34d' },
+        { icon: '💳', text: 'Плащане на части без лихва', color: '#ede9fe', border: '#c4b5fd' },
+        { icon: '🚨', text: 'Спешни случаи — в деня на обаждането', color: '#fee2e2', border: '#fca5a5' },
       ].map(item => (
-        <div style="background:white;border-radius:8px;padding:16px 20px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.06)">
-          <span style="color:var(--blue);font-weight:700;font-size:16px;flex-shrink:0">{item.icon}</span>
-          <span style="font-size:14px;color:var(--text);font-weight:500">{item.text}</span>
+        <div style={`background:${item.color};border:2px solid ${item.border};padding:16px 20px;display:flex;gap:12px;align-items:center;transition:transform .2s`} onmouseover="this.style.transform='translateX(6px)'" onmouseout="this.style.transform='translateX(0)'">
+          <span style="font-size:22px;flex-shrink:0">{item.icon}</span>
+          <span style="font-size:14px;color:var(--text);font-weight:600">{item.text}</span>
         </div>
       ))}
     </div>
@@ -81,27 +147,77 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <!-- УСЛУГИ -->
 <section id="uslugi" style="background:white">
   <div class="container">
-    <div style="text-align:center;margin-bottom:56px">
+    <div style="text-align:center;margin-bottom:56px" class="reveal">
       <span class="tag">Нашите услуги</span>
       <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--dark);margin-bottom:16px">Пълна дентална грижа</h2>
-      <p style="color:#64748b;max-width:500px;margin:0 auto;line-height:1.7">От профилактика до естетична стоматология — всичко под един покрив.</p>
+      <p style="color:#64748b;max-width:480px;margin:0 auto;line-height:1.7">Задръжте мишката върху услуга за повече информация</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
       {[
-        { icon: '🔍', title: 'Профилактика',      desc: 'Годишен преглед, почистване на зъбен камък, полиране. Препоръчваме 2 пъти годишно.', price: 'от 40 лв.' },
-        { icon: '🦷', title: 'Лечение на кариес', desc: 'Модерни фотополимерни пломби в цвета на зъба. Безболезнена анестезия.', price: 'от 80 лв.' },
-        { icon: '⚡', title: 'Избелване',          desc: 'Клинично избелване с LED технология. Резултат след 1 час. Устойчив ефект 2+ години.', price: 'от 280 лв.' },
-        { icon: '👑', title: 'Коронки и мостове',  desc: 'Циркониеви коронки с 10-годишна гаранция. Цвят, форма и усещане като естествен зъб.', price: 'от 350 лв.' },
-        { icon: '📐', title: 'Ортодонция',          desc: 'Брекети и прозрачни шини за деца и възрастни. Индивидуален план за лечение.', price: 'от 1200 лв.' },
-        { icon: '🔩', title: 'Зъбни импланти',     desc: 'Швейцарски импланти Straumann. Доживотна гаранция. Процедурата — под 1 час.', price: 'от 1500 лв.' },
+        { icon: '🔍', title: 'Профилактика',      desc: 'Годишен преглед, почистване на зъбен камък, полиране. Препоръчваме 2 пъти годишно.', price: 'от 40 лв.', extra: 'Включва: преглед, рентгенова снимка, консултация, почистване' },
+        { icon: '🦷', title: 'Лечение на кариес', desc: 'Модерни фотополимерни пломби в цвета на зъба. Безболезнена анестезия.', price: 'от 80 лв.', extra: 'Гаранция 2 години. Процедурата отнема 30–45 минути.' },
+        { icon: '⚡', title: 'Избелване',          desc: 'Клинично избелване с LED технология. Резултат след 1 час. Устойчив ефект 2+ години.', price: 'от 280 лв.', extra: 'До 8 нюанса по-бели. Безопасно за емайла.' },
+        { icon: '👑', title: 'Коронки и мостове',  desc: 'Циркониеви коронки с 10-годишна гаранция. Цвят, форма и усещане като естествен зъб.', price: 'от 350 лв.', extra: '10-годишна гаранция. CAD/CAM технология.' },
+        { icon: '📐', title: 'Ортодонция',          desc: 'Брекети и прозрачни шини за деца и възрастни. Индивидуален план за лечение.', price: 'от 1200 лв.', extra: 'Invisalign сертифициран кабинет. Онлайн наблюдение.' },
+        { icon: '🔩', title: 'Зъбни импланти',     desc: 'Швейцарски импланти Straumann. Доживотна гаранция. Процедурата — под 1 час.', price: 'от 1500 лв.', extra: 'Straumann & Nobel импланти. Доживотна гаранция.' },
       ].map(s => (
-        <div style="border:1px solid #e2e8f0;padding:28px;border-radius:8px;transition:box-shadow .2s;position:relative;overflow:hidden">
-          <div style="font-size:28px;margin-bottom:16px">{s.icon}</div>
-          <h3 style="font-size:17px;font-weight:700;color:var(--dark);margin-bottom:10px">{s.title}</h3>
-          <p style="font-size:13px;color:#64748b;line-height:1.7;margin-bottom:16px">{s.desc}</p>
-          <div style="font-size:13px;font-weight:700;color:var(--blue)">{s.price}</div>
+        <div class="service-card reveal">
+          <div class="sc-icon" style="font-size:32px;margin-bottom:16px;display:block;transition:filter .3s">{s.icon}</div>
+          <h3 class="sc-title" style="font-size:17px;font-weight:700;color:var(--dark);margin-bottom:10px;transition:color .3s">{s.title}</h3>
+          <p class="sc-desc" style="font-size:13px;color:#64748b;line-height:1.7;margin-bottom:16px;transition:color .3s">{s.desc}</p>
+          <div class="sc-price" style="font-size:14px;font-weight:700;color:var(--blue);transition:color .3s">{s.price}</div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;color:rgba(255,255,255,.7);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s" class="sc-extra">{s.extra}</div>
         </div>
       ))}
+    </div>
+  </div>
+</section>
+
+<!-- TRUST INDICATORS with progress bars -->
+<section style="background:var(--dark)">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <div class="reveal-left">
+      <span class="tag">Защо пациентите ни избират</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:white;margin-bottom:32px;line-height:1.2">Числата говорят</h2>
+      <div style="display:flex;flex-direction:column;gap:28px">
+        {[
+          { label: 'Пациентска удовлетвореност', val: 98 },
+          { label: 'Успех при имплантиране', val: 99 },
+          { label: 'Препоръчани от пациенти', val: 94 },
+          { label: 'Спешни случаи, приети в деня', val: 87 },
+        ].map(item => (
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:13px;color:rgba(255,255,255,.7);font-weight:500">{item.label}</span>
+              <span style="font-size:13px;color:var(--sky);font-weight:700">{item.val}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" data-width={item.val}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <div style="background:linear-gradient(135deg,var(--sky),var(--blue));padding:40px;color:white">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:28px">Защо пациентите ни се връщат</h3>
+        {[
+          'Безплатен преглед при първо посещение',
+          'Обясняваме всяка стъпка преди да започнем',
+          'EU стандарти за стерилизация',
+          'Гъвкаво работно време вкл. събота',
+          'Плащане на части без лихва',
+          'Спешни часове в деня на обаждането',
+        ].map((item, i) => (
+          <div class="check-item" style={`transition-delay:${i * .1}s`}>
+            <div style="width:20px;height:20px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">
+              <span style="font-size:11px;font-weight:700">✓</span>
+            </div>
+            <span style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">{item}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -109,64 +225,44 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <!-- ЗА НАС -->
 <section style="background:#f8fafc">
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
-    <div>
+    <div class="reveal-left">
+      <div style="width:120px;height:120px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:28px;box-shadow:0 8px 32px rgba(14,165,233,.35)">👩‍⚕️</div>
       <span class="tag">За нас</span>
-      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--dark);margin-bottom:24px">Д-р Мария Иванова</h2>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:var(--dark);margin-bottom:20px">Д-р Мария Иванова</h2>
       <p style="color:#475569;line-height:1.8;margin-bottom:16px">
         Специалист по обща стоматология и естетична дентална медицина. Завършила Медицински университет — Варна, с специализация в Германия (Berlin Charité, 2012).
       </p>
       <p style="color:#475569;line-height:1.8;margin-bottom:32px">
         Работя с любов към всеки пациент. Вярвам, че добрата дентална грижа започва от доверието — затова всяко лечение обяснявам стъпка по стъпка, без скрити такси.
       </p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         {[
           ['🎓', 'МУ Варна, 2008'],
           ['🏥', 'Специализация Берлин'],
           ['🏆', '15г. практика'],
           ['❤️', '5000+ пациенти'],
         ].map(([icon, text]) => (
-          <div style="display:flex;gap:10px;align-items:center">
-            <span style="font-size:18px">{icon}</span>
+          <div style="display:flex;gap:10px;align-items:center;background:white;padding:12px 16px;border:1px solid #e2e8f0;transition:border-color .2s,transform .2s" onmouseover="this.style.borderColor='var(--sky)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.transform='translateY(0)'">
+            <span style="font-size:20px">{icon}</span>
             <span style="font-size:13px;font-weight:600;color:var(--text)">{text}</span>
           </div>
         ))}
       </div>
     </div>
-    <div style="background:linear-gradient(135deg,var(--blue),#0284c7);padding:40px;border-radius:12px;color:white">
-      <h3 style="font-size:20px;font-weight:700;margin-bottom:24px">Защо пациентите ни се връщат</h3>
-      {[
-        'Безплатен преглед при първо посещение',
-        'Обясняваме всяка стъпка преди да започнем',
-        'Модерно оборудване и стерилизация по EU стандарти',
-        'Гъвкаво работно време вкл. събота',
-        'Плащане на части без лихва',
-        'Спешни часове в деня на обаждането',
-      ].map(item => (
-        <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px">
-          <span style="color:#bae6fd;flex-shrink:0;margin-top:2px">✓</span>
-          <span style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">{item}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
 
-<!-- ОТЗИВИ -->
-<section style="background:white">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:48px">
-      <span class="tag">Отзиви</span>
-      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--dark)">Пациентите говорят</h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+    <!-- Testimonial highlight -->
+    <div class="reveal-right" style="display:flex;flex-direction:column;gap:20px">
       {[
-        { name: 'Стефан К.', text: 'Отидох с огромен страх от зъболекар. Д-р Иванова беше изключително търпелива и обясни всичко детайлно. Абсолютно безболезнено! Вече не ме е страх.' },
-        { name: 'Елена М.', text: 'Избелването беше невероятно — резултатът е много по-добър от очакваното. Процедурата беше бърза и удобна. Препоръчвам на всеки!' },
-        { name: 'Николай Т.', text: 'Правих имплант. Страхувах се, но всичко мина гладко. Д-р Иванова е перфекционист. Вече не се усеща разлика с истинския зъб.' },
+        { name: 'Стефан К.', text: 'Отидох с огромен страх от зъболекар. Д-р Иванова беше изключително търпелива. Абсолютно безболезнено! Вече не ме е страх.', tag: 'Лечение на кариес' },
+        { name: 'Елена М.', text: 'Избелването беше невероятно — резултатът е много по-добър от очакваното. Процедурата беше бърза и удобна.', tag: 'Избелване' },
+        { name: 'Николай Т.', text: 'Правих имплант. Страхувах се, но всичко мина гладко. Вече не се усеща разлика с истинския зъб.', tag: 'Зъбен имплант' },
       ].map(r => (
-        <div style="border:1px solid #e2e8f0;padding:28px;border-radius:8px">
-          <div style="color:#f59e0b;margin-bottom:12px">★★★★★</div>
-          <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:16px;font-style:italic">"{r.text}"</p>
+        <div class="review-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div style="color:#f59e0b">★★★★★</div>
+            <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:var(--light);color:var(--blue);padding:3px 10px">{r.tag}</span>
+          </div>
+          <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:12px;font-style:italic">"{r.text}"</p>
           <div style="font-weight:700;font-size:13px;color:var(--dark)">{r.name}</div>
         </div>
       ))}
@@ -177,42 +273,42 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <!-- ЗАПИШЕТЕ ЧАС -->
 <section id="zapis" style="background:var(--light)">
   <div class="container" style="max-width:680px">
-    <div style="text-align:center;margin-bottom:48px">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
       <span class="tag">Запишете час</span>
       <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--dark);margin-bottom:12px">Запазете своя час</h2>
       <p style="color:#64748b">Потвърждение по SMS до 30 минути. Безплатен преглед при първо посещение.</p>
     </div>
-    <div style="background:white;padding:40px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08)">
+    <div style="background:white;padding:40px;box-shadow:0 8px 48px rgba(14,165,233,.12);border-top:4px solid var(--sky)" class="reveal">
       <form style="display:grid;gap:20px">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
           <div>
-            <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Ime</label>
-            <input type="text" placeholder="Вашето име" style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;border-radius:4px" />
+            <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Вашето ime</label>
+            <input type="text" placeholder="Вашето ime" style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--sky)'" onblur="this.style.borderColor='#e2e8f0'" />
           </div>
           <div>
-            <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Телефон</label>
-            <input type="tel" placeholder="+359 88..." style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;border-radius:4px" />
+            <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Телефон</label>
+            <input type="tel" placeholder="+359 88..." style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--sky)'" onblur="this.style.borderColor='#e2e8f0'" />
           </div>
         </div>
         <div>
-          <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Услуга</label>
-          <select style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;border-radius:4px;background:white">
+          <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Услуга</label>
+          <select style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white;transition:border-color .2s" onfocus="this.style.borderColor='var(--sky)'" onblur="this.style.borderColor='#e2e8f0'">
             {['Профилактичен преглед','Лечение на кариес','Избелване','Коронка / мост','Имплант','Ортодонция','Спешен случай','Друго'].map(o => <option>{o}</option>)}
           </select>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
           <div>
-            <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Предпочитана дата</label>
-            <input type="date" style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;border-radius:4px" />
+            <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Предпочитана дата</label>
+            <input type="date" style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--sky)'" onblur="this.style.borderColor='#e2e8f0'" />
           </div>
           <div>
-            <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Предпочитан час</label>
-            <select style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;border-radius:4px;background:white">
+            <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Предпочитан час</label>
+            <select style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
               {['9:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00'].map(h => <option>{h}</option>)}
             </select>
           </div>
         </div>
-        <button type="submit" class="btn" style="width:100%;padding:16px;font-size:15px;border-radius:4px">Запишете час →</button>
+        <button type="submit" class="btn" style="width:100%;padding:16px;font-size:15px;justify-content:center">Запишете час →</button>
       </form>
     </div>
   </div>
@@ -222,23 +318,87 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <footer style="background:var(--dark);padding:48px 24px">
   <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:32px">
     <div>
-      <div style="font-weight:800;font-size:18px;color:white;margin-bottom:12px">Д-р Иванова</div>
-      <p style="color:rgba(255,255,255,.4);font-size:13px;line-height:1.7">Дентален кабинет · Бургас<br/>Работим с любов от 2009.</p>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;background:var(--sky);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px">🦷</div>
+        <div style="font-weight:800;font-size:16px;color:white">Д-р Иванова</div>
+      </div>
+      <p style="color:rgba(255,255,255,.35);font-size:13px;line-height:1.7">Дентален кабинет · Бургас<br/>Работим с любов от 2009.</p>
     </div>
     {[
       ['Услуги', ['Профилактика', 'Лечение', 'Избелване', 'Коронки', 'Импланти', 'Ортодонция']],
       ['Контакти', ['ул. Александровска 15, Бургас', '+359 56 456 789', 'dr.ivanova@gmail.com', 'Пон–Пет: 9:00–19:00', 'Саб: 9:00–14:00']],
     ].map(([title, items]) => (
       <div>
-        <div style="color:#38bdf8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">{title}</div>
+        <div style="color:var(--sky);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">{title}</div>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
-          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.4);font-size:13px">{item}</li>)}
+          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.35);font-size:13px">{item}</li>)}
         </ul>
       </div>
     ))}
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;color:rgba(255,255,255,.2);font-size:12px">
+  <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;text-align:center;color:rgba(255,255,255,.2);font-size:12px">
     © 2026 Дентален Кабинет Д-р Иванова · Бургас
   </div>
 </footer>
+
+<script>
+  // --- Scroll reveal ---
+  const allReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  allReveal.forEach(r => revealIO.observe(r));
+
+  // --- Nav scroll ---
+  const nav = document.getElementById('dental-nav');
+  window.addEventListener('scroll', () => {
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // --- Service card extra text ---
+  document.querySelectorAll('.service-card').forEach(card => {
+    const extra = card.querySelector('.sc-extra') as HTMLElement | null;
+    card.addEventListener('mouseenter', () => { if (extra) { extra.style.opacity = '1'; extra.style.transform = 'translateY(0)'; } });
+    card.addEventListener('mouseleave', () => { if (extra) { extra.style.opacity = '0'; extra.style.transform = 'translateY(8px)'; } });
+  });
+
+  // --- Progress bars ---
+  const progressIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.progress-fill').forEach((fill: Element) => {
+          const el = fill as HTMLElement;
+          const w = el.getAttribute('data-width');
+          if (w) el.style.width = w + '%';
+        });
+        progressIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.progress-bar').forEach(b => progressIO.observe(b.parentElement?.parentElement || b));
+
+  // --- Check items animation ---
+  const checkIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.check-item').forEach((item: Element) => item.classList.add('visible'));
+        checkIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  const checkContainer = document.querySelector('.check-item')?.closest('div');
+  if (checkContainer) checkIO.observe(checkContainer);
+
+  // --- Hide float CTA when in booking section ---
+  const floatBtn = document.getElementById('float-cta');
+  const zapSection = document.getElementById('zapis');
+  if (floatBtn && zapSection) {
+    const hideIO = new IntersectionObserver(([e]) => {
+      if (floatBtn) floatBtn.style.opacity = e.isIntersecting ? '0' : '1';
+    }, { threshold: 0.5 });
+    hideIO.observe(zapSection);
+  }
+</script>
 </DemoLayout>

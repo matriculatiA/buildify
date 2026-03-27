@@ -4,6 +4,7 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <DemoLayout title="Механа Загорето — Автентична българска кухня" accent="#e8a030">
 <style>
   :root { --green: #1a2e1a; --gold: #c8902a; --cream: #f5f0e8; --text: #2a1a0a; }
+  * { box-sizing: border-box; }
   a { text-decoration: none; }
   .btn-primary { background: var(--gold); color: white; font-weight: 700; padding: 14px 32px; display: inline-block; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; transition: background .2s; cursor: pointer; border: none; }
   .btn-primary:hover { background: #a87020; }
@@ -12,13 +13,56 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   section { padding: 80px 24px; }
   .container { max-width: 1100px; margin: 0 auto; }
   .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+
+  /* Floating particles */
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+  }
+  .particle {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+  }
+
+  /* Menu tabs */
+  .menu-tab { background: transparent; border: 2px solid rgba(200,144,42,.4); color: rgba(255,255,255,.6); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 10px 22px; cursor: pointer; transition: all .25s; font-family: Inter, sans-serif; }
+  .menu-tab:hover { border-color: var(--gold); color: var(--gold); }
+  .menu-tab.active { background: var(--gold); border-color: var(--gold); color: white; }
+  .menu-panel { display: none; animation: fadeIn .3s ease; }
+  .menu-panel.active { display: grid; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Review carousel */
+  .reviews-track { display: flex; gap: 24px; overflow: hidden; }
+  .review-card { min-width: 300px; flex-shrink: 0; border: 1px solid #e8e0d0; padding: 28px; position: relative; transition: transform .3s, box-shadow .3s; }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.12); }
+
+  /* Gallery */
+  .gallery-item { overflow: hidden; cursor: pointer; position: relative; aspect-ratio: 4/3; background: var(--green); }
+  .gallery-item .overlay { position: absolute; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; }
+  .gallery-item:hover .overlay { opacity: 1; }
+  .gallery-item .fake-img { width: 100%; height: 100%; transition: transform .5s; }
+  .gallery-item:hover .fake-img { transform: scale(1.08); }
+
+  /* Sticky nav scroll effect */
+  #restoran-nav { transition: background .3s, box-shadow .3s; }
+  #restoran-nav.scrolled { background: rgba(15,28,15,.95) !important; backdrop-filter: blur(12px); }
 </style>
 
 <!-- NAV -->
-<nav style="background:var(--green);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)">
+<nav id="restoran-nav" style="background:var(--green);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)">
   <div style="display:flex;align-items:center;gap:8px">
     <span style="font-size:22px">🍽</span>
-    <span class="serif" style="color:white;font-size:20px;font-weight:700">Механа Загорето</span>
+    <span class="serif" style="color:white;font-size:20px;font-weight:700;font-family:'Playfair Display',serif">Механа Загорето</span>
   </div>
   <div style="display:none;gap:32px" class="nav-links">
     {['Меню', 'За нас', 'Галерия', 'Резервация', 'Контакти'].map(l => (
@@ -29,34 +73,53 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 </nav>
 <style>@media(min-width:768px){.nav-links{display:flex!important}}</style>
 
-<!-- HERO -->
-<div style="background:linear-gradient(135deg,#0f1e0f 0%,#1a2e1a 40%,#2d4a1e 100%);min-height:90vh;display:flex;align-items:center;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2220%22 cy=%2220%22 r=%2240%22 fill=%22rgba(200,144,42,.06)%22/><circle cx=%2280%22 cy=%2280%22 r=%2260%22 fill=%22rgba(200,144,42,.04)%22/></svg>');background-size:cover"></div>
+<!-- HERO with floating particles -->
+<div style="background:linear-gradient(135deg,#0f1e0f 0%,#1a2e1a 40%,#2d4a1e 100%);min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden" id="hero">
+  <!-- Particles container -->
+  <div id="particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+
+  <!-- Subtle texture overlay -->
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(200,144,42,.06) 1px,transparent 1px);background-size:40px 40px;pointer-events:none"></div>
+
   <div class="container" style="position:relative;z-index:1;padding:60px 24px">
-    <span class="tag" style="font-size:12px">★ ★ ★ ★ ★ &nbsp;&nbsp; Отворени от 1994</span>
-    <h1 class="serif" style="color:white;font-size:clamp(2.8rem,7vw,5.5rem);line-height:1.05;margin-bottom:24px;max-width:700px">
+    <span class="tag reveal" style="font-size:12px">★ ★ ★ ★ ★ &nbsp;&nbsp; Отворени от 1994</span>
+    <h1 class="serif reveal reveal-delay-1" style="color:white;font-size:clamp(2.8rem,7vw,5.5rem);line-height:1.05;margin-bottom:24px;max-width:700px;font-family:'Playfair Display',serif">
       Автентична<br/>българска кухня<br/><span style="color:var(--gold)">от сърцето на Балкана</span>
     </h1>
-    <p style="color:rgba(255,255,255,.65);font-size:18px;line-height:1.7;max-width:520px;margin-bottom:40px">
+    <p class="reveal reveal-delay-2" style="color:rgba(255,255,255,.65);font-size:18px;line-height:1.7;max-width:520px;margin-bottom:40px">
       Домашно приготвени ястия по стари рецепти, уютна атмосфера и вина от собствено лозе. Всяка хапка — история.
     </p>
-    <div style="display:flex;gap:16px;flex-wrap:wrap">
+    <div class="reveal reveal-delay-3" style="display:flex;gap:16px;flex-wrap:wrap">
       <a href="#rezervacia" class="btn-primary">Резервирай маса →</a>
       <a href="#menu" class="btn-outline">Виж менюто</a>
     </div>
-    <div style="display:flex;gap:40px;margin-top:56px;flex-wrap:wrap">
-      {[['30+', 'Години традиция'], ['200+', 'Места за гости'], ['50+', 'Ястия в менюто']].map(([n,l]) => (
-        <div>
-          <div class="serif" style="color:var(--gold);font-size:2.2rem;font-weight:700">{n}</div>
-          <div style="color:rgba(255,255,255,.5);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-top:4px">{l}</div>
+
+    <!-- Animated stats -->
+    <div style="display:flex;gap:40px;margin-top:64px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,.1)">
+      {[['30+', 'Години традиция'], ['200+', 'Места за гости'], ['50+', 'Ястия в менюто'], ['4.9★', 'Google рейтинг']].map(([n,l]) => (
+        <div class="reveal" style="text-align:center">
+          <div class="serif counter" style="color:var(--gold);font-size:2.4rem;font-weight:700;font-family:'Playfair Display',serif;line-height:1">{n}</div>
+          <div style="color:rgba(255,255,255,.4);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px">{l}</div>
         </div>
       ))}
     </div>
   </div>
+
+  <!-- Scroll indicator -->
+  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:11px;letter-spacing:.1em;text-transform:uppercase">
+    <span>Скролирай</span>
+    <div id="scroll-arrow" style="width:2px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollBounce 1.5s ease-in-out infinite"></div>
+  </div>
 </div>
+<style>
+  @keyframes scrollBounce {
+    0%,100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(.6); opacity: .5; }
+  }
+</style>
 
 <!-- INFO BAR -->
-<div style="background:var(--gold)">
+<div style="background:var(--gold)" class="reveal">
   <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:0">
     {[
       ['🕐', 'Работно време', 'Пон–Пет: 11:00–23:00\nСаб–Нед: 11:00–24:00'],
@@ -64,47 +127,141 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
       ['📞', 'Телефон', '+359 56 123 456\nhello@zagoreto.bg'],
       ['🅿', 'Паркинг', 'Безплатен паркинг\nза гостите ни'],
     ].map(([icon, title, info]) => (
-      <div style="padding:24px 28px;border-right:1px solid rgba(255,255,255,.3)">
-        <div style="font-size:20px;margin-bottom:8px">{icon}</div>
-        <div style="font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:rgba(0,0,0,.6);margin-bottom:4px">{title}</div>
+      <div style="padding:24px 28px;border-right:1px solid rgba(255,255,255,.3);cursor:default;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='transparent'">
+        <div style="font-size:22px;margin-bottom:8px">{icon}</div>
+        <div style="font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.5);margin-bottom:4px">{title}</div>
         <div style="font-size:13px;color:#1a0a00;line-height:1.5;white-space:pre-line">{info}</div>
       </div>
     ))}
   </div>
 </div>
 
-<!-- MENU -->
-<section id="menu" style="background:var(--cream)">
+<!-- MENU with tabs -->
+<section id="menu" style="background:#0f1e0f">
   <div class="container">
-    <div style="text-align:center;margin-bottom:56px">
+    <div style="text-align:center;margin-bottom:40px" class="reveal">
       <span class="tag">Нашето меню</span>
-      <h2 class="serif" style="font-size:clamp(2rem,4vw,3rem);color:var(--text);margin-bottom:16px">Вкусове от България</h2>
-      <p style="color:#666;max-width:500px;margin:0 auto;line-height:1.7">Готвим с продукти от местни фермери. Без консерванти, без компромиси.</p>
+      <h2 class="serif" style="font-size:clamp(2rem,4vw,3rem);color:white;margin-bottom:16px;font-family:'Playfair Display',serif">Вкусове от България</h2>
+      <p style="color:rgba(255,255,255,.4);max-width:500px;margin:0 auto;line-height:1.7">Готвим с продукти от местни фермери. Без консерванти, без компромиси.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px">
+    <!-- Tabs -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:40px" class="reveal">
+      {['🥗 Предястия', '🍲 Основни', '🔥 Скара', '🍷 Вина & Десерти'].map((tab, i) => (
+        <button class={`menu-tab${i===0?' active':''}`} data-tab={i} onclick="switchTab(this)">{tab}</button>
+      ))}
+    </div>
+
+    <!-- Panel 0: Предястия -->
+    <div class="menu-panel active" id="panel-0" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:rgba(255,255,255,.05)">
       {[
-        { cat: '🥗 Студени предястия', items: [['Шопска салата', '8 лв.'], ['Кьопоолу', '9 лв.'], ['Сирене по Шопски', '11 лв.'], ['Луканка с краставички', '12 лв.']] },
-        { cat: '🍲 Основни ястия', items: [['Кавърма с наденица', '22 лв.'], ['Агнешко на фурна', '28 лв.'], ['Пълнени чушки', '18 лв.'], ['Гювеч с телешко', '24 лв.']] },
-        { cat: '🔥 Скара', items: [['Кюфтета (3 бр.)', '14 лв.'], ['Свинска пържола', '20 лв.'], ['Пилешко филе', '16 лв.'], ['Мешана скара', '32 лв.']] },
-      ].map(cat => (
-        <div style="background:white;border:1px solid #e8e0d0;overflow:hidden">
-          <div style="background:var(--green);padding:16px 24px">
-            <h3 style="color:white;font-size:15px;font-weight:700">{cat.cat}</h3>
+        ['Шопска салата', '8 лв.', 'Домати, краставици, сирене, маслини'],
+        ['Кьопоолу', '9 лв.', 'Печен патладжан с чесън и орехи'],
+        ['Сирене по Шопски', '11 лв.', 'Печено сирене с домати на тиган'],
+        ['Луканка с краставички', '12 лв.', 'Домашна луканка, кисели краставички'],
+        ['Таратор', '7 лв.', 'Кисело мляко, краставица, орехи, чесън'],
+        ['Чушки бюрек', '10 лв.', 'Печени чушки с краве сирене'],
+      ].map(([name, price, desc]) => (
+        <div style="background:#1a2e1a;padding:20px 24px;transition:background .2s" onmouseover="this.style.background='#243d24'" onmouseout="this.style.background='#1a2e1a'">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <span style="font-size:15px;color:white;font-weight:600">{name}</span>
+            <span style="font-weight:700;color:var(--gold);font-size:15px;margin-left:16px;flex-shrink:0">{price}</span>
           </div>
-          <div style="padding:8px 0">
-            {cat.items.map(([name, price]) => (
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;border-bottom:1px solid #f0ebe0">
-                <span style="font-size:14px;color:var(--text)">{name}</span>
-                <span style="font-weight:700;color:var(--gold);font-size:14px">{price}</span>
-              </div>
-            ))}
-          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.35)">{desc}</div>
         </div>
       ))}
     </div>
-    <div style="text-align:center;margin-top:32px">
-      <a href="#" class="btn-primary">Виж пълното меню →</a>
+
+    <!-- Panel 1: Основни -->
+    <div class="menu-panel" id="panel-1" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:rgba(255,255,255,.05)">
+      {[
+        ['Кавърма с наденица', '22 лв.', 'По родопска рецепта, с домашна наденица'],
+        ['Агнешко на фурна', '28 лв.', 'Бавно печено с картофи и розмарин'],
+        ['Пълнени чушки', '18 лв.', 'Телешка кайма, ориз, доматен сос'],
+        ['Гювеч с телешко', '24 лв.', 'Зеленчуци, телешко, подправки'],
+        ['Капама', '26 лв.', 'Пиле, свинско, кисело зеле, ориз'],
+        ['Боб манджа', '14 лв.', 'Бавно варен фасул с лук и чубрица'],
+      ].map(([name, price, desc]) => (
+        <div style="background:#1a2e1a;padding:20px 24px;transition:background .2s" onmouseover="this.style.background='#243d24'" onmouseout="this.style.background='#1a2e1a'">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <span style="font-size:15px;color:white;font-weight:600">{name}</span>
+            <span style="font-weight:700;color:var(--gold);font-size:15px;margin-left:16px;flex-shrink:0">{price}</span>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.35)">{desc}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Panel 2: Скара -->
+    <div class="menu-panel" id="panel-2" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:rgba(255,255,255,.05)">
+      {[
+        ['Кюфтета (3 бр.)', '14 лв.', 'Смесена кайма с чесън и кимион'],
+        ['Свинска пържола', '20 лв.', 'Натурална, с масло и розмарин'],
+        ['Пилешко филе', '16 лв.', 'Маринирано, с лимон и билки'],
+        ['Мешана скара', '32 лв.', 'Кюфте, кебапче, пилешко, свинско'],
+        ['Кебапчета (5 бр.)', '13 лв.', 'По традиционна рецепта'],
+        ['Агнешки котлети', '28 лв.', 'Нежно агнешко, зелени подправки'],
+      ].map(([name, price, desc]) => (
+        <div style="background:#1a2e1a;padding:20px 24px;transition:background .2s" onmouseover="this.style.background='#243d24'" onmouseout="this.style.background='#1a2e1a'">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <span style="font-size:15px;color:white;font-weight:600">{name}</span>
+            <span style="font-weight:700;color:var(--gold);font-size:15px;margin-left:16px;flex-shrink:0">{price}</span>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.35)">{desc}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Panel 3: Вина & Десерти -->
+    <div class="menu-panel" id="panel-3" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:rgba(255,255,255,.05)">
+      {[
+        ['Домашно червено вино', '12 лв./бутилка', 'От собственото ни лозе, 2022'],
+        ['Домашно бяло вино', '12 лв./бутилка', 'Свежо, полусухо, мускат'],
+        ['Мастика Загорето', '4 лв./чашка', 'Домашна анасонова мастика'],
+        ['Баница с мед', '6 лв.', 'Топла, с домашен мед и орехи'],
+        ['Тиквеник', '5 лв.', 'По баническа рецепта, с тиква'],
+        ['Крем карамел', '7 лв.', 'Домашен, с карамелен сос'],
+      ].map(([name, price, desc]) => (
+        <div style="background:#1a2e1a;padding:20px 24px;transition:background .2s" onmouseover="this.style.background='#243d24'" onmouseout="this.style.background='#1a2e1a'">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+            <span style="font-size:15px;color:white;font-weight:600">{name}</span>
+            <span style="font-weight:700;color:var(--gold);font-size:15px;margin-left:16px;flex-shrink:0">{price}</span>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.35)">{desc}</div>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align:center;margin-top:32px" class="reveal">
+      <a href="#rezervacia" class="btn-primary">Запазете маса →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section style="background:var(--cream);padding:80px 24px">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px" class="reveal">
+      <span class="tag">Атмосфера</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);font-family:'Playfair Display',serif">Усетете духа на механата</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:12px">
+      {[
+        { bg: 'linear-gradient(135deg,#2d1a0a,#4a2e10)', emoji: '🍽', label: 'Уютна зала', span: 'col-span-2' },
+        { bg: 'linear-gradient(135deg,#1a2e1a,#2d4a1e)', emoji: '🌿', label: 'Градинска тераса', span: '' },
+        { bg: 'linear-gradient(135deg,#3d1f00,#6b3800)', emoji: '🥩', label: 'Скара на жар', span: '' },
+        { bg: 'linear-gradient(135deg,#1a1a0a,#3d3d1a)', emoji: '🍷', label: 'Наш избор', span: '' },
+        { bg: 'linear-gradient(135deg,#0a1a0a,#1a3a1a)', emoji: '🎵', label: 'Живa музика', span: 'col-span-2' },
+      ].map((item, i) => (
+        <div class="gallery-item reveal" style={`${i===0?'grid-column:span 2':''}${i===4?'grid-column:span 2':''};background:${item.bg};border-radius:2px`}>
+          <div class="fake-img" style={`background:${item.bg};width:100%;height:200px;display:flex;align-items:center;justify-content:center`}>
+            <span style="font-size:64px;opacity:.6">{item.emoji}</span>
+          </div>
+          <div class="overlay">
+            <span style="color:white;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase">{item.label}</span>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -112,94 +269,111 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <!-- ABOUT -->
 <section style="background:var(--green)">
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
-    <div>
+    <div class="reveal">
       <span class="tag">За нас</span>
-      <h2 class="serif" style="color:white;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:24px">Три поколения на трапезата</h2>
+      <h2 class="serif" style="color:white;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:24px;font-family:'Playfair Display',serif">Три поколения на трапезата</h2>
       <p style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:20px">
         Механа Загорето е основана от баба Мария Петрова през 1994 година с мечтата да съхрани автентичния вкус на родопската кухня. Днес, три десетилетия по-късно, продължаваме традицията с рецептите, предадени от поколение на поколение.
       </p>
       <p style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:32px">
-        Всяко ястие се приготвя с пресни, сезонни продукти от местни производители. Виното ни е от собственото ни лозе в Cotele — бяло и червено, отлежало в дъбови бурета.
+        Всяко ястие се приготвя с пресни, сезонни продукти от местни производители. Виното ни е от собственото ни лозе — бяло и червено, отлежало в дъбови бурета.
       </p>
-      <div style="display:flex;gap:12px">
-        <a href="#rezervacia" class="btn-primary">Резервирай →</a>
-      </div>
+      <a href="#rezervacia" class="btn-primary">Резервирай →</a>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="reveal">
       {[
         { n: '⭐ 4.9', t: 'Google рейтинг' },
         { n: '1200+', t: 'Отзива' },
         { n: '30г.', t: 'Традиция' },
         { n: '100%', t: 'Домашно готвене' },
       ].map(s => (
-        <div style="background:rgba(255,255,255,.07);padding:24px;text-align:center;border:1px solid rgba(255,255,255,.1)">
-          <div class="serif" style="color:var(--gold);font-size:1.8rem;font-weight:700;margin-bottom:8px">{s.n}</div>
-          <div style="color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.08em">{s.t}</div>
+        <div style="background:rgba(255,255,255,.07);padding:28px;text-align:center;border:1px solid rgba(255,255,255,.1);transition:background .3s,transform .3s;cursor:default" onmouseover="this.style.background='rgba(200,144,42,.15)';this.style.transform='scale(1.04)'" onmouseout="this.style.background='rgba(255,255,255,.07)';this.style.transform='scale(1)'">
+          <div class="serif" style="color:var(--gold);font-size:1.8rem;font-weight:700;margin-bottom:8px;font-family:'Playfair Display',serif">{s.n}</div>
+          <div style="color:rgba(255,255,255,.45);font-size:11px;text-transform:uppercase;letter-spacing:.1em">{s.t}</div>
         </div>
       ))}
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section style="background:white">
+<!-- REVIEWS - Carousel -->
+<section style="background:white;overflow:hidden">
   <div class="container">
-    <div style="text-align:center;margin-bottom:48px">
-      <span class="tag">Отзиви</span>
-      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text)">Какво казват гостите</h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:40px" class="reveal">
+      <div>
+        <span class="tag">Отзиви</span>
+        <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);font-family:'Playfair Display',serif">Какво казват гостите</h2>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button id="prev-review" onclick="moveCarousel(-1)" style="width:44px;height:44px;border:2px solid #ddd;background:white;font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='#ddd';this.style.color='inherit'">‹</button>
+        <button id="next-review" onclick="moveCarousel(1)" style="width:44px;height:44px;border:2px solid #ddd;background:white;font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='#ddd';this.style.color='inherit'">›</button>
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
-      {[
-        { name: 'Мария С.', stars: 5, text: 'Най-добрите кюфтета, които съм яла! Атмосферата е невероятна, усещаш се като у дома. Определено ще се върна.' },
-        { name: 'Георги П.', stars: 5, text: 'Идеално място за семейна вечеря. Храната е приготвена с любов, порциите са огромни, а цените — много разумни.' },
-        { name: 'Ана Д.', stars: 5, text: 'Отбелязахме рождения ден на мама тук. Персоналът беше изключителен, изненадаха ни с торта. Пет звезди!' },
-      ].map(r => (
-        <div style="border:1px solid #e8e0d0;padding:28px;position:relative">
-          <div style="color:var(--gold);font-size:18px;margin-bottom:12px">{'★'.repeat(r.stars)}</div>
-          <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:16px;font-style:italic">"{r.text}"</p>
-          <div style="font-weight:700;font-size:13px;color:var(--text)">{r.name}</div>
-        </div>
-      ))}
+    <div style="overflow:hidden">
+      <div class="reviews-track" id="reviews-track">
+        {[
+          { name: 'Мария С.', stars: 5, text: 'Най-добрите кюфтета, които съм яла! Атмосферата е невероятна, усещаш се като у дома. Определено ще се върна.', date: 'Февруари 2026' },
+          { name: 'Георги П.', stars: 5, text: 'Идеално място за семейна вечеря. Храната е приготвена с любов, порциите са огромни, а цените — много разумни.', date: 'Януари 2026' },
+          { name: 'Ана Д.', stars: 5, text: 'Отбелязахме рождения ден на мама тук. Персоналът беше изключителен, изненадаха ни с торта. Пет звезди!', date: 'Март 2026' },
+          { name: 'Петко М.', stars: 5, text: 'Агнешкото на фурна е легендарно. Идвам тук от 15 години и никога не съм разочарован. Домашното вино е великолепно.', date: 'Февруари 2026' },
+          { name: 'Силвия Н.', stars: 5, text: 'Организирахме корпоративна вечеря за 40 човека. Всичко беше перфектно — от храната до обслужването. Благодаря!', date: 'Март 2026' },
+        ].map(r => (
+          <div class="review-card">
+            <div style="color:var(--gold);font-size:18px;margin-bottom:12px">{'★'.repeat(r.stars)}</div>
+            <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:16px;font-style:italic">"{r.text}"</p>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700;font-size:13px;color:var(--text)">{r.name}</div>
+              <div style="font-size:11px;color:#aaa">{r.date}</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
+    <!-- Dots -->
+    <div id="review-dots" style="display:flex;gap:8px;justify-content:center;margin-top:24px"></div>
   </div>
 </section>
 
 <!-- REZERVACIA -->
 <section id="rezervacia" style="background:var(--cream)">
   <div class="container" style="max-width:700px">
-    <div style="text-align:center;margin-bottom:48px">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
       <span class="tag">Резервация</span>
-      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);margin-bottom:16px">Запазете маса</h2>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text);margin-bottom:16px;font-family:'Playfair Display',serif">Запазете маса</h2>
       <p style="color:#666">Обаждаме се за потвърждение до 30 минути.</p>
     </div>
-    <form style="display:grid;gap:16px">
+    <form style="display:grid;gap:16px;background:white;padding:40px;box-shadow:0 4px 40px rgba(0,0,0,.08)" class="reveal">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div>
-          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Вашето име</label>
-          <input type="text" placeholder="Иван Иванов" style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none" />
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;display:block;margin-bottom:8px">Вашето име</label>
+          <input type="text" placeholder="Иван Иванов" style="width:100%;padding:14px 16px;border:2px solid #e8e0d0;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#c8902a'" onblur="this.style.borderColor='#e8e0d0'" />
         </div>
         <div>
-          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Телефон</label>
-          <input type="tel" placeholder="+359 88 888 8888" style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none" />
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;display:block;margin-bottom:8px">Телефон</label>
+          <input type="tel" placeholder="+359 88 888 8888" style="width:100%;padding:14px 16px;border:2px solid #e8e0d0;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#c8902a'" onblur="this.style.borderColor='#e8e0d0'" />
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
         <div>
-          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Дата</label>
-          <input type="date" style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none" />
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;display:block;margin-bottom:8px">Дата</label>
+          <input type="date" style="width:100%;padding:14px 16px;border:2px solid #e8e0d0;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#c8902a'" onblur="this.style.borderColor='#e8e0d0'" />
         </div>
         <div>
-          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Час</label>
-          <select style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;display:block;margin-bottom:8px">Час</label>
+          <select style="width:100%;padding:14px 16px;border:2px solid #e8e0d0;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
             {['12:00','13:00','14:00','18:00','19:00','20:00','21:00'].map(h => <option>{h}</option>)}
           </select>
         </div>
         <div>
-          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666;display:block;margin-bottom:8px">Гости</label>
-          <select style="width:100%;padding:14px 16px;border:2px solid #ddd;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;display:block;margin-bottom:8px">Гости</label>
+          <select style="width:100%;padding:14px 16px;border:2px solid #e8e0d0;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white">
             {['1','2','3','4','5','6','7','8+'].map(n => <option>{n} {n==='1'?'гост':'гости'}</option>)}
           </select>
         </div>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;display:block;margin-bottom:8px">Специални желания (по избор)</label>
+        <textarea placeholder="Рожден ден, алергии, предпочитания за маса..." rows={3} style="width:100%;padding:14px 16px;border:2px solid #e8e0d0;font-size:14px;font-family:Inter,sans-serif;outline:none;resize:vertical;transition:border-color .2s" onfocus="this.style.borderColor='#c8902a'" onblur="this.style.borderColor='#e8e0d0'"></textarea>
       </div>
       <button type="submit" class="btn-primary" style="width:100%;padding:18px;font-size:15px">Изпрати резервация →</button>
     </form>
@@ -207,26 +381,115 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 </section>
 
 <!-- FOOTER -->
-<footer style="background:var(--green);padding:48px 24px">
+<footer style="background:var(--green);padding:56px 24px">
   <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:40px">
     <div>
-      <div class="serif" style="color:white;font-size:22px;font-weight:700;margin-bottom:16px">Механа Загорето</div>
-      <p style="color:rgba(255,255,255,.5);font-size:13px;line-height:1.7">Автентична българска кухня от 1994 г. Добре дошли на нашата трапеза.</p>
+      <div class="serif" style="color:white;font-size:22px;font-weight:700;margin-bottom:16px;font-family:'Playfair Display',serif">Механа Загорето</div>
+      <p style="color:rgba(255,255,255,.4);font-size:13px;line-height:1.8">Автентична българска кухня от 1994 г. Добре дошли на нашата трапеза.</p>
+      <div style="display:flex;gap:12px;margin-top:20px">
+        {['f', 'in', 'ig'].map(s => (
+          <div style="width:36px;height:36px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='#c8902a'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)'">
+            <span style="color:rgba(255,255,255,.4);font-size:12px;font-weight:700">{s}</span>
+          </div>
+        ))}
+      </div>
     </div>
     {[
       ['Меню', ['Студени предястия', 'Супи', 'Основни', 'Скара', 'Десерти', 'Вина']],
       ['Контакти', ['ул. Витоша 42, Бургас', '+359 56 123 456', 'hello@zagoreto.bg', 'Пон–Нед: 11:00–24:00']],
     ].map(([title, items]) => (
       <div>
-        <div style="color:var(--gold);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">{title}</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
-          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.5);font-size:13px">{item}</li>)}
+        <div style="color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">{title}</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.4);font-size:13px">{item}</li>)}
         </ul>
       </div>
     ))}
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;color:rgba(255,255,255,.3);font-size:12px">
+  <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;color:rgba(255,255,255,.25);font-size:12px">
     © 2026 Механа Загорето · Всички права запазени
   </div>
 </footer>
+
+<script>
+  // --- Floating Particles ---
+  const emojis = ['🍽','🥩','🍷','🌿','🫙','🥗','🔥'];
+  const container = document.getElementById('particles');
+  function spawnParticle() {
+    if (!container) return;
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.bottom = '-40px';
+    const dur = 8 + Math.random() * 12;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = Math.random() * 4 + 's';
+    el.style.fontSize = (16 + Math.random() * 20) + 'px';
+    el.style.opacity = (0.15 + Math.random() * 0.25).toString();
+    container.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 4) * 1000);
+  }
+  for (let i = 0; i < 12; i++) setTimeout(spawnParticle, i * 600);
+  setInterval(spawnParticle, 2000);
+
+  // --- Scroll reveal ---
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => io.observe(r));
+
+  // --- Nav scroll effect ---
+  const nav = document.getElementById('restoran-nav');
+  window.addEventListener('scroll', () => {
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // --- Menu tabs ---
+  function switchTab(btn) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const idx = btn.getAttribute('data-tab');
+    document.getElementById('panel-' + idx)?.classList.add('active');
+  }
+
+  // --- Review carousel ---
+  let carouselIdx = 0;
+  const track = document.getElementById('reviews-track');
+  const dotsContainer = document.getElementById('review-dots');
+  const totalReviews = 5;
+  const visibleCount = () => window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+
+  function buildDots() {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    const maxIdx = totalReviews - visibleCount();
+    for (let i = 0; i <= maxIdx; i++) {
+      const dot = document.createElement('div');
+      dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i === carouselIdx ? '#c8902a' : '#ddd'};cursor:pointer;transition:background .2s`;
+      dot.onclick = () => { carouselIdx = i; updateCarousel(); };
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateCarousel() {
+    if (!track) return;
+    const cardWidth = 324; // 300px + 24px gap
+    track.style.transform = `translateX(-${carouselIdx * cardWidth}px)`;
+    track.style.transition = 'transform .4s cubic-bezier(.25,.46,.45,.94)';
+    buildDots();
+  }
+
+  function moveCarousel(dir) {
+    const max = totalReviews - visibleCount();
+    carouselIdx = Math.max(0, Math.min(max, carouselIdx + dir));
+    updateCarousel();
+  }
+
+  buildDots();
+  // Auto-advance
+  setInterval(() => moveCarousel(carouselIdx >= totalReviews - visibleCount() ? -(totalReviews - visibleCount()) : 1), 5000);
+</script>
 </DemoLayout>
