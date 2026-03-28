@@ -48,6 +48,14 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
   <meta name="twitter:description"content={description} />
   <meta name="twitter:image"      content={ogImage} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDHEV1Q16X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NDHEV1Q16X');
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
