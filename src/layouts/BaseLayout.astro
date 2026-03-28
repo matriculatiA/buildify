@@ -20,7 +20,7 @@ const {
 const navLinks = [
   { href: '/websites',  label: 'Уеб дизайн' },
   { href: '/plugins',   label: 'Плъгини'    },
-  { href: '/ai-bots',   label: 'AI ботове'  },
+  { href: '/ai-bots',   label: 'AI чатбот'  },
   { href: '/blog',      label: 'Блог'       },
   { href: '/about',    label: 'За нас'     },
 ];
@@ -166,7 +166,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
         <ul class="space-y-3">
           {[
             ['Уеб дизайн', '/websites'],
-            ['AI ботове',  '/ai-bots'],
+            ['AI чатбот',  '/ai-bots'],
             ['Плъгини',    '/plugins'],
           ].map(([label, href]) => (
             <li>
