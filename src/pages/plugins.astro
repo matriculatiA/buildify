@@ -119,13 +119,17 @@ const examples = [
       .ps:nth-child(5) { margin-top: 72px; }
       .ps:nth-child(6) { margin-top: 24px; }
     }
-    .ps { display: flex; flex-direction: column; }
-    .ps-ctx { padding-bottom: 14px; border-bottom: 2px solid #111; margin-bottom: 0; }
-    .ps-num { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #94a3b8; margin-bottom: 5px; display: block; }
-    .ps-name { font-weight: 800; font-size: 15px; color: #111; line-height: 1.2; margin-bottom: 5px; }
-    .ps-desc { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 8px; }
+    .ps { display: flex; flex-direction: row; border: 2px solid #111; border-radius: 16px; overflow: hidden; box-shadow: 4px 4px 0 #111; background: white; }
+    .ps-sidebar { width: 38px; background: #111; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 16px 0; }
+    .ps-label { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .18em; color: #f5e642; white-space: nowrap; }
+    .ps-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .ps-ctx { padding: 13px 16px; border-bottom: 1.5px solid #e8e4dc; background: #f5f2eb; flex-shrink: 0; }
+    .ps-name { font-weight: 800; font-size: 12px; color: #111; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+    .ps-desc { display: none; }
+    .ps-num  { display: none; }
     .ps-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .ps-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #555; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 8px; }
+    .ps-tag { font-family: 'Space Mono', monospace; font-size: 8px; font-weight: 700; text-transform: uppercase; color: #555; background: white; border: 1px solid #ddd; padding: 2px 7px; }
+    .ps .wc { border: none; border-radius: 0; box-shadow: none; flex: 1; height: auto; min-height: 440px; }
 
     .wc {
       border-radius: 16px;
@@ -445,10 +449,10 @@ const examples = [
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('wave-grid').innerHTML = `
     <div class="ps">
+      <div class="ps-sidebar"><span class="ps-label">Плъгин 01</span></div>
+      <div class="ps-main">
       <div class="ps-ctx">
-        <span class="ps-num">Плъгин 01</span>
         <div class="ps-name">Ипотечен калкулатор</div>
-        <div class="ps-desc">Клиентът изчислява вноската сам — идва при теб вече информиран.</div>
         <div class="ps-tags"><span class="ps-tag">Имоти</span><span class="ps-tag">Банки</span><span class="ps-tag">Строители</span></div>
       </div>
     <div class="wc wc-01">
@@ -478,12 +482,13 @@ const examples = [
       </div>
     </div>
     </div>
+    </div>
 
     <div class="ps">
+      <div class="ps-sidebar"><span class="ps-label">Плъгин 02</span></div>
+      <div class="ps-main">
       <div class="ps-ctx">
-        <span class="ps-num">Плъгин 02</span>
         <div class="ps-name">Резервационна система</div>
-        <div class="ps-desc">Онлайн записване 24/7 — без телефонни обаждания.</div>
         <div class="ps-tags"><span class="ps-tag">Лекари</span><span class="ps-tag">Ресторанти</span><span class="ps-tag">Услуги</span></div>
       </div>
     <div class="wc wc-02">
@@ -518,12 +523,13 @@ const examples = [
       </div>
     </div>
     </div>
+    </div>
 
     <div class="ps">
+      <div class="ps-sidebar"><span class="ps-label">Плъгин 03</span></div>
+      <div class="ps-main">
       <div class="ps-ctx">
-        <span class="ps-num">Плъгин 03</span>
         <div class="ps-name">AI чатбот</div>
-        <div class="ps-desc">Отговаря на въпроси на клиентите денонощно — без теб.</div>
         <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">24/7</span></div>
       </div>
     <div class="wc wc-03">
@@ -549,12 +555,13 @@ const examples = [
       </div>
     </div>
     </div>
+    </div>
 
     <div class="ps">
+      <div class="ps-sidebar"><span class="ps-label">Плъгин 04</span></div>
+      <div class="ps-main">
       <div class="ps-ctx">
-        <span class="ps-num">Плъгин 04</span>
         <div class="ps-name">BMI Калкулатор</div>
-        <div class="ps-desc">Ангажира посетителя с персонален резултат — насочва към следваща стъпка.</div>
         <div class="ps-tags"><span class="ps-tag">Фитнес</span><span class="ps-tag">Здраве</span><span class="ps-tag">Хранене</span></div>
       </div>
     <div class="wc wc-04">
@@ -578,13 +585,14 @@ const examples = [
       </div>
     </div>
     </div>
+    </div>
 
     <div class="ps">
+      <div class="ps-sidebar"><span class="ps-label">Плъгин 05</span></div>
+      <div class="ps-main">
       <div class="ps-ctx">
-        <span class="ps-num">Плъгин 05</span>
         <div class="ps-name">Комунален калкулатор</div>
-        <div class="ps-desc">Помага на клиента да изчисли разходите — изгражда доверие от първата секунда.</div>
-        <div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Недвижими имоти</span><span class="ps-tag">Комунални</span></div>
+        <div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Имоти</span><span class="ps-tag">Комунални</span></div>
       </div>
     <div class="wc wc-05">
       <div class="wc-header">
@@ -612,12 +620,13 @@ const examples = [
       </div>
     </div>
     </div>
+    </div>
 
     <div class="ps">
+      <div class="ps-sidebar"><span class="ps-label">Плъгин 06</span></div>
+      <div class="ps-main">
       <div class="ps-ctx">
-        <span class="ps-num">Плъгин 06</span>
         <div class="ps-name">Контактна форма</div>
-        <div class="ps-desc">Структурирано запитване — получаваш точно нужното преди да отговориш.</div>
         <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">Лийдове</span></div>
       </div>
     <div class="wc wc-06">
@@ -647,6 +656,7 @@ const examples = [
           <button class="cf-reset" onclick="resetForm()">Ново съобщение</button>
         </div>
       </div>
+    </div>
     </div>
     </div>
     `;
