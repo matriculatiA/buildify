@@ -76,7 +76,8 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <style>@media(min-width:768px){.nav-links{display:flex!important}}</style>
 
 <!-- HERO with floating particles -->
-<div style="background:linear-gradient(135deg,#0f1e0f 0%,#1a2e1a 40%,#2d4a1e 100%);min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden" id="hero">
+<div style="background-image:url('/images/restoran-hero.jpg');background-size:cover;background-position:center;min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden" id="hero">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,20,10,.88) 0%,rgba(15,30,15,.75) 60%,rgba(20,40,15,.65) 100%);pointer-events:none"></div>
   <!-- Atmospheric orbs -->
   <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
     <div class="orb" style="width:480px;height:480px;left:-8%;top:5%;animation-duration:10s"></div>
