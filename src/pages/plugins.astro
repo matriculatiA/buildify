@@ -103,29 +103,46 @@ const examples = [
   </section>
 
   <style is:global>
-    #wave-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      align-items: start;
-    }
+    #wave-grid { display: flex; flex-direction: column; }
 
-    @media (min-width: 900px) {
-      #wave-grid { grid-template-columns: repeat(3, 1fr); }
-      .ps:nth-child(1) { margin-top: 0px; }
-      .ps:nth-child(2) { margin-top: 48px; }
-      .ps:nth-child(3) { margin-top: 0px; }
-      .ps:nth-child(4) { margin-top: 24px; }
-      .ps:nth-child(5) { margin-top: 72px; }
-      .ps:nth-child(6) { margin-top: 24px; }
+    .ps { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 2px solid #111; min-height: 520px; }
+    .ps:last-child { border-bottom: none; }
+    .ps-demo { display: flex; align-items: center; justify-content: center; padding: 52px 44px; }
+    .ps-text { display: flex; flex-direction: column; justify-content: center; padding: 52px 56px; }
+
+    .ps:nth-child(odd)  .ps-demo { background: white; order: 1; border-right: 2px solid #111; }
+    .ps:nth-child(odd)  .ps-text { background: #f0ede6; order: 2; }
+    .ps:nth-child(even) .ps-demo { background: #1a1a1a; order: 2; border-left: 2px solid #333; }
+    .ps:nth-child(even) .ps-text { background: #111; order: 1; }
+
+    .ps-num { font-family: 'Space Mono', monospace; font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 20px; display: block; letter-spacing: -.02em; }
+    .ps:nth-child(odd)  .ps-num  { color: #ddd8cf; }
+    .ps:nth-child(even) .ps-num  { color: #f5e642; }
+
+    .ps-name { font-weight: 800; font-size: 20px; line-height: 1.15; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .03em; }
+    .ps:nth-child(odd)  .ps-name { color: #111; }
+    .ps:nth-child(even) .ps-name { color: white; }
+
+    .ps-desc { font-size: 14px; line-height: 1.75; margin-bottom: 24px; max-width: 300px; }
+    .ps:nth-child(odd)  .ps-desc { color: #666; }
+    .ps:nth-child(even) .ps-desc { color: rgba(255,255,255,.45); }
+
+    .ps-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ps-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 4px 10px; border: 1.5px solid; }
+    .ps:nth-child(odd)  .ps-tag { color: #555; border-color: #bbb; background: white; }
+    .ps:nth-child(even) .ps-tag { color: #f5e642; border-color: rgba(245,230,66,.35); background: transparent; }
+
+    .ps .wc { max-width: 360px; width: 100%; height: 460px; }
+    .ps:nth-child(even) .wc { box-shadow: 5px 5px 0 #f5e642; }
+
+    @media (max-width: 768px) {
+      .ps { grid-template-columns: 1fr; min-height: auto; }
+      .ps .ps-text { order: 1 !important; padding: 36px 24px; border: none !important; }
+      .ps .ps-demo { order: 2 !important; padding: 0 24px 36px; border: none !important; background: white !important; }
+      .ps .wc { max-width: 100%; }
+      .ps-num { font-size: 3.5rem; }
+      .ps-name { font-size: 17px; }
     }
-    .ps { display: flex; flex-direction: column; }
-    .ps-ctx { padding-bottom: 14px; border-bottom: 2px solid #111; margin-bottom: 0; }
-    .ps-num { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #94a3b8; margin-bottom: 5px; display: block; }
-    .ps-name { font-weight: 800; font-size: 15px; color: #111; line-height: 1.2; margin-bottom: 5px; }
-    .ps-desc { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 8px; }
-    .ps-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .ps-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #555; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 8px; }
 
     .wc {
       border-radius: 16px;
@@ -445,12 +462,7 @@ const examples = [
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('wave-grid').innerHTML = `
     <div class="ps">
-      <div class="ps-ctx">
-        <span class="ps-num">Плъгин 01</span>
-        <div class="ps-name">Ипотечен калкулатор</div>
-        <div class="ps-desc">Клиентът изчислява вноската сам — идва при теб вече информиран.</div>
-        <div class="ps-tags"><span class="ps-tag">Имоти</span><span class="ps-tag">Банки</span><span class="ps-tag">Строители</span></div>
-      </div>
+      <div class="ps-demo">
     <div class="wc wc-01">
       <div class="wc-header">
         <div class="wc-badge">Имоти · Банки</div>
@@ -477,15 +489,17 @@ const examples = [
         </div>
       </div>
     </div>
+      </div>
+      <div class="ps-text">
+        <span class="ps-num">01</span>
+        <div class="ps-name">Ипотечен калкулатор</div>
+        <div class="ps-desc">Клиентът вижда месечната вноска преди да ви потърси — идва информиран и готов за разговор.</div>
+        <div class="ps-tags"><span class="ps-tag">Имоти</span><span class="ps-tag">Банки</span><span class="ps-tag">Строители</span></div>
+      </div>
     </div>
 
     <div class="ps">
-      <div class="ps-ctx">
-        <span class="ps-num">Плъгин 02</span>
-        <div class="ps-name">Резервационна система</div>
-        <div class="ps-desc">Онлайн записване 24/7 — без телефонни обаждания.</div>
-        <div class="ps-tags"><span class="ps-tag">Лекари</span><span class="ps-tag">Ресторанти</span><span class="ps-tag">Услуги</span></div>
-      </div>
+      <div class="ps-demo">
     <div class="wc wc-02">
       <div class="wc-header">
         <div class="wc-title">Резервационна система</div>
@@ -517,15 +531,17 @@ const examples = [
         <div id="bk-succ"></div>
       </div>
     </div>
+      </div>
+      <div class="ps-text">
+        <span class="ps-num">02</span>
+        <div class="ps-name">Резервационна система</div>
+        <div class="ps-desc">Записвания онлайн 24/7 — без телефонни обаждания, без пропуснати часове.</div>
+        <div class="ps-tags"><span class="ps-tag">Лекари</span><span class="ps-tag">Ресторанти</span><span class="ps-tag">Услуги</span></div>
+      </div>
     </div>
 
     <div class="ps">
-      <div class="ps-ctx">
-        <span class="ps-num">Плъгин 03</span>
-        <div class="ps-name">AI чатбот</div>
-        <div class="ps-desc">Отговаря на въпроси на клиентите денонощно — без теб.</div>
-        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">24/7</span></div>
-      </div>
+      <div class="ps-demo">
     <div class="wc wc-03">
       <div class="wc-header">
         <div class="chat-av">🤖</div>
@@ -548,15 +564,17 @@ const examples = [
         <button onclick="sendChatDemo()">➤</button>
       </div>
     </div>
+      </div>
+      <div class="ps-text">
+        <span class="ps-num">03</span>
+        <div class="ps-name">AI чатбот</div>
+        <div class="ps-desc">Отговаря вместо вас — по всяко време, с вашия тон и вашите отговори.</div>
+        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">24/7</span></div>
+      </div>
     </div>
 
     <div class="ps">
-      <div class="ps-ctx">
-        <span class="ps-num">Плъгин 04</span>
-        <div class="ps-name">BMI Калкулатор</div>
-        <div class="ps-desc">Ангажира посетителя с персонален резултат — насочва към следваща стъпка.</div>
-        <div class="ps-tags"><span class="ps-tag">Фитнес</span><span class="ps-tag">Здраве</span><span class="ps-tag">Хранене</span></div>
-      </div>
+      <div class="ps-demo">
     <div class="wc wc-04">
       <div class="wc-header">
         <div class="wc-badge">Здраве · Фитнес</div>
@@ -577,15 +595,17 @@ const examples = [
         <div class="bmi-advice" id="bmi-advice">Отлично! Поддържай здравословен начин на живот.</div>
       </div>
     </div>
+      </div>
+      <div class="ps-text">
+        <span class="ps-num">04</span>
+        <div class="ps-name">BMI Калкулатор</div>
+        <div class="ps-desc">Персонален резултат за всеки посетител — ангажира и насочва към следваща стъпка.</div>
+        <div class="ps-tags"><span class="ps-tag">Фитнес</span><span class="ps-tag">Здраве</span><span class="ps-tag">Хранене</span></div>
+      </div>
     </div>
 
     <div class="ps">
-      <div class="ps-ctx">
-        <span class="ps-num">Плъгин 05</span>
-        <div class="ps-name">Комунален калкулатор</div>
-        <div class="ps-desc">Помага на клиента да изчисли разходите — изгражда доверие от първата секунда.</div>
-        <div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Недвижими имоти</span><span class="ps-tag">Комунални</span></div>
-      </div>
+      <div class="ps-demo">
     <div class="wc wc-05">
       <div class="wc-header">
         <div class="wc-title">Комунален калкулатор</div>
@@ -611,15 +631,17 @@ const examples = [
         <div class="ut-tip" id="ut-tip">10 kWh/ден x 0.35 лв. = 3.50 лв./ден</div>
       </div>
     </div>
+      </div>
+      <div class="ps-text">
+        <span class="ps-num">05</span>
+        <div class="ps-name">Комунален калкулатор</div>
+        <div class="ps-desc">Помага на клиента да планира разходите — доверие от първата секунда.</div>
+        <div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Имоти</span><span class="ps-tag">Комунални</span></div>
+      </div>
     </div>
 
     <div class="ps">
-      <div class="ps-ctx">
-        <span class="ps-num">Плъгин 06</span>
-        <div class="ps-name">Контактна форма</div>
-        <div class="ps-desc">Структурирано запитване — получаваш точно нужното преди да отговориш.</div>
-        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">Лийдове</span></div>
-      </div>
+      <div class="ps-demo">
     <div class="wc wc-06">
       <div class="wc-header">
         <div class="wc-badge">Безплатна консултация</div>
@@ -648,6 +670,13 @@ const examples = [
         </div>
       </div>
     </div>
+      </div>
+      <div class="ps-text">
+        <span class="ps-num">06</span>
+        <div class="ps-name">Контактна форма</div>
+        <div class="ps-desc">Структурирано запитване с точно нужното — по-малко имейли напред-назад.</div>
+        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">Лийдове</span></div>
+      </div>
     </div>
     `;
 
