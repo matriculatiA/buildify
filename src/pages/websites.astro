@@ -204,7 +204,7 @@ const steps = [
           <span class="font-mono text-xs font-bold bg-ink text-yellow px-2 py-1 self-start tracking-widest">{ind.code}</span>
           <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
           <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
-          <span class="font-mono text-xs text-muted/50 uppercase tracking-wide">Скоро демо</span>
+          <a href="/contact" class="font-mono text-xs text-ink/40 hover:text-yellow uppercase tracking-wide transition-colors">Поискайте оферта →</a>
         </div>
       ))}
     </div>
@@ -455,10 +455,49 @@ const steps = [
     </div>
   </section>
 
-  <!-- 06 · Пакети и цени -->
+  <!-- 06 · Бургас -->
+  <section class="border-b-2 border-ink grid md:grid-cols-2">
+    <div class="bg-yellow px-8 py-14 md:px-14 md:py-20 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-ink">
+      <span class="font-mono text-xs uppercase tracking-widest text-ink/40 font-bold">06 · Локация</span>
+      <div>
+        <h2 class="font-bold text-ink uppercase tracking-tightest leading-[1.0] mb-5" style="font-size:clamp(2rem,5vw,3.5rem)">
+          Изработка на<br/>уебсайт<br/>в Бургас.
+        </h2>
+        <p class="text-ink/60 text-sm leading-relaxed max-w-sm">
+          Дигитална агенция от Бургас с 7+ години опит. Работим лично с клиенти в Бургас и дистанционно с целия регион — Несебър, Созопол, Поморие, Айтос и цяла България.
+        </p>
+      </div>
+    </div>
+    <div class="bg-ink px-8 py-14 md:px-14 md:py-20 flex flex-col gap-6">
+      <p class="text-white/60 text-sm leading-relaxed">
+        Ако сте в Бургас и търсите <strong class="text-white">уеб разработчик в Бургас</strong> — работим на място. Разбираме местния пазар, местните конкуренти и кои ключови думи носят трафик именно в нашия регион.
+      </p>
+      <p class="text-white/60 text-sm leading-relaxed">
+        За клиенти от цяла България — процесът е изцяло дистанционен и работи без разлика. Консултация по видео, дизайн в споделен файл, предаване онлайн.
+      </p>
+      <div class="flex flex-col gap-0 mt-2">
+        {[
+          { label: "Лична среща", val: "Бургас — по уговорка" },
+          { label: "Дистанционна работа", val: "Цяла България" },
+          { label: "Отговор на запитване", val: "До 24 часа" },
+          { label: "Консултация", val: "Безплатна, без ангажимент" },
+        ].map(r => (
+          <div class="flex justify-between items-center py-3 border-b border-white/10 gap-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-white/45">{r.label}</span>
+            <span class="text-sm font-semibold text-white text-right">{r.val}</span>
+          </div>
+        ))}
+      </div>
+      <a href="/contact" class="self-start bg-yellow text-ink font-bold text-sm px-7 py-4 uppercase tracking-wide hover:bg-yellow-dark transition-colors mt-2">
+        Свържете се →
+      </a>
+    </div>
+  </section>
+
+  <!-- 07 · Пакети и цени -->
   <section id="paketi" class="scroll-mt-14 bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
-      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">06 · Пакети и цени</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">07 · Пакети и цени</span>
     </div>
     <div class="px-8 py-10 max-w-3xl">
       <h2 class="font-bold text-2xl md:text-3xl tracking-tight text-ink mb-3">
@@ -513,7 +552,7 @@ const steps = [
     </div>
   </section>
 
-  <!-- 07 · Поддръжка след пускане -->
+  <!-- 08 · Поддръжка след пускане -->
   <section class="bg-ink border-b-2 border-ink">
     <div class="border-b-2 border-white/10 px-8 py-5">
       <span class="font-mono text-xs uppercase tracking-widest text-yellow font-bold">07 · След пускането</span>
@@ -549,10 +588,10 @@ const steps = [
     </div>
   </section>
 
-  <!-- 08 · Въпроси -->
+  <!-- 09 · Въпроси -->
   <section class="bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
-      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">08 · Въпроси</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">09 · Въпроси</span>
     </div>
     <div class="divide-y-2 divide-ink">
       {[
