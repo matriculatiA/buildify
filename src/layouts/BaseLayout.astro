@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 
 const navLinks = [
-  { href: '/websites',  label: 'Уебсайтове' },
+  { href: '/websites',  label: 'Уеб дизайн' },
   { href: '/plugins',   label: 'Плъгини'    },
   { href: '/ai-bots',   label: 'AI ботове'  },
   { href: '/blog',      label: 'Блог'       },
@@ -111,7 +111,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
           href="/contact"
           class="flex items-center px-4 md:px-6 bg-yellow text-ink text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-yellow-dark transition-colors"
         >
-          <span class="hidden sm:inline">Консултация </span>→
+          <span class="hidden sm:inline">Безплатна консултация </span>→
         </a>
         <!-- Hamburger - mobile only -->
         <button
@@ -165,7 +165,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
         <p class="text-xs font-bold uppercase tracking-widest text-white/30 mb-5">Услуги</p>
         <ul class="space-y-3">
           {[
-            ['Уебсайтове', '/websites'],
+            ['Уеб дизайн', '/websites'],
             ['AI ботове',  '/ai-bots'],
             ['Плъгини',    '/plugins'],
           ].map(([label, href]) => (
