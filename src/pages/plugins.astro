@@ -133,14 +133,32 @@ const examples = [
 
     .tp-demo .wc { max-width: 360px; width: 100%; }
 
+    @media (min-width: 769px) {
+      .mobile-carousel { display: none; }
+    }
     @media (max-width: 768px) {
-      .tab-panel.active { grid-template-columns: 1fr; min-height: auto; }
-      .tp-text { order: 1; padding: 32px 24px; border-bottom: 2px solid #111; }
-      .tp-demo { order: 2; padding: 32px 24px; border-right: none; background: #f8f8f8 !important; }
-      .tp-demo .wc { max-width: 100%; }
-      .tp-num { font-size: 3.5rem; }
-      .tp-name { font-size: 18px; }
-      .tab-btn { padding: 12px 16px; font-size: 9px; }
+      .tab-nav, .tab-panel, .tab-panel.active { display: none !important; }
+      .mobile-carousel { display: block; }
+
+      .mc-info { padding: 28px 24px 22px; background: #f0ede6; border-bottom: 2px solid #111; min-height: 168px; }
+      .mc-num  { font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; color: #ddd8cf; line-height: 1; display: block; margin-bottom: 8px; }
+      .mc-name { font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: .03em; color: #111; margin-bottom: 10px; }
+      .mc-desc { font-size: 13px; line-height: 1.7; color: #666; margin-bottom: 14px; }
+      .mc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+      .mc-tag  { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 3px 9px; border: 1.5px solid #bbb; color: #555; background: white; }
+
+      .mc-wrap  { overflow: hidden; background: #e8e4dc; padding: 28px 0; position: relative; }
+      .mc-track { display: flex; gap: 16px; padding: 0 44px; transition: transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94); will-change: transform; }
+      .mc-slide { flex-shrink: 0; width: calc(100vw - 88px); }
+      .mc-slide .wc { width: 100%; max-width: 100%; }
+
+      .mc-footer { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: #111; }
+      .mc-btn { width: 44px; height: 44px; border: 2px solid #f5e642; background: transparent; color: #f5e642; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700; transition: background .15s, color .15s; font-family: 'Space Mono', monospace; }
+      .mc-btn:not(:disabled):active { background: #f5e642; color: #111; }
+      .mc-btn:disabled { opacity: 0.2; cursor: default; }
+      .mc-dots { display: flex; gap: 8px; align-items: center; }
+      .mc-dot  { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.22); border: none; padding: 0; cursor: pointer; transition: all .25s ease; }
+      .mc-dot.active { background: #f5e642; width: 24px; border-radius: 3.5px; }
     }
 
     .wc {
@@ -646,8 +664,64 @@ const examples = [
       </div>`;
     }).join('');
 
-    document.getElementById('plugin-tabs').innerHTML =
-      `<div class="tab-nav">${tabNav}</div>${panels}`;
+    const isMobile = window.innerWidth <= 768;
+
+    if (!isMobile) {
+      // ── DESKTOP: tab nav + panels ──────────────────
+      document.getElementById('plugin-tabs').innerHTML =
+        `<div class="tab-nav">${tabNav}</div>${panels}`;
+    } else {
+      // ── MOBILE: peek carousel ──────────────────────
+      const mcInfoHtml = (i) => {
+        const m = meta[i];
+        return `<span class="mc-num">${m.num}</span><div class="mc-name">${m.name}</div><div class="mc-desc">${m.desc}</div><div class="mc-tags">${m.tags.map(t=>`<span class="mc-tag">${t}</span>`).join('')}</div>`;
+      };
+      const mcSlides = widgets.map((w,i)=>`<div class="mc-slide" data-idx="${i}">${w}</div>`).join('');
+      const mcDots   = meta.map((_,i)=>`<button class="mc-dot${i===0?' active':''}" onclick="mcGoTo(${i})"></button>`).join('');
+
+      document.getElementById('plugin-tabs').innerHTML = `
+        <div class="mobile-carousel">
+          <div class="mc-info" id="mc-info">${mcInfoHtml(0)}</div>
+          <div class="mc-wrap" id="mc-wrap">
+            <div class="mc-track" id="mc-track">${mcSlides}</div>
+          </div>
+          <div class="mc-footer">
+            <button class="mc-btn" id="mc-prev" onclick="mcPrev()" disabled>&#8592;</button>
+            <div class="mc-dots">${mcDots}</div>
+            <button class="mc-btn" id="mc-next" onclick="mcNext()">&#8594;</button>
+          </div>
+        </div>`;
+
+      let mcCur = 0;
+      function mcGoTo(i) {
+        mcCur = i;
+        const wrap  = document.getElementById('mc-wrap');
+        const track = document.getElementById('mc-track');
+        if (track && wrap) track.style.transform = `translateX(-${i * (wrap.offsetWidth - 72)}px)`;
+        const info = document.getElementById('mc-info');
+        if (info) info.innerHTML = mcInfoHtml(i);
+        document.querySelectorAll('.mc-dot').forEach((d,j) => d.classList.toggle('active', j===i));
+        const prev = document.getElementById('mc-prev');
+        const next = document.getElementById('mc-next');
+        if (prev) prev.disabled = i === 0;
+        if (next) next.disabled = i === meta.length - 1;
+      }
+      function mcPrev() { if (mcCur > 0) mcGoTo(mcCur - 1); }
+      function mcNext() { if (mcCur < meta.length - 1) mcGoTo(mcCur + 1); }
+
+      // Touch/swipe support
+      let mcTouchX = 0;
+      const mcWrapEl = document.getElementById('mc-wrap');
+      if (mcWrapEl) {
+        mcWrapEl.addEventListener('touchstart', e => { mcTouchX = e.touches[0].clientX; }, { passive: true });
+        mcWrapEl.addEventListener('touchend',   e => {
+          const diff = mcTouchX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) diff > 0 ? mcNext() : mcPrev();
+        });
+      }
+
+      window.mcGoTo=mcGoTo; window.mcPrev=mcPrev; window.mcNext=mcNext;
+    }
 
     initBook(); calcM(); calcBMI(); calcUtil();
     window.calcM=calcM; window.calcBMI=calcBMI; window.calcUtil=calcUtil;
