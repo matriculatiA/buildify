@@ -103,20 +103,26 @@ const examples = [
   </section>
 
   <style is:global>
-    /* ── TAB NAV ─────────────────────────────────── */
-    .tab-nav { display: flex; overflow-x: auto; border-bottom: 2px solid #111; background: #f0ede6; scrollbar-width: none; }
-    .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { flex-shrink: 0; padding: 16px 24px; border: none; border-right: 2px solid #111; background: transparent; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #999; transition: all .15s; white-space: nowrap; }
-    .tab-btn:hover { color: #111; background: #e8e4dc; }
-    .tab-btn.active { background: #111; color: #f5e642; }
-    .tab-btn:last-child { border-right: none; }
+    /* ── SIDEBAR LAYOUT ─────────────────────────── */
+    .tab-layout { display: grid; grid-template-columns: 220px 1fr; }
+    .tab-sidebar { background: #111; border-right: 2px solid #111; display: flex; flex-direction: column; }
+    .tab-content { position: relative; }
+
+    .tab-btn { display: flex; flex-direction: column; gap: 4px; padding: 18px 20px 18px 22px; border: none; border-bottom: 1px solid rgba(255,255,255,.07); border-left: 3px solid transparent; background: transparent; cursor: pointer; text-align: left; width: 100%; transition: background .15s; }
+    .tab-btn:hover { background: rgba(255,255,255,.05); }
+    .tab-btn.active { background: #1c1c1c; border-left-color: #f5e642; }
+    .tab-btn-num  { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.22); transition: color .15s; }
+    .tab-btn-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: rgba(255,255,255,.38); line-height: 1.35; transition: color .15s; }
+    .tab-btn.active .tab-btn-num  { color: #f5e642; }
+    .tab-btn.active .tab-btn-name { color: white; }
+    .tab-btn:hover .tab-btn-name  { color: rgba(255,255,255,.65); }
 
     /* ── TAB PANELS ──────────────────────────────── */
     .tab-panel { display: none; }
-    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; }
+    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; }
 
     .tp-demo { display: flex; align-items: center; justify-content: center; padding: 52px 44px; border-right: 2px solid #111; }
-    .tp-text { display: flex; flex-direction: column; justify-content: center; padding: 52px 56px; background: #f0ede6; }
+    .tp-text { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; background: #f0ede6; }
 
     .tab-panel[data-panel="0"] .tp-demo { background: #edf2fc; }
     .tab-panel[data-panel="1"] .tp-demo { background: #eef5ef; }
@@ -125,11 +131,13 @@ const examples = [
     .tab-panel[data-panel="4"] .tp-demo { background: #fefce6; }
     .tab-panel[data-panel="5"] .tp-demo { background: #f0ede6; }
 
-    .tp-num { font-family: 'Space Mono', monospace; font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 20px; display: block; color: #ddd8cf; letter-spacing: -.02em; }
-    .tp-name { font-weight: 800; font-size: 22px; line-height: 1.15; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .03em; color: #111; }
-    .tp-desc { font-size: 14px; line-height: 1.75; margin-bottom: 24px; max-width: 300px; color: #666; }
-    .tp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tp-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 4px 10px; border: 1.5px solid #bbb; color: #555; background: white; }
+    .tp-num  { font-family: 'Space Mono', monospace; font-size: 4rem; font-weight: 700; line-height: 1; margin-bottom: 16px; display: block; color: #ddd8cf; letter-spacing: -.02em; }
+    .tp-name { font-weight: 800; font-size: 20px; line-height: 1.15; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .03em; color: #111; }
+    .tp-desc { font-size: 14px; line-height: 1.75; margin-bottom: 20px; max-width: 280px; color: #666; }
+    .tp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+    .tp-tag  { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 4px 10px; border: 1.5px solid #bbb; color: #555; background: white; }
+    .tp-cta  { display: inline-flex; align-items: center; gap: 6px; background: #111; color: #f5e642; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 12px 20px; text-decoration: none; transition: background .15s; width: fit-content; }
+    .tp-cta:hover { background: #2a2a2a; }
 
     .tp-demo .wc { max-width: 360px; width: 100%; }
 
@@ -649,7 +657,7 @@ const examples = [
     ];
 
     const tabNav = meta.map((m,i) =>
-      `<button class="tab-btn${i===0?' active':''}" onclick="switchTab(${i})">${m.num} · ${m.name}</button>`
+      `<button class="tab-btn${i===0?' active':''}" onclick="switchTab(${i})"><span class="tab-btn-num">${m.num}</span><span class="tab-btn-name">${m.name}</span></button>`
     ).join('');
 
     const panels = widgets.map((w, i) => {
@@ -662,6 +670,7 @@ const examples = [
           <div class="tp-name">${m.name}</div>
           <div class="tp-desc">${m.desc}</div>
           <div class="tp-tags">${tags}</div>
+          <a href="/contact" class="tp-cta">Поискай оферта →</a>
         </div>
       </div>`;
     }).join('');
@@ -669,9 +678,9 @@ const examples = [
     const isMobile = window.innerWidth <= 768;
 
     if (!isMobile) {
-      // ── DESKTOP: tab nav + panels ──────────────────
+      // ── DESKTOP: sidebar + panels ──────────────────
       document.getElementById('plugin-tabs').innerHTML =
-        `<div class="tab-nav">${tabNav}</div>${panels}`;
+        `<div class="tab-layout"><div class="tab-sidebar">${tabNav}</div><div class="tab-content">${panels}</div></div>`;
     } else {
       // ── MOBILE: peek carousel ──────────────────────
       const mcInfoHtml = (i) => {
