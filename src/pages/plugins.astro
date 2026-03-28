@@ -95,53 +95,52 @@ const examples = [
   </section>
 
   <!-- LIVE DEMOS -->
-  <section class="border-b-2 border-ink bg-cream">
+  <section class="border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
       <span class="font-mono text-xs uppercase tracking-widest font-bold text-muted">02 · Демо плъгини — пробвай ги сега</span>
     </div>
-    <div class="px-6 md:px-10 py-10" id="wave-grid"></div>
+    <div id="plugin-tabs"></div>
   </section>
 
   <style is:global>
-    #wave-grid { display: flex; flex-direction: column; }
+    /* ── TAB NAV ─────────────────────────────────── */
+    .tab-nav { display: flex; overflow-x: auto; border-bottom: 2px solid #111; background: #f0ede6; scrollbar-width: none; }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn { flex-shrink: 0; padding: 16px 24px; border: none; border-right: 2px solid #111; background: transparent; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #999; transition: all .15s; white-space: nowrap; }
+    .tab-btn:hover { color: #111; background: #e8e4dc; }
+    .tab-btn.active { background: #111; color: #f5e642; }
+    .tab-btn:last-child { border-right: none; }
 
-    .ps { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 2px solid #111; min-height: 520px; }
-    .ps:last-child { border-bottom: none; }
-    .ps-demo { display: flex; align-items: center; justify-content: center; padding: 52px 44px; }
-    .ps-text { display: flex; flex-direction: column; justify-content: center; padding: 52px 56px; }
+    /* ── TAB PANELS ──────────────────────────────── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; }
 
-    .ps:nth-child(odd)  .ps-demo { background: white; order: 1; border-right: 2px solid #111; }
-    .ps:nth-child(odd)  .ps-text { background: #f0ede6; order: 2; }
-    .ps:nth-child(even) .ps-demo { background: #1a1a1a; order: 2; border-left: 2px solid #333; }
-    .ps:nth-child(even) .ps-text { background: #111; order: 1; }
+    .tp-demo { display: flex; align-items: center; justify-content: center; padding: 52px 44px; border-right: 2px solid #111; }
+    .tp-text { display: flex; flex-direction: column; justify-content: center; padding: 52px 56px; background: #f0ede6; }
 
-    .ps-num { font-family: 'Space Mono', monospace; font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 20px; display: block; letter-spacing: -.02em; }
-    .ps:nth-child(odd)  .ps-num  { color: #ddd8cf; }
-    .ps:nth-child(even) .ps-num  { color: #f5e642; }
+    .tab-panel[data-panel="0"] .tp-demo { background: #edf2fc; }
+    .tab-panel[data-panel="1"] .tp-demo { background: #eef5ef; }
+    .tab-panel[data-panel="2"] .tp-demo { background: #eeeafb; }
+    .tab-panel[data-panel="3"] .tp-demo { background: #faf5f0; }
+    .tab-panel[data-panel="4"] .tp-demo { background: #fefce6; }
+    .tab-panel[data-panel="5"] .tp-demo { background: #f0ede6; }
 
-    .ps-name { font-weight: 800; font-size: 20px; line-height: 1.15; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .03em; }
-    .ps:nth-child(odd)  .ps-name { color: #111; }
-    .ps:nth-child(even) .ps-name { color: white; }
+    .tp-num { font-family: 'Space Mono', monospace; font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 20px; display: block; color: #ddd8cf; letter-spacing: -.02em; }
+    .tp-name { font-weight: 800; font-size: 22px; line-height: 1.15; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .03em; color: #111; }
+    .tp-desc { font-size: 14px; line-height: 1.75; margin-bottom: 24px; max-width: 300px; color: #666; }
+    .tp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tp-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 4px 10px; border: 1.5px solid #bbb; color: #555; background: white; }
 
-    .ps-desc { font-size: 14px; line-height: 1.75; margin-bottom: 24px; max-width: 300px; }
-    .ps:nth-child(odd)  .ps-desc { color: #666; }
-    .ps:nth-child(even) .ps-desc { color: rgba(255,255,255,.45); }
-
-    .ps-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .ps-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 4px 10px; border: 1.5px solid; }
-    .ps:nth-child(odd)  .ps-tag { color: #555; border-color: #bbb; background: white; }
-    .ps:nth-child(even) .ps-tag { color: #f5e642; border-color: rgba(245,230,66,.35); background: transparent; }
-
-    .ps .wc { max-width: 360px; width: 100%; height: 460px; }
-    .ps:nth-child(even) .wc { box-shadow: 5px 5px 0 #f5e642; }
+    .tp-demo .wc { max-width: 360px; width: 100%; }
 
     @media (max-width: 768px) {
-      .ps { grid-template-columns: 1fr; min-height: auto; }
-      .ps .ps-text { order: 1 !important; padding: 36px 24px; border: none !important; }
-      .ps .ps-demo { order: 2 !important; padding: 0 24px 36px; border: none !important; background: white !important; }
-      .ps .wc { max-width: 100%; }
-      .ps-num { font-size: 3.5rem; }
-      .ps-name { font-size: 17px; }
+      .tab-panel.active { grid-template-columns: 1fr; min-height: auto; }
+      .tp-text { order: 1; padding: 32px 24px; border-bottom: 2px solid #111; }
+      .tp-demo { order: 2; padding: 32px 24px; border-right: none; background: #f8f8f8 !important; }
+      .tp-demo .wc { max-width: 100%; }
+      .tp-num { font-size: 3.5rem; }
+      .tp-name { font-size: 18px; }
+      .tab-btn { padding: 12px 16px; font-size: 9px; }
     }
 
     .wc {
@@ -459,11 +458,14 @@ const examples = [
 
 
 
+  function switchTab(idx) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+    document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('wave-grid').innerHTML = `
-    <div class="ps">
-      <div class="ps-demo">
-    <div class="wc wc-01">
+    const widgets = [
+      /* 01 */ `<div class="wc wc-01">
       <div class="wc-header">
         <div class="wc-badge">Имоти · Банки</div>
         <div class="wc-title">Ипотечен калкулатор</div>
@@ -488,19 +490,8 @@ const examples = [
           <div class="m-stat"><div class="m-sv" id="mltv">80%</div><div class="m-sl">LTV</div></div>
         </div>
       </div>
-    </div>
-      </div>
-      <div class="ps-text">
-        <span class="ps-num">01</span>
-        <div class="ps-name">Ипотечен калкулатор</div>
-        <div class="ps-desc">Клиентът вижда месечната вноска преди да ви потърси — идва информиран и готов за разговор.</div>
-        <div class="ps-tags"><span class="ps-tag">Имоти</span><span class="ps-tag">Банки</span><span class="ps-tag">Строители</span></div>
-      </div>
-    </div>
-
-    <div class="ps">
-      <div class="ps-demo">
-    <div class="wc wc-02">
+    </div>`,
+      /* 02 */ `<div class="wc wc-02">
       <div class="wc-header">
         <div class="wc-title">Резервационна система</div>
         <div class="wc-badge">Онлайн</div>
@@ -530,19 +521,8 @@ const examples = [
         </div>
         <div id="bk-succ"></div>
       </div>
-    </div>
-      </div>
-      <div class="ps-text">
-        <span class="ps-num">02</span>
-        <div class="ps-name">Резервационна система</div>
-        <div class="ps-desc">Записвания онлайн 24/7 — без телефонни обаждания, без пропуснати часове.</div>
-        <div class="ps-tags"><span class="ps-tag">Лекари</span><span class="ps-tag">Ресторанти</span><span class="ps-tag">Услуги</span></div>
-      </div>
-    </div>
-
-    <div class="ps">
-      <div class="ps-demo">
-    <div class="wc wc-03">
+    </div>`,
+      /* 03 */ `<div class="wc wc-03">
       <div class="wc-header">
         <div class="chat-av">🤖</div>
         <div>
@@ -563,19 +543,8 @@ const examples = [
         <input type="text" id="chat-inp" placeholder="Напишете съобщение..." onkeydown="if(event.key==='Enter')sendChatDemo()"/>
         <button onclick="sendChatDemo()">➤</button>
       </div>
-    </div>
-      </div>
-      <div class="ps-text">
-        <span class="ps-num">03</span>
-        <div class="ps-name">AI чатбот</div>
-        <div class="ps-desc">Отговаря вместо вас — по всяко време, с вашия тон и вашите отговори.</div>
-        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">24/7</span></div>
-      </div>
-    </div>
-
-    <div class="ps">
-      <div class="ps-demo">
-    <div class="wc wc-04">
+    </div>`,
+      /* 04 */ `<div class="wc wc-04">
       <div class="wc-header">
         <div class="wc-badge">Здраве · Фитнес</div>
         <div class="wc-title">BMI Калкулатор</div>
@@ -583,7 +552,7 @@ const examples = [
       <div class="wc-body">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div><span class="wc-lbl">Ръст (см)</span><input class="wc-inp" type="number" id="bmi-h" value="175" oninput="calcBMI()"/></div>
-          <div><span class="wc-lbl">Тегло (кг)</span><input class="wc-inp" type="number" id="bmi-w" value="75"  oninput="calcBMI()"/></div>
+          <div><span class="wc-lbl">Тегло (кг)</span><input class="wc-inp" type="number" id="bmi-w" value="75" oninput="calcBMI()"/></div>
         </div>
         <div class="wc-result" id="bmi-result" style="background:#c47a5222">
           <div class="wc-rval" id="bmi-rval-c" style="color:#c47a52;font-size:30px"><span id="bmi-val">24.5</span></div>
@@ -594,19 +563,8 @@ const examples = [
         <div class="bmi-ideal" id="bmi-ideal">Идеално тегло: 62-80 кг</div>
         <div class="bmi-advice" id="bmi-advice">Отлично! Поддържай здравословен начин на живот.</div>
       </div>
-    </div>
-      </div>
-      <div class="ps-text">
-        <span class="ps-num">04</span>
-        <div class="ps-name">BMI Калкулатор</div>
-        <div class="ps-desc">Персонален резултат за всеки посетител — ангажира и насочва към следваща стъпка.</div>
-        <div class="ps-tags"><span class="ps-tag">Фитнес</span><span class="ps-tag">Здраве</span><span class="ps-tag">Хранене</span></div>
-      </div>
-    </div>
-
-    <div class="ps">
-      <div class="ps-demo">
-    <div class="wc wc-05">
+    </div>`,
+      /* 05 */ `<div class="wc wc-05">
       <div class="wc-header">
         <div class="wc-title">Комунален калкулатор</div>
         <div class="wc-badge">Ток · Вода · Гориво</div>
@@ -630,19 +588,8 @@ const examples = [
         </div>
         <div class="ut-tip" id="ut-tip">10 kWh/ден x 0.35 лв. = 3.50 лв./ден</div>
       </div>
-    </div>
-      </div>
-      <div class="ps-text">
-        <span class="ps-num">05</span>
-        <div class="ps-name">Комунален калкулатор</div>
-        <div class="ps-desc">Помага на клиента да планира разходите — доверие от първата секунда.</div>
-        <div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Имоти</span><span class="ps-tag">Комунални</span></div>
-      </div>
-    </div>
-
-    <div class="ps">
-      <div class="ps-demo">
-    <div class="wc wc-06">
+    </div>`,
+      /* 06 */ `<div class="wc wc-06">
       <div class="wc-header">
         <div class="wc-badge">Безплатна консултация</div>
         <div class="wc-title">Пишете ни</div>
@@ -669,21 +616,44 @@ const examples = [
           <button class="cf-reset" onclick="resetForm()">Ново съобщение</button>
         </div>
       </div>
-    </div>
-      </div>
-      <div class="ps-text">
-        <span class="ps-num">06</span>
-        <div class="ps-name">Контактна форма</div>
-        <div class="ps-desc">Структурирано запитване с точно нужното — по-малко имейли напред-назад.</div>
-        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">Лийдове</span></div>
-      </div>
-    </div>
-    `;
+    </div>`,
+    ];
+
+    const meta = [
+      { num:'01', name:'Ипотечен калкулатор', desc:'Клиентът вижда месечната вноска преди да ви потърси — идва информиран и готов за разговор.', tags:['Имоти','Банки','Строители'] },
+      { num:'02', name:'Резервационна система', desc:'Записвания онлайн 24/7 — без телефонни обаждания, без пропуснати часове.', tags:['Лекари','Ресторанти','Услуги'] },
+      { num:'03', name:'AI чатбот', desc:'Отговаря вместо вас — по всяко време, с вашия тон и вашите отговори.', tags:['Всеки бизнес','24/7'] },
+      { num:'04', name:'BMI калкулатор', desc:'Персонален резултат за всеки посетител — ангажира и насочва към следваща стъпка.', tags:['Фитнес','Здраве','Хранене'] },
+      { num:'05', name:'Комунален калкулатор', desc:'Помага на клиента да планира разходите — доверие от първата секунда.', tags:['Енергия','Имоти','Комунални'] },
+      { num:'06', name:'Контактна форма', desc:'Структурирано запитване с точно нужното — по-малко имейли напред-назад.', tags:['Всеки бизнес','Лийдове'] },
+    ];
+
+    const tabNav = meta.map((m,i) =>
+      `<button class="tab-btn${i===0?' active':''}" onclick="switchTab(${i})">${m.num} · ${m.name}</button>`
+    ).join('');
+
+    const panels = widgets.map((w, i) => {
+      const m = meta[i];
+      const tags = m.tags.map(t=>`<span class="tp-tag">${t}</span>`).join('');
+      return `<div class="tab-panel${i===0?' active':''}" data-panel="${i}">
+        <div class="tp-demo">${w}</div>
+        <div class="tp-text">
+          <span class="tp-num">${m.num}</span>
+          <div class="tp-name">${m.name}</div>
+          <div class="tp-desc">${m.desc}</div>
+          <div class="tp-tags">${tags}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    document.getElementById('plugin-tabs').innerHTML =
+      `<div class="tab-nav">${tabNav}</div>${panels}`;
 
     initBook(); calcM(); calcBMI(); calcUtil();
     window.calcM=calcM; window.calcBMI=calcBMI; window.calcUtil=calcUtil;
     window.pickTime=pickTime; window.confirmBk=confirmBk; window.bkPrevWeek=bkPrevWeek; window.bkNextWeek=bkNextWeek; window.bkSelectDay=bkSelectDay;
     window.sendChatDemo=sendChatDemo; window.submitForm=submitForm; window.resetForm=resetForm;
+    window.switchTab=switchTab;
   });
   </script>
 
