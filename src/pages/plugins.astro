@@ -120,13 +120,12 @@ const examples = [
       .ps:nth-child(6) { margin-top: 24px; }
     }
     .ps { display: flex; flex-direction: column; }
-    .ps .wc { border-top: none; border-radius: 0 0 16px 16px; }
-    .ps-ctx { background: #f5e642; border: 2px solid #111; border-bottom: none; padding: 16px 20px; display: flex; align-items: center; gap: 20px; border-radius: 16px 16px 0 0; }
-    .ps-num { font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 700; color: #111; line-height: 1; flex-shrink: 0; padding-right: 20px; border-right: 2px solid #111; }
-    .ps-name { font-weight: 800; font-size: 13px; color: #111; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
-    .ps-desc { display: none; }
+    .ps-ctx { padding-bottom: 14px; border-bottom: 2px solid #111; margin-bottom: 0; }
+    .ps-num { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #94a3b8; margin-bottom: 5px; display: block; }
+    .ps-name { font-weight: 800; font-size: 15px; color: #111; line-height: 1.2; margin-bottom: 5px; }
+    .ps-desc { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 8px; }
     .ps-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .ps-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #111; background: rgba(0,0,0,.1); border: 1px solid rgba(0,0,0,.2); padding: 2px 8px; }
+    .ps-tag { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #555; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 8px; }
 
     .wc {
       border-radius: 16px;
@@ -447,8 +446,10 @@ const examples = [
     document.getElementById('wave-grid').innerHTML = `
     <div class="ps">
       <div class="ps-ctx">
-        <div class="ps-num">#01</div>
-        <div><div class="ps-name">Ипотечен калкулатор</div><div class="ps-tags"><span class="ps-tag">Имоти</span><span class="ps-tag">Банки</span><span class="ps-tag">Строители</span></div></div>
+        <span class="ps-num">Плъгин 01</span>
+        <div class="ps-name">Ипотечен калкулатор</div>
+        <div class="ps-desc">Клиентът изчислява вноската сам — идва при теб вече информиран.</div>
+        <div class="ps-tags"><span class="ps-tag">Имоти</span><span class="ps-tag">Банки</span><span class="ps-tag">Строители</span></div>
       </div>
     <div class="wc wc-01">
       <div class="wc-header">
@@ -480,8 +481,10 @@ const examples = [
 
     <div class="ps">
       <div class="ps-ctx">
-        <div class="ps-num">#02</div>
-        <div><div class="ps-name">Резервационна система</div><div class="ps-tags"><span class="ps-tag">Лекари</span><span class="ps-tag">Ресторанти</span><span class="ps-tag">Услуги</span></div></div>
+        <span class="ps-num">Плъгин 02</span>
+        <div class="ps-name">Резервационна система</div>
+        <div class="ps-desc">Онлайн записване 24/7 — без телефонни обаждания.</div>
+        <div class="ps-tags"><span class="ps-tag">Лекари</span><span class="ps-tag">Ресторанти</span><span class="ps-tag">Услуги</span></div>
       </div>
     <div class="wc wc-02">
       <div class="wc-header">
@@ -518,8 +521,10 @@ const examples = [
 
     <div class="ps">
       <div class="ps-ctx">
-        <div class="ps-num">#03</div>
-        <div><div class="ps-name">AI чатбот</div><div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">24/7</span></div></div>
+        <span class="ps-num">Плъгин 03</span>
+        <div class="ps-name">AI чатбот</div>
+        <div class="ps-desc">Отговаря на въпроси на клиентите денонощно — без теб.</div>
+        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">24/7</span></div>
       </div>
     <div class="wc wc-03">
       <div class="wc-header">
@@ -547,8 +552,10 @@ const examples = [
 
     <div class="ps">
       <div class="ps-ctx">
-        <div class="ps-num">#04</div>
-        <div><div class="ps-name">BMI Калкулатор</div><div class="ps-tags"><span class="ps-tag">Фитнес</span><span class="ps-tag">Здраве</span><span class="ps-tag">Хранене</span></div></div>
+        <span class="ps-num">Плъгин 04</span>
+        <div class="ps-name">BMI Калкулатор</div>
+        <div class="ps-desc">Ангажира посетителя с персонален резултат — насочва към следваща стъпка.</div>
+        <div class="ps-tags"><span class="ps-tag">Фитнес</span><span class="ps-tag">Здраве</span><span class="ps-tag">Хранене</span></div>
       </div>
     <div class="wc wc-04">
       <div class="wc-header">
@@ -574,8 +581,10 @@ const examples = [
 
     <div class="ps">
       <div class="ps-ctx">
-        <div class="ps-num">#05</div>
-        <div><div class="ps-name">Комунален калкулатор</div><div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Имоти</span><span class="ps-tag">Комунални</span></div></div>
+        <span class="ps-num">Плъгин 05</span>
+        <div class="ps-name">Комунален калкулатор</div>
+        <div class="ps-desc">Помага на клиента да изчисли разходите — изгражда доверие от първата секунда.</div>
+        <div class="ps-tags"><span class="ps-tag">Енергия</span><span class="ps-tag">Недвижими имоти</span><span class="ps-tag">Комунални</span></div>
       </div>
     <div class="wc wc-05">
       <div class="wc-header">
@@ -606,8 +615,10 @@ const examples = [
 
     <div class="ps">
       <div class="ps-ctx">
-        <div class="ps-num">#06</div>
-        <div><div class="ps-name">Контактна форма</div><div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">Лийдове</span></div></div>
+        <span class="ps-num">Плъгин 06</span>
+        <div class="ps-name">Контактна форма</div>
+        <div class="ps-desc">Структурирано запитване — получаваш точно нужното преди да отговориш.</div>
+        <div class="ps-tags"><span class="ps-tag">Всеки бизнес</span><span class="ps-tag">Лийдове</span></div>
       </div>
     <div class="wc wc-06">
       <div class="wc-header">
