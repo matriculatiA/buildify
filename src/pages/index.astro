@@ -61,11 +61,14 @@ const services = [
       </div>
     </div>
 
-    <!-- RIGHT cream — desktop only -->
-    <div class="hidden md:flex bg-cream flex-col border-t-2 md:border-t-0 border-ink">
+    <!-- RIGHT image — desktop only -->
+    <div class="hidden md:flex flex-col border-t-2 md:border-t-0 border-ink relative overflow-hidden"
+         style="background-image: url('/images/hero-bg.jpg'); background-size: cover; background-position: center;">
+      <!-- overlay -->
+      <div class="absolute inset-0 bg-ink/75"></div>
 
       <!-- Stats -->
-      <div class="grid grid-cols-2 border-b-2 border-ink divide-x-2 divide-y-2 divide-ink">
+      <div class="relative z-10 grid grid-cols-2 border-b-2 border-white/15 divide-x-2 divide-y-2 divide-white/15">
         {[
           { val: '7+',   label: 'Години опит в уеб разработка' },
           { val: '48ч',  label: 'Отговор на запитване' },
@@ -73,25 +76,25 @@ const services = [
           { val: 'SEO',  label: 'Вградено в кода — не купено отделно' },
         ].map(s => (
           <div class="p-8">
-            <span class="font-mono font-bold text-3xl text-ink block">{s.val}</span>
-            <span class="text-xs uppercase tracking-widest text-muted font-semibold block mt-1">{s.label}</span>
+            <span class="font-mono font-bold text-3xl text-yellow block">{s.val}</span>
+            <span class="text-xs uppercase tracking-widest text-white/50 font-semibold block mt-1">{s.label}</span>
           </div>
         ))}
       </div>
 
       <!-- Services list -->
-      <div class="flex flex-col divide-y-2 divide-ink flex-1">
+      <div class="relative z-10 flex flex-col divide-y-2 divide-white/15 flex-1">
         {services.map(s => (
           <a href={s.href}
-             class="group flex items-center justify-between px-10 py-5 hover:bg-ink transition-colors duration-200 flex-1">
+             class="group flex items-center justify-between px-10 py-5 hover:bg-yellow/10 transition-colors duration-200 flex-1">
             <div class="flex items-center gap-4">
-              <span class="font-mono text-xs text-muted group-hover:text-white/30 transition-colors w-6 shrink-0">{s.num}</span>
+              <span class="font-mono text-xs text-white/30 group-hover:text-white/50 transition-colors w-6 shrink-0">{s.num}</span>
               <div>
-                <span class="font-bold text-lg uppercase tracking-tight group-hover:text-yellow transition-colors block">{s.title}</span>
-                <span class="text-xs text-muted group-hover:text-white/40 transition-colors mt-0.5 block">{s.desc}</span>
+                <span class="font-bold text-lg uppercase tracking-tight text-white group-hover:text-yellow transition-colors block">{s.title}</span>
+                <span class="text-xs text-white/40 group-hover:text-white/60 transition-colors mt-0.5 block">{s.desc}</span>
               </div>
             </div>
-            <span class="text-xl text-muted group-hover:text-yellow group-hover:translate-x-1 transition-all duration-200 shrink-0">→</span>
+            <span class="text-xl text-white/30 group-hover:text-yellow group-hover:translate-x-1 transition-all duration-200 shrink-0">→</span>
           </a>
         ))}
       </div>
