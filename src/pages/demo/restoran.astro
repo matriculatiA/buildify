@@ -63,7 +63,7 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <!-- NAV -->
 <nav id="restoran-nav" style="background:rgba(10,20,10,.82);backdrop-filter:blur(12px);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;transition:background .4s,box-shadow .4s,border-color .4s">
   <div style="display:flex;align-items:center;gap:8px">
-    <span style="font-size:22px">🍽</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6h3.5"/><line x1="19.5" y1="13" x2="19.5" y2="22"/></svg>
     <span class="serif" style="color:white;font-size:20px;font-weight:700;font-family:'Playfair Display',serif">Механа Загорето</span>
   </div>
   <div style="display:none;gap:32px" class="nav-links">
@@ -125,13 +125,13 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <div id="info-bar" style="background:var(--gold)" class="reveal">
   <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:0">
     {[
-      ['🕐', 'Работно време', 'Пон–Пет: 11:00–23:00\nСаб–Нед: 11:00–24:00'],
-      ['📍', 'Адрес', 'ул. Витоша 42, Бургас\nдо Морската градина'],
-      ['📞', 'Телефон', '+359 56 123 456\nhello@zagoreto.bg'],
-      ['🅿', 'Паркинг', 'Безплатен паркинг\nза гостите ни'],
-    ].map(([icon, title, info]) => (
+      { svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a0a00" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', title: 'Работно време', info: 'Пон–Пет: 11:00–23:00\nСаб–Нед: 11:00–24:00' },
+      { svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a0a00" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>', title: 'Адрес', info: 'ул. Витоша 42, Бургас\nдо Морската градина' },
+      { svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a0a00" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.07 3.12h3a2 2 0 0 1 2 1.72 12.77 12.77 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.77 12.77 0 0 0 2.81.7A2 2 0 0 1 21 19.92z"/></svg>', title: 'Телефон', info: '+359 56 123 456\nhello@zagoreto.bg' },
+      { svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a0a00" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>', title: 'Паркинг', info: 'Безплатен паркинг\nза гостите ни' },
+    ].map(({ svg, title, info }) => (
       <div style="padding:24px 28px;border-right:1px solid rgba(255,255,255,.3);cursor:default;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='transparent'">
-        <div style="font-size:22px;margin-bottom:8px">{icon}</div>
+        <div style="margin-bottom:8px" set:html={svg} />
         <div style="font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.5);margin-bottom:4px">{title}</div>
         <div style="font-size:13px;color:#1a0a00;line-height:1.5;white-space:pre-line">{info}</div>
       </div>
@@ -150,7 +150,7 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 
     <!-- Tabs -->
     <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:40px" class="reveal">
-      {['🥗 Предястия', '🍲 Основни', '🔥 Скара', '🍷 Вина & Десерти'].map((tab, i) => (
+      {['Предястия', 'Основни ястия', 'Скара', 'Вина & Десерти'].map((tab, i) => (
         <button class={`menu-tab${i===0?' active':''}`} data-tab={i} onclick="switchTab(this)">{tab}</button>
       ))}
     </div>
@@ -288,7 +288,7 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="reveal">
       {[
-        { n: '⭐ 4.9', t: 'Google рейтинг' },
+        { n: '★ 4.9', t: 'Google рейтинг' },
         { n: '1200+', t: 'Отзива' },
         { n: '30г.', t: 'Традиция' },
         { n: '100%', t: 'Домашно готвене' },
