@@ -69,7 +69,7 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 
 <!-- Floating CTA -->
 <a href="#zapis" id="float-cta">
-  📞 Запишете час
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-right:6px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.07 3.12h3a2 2 0 0 1 2 1.72 12.77 12.77 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.77 12.77 0 0 0 2.81.7A2 2 0 0 1 21 19.92z"/></svg>Запишете час
 </a>
 
 <!-- NAV -->
@@ -152,17 +152,17 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));background:#e2e8f0">
       {[
-        { icon: '🔍', title: 'Профилактика',      desc: 'Годишен преглед, почистване на зъбен камък, полиране. Препоръчваме 2 пъти годишно.', price: 'от 40 лв.' },
-        { icon: '🦷', title: 'Лечение на кариес', desc: 'Фотополимерни пломби в цвета на зъба. Безболезнена анестезия. Гаранция 2 години.', price: 'от 80 лв.' },
-        { icon: '⚡', title: 'Избелване',          desc: 'LED технология — до 8 нюанса по-бели за 1 час. Устойчив ефект 2+ години.', price: 'от 280 лв.' },
-        { icon: '👑', title: 'Коронки и мостове',  desc: 'Циркониеви коронки с 10-годишна гаранция. CAD/CAM технология.', price: 'от 350 лв.' },
-        { icon: '📐', title: 'Ортодонция',          desc: 'Брекети и прозрачни Invisalign шини. Индивидуален план за деца и възрастни.', price: 'от 1200 лв.' },
-        { icon: '🔩', title: 'Зъбни импланти',     desc: 'Швейцарски импланти Straumann. Доживотна гаранция. Под 1 час процедура.', price: 'от 1500 лв.' },
+        { icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>', title: 'Профилактика', desc: 'Годишен преглед, почистване на зъбен камък, полиране. Препоръчваме 2 пъти годишно.', price: 'от 40 лв.' },
+        { icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"><path d="M12 2C9 2 7 4 7 7c0 2 .5 3.5 1 5l1 4c.3 1.2 1 2 2 2h2c1 0 1.7-.8 2-2l1-4c.5-1.5 1-3 1-5 0-3-2-5-5-5z"/><line x1="9" y1="12" x2="15" y2="12"/></svg>', title: 'Лечение на кариес', desc: 'Фотополимерни пломби в цвета на зъба. Безболезнена анестезия. Гаранция 2 години.', price: 'от 80 лв.' },
+        { icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>', title: 'Избелване', desc: 'LED технология — до 8 нюанса по-бели за 1 час. Устойчив ефект 2+ години.', price: 'от 280 лв.' },
+        { icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"><path d="M2 4l3 12h14l3-12"/><path d="M6 8h12"/><path d="M4 4h16"/></svg>', title: 'Коронки и мостове', desc: 'Циркониеви коронки с 10-годишна гаранция. CAD/CAM технология.', price: 'от 350 лв.' },
+        { icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/><path d="M8 14v3"/><path d="M12 14v3"/><path d="M16 14v3"/></svg>', title: 'Ортодонция', desc: 'Брекети и прозрачни Invisalign шини. Индивидуален план за деца и възрастни.', price: 'от 1200 лв.' },
+        { icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>', title: 'Зъбни импланти', desc: 'Швейцарски импланти Straumann. Доживотна гаранция. Под 1 час процедура.', price: 'от 1500 лв.' },
       ].map((s, i) => (
         <div class="service-card reveal" style={`transition-delay:${(i%3)*.1}s`}>
           <div class="service-num">{String(i+1).padStart(2,'0')}</div>
           <div style="position:relative;z-index:1">
-            <div style="width:48px;height:48px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px">{s.icon}</div>
+            <div style="width:48px;height:48px;background:var(--light);display:flex;align-items:center;justify-content:center;margin-bottom:18px" set:html={s.icon} />
             <h3 style="font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px">{s.title}</h3>
             <p style="font-size:13px;color:#64748b;line-height:1.75;margin-bottom:20px">{s.desc}</p>
             <div style="display:inline-block;background:var(--light);color:var(--blue);font-size:12px;font-weight:700;padding:5px 14px;letter-spacing:.02em">{s.price}</div>
@@ -226,7 +226,9 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 <section style="background:#f8fafc">
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
     <div class="reveal-left">
-      <div style="width:120px;height:120px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:28px;box-shadow:0 8px 32px rgba(14,165,233,.35)">👩‍⚕️</div>
+      <div style="width:120px;height:120px;background:linear-gradient(135deg,var(--sky),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;box-shadow:0 8px 32px rgba(14,165,233,.35)">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v4"/><path d="M10 13h4"/></svg>
+      </div>
       <span class="tag">За нас</span>
       <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:var(--dark);margin-bottom:20px">Д-р Мария Иванова</h2>
       <p style="color:#475569;line-height:1.8;margin-bottom:16px">
@@ -237,13 +239,13 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
       </p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         {[
-          ['🎓', 'МУ Варна, 2008'],
-          ['🏥', 'Специализация Берлин'],
-          ['🏆', '15г. практика'],
-          ['❤️', '5000+ пациенти'],
-        ].map(([icon, text]) => (
-          <div style="display:flex;gap:10px;align-items:center;background:white;padding:12px 16px;border:1px solid #e2e8f0;transition:border-color .2s,transform .2s" onmouseover="this.style.borderColor='var(--sky)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.transform='translateY(0)'">
-            <span style="font-size:20px">{icon}</span>
+          { text: 'МУ Варна, 2008', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3.33 1.67 8.67 1.67 12 0v-5"/></svg>' },
+          { text: 'Специализация Берлин', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z"/><path d="M8 10.5C4.5 11.5 2 14 2 17v1h20v-1c0-3-2.5-5.5-6-6.5"/><line x1="12" y1="7" x2="12" y2="10"/><line x1="10" y1="8.5" x2="14" y2="8.5"/></svg>' },
+          { text: '15г. практика', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>' },
+          { text: '5000+ пациенти', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
+        ].map(({ svg, text }) => (
+          <div style="display:flex;gap:12px;align-items:center;background:white;padding:12px 16px;border:1px solid #e2e8f0;transition:border-color .2s,transform .2s" onmouseover="this.style.borderColor='var(--sky)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.transform='translateY(0)'">
+            <span style="flex-shrink:0;display:flex" set:html={svg} />
             <span style="font-size:13px;font-weight:600;color:var(--text)">{text}</span>
           </div>
         ))}
