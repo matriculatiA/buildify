@@ -152,10 +152,12 @@ const examples = [
       .mc-slide { flex-shrink: 0; width: calc(100vw - 88px); }
       .mc-slide .wc { width: 100%; max-width: 100%; }
 
-      .mc-footer { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: #111; }
-      .mc-btn { width: 44px; height: 44px; border: 2px solid #f5e642; background: transparent; color: #f5e642; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700; transition: background .15s, color .15s; font-family: 'Space Mono', monospace; }
-      .mc-btn:not(:disabled):active { background: #f5e642; color: #111; }
-      .mc-btn:disabled { opacity: 0.2; cursor: default; }
+      .mc-footer { display: flex; justify-content: center; align-items: center; padding: 12px 24px; background: #111; gap: 8px; }
+      .mc-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 60px; background: rgba(10,10,10,0.52); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1.5px solid rgba(245,230,66,0.45); color: #f5e642; font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700; transition: background .15s, border-color .15s; }
+      .mc-btn-prev { left: 6px; border-radius: 0 4px 4px 0; }
+      .mc-btn-next { right: 6px; border-radius: 4px 0 0 4px; }
+      .mc-btn:not(:disabled):active { background: rgba(245,230,66,0.88); color: #111; border-color: #f5e642; }
+      .mc-btn:disabled { opacity: 0; pointer-events: none; }
       .mc-dots { display: flex; gap: 8px; align-items: center; }
       .mc-dot  { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.22); border: none; padding: 0; cursor: pointer; transition: all .25s ease; }
       .mc-dot.active { background: #f5e642; width: 24px; border-radius: 3.5px; }
@@ -684,11 +686,11 @@ const examples = [
           <div class="mc-info" id="mc-info">${mcInfoHtml(0)}</div>
           <div class="mc-wrap" id="mc-wrap">
             <div class="mc-track" id="mc-track">${mcSlides}</div>
+            <button class="mc-btn mc-btn-prev" id="mc-prev" onclick="mcPrev()" disabled>&#8592;</button>
+            <button class="mc-btn mc-btn-next" id="mc-next" onclick="mcNext()">&#8594;</button>
           </div>
           <div class="mc-footer">
-            <button class="mc-btn" id="mc-prev" onclick="mcPrev()" disabled>&#8592;</button>
             <div class="mc-dots">${mcDots}</div>
-            <button class="mc-btn" id="mc-next" onclick="mcNext()">&#8594;</button>
           </div>
         </div>`;
 
