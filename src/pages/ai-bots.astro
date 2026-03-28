@@ -2,14 +2,28 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icons.astro';
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "AI ботове и чатботове за бизнес",
-  "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
-  "description": "Разработка на AI чатботове за малкия и среден бизнес в България. Отговаря на клиенти 24/7 без теб.",
-  "areaServed": "Bulgaria"
-};
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI ботове и чатботове за бизнес",
+    "provider": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+    "description": "Разработка на AI чатботове за малкия и среден бизнес в България. Отговаря на клиенти 24/7 без теб.",
+    "areaServed": "Bulgaria"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Ще звучи ли роботски?", "acceptedAnswer": { "@type": "Answer", "text": "Не. Ботът се обучава с твой тон и начин на говорене. Ако пишеш неформално — ботът пише неформално. Ако си формален — същото. Повечето клиенти не разбират, че говорят с бот." } },
+      { "@type": "Question", "name": "Какво става ако не знае отговора?", "acceptedAnswer": { "@type": "Answer", "text": "Ботът е конфигуриран да казва честно \"не знам\" и да пренасочи клиента към теб — с линк за контакт, телефон или имейл. Никога не измисля отговори." } },
+      { "@type": "Question", "name": "Трябва ли ми ChatGPT акаунт или нещо друго?", "acceptedAnswer": { "@type": "Answer", "text": "Не. Ние управляваме всичко — API ключове, хостинг на бота, интеграцията. Ти просто получаваш работещ бот в сайта." } },
+      { "@type": "Question", "name": "Колко дълго трае обучението и инсталацията?", "acceptedAnswer": { "@type": "Answer", "text": "При готови материали — 3 до 5 работни дни. Ако трябва да събираме информацията заедно — до 1 седмица. Интеграцията в сайта е 1 ред код." } },
+      { "@type": "Question", "name": "Мога ли да го обновявам сам след това?", "acceptedAnswer": { "@type": "Answer", "text": "С пакета Поддръжка — ние го обновяваме месечно. При еднократна инсталация получаваш документация и инструкции. За по-сложни промени — свържи се с нас." } },
+      { "@type": "Question", "name": "Работи ли само на сайт или и в социалните мрежи?", "acceptedAnswer": { "@type": "Answer", "text": "Основната интеграция е в сайта. При нужда можем да го свържем и с Facebook Messenger или WhatsApp — обсъждаме при запитване." } }
+    ]
+  }
+];
 
 
 const faqs = [
