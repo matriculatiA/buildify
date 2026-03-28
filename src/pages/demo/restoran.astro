@@ -342,6 +342,34 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   </div>
 </section>
 
+<!-- FAQ -->
+<section style="background:#0f1e0f">
+  <div class="container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <span class="tag">Често задавани въпроси</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.6rem);color:white;font-family:'Playfair Display',serif">Отговори на вашите въпроси</h2>
+    </div>
+    {[
+      { q: 'Правите ли резервации онлайн?', a: 'Да — можете да запазите маса директно от сайта. Потвърждаваме по телефон до 30 минути. За групи над 8 човека, моля обадете се.' },
+      { q: 'Правите ли доставки до дома?', a: 'Правим доставки в радиус 5 км от центъра на Бургас. Минимална поръчка 25 лв., доставка 3.90 лв. Времетраене 40–50 мин.' },
+      { q: 'Работите ли в събота и неделя?', a: 'Да, работим всеки ден от 11:00 до 23:00. В петък и събота работим до 24:00. Кухнята приема поръчки до 30 мин. преди затваряне.' },
+      { q: 'Има ли паркинг наблизо?', a: 'Има безплатен паркинг непосредствено пред заведението. В пиково време можете да ползвате и общинския паркинг на 100 м.' },
+      { q: 'Приемате ли карти?', a: 'Приемаме всички карти — Visa, Mastercard, Maestro. Фирмени клиенти могат да плащат по фактура.' },
+      { q: 'Имате ли меню за деца?', a: 'Да, предлагаме детско меню с намалени порции. Разполагаме с детски столчета и кът за деца в по-голямата зала.' },
+    ].map((item, i) => (
+      <div class="reveal" style={`border-top:1px solid rgba(255,255,255,.1);padding:24px 0;transition-delay:${i*.07}s`}>
+        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.faq-arrow').style.transform=this.nextElementSibling.style.display==='block'?'rotate(180deg)':'rotate(0)'" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;padding:0">
+          <span style="font-size:15px;font-weight:700;color:white">{item.q}</span>
+          <span class="faq-arrow" style="color:var(--gold);font-size:18px;flex-shrink:0;transition:transform .3s">↓</span>
+        </button>
+        <div style="display:none;padding-top:14px">
+          <p style="font-size:14px;color:rgba(255,255,255,.55);line-height:1.8">{item.a}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 <!-- REZERVACIA -->
 <section id="rezervacia" style="background:var(--cream)">
   <div class="container" style="max-width:700px">

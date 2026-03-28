@@ -417,10 +417,48 @@ const steps = [
     </div>
   </section>
 
-  <!-- 05 · Пакети и цени -->
+  <!-- 05 · Отзиви -->
+  <section class="bg-cream border-b-2 border-ink">
+    <div class="border-b-2 border-ink px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">05 · Казват за нас</span>
+    </div>
+    <div class="grid md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
+      {[
+        {
+          name: "Ива Стоянова",
+          biz: "Козметично студио, Бургас",
+          text: "Търсихме някой, който разбира от SEO — не просто да направи \"хубав\" сайт. Резултатът: 3 месеца след пускането сме на първа страница в Google по 4 ключови думи. Клиентите казват, че са ни намерили онлайн.",
+          result: "+180% органичен трафик"
+        },
+        {
+          name: "Мартин Колев",
+          biz: "Адвокатска кантора, София",
+          text: "Работих с две агенции преди buildify.bg. Разликата е в детайлите — обясниха всяко решение, спазиха срока и цената не се промени. Сайтът работи бързо и изглежда професионално.",
+          result: "Предаден в срок, без изненади"
+        },
+        {
+          name: "Пламен Георгиев",
+          biz: "Ресторант, Несебър",
+          text: "Имахме стар сайт от 2017, невидим за Google. Новият се зарежда за под секунда и вече получаваме онлайн резервации директно — без да плащаме на платформи с комисионни.",
+          result: "Резервации директно от сайта"
+        },
+      ].map(r => (
+        <div class="p-8 md:p-10 flex flex-col gap-5">
+          <p class="text-ink/80 text-sm leading-relaxed flex-1 italic">"{r.text}"</p>
+          <div>
+            <div class="font-mono text-xs font-bold bg-yellow text-ink px-2 py-1 inline-block tracking-widest mb-3">{r.result}</div>
+            <div class="font-bold text-sm text-ink">{r.name}</div>
+            <div class="text-xs text-muted mt-0.5">{r.biz}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 06 · Пакети и цени -->
   <section id="paketi" class="scroll-mt-14 bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
-      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">05 · Пакети и цени</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">06 · Пакети и цени</span>
     </div>
     <div class="px-8 py-10 max-w-3xl">
       <h2 class="font-bold text-2xl md:text-3xl tracking-tight text-ink mb-3">
@@ -451,16 +489,70 @@ const steps = [
         </div>
       ))}
     </div>
-    <div class="border-t-2 border-ink px-8 py-6 bg-paper flex items-center gap-4 flex-wrap">
-      <span class="text-sm text-muted">Не сте сигурни кой пакет е подходящ?</span>
-      <a href="/contact" class="font-bold text-sm text-ink underline underline-offset-4 hover:text-yellow transition-colors">Консултираме безплатно →</a>
+    <div class="border-t-2 border-ink bg-paper">
+      <div class="px-8 py-5 border-b border-ink/10">
+        <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Всички пакети включват</span>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-ink/10 border-b border-ink/10">
+        {[
+          { label: "Безплатен хостинг", detail: "Cloudflare Pages · глобален CDN" },
+          { label: "SSL сертификат", detail: "HTTPS автоматично · без доп. разходи" },
+          { label: "Google Analytics 4", detail: "Трафик, конверсии, поведение" },
+          { label: "Google Search Console", detail: "Верификация + sitemap подаване" },
+        ].map(item => (
+          <div class="px-6 py-4 flex flex-col gap-1">
+            <span class="font-bold text-sm text-ink">{item.label}</span>
+            <span class="text-xs text-muted">{item.detail}</span>
+          </div>
+        ))}
+      </div>
+      <div class="px-8 py-6 flex items-center gap-4 flex-wrap">
+        <span class="text-sm text-muted">Не сте сигурни кой пакет е подходящ?</span>
+        <a href="/contact" class="font-bold text-sm text-ink underline underline-offset-4 hover:text-yellow transition-colors">Консултираме безплатно →</a>
+      </div>
     </div>
   </section>
 
-  <!-- 06 · Въпроси -->
+  <!-- 07 · Поддръжка след пускане -->
+  <section class="bg-ink border-b-2 border-ink">
+    <div class="border-b-2 border-white/10 px-8 py-5">
+      <span class="font-mono text-xs uppercase tracking-widest text-yellow font-bold">07 · След пускането</span>
+    </div>
+    <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
+      <div class="px-8 py-12 md:px-12 md:py-14 flex flex-col gap-5">
+        <h2 class="font-bold text-white text-xl md:text-2xl uppercase tracking-tight">Какво се случва след предаването?</h2>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Предаването на сайта не е краят — то е началото. Верифицираме домейна в Google Search Console, проверяваме индексирането и ви обясняваме как да следите трафика в Analytics.
+        </p>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Включваме 30 дни безплатни корекции след пускане за очевидни грешки. Ако след месеци искате да добавите страница или да смените текст — помагаме срещу договорена почасова ставка. Без абонамент, без обвързване.
+        </p>
+        <p class="text-white/30 text-xs leading-relaxed">
+          Хостингът на Cloudflare Pages е безплатен за цял живот — не зависите от нас за работата на сайта. Ако решите да сменете разработчик, имате пълен достъп до кода и домейна.
+        </p>
+      </div>
+      <div class="flex flex-col divide-y-2 divide-white/10">
+        {[
+          { label: "30 дни след пускане", val: "Безплатни корекции за очевидни грешки" },
+          { label: "Google Search Console", val: "Верифицираме и подаваме sitemap" },
+          { label: "Обучение", val: "Показваме как да следите трафика" },
+          { label: "Поддръжка след това", val: "По договорена почасова ставка" },
+          { label: "Хостинг", val: "Безплатен завинаги (Cloudflare Pages)" },
+          { label: "Собственост на кода", val: "100% ваша — без зависимост" },
+        ].map(row => (
+          <div class="px-8 py-5 flex items-center justify-between gap-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-white/25">{row.label}</span>
+            <span class="font-semibold text-sm text-white text-right">{row.val}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · Въпроси -->
   <section class="bg-cream border-b-2 border-ink">
     <div class="border-b-2 border-ink px-8 py-5">
-      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">06 · Въпроси</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">08 · Въпроси</span>
     </div>
     <div class="divide-y-2 divide-ink">
       {[
@@ -501,6 +593,14 @@ const steps = [
           <p class="text-muted text-sm mt-4 leading-relaxed max-w-2xl">{faq.a}</p>
         </details>
       ))}
+    </div>
+    <div class="border-t-2 border-ink px-8 py-6 bg-paper">
+      <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold block mb-4">Четете още от блога</span>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="/blog/tsena-uebsayt-bulgaria-2026" class="text-sm font-semibold text-ink hover:text-yellow transition-colors underline underline-offset-4">Колко струва уебсайт в България през 2026? →</a>
+        <a href="/blog/wordpress-sreshtu-custom-sayt" class="text-sm font-semibold text-ink hover:text-yellow transition-colors underline underline-offset-4">WordPress срещу custom сайт →</a>
+        <a href="/blog/kak-da-izberem-ueb-razrabotchik-bulgaria" class="text-sm font-semibold text-ink hover:text-yellow transition-colors underline underline-offset-4">Как да изберете уеб разработчик →</a>
+      </div>
     </div>
   </section>
 

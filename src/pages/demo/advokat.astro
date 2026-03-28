@@ -240,6 +240,59 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   </div>
 </section>
 
+<!-- ОТЗИВИ -->
+<section style="background:var(--navy)">
+  <div class="container">
+    <div style="margin-bottom:48px" class="reveal">
+      <span class="tag">Отзиви от клиенти</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:white;font-family:'Playfair Display',serif;max-width:500px;line-height:1.2">Какво казват нашите клиенти</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+      {[
+        { name: 'Георги Николов', role: 'Управител, строителна фирма', text: 'Адв. Петров ни помогна при сложен трудов спор с бивш служител. Изходът беше максимално добър за нас. Комуникацията беше ясна и честна от първата среща.', area: 'Трудово право' },
+        { name: 'Светлана Димитрова', role: 'Частно лице', text: 'Преминах през развод и делба на имот. Д-р Иванова ме представи изключително компетентно. Постигнахме справедливо решение без излишно протакане.', area: 'Семейно право' },
+        { name: 'Мартин Стоянов', role: 'Собственик на апартамент', text: 'Купувах апартамент с усложнена история на собственост. Адв. Петров провери всичко детайлно и предотврати потенциален проблем. Препоръчвам без резерви.', area: 'Недвижими имоти' },
+      ].map((r, i) => (
+        <div class="reveal" style={`background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:32px;transition-delay:${i*.1}s`}>
+          <div style="color:var(--gold);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px">{r.area}</div>
+          <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.85;margin-bottom:24px;font-style:italic">"{r.text}"</p>
+          <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:16px">
+            <div style="font-weight:700;color:white;font-size:14px">{r.name}</div>
+            <div style="color:rgba(255,255,255,.35);font-size:12px;margin-top:2px">{r.role}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:white">
+  <div class="container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <span class="tag">Често задавани въпроси</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--navy);font-family:'Playfair Display',serif">Въпроси, които чуваме най-често</h2>
+    </div>
+    {[
+      { q: 'Колко струва правната консултация?', a: 'Първата консултация (30 мин.) е безплатна. Последващите хонорари зависят от вида и сложността на казуса. Обсъждаме ги открито на първата среща — без скрити такси.' },
+      { q: 'Трябва ли ми адвокат при КАТ акт?', a: 'При сериозни нарушения (отнемане на книжка, злополука с пострадали) — силно препоръчваме. При обикновени глоби е въпрос на преценка. Обадете се за безплатна 10-минутна консултация по телефона.' },
+      { q: 'Колко трае едно дело?', a: 'Зависи от вида — граждански дела обикновено приключват за 6–18 месеца, административни за 3–9. Трудови спорове — 4–12 месеца. Даваме реалистична прогноза на първата среща.' },
+      { q: 'Работите ли с фирми или само с физически лица?', a: 'Работим и с двете. За фирми предлагаме абонаментно правно обслужване — постоянна правна защита на фиксирана месечна такса.' },
+      { q: 'Може ли консултацията да е онлайн?', a: 'Да, провеждаме онлайн консултации по видео или телефон. За подписване на документи е необходима лична среща или нотариално заверено пълномощно.' },
+    ].map((item, i) => (
+      <div class="reveal" style={`border-top:1px solid #e2d9c4;padding:22px 0;transition-delay:${i*.07}s`}>
+        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.faq-a').style.transform=this.nextElementSibling.style.display==='block'?'rotate(180deg)':'rotate(0)'" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;padding:0">
+          <span style="font-size:15px;font-weight:700;color:var(--navy)">{item.q}</span>
+          <span class="faq-a" style="color:var(--gold);font-size:18px;flex-shrink:0;transition:transform .3s">↓</span>
+        </button>
+        <div style="display:none;padding-top:12px">
+          <p style="font-size:14px;color:#64748b;line-height:1.8">{item.a}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 <!-- КОНСУЛТАЦИЯ -->
 <section id="konsultaciq" style="background:var(--cream)">
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">

@@ -272,6 +272,35 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
   </div>
 </section>
 
+<!-- FAQ -->
+<section style="background:white">
+  <div class="container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <span class="tag">Често задавани въпроси</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--dark);margin-bottom:12px">Отговори преди посещението</h2>
+      <p style="color:#64748b;font-size:14px">Имате друг въпрос? Обадете се или попитайте при записването.</p>
+    </div>
+    {[
+      { q: 'Боли ли поставянето на имплант?', a: 'Процедурата се извършва под местна анестезия — не усещате болка по време на операцията. След това може да има лека чувствителност 2–3 дни, контролирана с обичайни болкоуспокояващи.' },
+      { q: 'Колко трае избелването?', a: 'Процедурата с LED технология отнема около 60 минути в кабинета. Резултатът е до 8 нюанса по-бяло и издържа 2+ години при правилна хигиена.' },
+      { q: 'Безплатен ли е първият преглед?', a: 'Да — при първо посещение правим безплатен профилактичен преглед и консултация. Обясняваме какво е необходимо и даваме ценова оферта без ангажимент.' },
+      { q: 'Работите ли в събота?', a: 'Да, приемаме пациенти в събота от 9:00 до 14:00. За спешни случаи — обадете се и ще намерим решение в рамките на деня.' },
+      { q: 'Може ли да се плаща на части?', a: 'Да, предлагаме разсрочено плащане без лихва за лечения над 300 лв. Планът се уточнява индивидуално при консултацията.' },
+      { q: 'Как да се подготвя за преглед?', a: 'Не е необходима специална подготовка. Измийте зъбите преди посещението. При планирана анестезия — избягвайте тежка храна 2 часа преди.' },
+    ].map((item, i) => (
+      <div class="reveal" style={`border-top:2px solid var(--light);padding:22px 0;transition-delay:${i*.07}s`}>
+        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.faq-arr').style.transform=this.nextElementSibling.style.display==='block'?'rotate(180deg)':'rotate(0)'" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;padding:0">
+          <span style="font-size:15px;font-weight:700;color:var(--dark)">{item.q}</span>
+          <span class="faq-arr" style="color:var(--sky);font-size:18px;flex-shrink:0;transition:transform .3s">↓</span>
+        </button>
+        <div style="display:none;padding-top:12px">
+          <p style="font-size:14px;color:#64748b;line-height:1.8">{item.a}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 <!-- ЗАПИШЕТЕ ЧАС -->
 <section id="zapis" style="background:var(--light)">
   <div class="container" style="max-width:680px">
