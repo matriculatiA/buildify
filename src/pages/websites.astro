@@ -73,14 +73,14 @@ const packages = [
 ];
 
 const industries = [
-  { icon: "🍽", name: "Ресторант / Заведение", desc: "Онлайн меню, резервации, работно време, отзиви. Клиентите намират заведението ви в Google Maps преди да излязат от вкъщи.", href: "/demo/restoran", demo: true },
-  { icon: "🦷", name: "Дентален кабинет / Лекар", desc: "Онлайн запис на час, услуги с цени, екип. Нови пациенти от Google всеки месец без да плащате реклама.", href: "/demo/dentalen-kabinet", demo: true },
-  { icon: "⚖️", name: "Адвокат / Юридически услуги", desc: "Практики, екип, форма за консултация. Позиция в Google по специализация и локация — преди клиентът да потърси конкурент.", href: "/demo/advokat", demo: true },
-  { icon: "✂️", name: "Козметичен салон / Фризьор", desc: "Галерия с процедури, ценоразпис, онлайн запис. Работи вместо вас 24/7 и пълни календара автоматично.", href: null, demo: false },
-  { icon: "🏨", name: "Хотел / Стаи под наем", desc: "Директни резервации без 15% комисионна на Booking.com. Снимки, удобства, наличност — всичко на вашия домейн.", href: null, demo: false },
-  { icon: "🔨", name: "Строителна фирма / Ремонти", desc: "Портфолио от реализирани проекти, услуги, контакти. Доверие и референции преди първата среща с клиента.", href: null, demo: false },
-  { icon: "📊", name: "Счетоводител / Консултант", desc: "Услуги, цени, опит. Позиция в Google по локация и специализация — без да разчитате само на препоръки.", href: null, demo: false },
-  { icon: "🛒", name: "Онлайн магазин", desc: "Малък e-commerce с плащане с карта, управление на наличности и автоматични имейл потвърждения. Без Shopify абонамент.", href: null, demo: false },
+  { code: "REST", name: "Ресторант / Заведение", desc: "Онлайн меню, резервации, работно време, отзиви. Клиентите намират заведението ви в Google Maps преди да излязат от вкъщи.", href: "/demo/restoran", demo: true },
+  { code: "MED",  name: "Дентален кабинет / Лекар", desc: "Онлайн запис на час, услуги с цени, екип. Нови пациенти от Google всеки месец без да плащате реклама.", href: "/demo/dentalen-kabinet", demo: true },
+  { code: "LAW",  name: "Адвокат / Юридически услуги", desc: "Практики, екип, форма за консултация. Позиция в Google по специализация и локация — преди клиентът да потърси конкурент.", href: "/demo/advokat", demo: true },
+  { code: "SPA",  name: "Козметичен салон / Фризьор", desc: "Галерия с процедури, ценоразпис, онлайн запис. Работи вместо вас 24/7 и пълни календара автоматично.", href: null, demo: false },
+  { code: "HTL",  name: "Хотел / Стаи под наем", desc: "Директни резервации без 15% комисионна на Booking.com. Снимки, удобства, наличност — всичко на вашия домейн.", href: null, demo: false },
+  { code: "CON",  name: "Строителна фирма / Ремонти", desc: "Портфолио от реализирани проекти, услуги, контакти. Доверие и референции преди първата среща с клиента.", href: null, demo: false },
+  { code: "ACC",  name: "Счетоводител / Консултант", desc: "Услуги, цени, опит. Позиция в Google по локация и специализация — без да разчитате само на препоръки.", href: null, demo: false },
+  { code: "SHOP", name: "Онлайн магазин", desc: "Малък e-commerce с плащане с карта, управление на наличности и автоматични имейл потвърждения. Без Shopify абонамент.", href: null, demo: false },
 ];
 
 const steps = [
@@ -187,7 +187,7 @@ const steps = [
     <div class="grid sm:grid-cols-2 md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-t-2 border-ink">
       {industries.slice(0, 4).map(ind => (
         <div class="p-6 flex flex-col gap-3 group hover:bg-ink/5 transition-colors">
-          <span class="text-2xl">{ind.icon}</span>
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-2 py-1 self-start tracking-widest">{ind.code}</span>
           <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
           <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
           {ind.demo && ind.href && (
@@ -201,7 +201,7 @@ const steps = [
     <div class="grid sm:grid-cols-2 md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-t-2 border-ink">
       {industries.slice(4).map(ind => (
         <div class="p-6 flex flex-col gap-3 group hover:bg-ink/5 transition-colors">
-          <span class="text-2xl">{ind.icon}</span>
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-2 py-1 self-start tracking-widest">{ind.code}</span>
           <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
           <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
           <span class="font-mono text-xs text-muted/50 uppercase tracking-wide">Скоро демо</span>
