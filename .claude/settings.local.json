@@ -7,7 +7,25 @@
       "WebFetch(domain:seo.maksoft.net)",
       "WebFetch(domain:humerson.com)",
       "WebFetch(domain:www.semrush.com)",
-      "WebFetch(domain:www.ceicdata.com)"
+      "WebFetch(domain:www.ceicdata.com)",
+      "WebSearch",
+      "WebFetch(domain:resources.clicks.so)",
+      "WebFetch(domain:www.ranktracker.com)",
+      "WebFetch(domain:www.quora.com)",
+      "WebFetch(domain:blog.unlimitedvisitors.io)",
+      "WebFetch(domain:www.statista.com)",
+      "WebFetch(domain:serpact.com)",
+      "WebFetch(domain:vipestudio.com)",
+      "WebFetch(domain:easyweb.bg)",
+      "WebFetch(domain:gambit-technologies.com)",
+      "WebFetch(domain:marketolog.bg)",
+      "WebFetch(domain:az-moga.com)",
+      "WebFetch(domain:seoconsult.bg)",
+      "WebFetch(domain:trends.builtwith.com)",
+      "WebFetch(domain:datareportal.com)",
+      "WebFetch(domain:blog.applabx.com)",
+      "WebFetch(domain:denvelkoff.studio)",
+      "WebFetch(domain:keywordtool.io)"
     ]
   }
 }

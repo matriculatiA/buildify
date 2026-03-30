@@ -1,0 +1,207 @@
+---
+const title = "Keyword Research Tool";
+---
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex"/>
+  <title>Keyword Tool — buildify internal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Space Grotesk', sans-serif; background: #f0ede6; color: #111; min-height: 100vh; }
+    .mono { font-family: 'Space Mono', monospace; }
+
+    header { background: #111; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #f5e642; }
+    header h1 { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+    header span { color: rgba(255,255,255,.3); font-family: 'Space Mono', monospace; font-size: 10px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+    .input-row { display: flex; gap: 0; border: 2px solid #111; background: white; margin-bottom: 32px; }
+    .input-row input { flex: 1; border: none; padding: 16px 20px; font-size: 16px; font-family: 'Space Grotesk', sans-serif; outline: none; color: #111; background: white; }
+    .input-row button { background: #f5e642; border: none; border-left: 2px solid #111; padding: 16px 28px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; color: #111; transition: background .15s; white-space: nowrap; }
+    .input-row button:hover { background: #d4c30a; }
+    .input-row button:disabled { background: #e8e4dc; cursor: not-allowed; color: #888; }
+
+    .status { font-family: 'Space Mono', monospace; font-size: 11px; color: #888; margin-bottom: 24px; min-height: 20px; }
+    .status.loading { color: #f5a623; }
+    .status.done { color: #2d7a3a; }
+    .status.error { color: #c0392b; }
+
+    .results-grid { display: grid; gap: 16px; }
+
+    .result-group { background: white; border: 2px solid #111; }
+    .result-group-header { background: #111; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+    .result-group-header span { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+    .result-group-header em { color: rgba(255,255,255,.3); font-family: 'Space Mono', monospace; font-size: 10px; font-style: normal; }
+    .result-group-body { padding: 4px 0; }
+
+    .suggestion { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid #f0ede6; cursor: pointer; transition: background .1s; }
+    .suggestion:last-child { border-bottom: none; }
+    .suggestion:hover { background: #f9f8f5; }
+    .suggestion-text { font-size: 14px; color: #111; font-weight: 500; }
+    .suggestion-copy { font-family: 'Space Mono', monospace; font-size: 9px; color: #bbb; text-transform: uppercase; letter-spacing: .06em; opacity: 0; transition: opacity .1s; }
+    .suggestion:hover .suggestion-copy { opacity: 1; }
+
+    .empty-group { padding: 14px 16px; font-family: 'Space Mono', monospace; font-size: 10px; color: #bbb; text-transform: uppercase; letter-spacing: .06em; }
+
+    .summary { background: #111; border: 2px solid #111; padding: 20px 24px; margin-bottom: 24px; display: none; }
+    .summary.visible { display: block; }
+    .summary-title { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+    .summary-all { display: flex; flex-wrap: wrap; gap: 8px; }
+    .summary-tag { background: rgba(245,230,66,.12); border: 1px solid rgba(245,230,66,.3); color: #f5e642; padding: 5px 12px; font-size: 12px; cursor: pointer; transition: background .1s; }
+    .summary-tag:hover { background: rgba(245,230,66,.25); }
+    .copy-all-btn { margin-top: 14px; background: #f5e642; color: #111; border: none; padding: 10px 20px; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; transition: background .15s; }
+    .copy-all-btn:hover { background: #d4c30a; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Keyword Research Tool</h1>
+  <span>buildify internal · Google Autocomplete · BG</span>
+</header>
+
+<div class="container">
+  <div class="input-row">
+    <input type="text" id="seed" placeholder="Въведи keyword... (напр. сайт за ресторант)" autocomplete="off" />
+    <button id="search-btn" onclick="runSearch()">Анализирай →</button>
+  </div>
+
+  <div class="status mono" id="status"></div>
+
+  <div class="summary" id="summary">
+    <div class="summary-title">Всички уникални keywords (<span id="total-count">0</span>)</div>
+    <div class="summary-all" id="summary-tags"></div>
+    <button class="copy-all-btn" onclick="copyAll()">Копирай всички</button>
+  </div>
+
+  <div class="results-grid" id="results"></div>
+</div>
+
+<script>
+  const PATTERNS = [
+    { label: 'Base',                    fn: q => q },
+    { label: 'цена / колко струва',     fn: q => `${q} цена` },
+    { label: 'колко струва',            fn: q => `колко струва ${q}` },
+    { label: 'как',                     fn: q => `как ${q}` },
+    { label: 'в България',              fn: q => `${q} в България` },
+    { label: 'за малък бизнес',         fn: q => `${q} за малък бизнес` },
+    { label: 'онлайн',                  fn: q => `${q} онлайн` },
+    { label: 'безплатно',               fn: q => `${q} безплатно` },
+    { label: 'отзиви / препоръки',      fn: q => `${q} отзиви` },
+    { label: 'алтернативи / или',       fn: q => `${q} или` },
+    { label: 'защо',                    fn: q => `защо ${q}` },
+    { label: 'най-добър',               fn: q => `най-добър ${q}` },
+  ];
+
+  let allKeywords = new Set();
+
+  async function fetchSuggest(query) {
+    const res = await fetch(`/api/suggest?q=${encodeURIComponent(query)}`);
+    if (!res.ok) return [];
+    return await res.json();
+  }
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function runSearch() {
+    const seed = document.getElementById('seed').value.trim();
+    if (!seed) return;
+
+    const btn = document.getElementById('search-btn');
+    const status = document.getElementById('status');
+    const results = document.getElementById('results');
+    const summary = document.getElementById('summary');
+
+    btn.disabled = true;
+    results.innerHTML = '';
+    allKeywords.clear();
+    summary.classList.remove('visible');
+
+    status.className = 'status loading mono';
+    status.textContent = `Анализирам "${seed}" — изчакай...`;
+
+    const groups = [];
+
+    for (let i = 0; i < PATTERNS.length; i++) {
+      const p = PATTERNS[i];
+      const query = p.fn(seed);
+      status.textContent = `[${i+1}/${PATTERNS.length}] Query: "${query}"`;
+
+      let suggestions = [];
+      try {
+        suggestions = await fetchSuggest(query);
+      } catch(e) {}
+
+      suggestions.forEach(s => allKeywords.add(s));
+      groups.push({ label: p.label, query, suggestions });
+
+      // Render incrementally
+      renderGroup({ label: p.label, query, suggestions }, results);
+
+      await sleep(300);
+    }
+
+    status.className = 'status done mono';
+    status.textContent = `✓ Готово — ${allKeywords.size} уникални keywords от ${PATTERNS.length} queries`;
+    btn.disabled = false;
+
+    // Render summary
+    const summaryTags = document.getElementById('summary-tags');
+    const totalCount = document.getElementById('total-count');
+    totalCount.textContent = allKeywords.size;
+    summaryTags.innerHTML = [...allKeywords].map(k =>
+      `<span class="summary-tag" onclick="copyText('${k.replace(/'/g,"\\'")}', this)">${k}</span>`
+    ).join('');
+    summary.classList.add('visible');
+  }
+
+  function renderGroup({ label, query, suggestions }, container) {
+    const div = document.createElement('div');
+    div.className = 'result-group';
+    div.innerHTML = `
+      <div class="result-group-header">
+        <span>${label}</span>
+        <em>"${query}" → ${suggestions.length} results</em>
+      </div>
+      <div class="result-group-body">
+        ${suggestions.length === 0
+          ? `<div class="empty-group">Няма резултати</div>`
+          : suggestions.map(s => `
+              <div class="suggestion" onclick="copyText('${s.replace(/'/g,"\\'")}', this)">
+                <span class="suggestion-text">${s}</span>
+                <span class="suggestion-copy">копирай</span>
+              </div>`).join('')
+        }
+      </div>`;
+    container.appendChild(div);
+  }
+
+  function copyText(text, el) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = el.querySelector?.('.suggestion-copy');
+      if (orig) { orig.textContent = '✓ копирано'; setTimeout(() => orig.textContent = 'копирай', 1500); }
+    });
+  }
+
+  function copyAll() {
+    const text = [...allKeywords].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-all-btn');
+      btn.textContent = '✓ Копирано!';
+      setTimeout(() => btn.textContent = 'Копирай всички', 2000);
+    });
+  }
+
+  document.getElementById('seed').addEventListener('keydown', e => {
+    if (e.key === 'Enter') runSearch();
+  });
+</script>
+
+</body>
+</html>
