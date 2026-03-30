@@ -25,7 +25,11 @@
       "WebFetch(domain:datareportal.com)",
       "WebFetch(domain:blog.applabx.com)",
       "WebFetch(domain:denvelkoff.studio)",
-      "WebFetch(domain:keywordtool.io)"
+      "WebFetch(domain:keywordtool.io)",
+      "WebFetch(domain:suggestqueries.google.com)",
+      "WebFetch(domain:clients1.google.com)",
+      "Bash(python3 -c \"import sys; sys.stdout.buffer.write\\(sys.stdin.buffer.read\\(\\)\\)\")",
+      "Bash(python3 -c \":*)"
     ]
   }
 }

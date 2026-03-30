@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Онлайн резервации за ресторант — как да ги добавиш към сайта",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-30",
+  "dateModified": "2026-03-30",
+  "description": "Как работи системата за онлайн резервации за ресторант, колко струва и защо клиентите предпочитат да резервират онлайн вместо по телефон."
+};
+---
+
+<BaseLayout
+  title="Онлайн резервации за ресторант — как да ги добавиш | buildify.bg"
+  description="Как работи онлайн резервационната система за ресторант, колко струва и как да я добавиш към сайта си. Пробвай демо версията."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Ресторанти</span>
+        <span class="font-mono text-xs text-white/45">Март 2026</span>
+        <span class="font-mono text-xs text-white/45">4 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Онлайн резервации<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">за ресторант</mark><br/>
+        — как работи
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Клиентът иска маса за петък вечер. Обажда се — линията е заета. Резервира при конкурента. Познато?
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- ПРОБЛЕМЪТ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Колко резервации губите без онлайн система</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Телефонните резервации имат два основни проблема: работят само когато някой вдига и изискват ресурс — персонал, внимание, записки.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Клиентите вземат решения в различно време — в обяд, вечер, в почивния ден. Ако телефонът не е опция, по-голямата част от тях не чакат — търсят заведение, което позволява резервация онлайн.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Онлайн резервационната система е форма на вашия сайт, свързана с вашите маси и работни часове. Клиентът избира дата, час и брой хора. Вие виждате всичко в реално време — без телефони, без записки, без грешки.
+        </p>
+      </div>
+
+      <!-- СТАТИСТИКИ -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "52%", lbl: "От клиентите предпочитат да резервират онлайн" },
+          { val: "30%", lbl: "По-малко no-show с онлайн потвърждение" },
+          { val: "24/7", lbl: "Системата приема резервации дори когато сте затворени" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- КАК РАБОТИ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Как работи системата стъпка по стъпка</span>
+        </div>
+        <div class="space-y-3">
+          {[
+            { step: "01", title: "Клиентът отваря сайта ви",          desc: "Вижда бутон Резервирай маса — на видно място, работи от телефон и компютър." },
+            { step: "02", title: "Избира дата, час и брой хора",      desc: "Системата показва само реално свободните часове. Без двойни резервации, без грешки." },
+            { step: "03", title: "Оставя имена и телефон",            desc: "Минимални данни. Опция за бележка — поводи за рожден ден, алергии, специални искания." },
+            { step: "04", title: "Получава потвърждение",             desc: "Автоматичен имейл или SMS. Напомняне 24 часа преди намалява no-show значително." },
+            { step: "05", title: "Вие виждате всичко",               desc: "Панел с всички резервации за деня, седмицата, месеца. Лесно управление — отмяна, промяна, бележки." },
+          ].map(item => (
+            <div class="flex gap-4 items-start bg-white border-2 border-ink p-5">
+              <span class="font-mono font-bold text-ink/20 text-xl shrink-0 w-8">{item.step}</span>
+              <div>
+                <div class="font-bold text-sm uppercase tracking-tight text-ink mb-1">{item.title}</div>
+                <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Клиентите не чакат петък да ви се обадят. Те резервират в сряда вечерта, след вечеря."
+        </p>
+      </div>
+
+      <!-- РАЗЛИКА с TheFork/Booking -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Защо не TheFork или Booking — и директна система</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-4">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">TheFork / платформи</span>
+            <span class="font-mono text-xs text-yellow uppercase tracking-widest">Директна система</span>
+          </div>
+          {[
+            { label: "Комисионна",       bad: "1-2€ на корица",       good: "0€ — няма" },
+            { label: "Данни за клиента", bad: "Остават при платформата", good: "Ваши са" },
+            { label: "Брандинг",         bad: "Техен сайт",            good: "Вашият сайт" },
+            { label: "Месечна такса",    bad: "30-80€+/месец",         good: "0€ след инсталация" },
+            { label: "Контрол",          bad: "Ограничен",             good: "Пълен" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 items-center ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.label}</span>
+              <span class="text-xs text-muted">{row.bad}</span>
+              <span class="text-xs text-ink font-bold">{row.good}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-muted text-sm">
+          Платформите имат смисъл за нова локация без аудитория. Ако вече имате клиенти — директната система е по-изгодна от първия месец.
+        </p>
+      </div>
+
+      <!-- ЦЕНА -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Колко струва</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Инсталация и настройка",           v: "от 300€ еднократно" },
+            { k: "Месечна такса след това",           v: "0€ — нищо" },
+            { k: "Брой резервации",                   v: "Неограничени" },
+            { k: "Срок за пускане",                   v: "3-5 работни дни" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink">{row.k}</span>
+              <span class="font-mono font-bold text-sm text-ink">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/60 text-sm leading-relaxed">
+          Ако системата задържи само 3-4 допълнителни маси на месец — инвестицията се изплаща в рамките на месец-два.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Добавки за сайт</div>
+            <div class="font-bold text-white text-xl tracking-tight">Вижте как изглежда в реално заведение</div>
+            <p class="text-white/40 text-sm mt-1">Пробвайте демото — изберете маса, час, потвърдете. Точно така ще работи при вас.</p>
+          </div>
+          <div class="flex gap-3 flex-wrap shrink-0">
+            <a href="/demo/restoran" class="bg-white/10 text-white font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-white/20 transition-colors whitespace-nowrap">
+              Виж demo →
+            </a>
+            <a href="/kontakt" class="bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+              Поискай оферта →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

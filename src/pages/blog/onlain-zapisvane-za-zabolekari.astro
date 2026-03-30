@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icons.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Онлайн записване за зъболекар — как работи и защо пациентите го предпочитат",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-30",
+  "dateModified": "2026-03-30",
+  "description": "Как работи онлайн записването за зъболекар, колко струва и как да го добавите към сайта си. Реален пример с изчисление на ROI."
+};
+---
+
+<BaseLayout
+  title="Онлайн записване за зъболекар — как работи | buildify.bg"
+  description="Как работи онлайн записването за зъболекарски кабинет, колко струва и как да го добавите към сайта си. Реален пример с ROI изчисление."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Дентална медицина</span>
+        <span class="font-mono text-xs text-white/45">Март 2026</span>
+        <span class="font-mono text-xs text-white/45">4 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Онлайн записване<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">за зъболекар</mark><br/>
+        — как работи
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Пациентите търсят зъболекар в 22:00. Телефонът не работи. Ако нямате онлайн записване — записват се при конкурента.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- ПРОБЛЕМЪТ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Проблемът с телефонното записване</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Повечето зъболекарски кабинети в България работят с телефон и рецепция. Системата работи — но само докато кабинетът е отворен.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Реалността: пациентите решават да запишат час вечер, в почивния ден, или по обяд докато са на работа. В тези моменти телефонът не е опция и те или чакат, или търсят друг кабинет.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Онлайн записването е просто — <strong>формуляр на сайта, свързан с вашия календар</strong>. Пациентът избира дата и час, вие получавате потвърждение. Без телефонни разговори.
+        </p>
+      </div>
+
+      <!-- СТАТИСТИКИ -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "68%", lbl: "От пациентите предпочитат онлайн записване пред телефон" },
+          { val: "40%", lbl: "От запитванията идват извън работно време" },
+          { val: "3×",  lbl: "По-малко no-show с автоматични SMS напомняния" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- КАК РАБОТИ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Как работи онлайн записването</span>
+        </div>
+        <div class="space-y-3">
+          {[
+            { step: "01", title: "Пациентът отваря сайта ви",         desc: "В кое да е время — 10:00 сутринта или 23:00 вечерта. Вижда бутон Запишете час." },
+            { step: "02", title: "Избира услуга и свободен час",      desc: "Системата показва само реално свободните часове от вашия работен календар. Без двойно записване." },
+            { step: "03", title: "Въвежда имена и телефон",           desc: "Минимални данни — само нужното. Процесът отнема под 2 минути." },
+            { step: "04", title: "Получава потвърждение",             desc: "Автоматичен имейл или SMS с детайлите. Напомняне 24 часа преди часа намалява no-show с до 3 пъти." },
+            { step: "05", title: "Вие виждате записването",           desc: "В реално време в панела или директно в Google Calendar. Без ръчно пренасяне на данни." },
+          ].map(item => (
+            <div class="flex gap-4 items-start bg-white border-2 border-ink p-5">
+              <span class="font-mono font-bold text-ink/20 text-xl shrink-0 w-8">{item.step}</span>
+              <div>
+                <div class="font-bold text-sm uppercase tracking-tight text-ink mb-1">{item.title}</div>
+                <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Пациентите не чакат сутринта да се обадят. Те записват час в момента, в който решат."
+        </p>
+      </div>
+
+      <!-- ROI -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Реален пример — колко се изплаща</span>
+        </div>
+        <p class="text-ink/70 text-sm leading-relaxed mb-6">
+          Зъболекарски кабинет с 35-40 часа на месец. Консервативна сметка:
+        </p>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Пациенти, които не са се записали (извън раб. часове)", v: "~8-10/мес." },
+            { k: "Ако системата задържи половината",                       v: "4-5 нови часа" },
+            { k: "Средна приходност на час",                               v: "80-120 лв." },
+            { k: "Допълнителен приход на месец",                           v: "320-600 лв." },
+            { k: "Цена на системата (еднократно)",                         v: "300€ ≈ 585 лв." },
+            { k: "Изплаща се за",                                          v: "1-2 месеца" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink">{row.k}</span>
+              <span class="font-mono font-bold text-sm text-ink">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/60 text-sm">
+          Системата работи и в събота, и в неделя, и на Коледа. Не иска увеличение.
+        </p>
+      </div>
+
+      <!-- КАКВО ВКЛЮЧВА -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Какво включва системата</span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-3">
+          {[
+            "Календар с вашите работни часове",
+            "Избор на услуга (преглед, почистване, лечение...)",
+            "Автоматично потвърждение по имейл",
+            "Напомняне 24 часа преди часа",
+            "Управление на записванията от панел",
+            "Интеграция с Google Calendar",
+            "Защита от спам записвания",
+            "Мобилна версия — работи от телефон",
+          ].map(item => (
+            <div class="flex gap-3 items-center bg-white border-2 border-ink px-5 py-3">
+              <span class="text-ink font-mono text-sm shrink-0">✓</span>
+              <span class="text-sm text-ink">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Добавки за сайт</div>
+            <div class="font-bold text-white text-xl tracking-tight">Добавете онлайн записване към сайта си</div>
+            <p class="text-white/40 text-sm mt-1">Пробвайте демото и вижте как изглежда за вашия кабинет.</p>
+          </div>
+          <div class="flex gap-3 flex-wrap shrink-0">
+            <a href="/demo/dentalen-kabinet" class="bg-white/10 text-white font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-white/20 transition-colors whitespace-nowrap">
+              Виж demo →
+            </a>
+            <a href="/kontakt" class="bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+              Поискай оферта →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>
