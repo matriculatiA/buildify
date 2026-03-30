@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="Контакти - Безплатна консултация | buildify.bg"
-  description="Свържи се с buildify.bg за безплатна консултация. Отговаряме до 48 часа."
+  description="Свържи се с buildify.bg за безплатна консултация. Отговаряме до 24 часа."
 >
 
   <!-- Header -->
@@ -14,21 +14,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1 class="font-bold text-5xl md:text-6xl text-white uppercase tracking-tightest leading-tight mb-4">
           Да<br/><span class="text-yellow">поговорим.</span>
         </h1>
-        <p class="text-white/40 text-base">30 минути безплатно. Без задължения. Отговаряме до 48 часа.</p>
+        <p class="text-white/40 text-base">Опиши накратко какво ти трябва. Отговаряме до 24 часа с конкретна цена.</p>
       </div>
     </div>
-    <div class="bg-cream p-10 md:p-16 flex flex-col justify-center gap-4">
+    <div class="bg-cream p-10 md:p-16 flex flex-col justify-center gap-6">
       {[
-        'Безплатен преглед на текущото ти онлайн присъствие',
-        'Конкретна цена и срок — не "зависи"',
+        'Конкретна цена и срок — не "зависи от обема"',
         'Отговор на въпроси без продаване',
-        'Без договори при стартова консултация',
+        'Без договори при първи разговор',
+        'Отговаряме до 24 часа в работен ден',
       ].map(item => (
         <div class="flex items-start gap-3 border-l-4 border-yellow pl-4 py-1">
           <span class="font-mono text-xs text-yellow shrink-0 mt-0.5">✓</span>
           <span class="text-sm font-semibold text-ink">{item}</span>
         </div>
       ))}
+      <div class="border-t-2 border-ink pt-6 mt-2">
+        <div class="font-mono text-xs uppercase tracking-widest text-muted mb-3">Или пиши директно</div>
+        <a href="mailto:hello@buildify.bg" class="font-bold text-ink hover:text-yellow transition-colors text-base">hello@buildify.bg</a>
+      </div>
     </div>
   </section>
 
