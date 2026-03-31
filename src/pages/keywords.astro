@@ -19,7 +19,7 @@ const title = "Keyword Research Tool";
     header h1 { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
     header span { color: rgba(255,255,255,.3); font-family: 'Space Mono', monospace; font-size: 10px; }
 
-    .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
 
     .input-row { display: flex; gap: 0; border: 2px solid #111; background: white; margin-bottom: 32px; }
     .input-row input { flex: 1; border: none; padding: 16px 20px; font-size: 16px; font-family: 'Space Grotesk', sans-serif; outline: none; color: #111; background: white; }
@@ -32,31 +32,68 @@ const title = "Keyword Research Tool";
     .status.done { color: #2d7a3a; }
     .status.error { color: #c0392b; }
 
-    .results-grid { display: grid; gap: 16px; }
+    /* Summary */
+    .summary { background: #111; border: 2px solid #111; margin-bottom: 24px; display: none; }
+    .summary.visible { display: block; }
+    .summary-header { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.1); flex-wrap: wrap; gap: 12px; }
+    .summary-title { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+    .summary-actions { display: flex; gap: 8px; }
+    .summary-actions button { background: rgba(245,230,66,.15); border: 1px solid rgba(245,230,66,.4); color: #f5e642; padding: 7px 14px; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; transition: background .15s; }
+    .summary-actions button:hover { background: rgba(245,230,66,.3); }
+    .summary-actions button.primary { background: #f5e642; color: #111; border-color: #f5e642; }
+    .summary-actions button.primary:hover { background: #d4c30a; }
 
+    /* Intent legend */
+    .intent-legend { display: flex; gap: 16px; padding: 12px 24px; border-bottom: 1px solid rgba(255,255,255,.06); flex-wrap: wrap; }
+    .intent-legend span { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* Sort controls */
+    .sort-bar { display: flex; align-items: center; gap: 12px; padding: 12px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .sort-bar label { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: .06em; }
+    .sort-bar select { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: #fff; padding: 4px 10px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; outline: none; }
+    .filter-bar { display: flex; gap: 6px; padding: 12px 24px; flex-wrap: wrap; }
+    .filter-btn { background: transparent; border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.5); padding: 5px 12px; font-family: 'Space Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; transition: all .15s; }
+    .filter-btn:hover { border-color: rgba(255,255,255,.4); color: rgba(255,255,255,.8); }
+    .filter-btn.active { border-color: #f5e642; color: #f5e642; background: rgba(245,230,66,.1); }
+
+    .summary-all { display: flex; flex-wrap: wrap; gap: 8px; padding: 20px 24px; }
+    .summary-tag { border: 1px solid rgba(245,230,66,.25); padding: 6px 12px; font-size: 12px; cursor: pointer; transition: all .1s; display: flex; align-items: center; gap-7px; gap: 7px; }
+    .summary-tag:hover { background: rgba(245,230,66,.2); }
+    .summary-tag .kw-text { color: #f5e642; }
+    .summary-tag .kw-score { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; padding: 1px 6px; min-width: 20px; text-align: center; }
+    /* intent color coding */
+    .tag-info { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.3); }
+    .tag-info .kw-score { background: rgba(59,130,246,.3); color: #93c5fd; }
+    .tag-trans { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.3); }
+    .tag-trans .kw-score { background: rgba(34,197,94,.25); color: #86efac; }
+    .tag-local { background: rgba(251,146,60,.1); border-color: rgba(251,146,60,.3); }
+    .tag-local .kw-score { background: rgba(251,146,60,.25); color: #fdba74; }
+    .tag-general { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); }
+    .tag-general .kw-score { background: rgba(255,255,255,.1); color: rgba(255,255,255,.5); }
+
+    /* Results grid */
+    .results-grid { display: grid; gap: 16px; }
     .result-group { background: white; border: 2px solid #111; }
     .result-group-header { background: #111; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
     .result-group-header span { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
     .result-group-header em { color: rgba(255,255,255,.3); font-family: 'Space Mono', monospace; font-size: 10px; font-style: normal; }
     .result-group-body { padding: 4px 0; }
 
-    .suggestion { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid #f0ede6; cursor: pointer; transition: background .1s; }
+    .suggestion { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid #f0ede6; cursor: pointer; transition: background .1s; gap: 12px; }
     .suggestion:last-child { border-bottom: none; }
     .suggestion:hover { background: #f9f8f5; }
+    .suggestion-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
     .suggestion-text { font-size: 14px; color: #111; font-weight: 500; }
-    .suggestion-copy { font-family: 'Space Mono', monospace; font-size: 9px; color: #bbb; text-transform: uppercase; letter-spacing: .06em; opacity: 0; transition: opacity .1s; }
+    .s-badge { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 7px; white-space: nowrap; }
+    .s-info { background: #dbeafe; color: #1d4ed8; }
+    .s-trans { background: #dcfce7; color: #15803d; }
+    .s-local { background: #ffedd5; color: #c2410c; }
+    .suggestion-score { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: #bbb; white-space: nowrap; }
+    .suggestion-score.high { color: #f5a623; }
+    .suggestion-copy { font-family: 'Space Mono', monospace; font-size: 9px; color: #bbb; text-transform: uppercase; letter-spacing: .06em; opacity: 0; transition: opacity .1s; white-space: nowrap; }
     .suggestion:hover .suggestion-copy { opacity: 1; }
 
     .empty-group { padding: 14px 16px; font-family: 'Space Mono', monospace; font-size: 10px; color: #bbb; text-transform: uppercase; letter-spacing: .06em; }
-
-    .summary { background: #111; border: 2px solid #111; padding: 20px 24px; margin-bottom: 24px; display: none; }
-    .summary.visible { display: block; }
-    .summary-title { color: #f5e642; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
-    .summary-all { display: flex; flex-wrap: wrap; gap: 8px; }
-    .summary-tag { background: rgba(245,230,66,.12); border: 1px solid rgba(245,230,66,.3); color: #f5e642; padding: 5px 12px; font-size: 12px; cursor: pointer; transition: background .1s; }
-    .summary-tag:hover { background: rgba(245,230,66,.25); }
-    .copy-all-btn { margin-top: 14px; background: #f5e642; color: #111; border: none; padding: 10px 20px; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; transition: background .15s; }
-    .copy-all-btn:hover { background: #d4c30a; }
   </style>
 </head>
 <body>
@@ -74,10 +111,38 @@ const title = "Keyword Research Tool";
 
   <div class="status mono" id="status"></div>
 
+  <!-- Summary panel -->
   <div class="summary" id="summary">
-    <div class="summary-title">Всички уникални keywords (<span id="total-count">0</span>)</div>
+    <div class="summary-header">
+      <div class="summary-title">Всички уникални keywords (<span id="total-count">0</span>)</div>
+      <div class="summary-actions">
+        <button onclick="exportCSV()">↓ CSV</button>
+        <button class="primary" onclick="copyAll()">Копирай всички</button>
+      </div>
+    </div>
+    <div class="intent-legend">
+      <span>🔵 Informational (как/защо)</span>
+      <span>🟢 Transactional (цена/поръчай)</span>
+      <span>🟠 Local (Бургас/България/град)</span>
+      <span>⚪ General</span>
+      <span style="margin-left:auto">Score = брой patterns → keyword</span>
+    </div>
+    <div class="sort-bar">
+      <label>Сортирай:</label>
+      <select id="sort-select" onchange="renderSummary()">
+        <option value="score">По score (най-важни първо)</option>
+        <option value="alpha">Азбучен ред</option>
+        <option value="intent">По интент</option>
+      </select>
+    </div>
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Всички</button>
+      <button class="filter-btn" data-filter="info" onclick="setFilter('info', this)">🔵 Informational</button>
+      <button class="filter-btn" data-filter="trans" onclick="setFilter('trans', this)">🟢 Transactional</button>
+      <button class="filter-btn" data-filter="local" onclick="setFilter('local', this)">🟠 Local</button>
+      <button class="filter-btn" data-filter="general" onclick="setFilter('general', this)">⚪ General</button>
+    </div>
     <div class="summary-all" id="summary-tags"></div>
-    <button class="copy-all-btn" onclick="copyAll()">Копирай всички</button>
   </div>
 
   <div class="results-grid" id="results"></div>
@@ -85,29 +150,48 @@ const title = "Keyword Research Tool";
 
 <script>
   const PATTERNS = [
-    { label: 'Base',                    fn: q => q },
-    { label: 'цена / колко струва',     fn: q => `${q} цена` },
-    { label: 'колко струва',            fn: q => `колко струва ${q}` },
-    { label: 'как',                     fn: q => `как ${q}` },
-    { label: 'в България',              fn: q => `${q} в България` },
-    { label: 'за малък бизнес',         fn: q => `${q} за малък бизнес` },
-    { label: 'онлайн',                  fn: q => `${q} онлайн` },
-    { label: 'безплатно',               fn: q => `${q} безплатно` },
-    { label: 'отзиви / препоръки',      fn: q => `${q} отзиви` },
-    { label: 'алтернативи / или',       fn: q => `${q} или` },
-    { label: 'защо',                    fn: q => `защо ${q}` },
-    { label: 'най-добър',               fn: q => `най-добър ${q}` },
+    { label: 'Base',                fn: q => q },
+    { label: 'цена',                fn: q => `${q} цена` },
+    { label: 'колко струва',        fn: q => `колко струва ${q}` },
+    { label: 'как',                 fn: q => `как ${q}` },
+    { label: 'в България',          fn: q => `${q} в България` },
+    { label: 'за малък бизнес',     fn: q => `${q} за малък бизнес` },
+    { label: 'онлайн',              fn: q => `${q} онлайн` },
+    { label: 'безплатно',           fn: q => `${q} безплатно` },
+    { label: 'отзиви',              fn: q => `${q} отзиви` },
+    { label: 'или',                 fn: q => `${q} или` },
+    { label: 'защо',                fn: q => `защо ${q}` },
+    { label: 'най-добър',           fn: q => `най-добър ${q}` },
+    { label: 'за фирма',            fn: q => `${q} за фирма` },
+    { label: 'за бизнес',           fn: q => `${q} за бизнес` },
+    { label: 'автоматизация',       fn: q => `${q} автоматизация` },
   ];
 
-  let allKeywords = new Set();
+  // intent classifier
+  const INFO_TERMS  = ['как ', 'защо ', 'какво ', 'кога ', 'кой ', 'как да', 'как работи', 'ръководство', 'урок'];
+  const TRANS_TERMS = ['цена', 'струва', 'поръчай', 'купи', 'оферта', 'изработка', 'инсталация', 'наеми', 'безплатно'];
+  const LOCAL_TERMS = ['бургас', 'варна', 'пловдив', 'софия', 'русе', 'стара загора', 'в българия', 'българия'];
+
+  function classifyIntent(kw) {
+    const lc = kw.toLowerCase();
+    if (LOCAL_TERMS.some(t => lc.includes(t))) return 'local';
+    if (TRANS_TERMS.some(t => lc.includes(t))) return 'trans';
+    if (INFO_TERMS.some(t => lc.includes(t)))  return 'info';
+    return 'general';
+  }
+
+  // State
+  let freqMap = new Map();   // keyword -> count of patterns that returned it
+  let intentMap = new Map(); // keyword -> intent
+  let currentFilter = 'all';
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
   async function fetchSuggest(query) {
     const res = await fetch(`/api/suggest?q=${encodeURIComponent(query)}`);
     if (!res.ok) return [];
     return await res.json();
   }
-
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
   async function runSearch() {
     const seed = document.getElementById('seed').value.trim();
@@ -120,45 +204,83 @@ const title = "Keyword Research Tool";
 
     btn.disabled = true;
     results.innerHTML = '';
-    allKeywords.clear();
+    freqMap.clear();
+    intentMap.clear();
+    currentFilter = 'all';
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
     summary.classList.remove('visible');
 
     status.className = 'status loading mono';
     status.textContent = `Анализирам "${seed}" — изчакай...`;
 
-    const groups = [];
-
     for (let i = 0; i < PATTERNS.length; i++) {
       const p = PATTERNS[i];
       const query = p.fn(seed);
-      status.textContent = `[${i+1}/${PATTERNS.length}] Query: "${query}"`;
+      status.textContent = `[${i+1}/${PATTERNS.length}] "${query}"`;
 
       let suggestions = [];
-      try {
-        suggestions = await fetchSuggest(query);
-      } catch(e) {}
+      try { suggestions = await fetchSuggest(query); } catch(e) {}
 
-      suggestions.forEach(s => allKeywords.add(s));
-      groups.push({ label: p.label, query, suggestions });
+      suggestions.forEach(s => {
+        freqMap.set(s, (freqMap.get(s) || 0) + 1);
+        if (!intentMap.has(s)) intentMap.set(s, classifyIntent(s));
+      });
 
-      // Render incrementally
       renderGroup({ label: p.label, query, suggestions }, results);
-
       await sleep(300);
     }
 
     status.className = 'status done mono';
-    status.textContent = `✓ Готово — ${allKeywords.size} уникални keywords от ${PATTERNS.length} queries`;
+    status.textContent = `✓ Готово — ${freqMap.size} уникални keywords от ${PATTERNS.length} queries`;
     btn.disabled = false;
 
-    // Render summary
-    const summaryTags = document.getElementById('summary-tags');
-    const totalCount = document.getElementById('total-count');
-    totalCount.textContent = allKeywords.size;
-    summaryTags.innerHTML = [...allKeywords].map(k =>
-      `<span class="summary-tag" onclick="copyText('${k.replace(/'/g,"\\'")}', this)">${k}</span>`
-    ).join('');
+    document.getElementById('total-count').textContent = freqMap.size;
+    renderSummary();
     summary.classList.add('visible');
+  }
+
+  function getSortedKeywords() {
+    const sort = document.getElementById('sort-select').value;
+    let entries = [...freqMap.entries()];
+
+    if (currentFilter !== 'all') {
+      entries = entries.filter(([kw]) => intentMap.get(kw) === currentFilter);
+    }
+
+    if (sort === 'score') {
+      entries.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'bg'));
+    } else if (sort === 'alpha') {
+      entries.sort((a, b) => a[0].localeCompare(b[0], 'bg'));
+    } else if (sort === 'intent') {
+      const order = { trans: 0, local: 1, info: 2, general: 3 };
+      entries.sort((a, b) => {
+        const ia = order[intentMap.get(a[0])] ?? 4;
+        const ib = order[intentMap.get(b[0])] ?? 4;
+        return ia - ib || b[1] - a[1];
+      });
+    }
+    return entries;
+  }
+
+  function renderSummary() {
+    const entries = getSortedKeywords();
+    const container = document.getElementById('summary-tags');
+    container.innerHTML = entries.map(([kw, score]) => {
+      const intent = intentMap.get(kw) || 'general';
+      const intentLabel = { info: '🔵', trans: '🟢', local: '🟠', general: '' }[intent] || '';
+      const safeKw = kw.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      return `<span class="summary-tag tag-${intent}" onclick="copyText('${safeKw}', this)" title="Score: ${score} | Intent: ${intent}">
+        <span class="kw-text">${intentLabel ? intentLabel + ' ' : ''}${kw}</span>
+        <span class="kw-score">${score}</span>
+      </span>`;
+    }).join('');
+  }
+
+  function setFilter(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSummary();
   }
 
   function renderGroup({ label, query, suggestions }, container) {
@@ -172,11 +294,21 @@ const title = "Keyword Research Tool";
       <div class="result-group-body">
         ${suggestions.length === 0
           ? `<div class="empty-group">Няма резултати</div>`
-          : suggestions.map(s => `
-              <div class="suggestion" onclick="copyText('${s.replace(/'/g,"\\'")}', this)">
-                <span class="suggestion-text">${s}</span>
+          : suggestions.map(s => {
+              const intent = intentMap.get(s) || classifyIntent(s);
+              const badge = { info: '<span class="s-badge s-info">INFO</span>', trans: '<span class="s-badge s-trans">BUY</span>', local: '<span class="s-badge s-local">LOCAL</span>', general: '' }[intent] || '';
+              const score = freqMap.get(s) || 1;
+              const scoreClass = score >= 3 ? 'high' : '';
+              const safe = s.replace(/'/g, "\\'");
+              return `<div class="suggestion" onclick="copyText('${safe}', this)">
+                <div class="suggestion-left">
+                  <span class="suggestion-text">${s}</span>
+                  ${badge}
+                </div>
+                <span class="suggestion-score ${scoreClass}">×${score}</span>
                 <span class="suggestion-copy">копирай</span>
-              </div>`).join('')
+              </div>`;
+            }).join('')
         }
       </div>`;
     container.appendChild(div);
@@ -185,17 +317,37 @@ const title = "Keyword Research Tool";
   function copyText(text, el) {
     navigator.clipboard.writeText(text).then(() => {
       const orig = el.querySelector?.('.suggestion-copy');
-      if (orig) { orig.textContent = '✓ копирано'; setTimeout(() => orig.textContent = 'копирай', 1500); }
+      if (orig) { orig.textContent = '✓'; setTimeout(() => orig.textContent = 'копирай', 1500); }
+      const kw = el.querySelector?.('.kw-text');
+      if (kw) { const prev = kw.textContent; kw.textContent = '✓ копирано'; setTimeout(() => kw.textContent = prev, 1500); }
     });
   }
 
   function copyAll() {
-    const text = [...allKeywords].join('\n');
+    const entries = getSortedKeywords();
+    const text = entries.map(([kw]) => kw).join('\n');
     navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.copy-all-btn');
+      const btn = document.querySelector('.summary-actions .primary');
       btn.textContent = '✓ Копирано!';
       setTimeout(() => btn.textContent = 'Копирай всички', 2000);
     });
+  }
+
+  function exportCSV() {
+    const entries = getSortedKeywords();
+    const header = 'keyword,score,intent\n';
+    const rows = entries.map(([kw, score]) => {
+      const intent = intentMap.get(kw) || 'general';
+      const safe = kw.includes(',') ? `"${kw}"` : kw;
+      return `${safe},${score},${intent}`;
+    }).join('\n');
+    const blob = new Blob([header + rows], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `keywords-${document.getElementById('seed').value.trim().replace(/\s+/g,'-')}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   document.getElementById('seed').addEventListener('keydown', e => {

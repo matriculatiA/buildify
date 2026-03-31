@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Колко струва онлайн магазин в България за 2026?",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-31",
+  "dateModified": "2026-03-31",
+  "description": "Реални цени за онлайн магазин в България за 2026 — готово решение, WooCommerce или custom. Кое се изплаща и кога."
+};
+---
+
+<BaseLayout
+  title="Колко струва онлайн магазин в България за 2026? | buildify.bg"
+  description="Реални цени за изработка на онлайн магазин — от готово решение до custom. Shopify, WooCommerce, custom сайт. Кое е най-изгодно за малкия бизнес?"
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Уебсайтове</span>
+        <span class="font-mono text-xs text-white/45">Март 2026</span>
+        <span class="font-mono text-xs text-white/45">5 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Колко струва<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">онлайн магазин</mark><br/>
+        в България?
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        "Готов онлайн магазин" може да означава 20 лв./месец в Shopify или 2000€ custom разработка. Разликата не е произволна — зависи какво продаваш и колко искаш да растеш.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- ПРОБЛЕМЪТ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Защо цените варират толкова много</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Ако потърсиш "онлайн магазин цена" ще намериш всичко от 200 лв. до 10 000€. Всички са прави — просто говорят за различни неща.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Под "онлайн магазин" се крият три коренно различни продукта: готова платформа с абонамент (Shopify, Wix), WordPress с WooCommerce плъгин, и custom разработка от нулата. Всяко решение има своята логика и своя истинска цена.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Ключовият въпрос не е "кое е по-евтино" — а кое ще ти струва по-малко след 3 години.
+        </p>
+      </div>
+
+      <!-- СРАВНЕНИЕ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Трите варианта — честно сравнение</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          <div class="grid grid-cols-4 bg-ink px-5 py-3">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Shopify / Wix</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">WooCommerce</span>
+            <span class="font-mono text-xs text-yellow uppercase tracking-widest">Custom</span>
+          </div>
+          {[
+            { label: "Начална цена",    a: "0€",              b: "от 500€",          c: "от 750€" },
+            { label: "Месечен абонамент",a: "29-79$/мес.",    b: "хостинг ~10€",     c: "0€" },
+            { label: "Транзакционна такса",a: "0.5-2%",       b: "0%",               c: "0%" },
+            { label: "Скорост",         a: "средна",          b: "бавна (плъгини)",  c: "бърза" },
+            { label: "SEO контрол",     a: "ограничен",       b: "добър",            c: "пълен" },
+            { label: "Дизайн",          a: "темплейт",        b: "темплейт",         c: "уникален" },
+            { label: "Мащабиране",      a: "скъпо",           b: "средно",           c: "лесно" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-4 gap-2 px-5 py-4 items-center ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.label}</span>
+              <span class="text-xs text-muted">{row.a}</span>
+              <span class="text-xs text-muted">{row.b}</span>
+              <span class="text-xs text-ink font-bold">{row.c}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-muted text-sm leading-relaxed">
+          Shopify изглежда евтин докато не видиш сметката след 2 години абонамент + транзакционни такси. WooCommerce е гъвкав, но бавен и изисква поддръжка. Custom е по-скъп отначало, но без скрити разходи.
+        </p>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Shopify за 3 години = над 1000€ абонамент. Custom магазин = 750€ еднократно, без повече."
+        </p>
+      </div>
+
+      <!-- КАКВО ВЛИЯЕ НА ЦЕНАТА -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Какво влияе на цената</span>
+        </div>
+        <div class="space-y-3">
+          {[
+            { factor: "Брой продукти",       low: "до 50 продукта — стандартна цена", high: "500+ продукта — интеграция с ERP/CSV внос" },
+            { factor: "Плащания",            low: "Stripe / наложен платеж — включено", high: "epay.bg, ePay, банков превод — малко повече" },
+            { factor: "Склад и логистика",   low: "Без интеграция — ръчно управление", high: "Интеграция с Еконт / Спиди / склад система" },
+            { factor: "Дизайн",              low: "Стандартен дизайн по системата ни", high: "Уникален дизайн по брандинг гайдлайн" },
+            { factor: "Допълнителни функции",low: "Търсене, филтри, количка — включено", high: "Сравняване, wishlist, абонамент, B2B цени" },
+          ].map(item => (
+            <div class="bg-white border-2 border-ink p-5">
+              <div class="font-bold text-sm uppercase tracking-tight text-ink mb-2">{item.factor}</div>
+              <div class="grid md:grid-cols-2 gap-3">
+                <div class="flex gap-2 items-start"><span class="text-green-600 font-mono text-xs shrink-0 mt-0.5">▸</span><span class="text-sm text-muted">{item.low}</span></div>
+                <div class="flex gap-2 items-start"><span class="text-yellow font-mono text-xs shrink-0 mt-0.5">▸</span><span class="text-sm text-muted">{item.high}</span></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- ЦЕНОВА ТАБЛИЦА -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Реални цени при buildify.bg</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Малък магазин (до 50 продукта, Stripe)",         v: "от 750€" },
+            { k: "Среден магазин (до 200 продукта, Еконт/Спиди)",  v: "от 1 200€" },
+            { k: "Голям магазин (500+ продукта, ERP интеграция)",   v: "от 1 800€" },
+            { k: "Месечна такса след пускане",                       v: "0€" },
+            { k: "Хостинг",                                          v: "0€ (Cloudflare Pages)" },
+            { k: "Срок за пускане",                                  v: "3-6 седмици" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink">{row.k}</span>
+              <span class="font-mono font-bold text-sm text-ink">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/60 text-sm leading-relaxed">
+          Всички цени са еднократни. Без абонамент, без скрити такси. Плащате само домейна (~10€/год.) и евентуалните транзакционни такси на Stripe (1.5% + 0.25€ за BG карти).
+        </p>
+      </div>
+
+      <!-- КОГА КОЕ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">05</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога кое решение има смисъл</span>
+        </div>
+        <div class="space-y-3">
+          {[
+            { when: "Тестваш идея за под 3 месеца",      use: "Shopify — бързо, без ангажимент" },
+            { when: "Имаш WordPress сайт вече",           use: "WooCommerce — логично продължение" },
+            { when: "Сериозен бизнес, дългосрочно",       use: "Custom — изплаща се след 1-2 години" },
+            { when: "Продаваш до 20 продукта",            use: "Custom landing page с форма — без магазин изобщо" },
+            { when: "Нужна е интеграция с Еконт/Спиди",  use: "Custom — готовите решения го правят трудно" },
+          ].map((item, i) => (
+            <div class={`flex gap-4 items-start px-5 py-4 border-2 border-ink ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-mono text-xs text-yellow shrink-0 mt-0.5 font-bold">АКО</span>
+              <span class="text-sm text-ink flex-1">{item.when}</span>
+              <span class="font-mono text-xs text-muted shrink-0 mt-0.5">→</span>
+              <span class="text-sm font-bold text-ink flex-1">{item.use}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Онлайн магазини</div>
+            <div class="font-bold text-white text-xl tracking-tight">Вземи конкретна цена за твоя магазин</div>
+            <p class="text-white/40 text-sm mt-1">Опиши накратко какво продаваш и брой продукти. Отговаряме с конкретна оферта до 24 часа.</p>
+          </div>
+          <div class="flex gap-3 flex-wrap shrink-0">
+            <a href="/kontakt" class="bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+              Поискай оферта →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

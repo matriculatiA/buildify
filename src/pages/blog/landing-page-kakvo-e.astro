@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Landing page — какво е, кога ти трябва и колко струва",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-03-31",
+  "dateModified": "2026-03-31",
+  "description": "Какво е landing page, как се различава от пълен сайт и колко струва изработката в България за 2026."
+};
+---
+
+<BaseLayout
+  title="Landing page — какво е, кога ти трябва и колко струва | buildify.bg"
+  description="Какво е landing page и как се различава от уебсайт. Кога ти трябва, кога не — и колко струва изработката в България."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Уебсайтове</span>
+        <span class="font-mono text-xs text-white/45">Март 2026</span>
+        <span class="font-mono text-xs text-white/45">4 мин. четене</span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Landing page —<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">какво е</mark><br/>
+        и колко струва
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Половината бизнеси плащат за пълен сайт, когато им трябва landing page. Другата половина пуска landing page, когато им трябва пълен сайт. Ето как да разбереш кое е твоето.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- КАКВО Е -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Какво е landing page</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Landing page е единична страница с една цел — да накара посетителя да направи нещо конкретно. Да се обади. Да остави имейл. Да поръча. Да запише час.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          За разлика от пълен сайт с много страници и навигация, landing page-ът е фокусиран. Без разсейване, без препратки към "За нас" или "Блог". Само едно действие.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Структурата е проста: проблем → решение → защо ние → доказателства → призив за действие. Всичко на една страница, оптимизирано за конверсия.
+        </p>
+      </div>
+
+      <!-- СТАТИСТИКИ -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "5-7",  lbl: "Работни дни за изработка на landing page" },
+          { val: "2-3×", lbl: "По-висока конверсия спрямо пълен сайт при реклама" },
+          { val: "350€", lbl: "Начална цена при buildify.bg — еднократно" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- LANDING PAGE VS САЙТ -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Landing page срещу пълен сайт</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Landing page</span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Пълен сайт</span>
+          </div>
+          {[
+            { label: "Брой страници",    a: "1",                      b: "5-20+" },
+            { label: "Цел",              a: "Едно действие",           b: "Информация + действие" },
+            { label: "Подходящ за",      a: "Реклама, промоция",       b: "Основен онлайн адрес" },
+            { label: "Навигация",        a: "Няма (или минимална)",    b: "Пълно меню" },
+            { label: "Цена",             a: "от 350€",                 b: "от 750€" },
+            { label: "Срок",             a: "5-7 работни дни",         b: "2-4 седмици" },
+            { label: "SEO потенциал",    a: "Ограничен (1 страница)",  b: "По-висок (много страни)" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 items-center ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.label}</span>
+              <span class="text-xs text-muted">{row.a}</span>
+              <span class="text-xs text-muted">{row.b}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Ако пускаш реклама в Google или Facebook — искаш landing page, не пълен сайт. Рекламата довежда хора с конкретно намерение. Дай им само едно нещо за правене."
+        </p>
+      </div>
+
+      <!-- КОГА LANDING PAGE -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Кога ти трябва landing page</span>
+        </div>
+        <div class="space-y-3 mb-6">
+          {[
+            { yes: true,  case: "Пускаш Google / Facebook реклама за конкретна услуга" },
+            { yes: true,  case: "Предлагаш един продукт или промоция с краен срок" },
+            { yes: true,  case: "Събираш имейли или записвания за събитие" },
+            { yes: true,  case: "Тестваш дали има търсене преди да правиш пълен сайт" },
+            { yes: false, case: "Искаш да се намираш в Google по много теми" },
+            { yes: false, case: "Имаш много услуги или продукти, които трябва да обясниш" },
+            { yes: false, case: "Клиентите трябва да разбират компанията ти преди да купят" },
+          ].map(item => (
+            <div class={`flex gap-4 items-center px-5 py-4 border-2 border-ink ${item.yes ? 'bg-white' : 'bg-cream'}`}>
+              <span class={`font-mono text-sm font-bold shrink-0 ${item.yes ? 'text-green-600' : 'text-red-400'}`}>{item.yes ? '✓' : '✗'}</span>
+              <span class="text-sm text-ink">{item.case}</span>
+              <span class={`font-mono text-xs ml-auto shrink-0 ${item.yes ? 'text-green-600' : 'text-muted'}`}>{item.yes ? 'Landing page' : 'Пълен сайт'}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- КАКВО ВКЛЮЧВА -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Какво включва landing page от buildify.bg</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Дизайн",           v: "Уникален — не темплейт, не Canva" },
+            { k: "Секции",           v: "До 5 (Hero, Проблем/Решение, Предимства, Доказателства, CTA)" },
+            { k: "Контактна форма",  v: "Включена — директно на имейла ти" },
+            { k: "Mobile-first",     v: "Перфектен на телефон — 70%+ от трафика е мобилен" },
+            { k: "Скорост",          v: "Core Web Vitals зелено — важно за Google реклама" },
+            { k: "SEO основи",       v: "Meta тагове, Schema markup, Open Graph за социални" },
+            { k: "Хостинг",         v: "Безплатно на Cloudflare — домейнът е ваш" },
+            { k: "Срок",             v: "5-7 работни дни" },
+            { k: "Цена",             v: "от 350€ еднократно" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 gap-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink font-semibold shrink-0">{row.k}</span>
+              <span class="font-mono text-sm text-ink text-right">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/60 text-sm">
+          Ако след landing page-а искаш да разширяш — добавяме страници. Не трябва да правиш всичко наново.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Landing pages</div>
+            <div class="font-bold text-white text-xl tracking-tight">Готов за 5-7 дни. От 350€.</div>
+            <p class="text-white/40 text-sm mt-1">Опиши накратко какво предлагаш. Отговаряме с конкретна цена до 24 часа.</p>
+          </div>
+          <div class="flex gap-3 flex-wrap shrink-0">
+            <a href="/kontakt" class="bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+              Поискай оферта →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

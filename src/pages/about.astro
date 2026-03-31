@@ -193,11 +193,11 @@ const schema = {
         <ul class="flex flex-col gap-2">
           {service.items.map(item => (
             <li class="flex items-center gap-3 text-sm text-muted">
-              <span class="text-yellow font-bold shrink-0">→</span>{item}
+              <span class="text-ink font-bold shrink-0">→</span>{item}
             </li>
           ))}
         </ul>
-        <a href={service.href} class="font-mono text-xs uppercase tracking-widest text-muted hover:text-ink transition-colors mt-auto pt-2">
+        <a href={service.href} class="inline-flex items-center gap-2 bg-ink text-yellow font-mono text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-ink/80 transition-colors self-start mt-auto">
           Виж услугата →
         </a>
       </div>

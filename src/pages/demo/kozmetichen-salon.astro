@@ -1,0 +1,344 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+---
+<DemoLayout title="Студио Аура — Козметичен салон Бургас" accent="#f9a8d4">
+<style>
+  :root { --rose: #be185d; --pink: #ec4899; --light: #fce7f3; --dark: #1a0a11; --text: #3b1829; }
+  * { box-sizing: border-box; }
+  a { text-decoration: none; }
+  section { padding: 80px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; display: block; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .delay-1 { transition-delay: .1s; } .delay-2 { transition-delay: .2s; }
+  .delay-3 { transition-delay: .3s; } .delay-4 { transition-delay: .4s; }
+
+  .btn { background: var(--rose); color: white; font-weight: 700; padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; letter-spacing: .03em; transition: background .2s, transform .15s; border: none; cursor: pointer; }
+  .btn:hover { background: #9d174d; transform: translateY(-2px); }
+  .btn-outline { border: 2px solid var(--rose); color: var(--rose); font-weight: 700; padding: 12px 28px; display: inline-block; font-size: 14px; transition: all .2s; }
+  .btn-outline:hover { background: var(--rose); color: white; }
+
+  .service-card { background: white; padding: 32px 28px; position: relative; overflow: hidden; cursor: default; transition: box-shadow .3s, transform .3s; border-bottom: 1px solid #fce7f3; border-right: 1px solid #fce7f3; }
+  .service-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--pink); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.25,.46,.45,.94); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-card:hover { box-shadow: 0 8px 32px rgba(236,72,153,.12); transform: translateY(-3px); }
+
+  #float-cta { position: fixed; bottom: 32px; right: 32px; z-index: 200; background: var(--pink); color: white; font-weight: 700; font-size: 13px; padding: 14px 24px; letter-spacing: .04em; box-shadow: 0 8px 32px rgba(236,72,153,.5); transition: transform .2s, box-shadow .2s; cursor: pointer; display: flex; align-items: center; gap: 8px; border: none; }
+  #float-cta:hover { transform: translateY(-3px) scale(1.04); }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 8px 32px rgba(236,72,153,.5); } 50% { box-shadow: 0 8px 48px rgba(236,72,153,.8); } }
+  #float-cta { animation: pulse 3s ease-in-out infinite; }
+  #float-cta:hover { animation: none; }
+
+  .review-card { background: white; border: 1px solid #fce7f3; padding: 28px; transition: transform .3s, box-shadow .3s; }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.08); }
+
+  #salon-nav { transition: transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .3s; }
+  #salon-nav.hidden { transform: translateY(-110%); }
+  #salon-nav.shadow { box-shadow: 0 4px 24px rgba(0,0,0,.10) !important; }
+
+  .gallery-item { overflow: hidden; aspect-ratio: 1; background: var(--light); display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay { position: absolute; inset: 0; background: rgba(190,24,93,.7); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .3s; }
+
+  .price-card { background: white; border: 1px solid #fce7f3; padding: 0; transition: box-shadow .25s; }
+  .price-card:hover { box-shadow: 0 8px 32px rgba(236,72,153,.1); }
+  .price-head { background: var(--light); padding: 20px 24px; border-bottom: 1px solid #fce7f3; }
+</style>
+
+<a href="#zapis" id="float-cta">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+  Запишете час
+</a>
+
+<!-- NAV -->
+<nav id="salon-nav" style="background:white;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:32px;z-index:100;box-shadow:0 1px 20px rgba(0,0,0,.06)">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div style="width:42px;height:42px;background:linear-gradient(135deg,var(--pink),var(--rose));display:flex;align-items:center;justify-content:center;color:white;font-size:20px;box-shadow:0 4px 12px rgba(236,72,153,.35)">✦</div>
+    <div>
+      <div style="font-weight:800;font-size:16px;color:var(--dark);line-height:1;font-family:'Playfair Display',serif">Студио Аура</div>
+      <div style="font-size:11px;color:#9d6e7e;letter-spacing:.04em">Козметичен салон · Бургас</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:28px;align-items:center">
+    {['Услуги', 'Цени', 'Галерия', 'Контакти'].map(l => (
+      <a href="#" style="color:#9d6e7e;font-size:14px;font-weight:500;display:none;transition:color .2s" class="nav-link" onmouseover="this.style.color='var(--rose)'" onmouseout="this.style.color='#9d6e7e'">{l}</a>
+    ))}
+    <a href="#zapis" class="btn" style="padding:10px 20px;font-size:13px">Запишете час →</a>
+  </div>
+</nav>
+<style>@media(min-width:768px){.nav-link{display:block!important}}</style>
+
+<!-- HERO -->
+<div style="background:#fdf2f8;padding:80px 24px 60px;position:relative;overflow:hidden;height:92vh">
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(253,242,248,.95) 0%,rgba(252,231,243,.85) 40%,rgba(251,207,232,.75) 100%);pointer-events:none;z-index:1"></div>
+  <!-- Decorative circles -->
+  <div style="position:absolute;right:-120px;top:-120px;width:600px;height:600px;border-radius:50%;border:1.5px solid rgba(236,72,153,.1);pointer-events:none"></div>
+  <div style="position:absolute;right:-40px;top:-40px;width:380px;height:380px;border-radius:50%;border:1.5px solid rgba(236,72,153,.07);pointer-events:none"></div>
+  <div style="position:absolute;left:-80px;bottom:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(236,72,153,.08) 0%,transparent 70%);pointer-events:none"></div>
+
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2;height:100%">
+    <div>
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:white;padding:8px 16px;border-radius:100px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:24px">
+        <span style="color:#f59e0b;font-size:14px">★★★★★</span>
+        <span style="font-size:13px;color:#9d6e7e;font-weight:500">4.9 · 280+ отзива в Google</span>
+      </div>
+      <h1 class="reveal delay-1 serif" style="font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;color:var(--dark);line-height:1.08;margin-bottom:20px">
+        Красотата е<br/><span style="color:var(--pink)">ритуал,</span><br/>не случайност.
+      </h1>
+      <p class="reveal delay-2" style="color:#6b3a4e;font-size:17px;line-height:1.7;margin-bottom:36px;max-width:460px">
+        Козметичен салон в Бургас с 10 години опит. Грижа за кожа, маникюр, масажи и SPA процедури с премиум продукти.
+      </p>
+      <div class="reveal delay-3" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px">
+        <a href="#zapis" class="btn">Запишете час →</a>
+        <a href="#uslugi" class="btn-outline">Нашите услуги</a>
+      </div>
+      <div class="reveal delay-4" style="display:flex;gap:40px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(236,72,153,.15)">
+        {[['10', 'г. опит'], ['3000', '+ клиентки'], ['100%', 'натурални продукти']].map(([n,l]) => (
+          <div>
+            <div style="font-size:2.2rem;font-weight:900;color:var(--rose);line-height:1">{n}</div>
+            <div style="font-size:12px;color:#9d6e7e;text-transform:uppercase;letter-spacing:.06em;margin-top:4px">{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div style="display:grid;gap:10px" class="reveal-right">
+      {[
+        '✦ Онлайн записване 24/7 — без чакане на телефона',
+        '✦ Потвърждение по SMS веднага',
+        '✦ Напомняне 24 часа преди часа',
+        '✦ Гъвкаво отменяне без неустойка',
+      ].map(text => (
+        <div style="background:white;border-left:3px solid var(--pink);padding:16px 20px;display:flex;gap:14px;align-items:center;box-shadow:0 2px 8px rgba(236,72,153,.07);font-size:14px;color:var(--text);font-weight:600;transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateX(6px)';this.style.boxShadow='0 4px 16px rgba(236,72,153,.16)'" onmouseout="this.style.transform='translateX(0)';this.style.boxShadow='0 2px 8px rgba(236,72,153,.07)'">{text}</div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<!-- УСЛУГИ -->
+<section id="uslugi" style="background:white">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px" class="reveal">
+      <span class="tag">Нашите услуги</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--dark);margin-bottom:16px">Грижа от главата до пръстите</h2>
+      <p style="color:#9d6e7e;max-width:440px;margin:0 auto;line-height:1.7">Всяка процедура е съобразена с нуждите на вашата кожа и стил на живот</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));background:#fce7f3">
+      {[
+        { icon: '🌸', title: 'Грижа за лице', desc: 'Почистване, хидратация, анти-ейджинг процедури. Работим с Guinot и La Mer продукти.', price: 'от 60 лв.' },
+        { icon: '💅', title: 'Маникюр & педикюр', desc: 'Класически, гел, акрил, нокти с дизайн. Апаратен педикюр. Трайност 3–4 седмици.', price: 'от 25 лв.' },
+        { icon: '✨', title: 'Козметичен масаж', desc: 'Лимфодренаж, антицелулитен, релаксиращ. 45 или 90-минутни процедури.', price: 'от 50 лв.' },
+        { icon: '💇', title: 'Депилация', desc: 'Кола маска, восък, захарна паста. Трайна лазерна депилация по договаряне.', price: 'от 20 лв.' },
+        { icon: '👁️', title: 'Оформяне на вежди', desc: 'Конец, восък, ламиниране на вежди и мигли. Трайно оцветяване.', price: 'от 15 лв.' },
+        { icon: '🛁', title: 'SPA пакети', desc: 'Пълен ден SPA — лице, тяло, масаж и маникюр. Перфектен подарък.', price: 'от 150 лв.' },
+      ].map((s, i) => (
+        <div class="service-card reveal" style={`transition-delay:${(i%3)*.1}s`}>
+          <div style="font-size:32px;margin-bottom:16px">{s.icon}</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px">{s.title}</h3>
+          <p style="font-size:13px;color:#9d6e7e;line-height:1.75;margin-bottom:20px">{s.desc}</p>
+          <div style="display:inline-block;background:var(--light);color:var(--rose);font-size:12px;font-weight:700;padding:5px 14px;letter-spacing:.02em">{s.price}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ЦЕНОРАЗПИС -->
+<section id="ceni" style="background:#fdf2f8">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <span class="tag">Ценоразпис</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;color:var(--dark);margin-bottom:12px">Прозрачни цени, без изненади</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+      {[
+        {
+          title: 'Маникюр',
+          items: [
+            ['Класически маникюр', '25 лв.'],
+            ['Гел лак', '40 лв.'],
+            ['Акрил / гел удължаване', '60 лв.'],
+            ['Свалане + ново нанасяне', '50 лв.'],
+            ['Дизайн (на нокът)', '+5 лв.'],
+          ]
+        },
+        {
+          title: 'Грижа за лице',
+          items: [
+            ['Класическо почистване', '60 лв.'],
+            ['Хидратираща процедура', '70 лв.'],
+            ['Анти-ейджинг лифтинг', '95 лв.'],
+            ['Микродермабразио', '80 лв.'],
+            ['Почистване + маска', '85 лв.'],
+          ]
+        },
+        {
+          title: 'Депилация',
+          items: [
+            ['Горна устна', '12 лв.'],
+            ['Вежди', '15 лв.'],
+            ['Подмишници', '20 лв.'],
+            ['Бикини зона', '35 лв.'],
+            ['Цял крак', '55 лв.'],
+          ]
+        },
+      ].map(cat => (
+        <div class="price-card reveal">
+          <div class="price-head">
+            <h3 style="font-weight:700;color:var(--dark);font-size:16px">{cat.title}</h3>
+          </div>
+          <div style="padding:0">
+            {cat.items.map(([name, price], i) => (
+              <div style={`display:flex;justify-content:space-between;align-items:center;padding:12px 24px;${i < cat.items.length-1 ? 'border-bottom:1px solid #fce7f3' : ''}`}>
+                <span style="font-size:14px;color:#6b3a4e">{name}</span>
+                <span style="font-size:14px;font-weight:700;color:var(--rose)">{price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section style="background:linear-gradient(135deg,var(--rose),#831843);padding:64px 24px">
+  <div class="container" style="text-align:center;max-width:640px">
+    <p class="serif reveal" style="font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:white;line-height:1.4;margin-bottom:24px">
+      "Всяка жена заслужава да се почувства красива. Нашата работа е да й помогнем да го открие."
+    </p>
+    <span style="font-size:13px;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.06em;text-transform:uppercase">— Студио Аура, Бургас</span>
+  </div>
+</section>
+
+<!-- ОТЗИВИ -->
+<section style="background:white">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <span class="tag">Отзиви</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;color:var(--dark);margin-bottom:12px">Клиентките говорят</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      {[
+        { name: 'Мария С.', text: 'Ходя в Аура от 3 години. Момичетата са фантастични — внимателни, прецизни и винаги се грижат да се чувствам специална. Маникюрът трае цял месец!', tag: 'Маникюр' },
+        { name: 'Петя Д.', text: 'Направих SPA пакет за рожден ден — беше невероятно. 3 часа чисто удоволствие. Определено ще повторя. Задължително го пробвайте!', tag: 'SPA пакет' },
+        { name: 'Ралица К.', text: 'Идвам за почистване на лице от 2 години. Кожата ми се подобри неимоверно. Препоръчвам на всяка жена — резултатите са видими след 2-3 процедури.', tag: 'Грижа за лице' },
+        { name: 'Елена В.', text: 'Онлайн записването е много удобно — записах се в 23:00 и получих потвърждение веднага. Нямаше нужда да звъня по телефона.', tag: 'Онлайн запис' },
+      ].map(r => (
+        <div class="review-card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div style="color:#f59e0b;font-size:14px">★★★★★</div>
+            <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:var(--light);color:var(--rose);padding:3px 10px">{r.tag}</span>
+          </div>
+          <p style="font-size:13px;color:#6b3a4e;line-height:1.75;margin-bottom:12px;font-style:italic">"{r.text}"</p>
+          <div style="font-weight:700;font-size:13px;color:var(--dark)">{r.name}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ЗАПИШЕТЕ ЧАС -->
+<section id="zapis" style="background:var(--light)">
+  <div class="container" style="max-width:680px">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <span class="tag">Онлайн записване</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;color:var(--dark);margin-bottom:12px">Запазете своя час</h2>
+      <p style="color:#9d6e7e">Потвърждение по SMS до 15 минути. Можете да отмените или промените час до 24 часа преди.</p>
+    </div>
+    <div style="background:white;padding:40px;box-shadow:0 8px 48px rgba(236,72,153,.1);border-top:4px solid var(--pink)" class="reveal">
+      <form style="display:grid;gap:20px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#9d6e7e;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Вашето име</label>
+            <input type="text" placeholder="Мария Иванова" style="width:100%;padding:12px 16px;border:2px solid #fce7f3;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s;color:#3b1829" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='#fce7f3'" />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#9d6e7e;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Телефон</label>
+            <input type="tel" placeholder="+359 88..." style="width:100%;padding:12px 16px;border:2px solid #fce7f3;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s;color:#3b1829" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='#fce7f3'" />
+          </div>
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;color:#9d6e7e;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Услуга</label>
+          <select style="width:100%;padding:12px 16px;border:2px solid #fce7f3;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white;color:#3b1829;transition:border-color .2s" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='#fce7f3'">
+            {['Маникюр','Педикюр','Грижа за лице','Масаж','Депилация','Вежди / мигли','SPA пакет','Друго'].map(o => <option>{o}</option>)}
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#9d6e7e;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Предпочитана дата</label>
+            <input type="date" style="width:100%;padding:12px 16px;border:2px solid #fce7f3;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='#fce7f3'" />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#9d6e7e;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Предпочитан час</label>
+            <select style="width:100%;padding:12px 16px;border:2px solid #fce7f3;font-size:14px;font-family:Inter,sans-serif;outline:none;background:white;color:#3b1829">
+              {['9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'].map(h => <option>{h}</option>)}
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn" style="width:100%;padding:16px;font-size:15px;justify-content:center">Запишете час →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--dark);padding:48px 24px">
+  <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:32px">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:18px;color:white">✦</div>
+        <div style="font-weight:800;font-size:16px;color:white;font-family:'Playfair Display',serif">Студио Аура</div>
+      </div>
+      <p style="color:rgba(255,255,255,.35);font-size:13px;line-height:1.7">Козметичен салон · Бургас<br/>Красота с любов от 2014.</p>
+    </div>
+    {[
+      ['Услуги', ['Маникюр & педикюр', 'Грижа за лице', 'Масажи', 'Депилация', 'SPA пакети']],
+      ['Контакти', ['ул. Лермонтов 12, Бургас', '+359 56 789 012', 'aura.salon@gmail.com', 'Пон–Саб: 9:00–19:00', 'Нед: 10:00–16:00']],
+    ].map(([title, items]) => (
+      <div>
+        <div style="color:var(--pink);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">{title}</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+          {(items as string[]).map(item => <li style="color:rgba(255,255,255,.35);font-size:13px">{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;text-align:center;color:rgba(255,255,255,.2);font-size:12px">
+    © 2026 Студио Аура · Козметичен салон Бургас
+  </div>
+</footer>
+
+<script>
+  const allReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  allReveal.forEach(r => io.observe(r));
+
+  const nav = document.getElementById('salon-nav');
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    if (!nav) return;
+    const y = window.scrollY;
+    if (y > lastY && y > 120) { nav.classList.add('hidden'); }
+    else { nav.classList.remove('hidden'); nav.classList.toggle('shadow', y > 40); }
+    lastY = y;
+  }, { passive: true });
+
+  const floatBtn = document.getElementById('float-cta');
+  const zapSection = document.getElementById('zapis');
+  if (floatBtn && zapSection) {
+    const hideIO = new IntersectionObserver(([e]) => {
+      if (floatBtn) floatBtn.style.opacity = e.isIntersecting ? '0' : '1';
+    }, { threshold: 0.5 });
+    hideIO.observe(zapSection);
+  }
+</script>
+</DemoLayout>

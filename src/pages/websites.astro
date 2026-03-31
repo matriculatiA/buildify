@@ -76,7 +76,7 @@ const industries = [
   { code: "REST", name: "Ресторант / Заведение", desc: "Онлайн меню, резервации, работно време, отзиви. Клиентите намират заведението ви в Google Maps преди да излязат от вкъщи.", href: "/demo/restoran", demo: true },
   { code: "MED",  name: "Дентален кабинет / Лекар", desc: "Онлайн запис на час, услуги с цени, екип. Нови пациенти от Google всеки месец без да плащате реклама.", href: "/demo/dentalen-kabinet", demo: true },
   { code: "LAW",  name: "Адвокат / Юридически услуги", desc: "Практики, екип, форма за консултация. Позиция в Google по специализация и локация — преди клиентът да потърси конкурент.", href: "/demo/advokat", demo: true },
-  { code: "SPA",  name: "Козметичен салон / Фризьор", desc: "Галерия с процедури, ценоразпис, онлайн запис. Работи вместо вас 24/7 и пълни календара автоматично.", href: null, demo: false },
+  { code: "SPA",  name: "Козметичен салон / Фризьор", desc: "Галерия с процедури, ценоразпис, онлайн запис. Работи вместо вас 24/7 и пълни календара автоматично.", href: "/demo/kozmetichen-salon", demo: true },
   { code: "HTL",  name: "Хотел / Стаи под наем", desc: "Директни резервации без 15% комисионна на Booking.com. Снимки, удобства, наличност — всичко на вашия домейн.", href: null, demo: false },
   { code: "CON",  name: "Строителна фирма / Ремонти", desc: "Портфолио от реализирани проекти, услуги, контакти. Доверие и референции преди първата среща с клиента.", href: null, demo: false },
   { code: "ACC",  name: "Счетоводител / Консултант", desc: "Услуги, цени, опит. Позиция в Google по локация и специализация — без да разчитате само на препоръки.", href: null, demo: false },
@@ -191,7 +191,7 @@ const steps = [
           <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
           <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
           {ind.demo && ind.href && (
-            <a href={ind.href} target="_blank" class="font-mono text-xs text-yellow font-bold uppercase tracking-wide hover:underline">
+            <a href={ind.href} target="_blank" class="inline-flex items-center gap-2 bg-ink text-yellow font-mono text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-ink/80 transition-colors self-start">
               Виж демо →
             </a>
           )}
@@ -204,13 +204,13 @@ const steps = [
           <span class="font-mono text-xs font-bold bg-ink text-yellow px-2 py-1 self-start tracking-widest">{ind.code}</span>
           <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
           <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
-          <a href="/contact" class="font-mono text-xs text-ink/40 hover:text-yellow uppercase tracking-wide transition-colors">Поискайте оферта →</a>
+          <a href="/contact" class="inline-flex items-center gap-2 bg-ink text-yellow font-mono text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-ink/80 transition-colors self-start">Поискайте оферта →</a>
         </div>
       ))}
     </div>
     <div class="border-t-2 border-ink px-8 py-6 flex items-center gap-4 flex-wrap">
       <span class="text-sm text-muted">Не виждате вашия бранш?</span>
-      <a href="/contact" class="font-bold text-sm text-ink underline underline-offset-4 hover:text-yellow transition-colors">Пишете ни — правим за всеки бизнес →</a>
+      <a href="/contact" class="font-bold text-sm text-ink underline underline-offset-4 hover:text-ink/60 transition-colors">Пишете ни — правим за всеки бизнес →</a>
     </div>
   </section>
 
