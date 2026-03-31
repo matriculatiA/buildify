@@ -190,11 +190,10 @@ const steps = [
           <span class="font-mono text-xs font-bold bg-ink text-yellow px-2 py-1 self-start tracking-widest">{ind.code}</span>
           <h3 class="font-bold text-sm uppercase tracking-tight text-ink">{ind.name}</h3>
           <p class="text-xs text-muted leading-relaxed flex-1">{ind.desc}</p>
-          {ind.demo && ind.href && (
-            <a href={ind.href} target="_blank" class="inline-flex items-center gap-2 bg-ink text-yellow font-mono text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-ink/80 transition-colors self-start">
-              Виж демо →
-            </a>
-          )}
+          {ind.demo && ind.href
+            ? <a href={ind.href} target="_blank" class="inline-flex items-center gap-2 bg-ink text-yellow font-mono text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-ink/80 transition-colors self-start">Виж демо →</a>
+            : <a href="/contact" class="inline-flex items-center gap-2 bg-ink text-yellow font-mono text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-ink/80 transition-colors self-start">Поискай оферта →</a>
+          }
         </div>
       ))}
     </div>
