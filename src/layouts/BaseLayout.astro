@@ -235,19 +235,6 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
     mobNav?.classList.toggle('hidden');
   });
 
-  // Blog view counter — fires on /blog/[slug] pages (not index)
-  (async () => {
-    const match = location.pathname.match(/^\/blog\/([^/]+)\/?$/);
-    if (!match) return;
-    const slug = match[1];
-    try {
-      const res = await fetch(`/api/views?slug=${slug}`, { method: 'POST' });
-      const { views } = await res.json();
-      document.querySelectorAll('[data-view-count]').forEach(el => {
-        el.textContent = views === 1 ? '1 преглед' : `${views} прегледа`;
-      });
-    } catch {}
-  })();
 </script>
 </body>
 </html>
