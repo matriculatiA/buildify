@@ -46,10 +46,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="text-white/60 text-sm">Ще се свържем с теб до 24 часа.</p>
       </div>
 
-      <form
-        id="contact-form"
-        class="border-2 border-ink"
-      >
+      <form id="contact-form" class="border-2 border-ink">
         <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-b-2 border-ink">
           <div class="p-6 flex flex-col gap-2">
             <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Твоето име *</label>
@@ -75,37 +72,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           />
         </div>
 
+        <!-- Custom select: Интересувам се от -->
         <div class="p-6 flex flex-col gap-2 border-b-2 border-ink">
           <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Интересувам се от</label>
-          <select name="service" class="bg-transparent font-semibold text-ink outline-none text-base cursor-pointer">
-            <option value="">Избери...</option>
-            <option>Уебсайт</option>
-            <option>Плъгин</option>
-            <option>AI бот</option>
-            <option>Не знам още</option>
-          </select>
+          <input type="hidden" name="service" id="val-service" />
+          <div class="custom-select" data-target="val-service">
+            <button type="button" class="cs-trigger" aria-haspopup="listbox">
+              <span class="cs-label">Избери...</span>
+              <span class="cs-arrow">↓</span>
+            </button>
+            <ul class="cs-list" role="listbox">
+              <li role="option" data-value="">Избери...</li>
+              <li role="option" data-value="Уебсайт">Уебсайт</li>
+              <li role="option" data-value="Плъгин">Плъгин</li>
+              <li role="option" data-value="AI бот">AI бот</li>
+              <li role="option" data-value="Не знам още">Не знам още</li>
+            </ul>
+          </div>
         </div>
 
         <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-b-2 border-ink">
+          <!-- Custom select: Бюджет -->
           <div class="p-6 flex flex-col gap-2">
             <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Бюджет (ориентировъчно)</label>
-            <select name="budget" class="bg-transparent font-semibold text-ink outline-none text-base cursor-pointer">
-              <option value="">Не знам още</option>
-              <option>до 500€</option>
-              <option>500€ – 1 000€</option>
-              <option>1 000€ – 3 000€</option>
-              <option>над 3 000€</option>
-            </select>
+            <input type="hidden" name="budget" id="val-budget" />
+            <div class="custom-select" data-target="val-budget">
+              <button type="button" class="cs-trigger" aria-haspopup="listbox">
+                <span class="cs-label">Не знам още</span>
+                <span class="cs-arrow">↓</span>
+              </button>
+              <ul class="cs-list" role="listbox">
+                <li role="option" data-value="">Не знам още</li>
+                <li role="option" data-value="до 500€">до 500€</li>
+                <li role="option" data-value="500€ – 1 000€">500€ – 1 000€</li>
+                <li role="option" data-value="1 000€ – 3 000€">1 000€ – 3 000€</li>
+                <li role="option" data-value="над 3 000€">над 3 000€</li>
+              </ul>
+            </div>
           </div>
+          <!-- Custom select: Срок -->
           <div class="p-6 flex flex-col gap-2">
             <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Срок</label>
-            <select name="timeline" class="bg-transparent font-semibold text-ink outline-none text-base cursor-pointer">
-              <option value="">Без конкретен срок</option>
-              <option>Колкото се може по-скоро</option>
-              <option>До 1 месец</option>
-              <option>1 – 3 месеца</option>
-              <option>Само проучвам</option>
-            </select>
+            <input type="hidden" name="timeline" id="val-timeline" />
+            <div class="custom-select" data-target="val-timeline">
+              <button type="button" class="cs-trigger" aria-haspopup="listbox">
+                <span class="cs-label">Без конкретен срок</span>
+                <span class="cs-arrow">↓</span>
+              </button>
+              <ul class="cs-list" role="listbox">
+                <li role="option" data-value="">Без конкретен срок</li>
+                <li role="option" data-value="Колкото се може по-скоро">Колкото се може по-скоро</li>
+                <li role="option" data-value="До 1 месец">До 1 месец</li>
+                <li role="option" data-value="1 – 3 месеца">1 – 3 месеца</li>
+                <li role="option" data-value="Само проучвам">Само проучвам</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -132,14 +153,112 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 </BaseLayout>
 
+<style>
+  .custom-select { position: relative; }
+
+  .cs-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #111;
+    padding: 8px 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    text-align: left;
+    gap: 8px;
+  }
+  .cs-trigger:focus { outline: none; border-bottom-color: #f5e642; }
+
+  .cs-arrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #777;
+    transition: transform 0.15s;
+    flex-shrink: 0;
+  }
+  .custom-select.open .cs-arrow { transform: rotate(180deg); color: #f5e642; }
+
+  .cs-list {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: -24px;
+    right: -24px;
+    background: #111;
+    border: 2px solid #111;
+    z-index: 50;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+  }
+  .custom-select.open .cs-list { display: block; }
+
+  .cs-list li {
+    padding: 10px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.1s;
+  }
+  .cs-list li:hover {
+    color: #f5e642;
+    border-left-color: #f5e642;
+    background: rgba(245,230,66,0.07);
+  }
+  .cs-list li.selected {
+    color: #f5e642;
+    border-left-color: #f5e642;
+  }
+  .cs-list li[data-value=""] { color: rgba(255,255,255,0.25); }
+</style>
+
 <script>
+  // Custom selects
+  document.querySelectorAll<HTMLElement>('.custom-select').forEach(select => {
+    const trigger = select.querySelector<HTMLButtonElement>('.cs-trigger')!;
+    const label   = select.querySelector<HTMLElement>('.cs-label')!;
+    const list    = select.querySelector<HTMLElement>('.cs-list')!;
+    const hidden  = document.getElementById(select.dataset.target!) as HTMLInputElement;
+
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = select.classList.contains('open');
+      document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+      if (!isOpen) select.classList.add('open');
+    });
+
+    list.querySelectorAll<HTMLElement>('li').forEach(item => {
+      item.addEventListener('click', () => {
+        label.textContent = item.textContent;
+        hidden.value = item.dataset.value ?? '';
+        list.querySelectorAll('li').forEach(li => li.classList.remove('selected'));
+        if (item.dataset.value) item.classList.add('selected');
+        select.classList.remove('open');
+      });
+    });
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+  });
+
+  // Form submit
   document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = document.getElementById('submit-btn');
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement;
     btn.textContent = 'Изпраща...';
     btn.disabled = true;
 
-    const data = new FormData(this);
+    const data = new FormData(this as HTMLFormElement);
     try {
       const res = await fetch('https://formspree.io/f/xjgpvgle', {
         method: 'POST',
@@ -147,8 +266,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        document.getElementById('contact-form').style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
+        (document.getElementById('contact-form') as HTMLElement).style.display = 'none';
+        (document.getElementById('form-success') as HTMLElement).style.display = 'block';
       } else {
         btn.textContent = 'Грешка — опитай отново';
         btn.disabled = false;
