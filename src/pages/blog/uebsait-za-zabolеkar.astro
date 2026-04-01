@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Уебсайт за зъболекар — задължителни елементи и цени за 2026",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-04-01",
+  "dateModified": "2026-04-01",
+  "description": "Какво трябва да включва уебсайтът на зъболекарски кабинет. Онлайн записване, услуги с цени, SEO. Реални цени за изработка за 2026."
+};
+---
+
+<BaseLayout
+  title="Уебсайт за зъболекар — задължителни елементи и цени за 2026 | buildify.bg"
+  description="Какво трябва да включва сайтът на дентален кабинет — онлайн записване, услуги с цени, екип, SEO. Реални цени и кои грешки да избегнете."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Уебсайтове</span>
+        <span class="font-mono text-xs text-white/45">Април 2026</span>
+        <span class="font-mono text-xs text-white/45">5 мин. четене</span>
+        <span class="font-mono text-xs text-white/45" data-view-count></span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Уебсайт за<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">зъболекар</mark> —<br/>
+        задължителни елементи
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Пациентите търсят зъболекар в Google — не в телефонния указател. Сайтът, който отговаря на техните въпроси преди да се обадят, печели записването.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Как пациентите избират зъболекар</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Изборът на зъболекар се е преместил онлайн. Препоръката от приятел все още има тежест, но дори след нея — пациентът отива в Google да провери. Търси сайта, чете за услугите, гледа снимки на кабинета, проверява цените. Ако намери нещо, което го убеди — записва се. Ако не намери нищо — продължава да търси.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Конкурентите ви с добри сайтове получават тези пациенти. Не защото са по-добри зъболекари — а защото сайтът им отговаря на въпросите, преди пациентът да се е обадил.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Добрата новина: денталните кабинети са локален бизнес. Конкуренцията в Google е ограничена до вашия град. С правилен сайт и SEO — първа страница е постижима за повечето локации в България.
+        </p>
+      </div>
+
+      <!-- СТАТИСТИКИ -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "68%",    lbl: "От пациентите проверяват сайта на кабинета преди да се запишат" },
+          { val: "40%",    lbl: "От записванията се правят извън работно време — ако има онлайн форма" },
+          { val: "от 550€", lbl: "Цена за уебсайт на дентален кабинет при buildify.bg" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 02 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Задължителните елементи</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-6">
+          Сайтът на дентален кабинет трябва да отговори на 6 въпроса, преди пациентът да е набрал телефона.
+        </p>
+        <div class="space-y-3">
+          {[
+            { el: "Услуги с цени",            why: "Цените са основната причина за търсене. Ако ги няма — пациентът продължава при конкурент, който ги е написал. Не е нужно точна цена — достатъчно е \"от X лв.\"" },
+            { el: "Онлайн записване",          why: "40% от пациентите решават да запишат час вечер или уикенда, когато кабинетът не работи. Без онлайн форма — губите ги." },
+            { el: "Снимки на кабинета",        why: "Страхът от зъболекар е реален. Снимки на чист, модерен кабинет намаляват тревожността преди първото посещение. Конвертират." },
+            { el: "Представяне на екипа",      why: "Пациентите избират конкретен лекар, не само кабинет. Снимка и кратка биография изграждат доверие преди срещата." },
+            { el: "Локация и паркинг",         why: "Адрес, Google Maps и описание как се стига. Ако паркирането е трудно — обяснете. Малкото детайли спестяват обаждания." },
+            { el: "Контакт видим навсякъде",   why: "Телефонният номер трябва да е видим на всяка страница — без да се търси. Кликаемо от телефон." },
+          ].map((item, i) => (
+            <div class={`border-2 border-ink p-5 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <div class="font-bold text-sm text-ink mb-1">{item.el}</div>
+              <div class="text-sm text-muted leading-relaxed">{item.why}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          "Пациентът, който не намери цена на сайта ви, не се обажда да пита — записва се при конкурента, който я е написал."
+        </p>
+      </div>
+
+      <!-- 03 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Сравнение — с и без онлайн записване</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          <div class="grid grid-cols-3 bg-ink px-5 py-3">
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+            <span class="font-mono text-xs text-white/40 uppercase tracking-widest">Без онлайн записване</span>
+            <span class="font-mono text-xs text-yellow uppercase tracking-widest">С онлайн записване</span>
+          </div>
+          {[
+            { label: "Записвания след 18:00", a: "0",              b: "40% от всички" },
+            { label: "Работно натоварване",   a: "Много обаждания", b: "По-малко телефони" },
+            { label: "Пропуснати записвания", a: "Постоянно",       b: "Минимални" },
+            { label: "Нов пациент отвечер",   a: "Чака до утре",    b: "Записан веднага" },
+            { label: "Сравнение с конкурент", a: "Губи",            b: "Печели" },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-3 gap-2 px-5 py-4 items-center ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-bold text-sm text-ink">{row.label}</span>
+              <span class="text-xs text-muted">{row.a}</span>
+              <span class="text-xs text-ink font-bold">{row.b}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Колко струва уебсайт за дентален кабинет</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Бизнес сайт (услуги + екип + контакти + SEO)",              v: "от 550€" },
+            { k: "Бизнес сайт + онлайн записване",                            v: "от 750€" },
+            { k: "Онлайн записване като добавка към съществуващ сайт",        v: "от 200€" },
+            { k: "Месечна такса след пускане",                                 v: "0€" },
+            { k: "Хостинг",                                                    v: "0€ (Cloudflare Pages)" },
+            { k: "Срок",                                                       v: "2-3 седмици" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 gap-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink">{row.k}</span>
+              <span class="font-mono font-bold text-sm text-ink shrink-0">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/60 text-sm leading-relaxed">
+          Цените са еднократни. Без абонамент. Плащате само за домейна (~10€/год.). Разплащане на две части — аванс при старт, остатък при предаване.
+        </p>
+      </div>
+
+      <!-- 05 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">05</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">SEO за дентален кабинет</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Ключовите думи за дентален кабинет са локални и конкретни: „зъболекар Бургас", „имплант цена Варна", „детски зъболекар София". Конкуренцията е само с кабинетите от вашия град — не с целия интернет.
+        </p>
+        <div class="space-y-3">
+          {[
+            { step: "Google Business Profile",      desc: "Безплатен профил с адрес, часове, снимки и отзиви. Появява се в Google Maps при търсене в района." },
+            { step: "Услуги като отделни секции",   desc: "Всяка услуга (имплант, избелване, детска стоматология) трябва да е описана — Google индексира отделно." },
+            { step: "LocalBusiness Schema",         desc: "Структурирани данни за Google: часове, адрес, телефон, специализации. Показват се директно в резултатите." },
+            { step: "Отзиви в Google",              desc: "Молете доволните пациенти за отзив. Броят и средната оценка влияят директно на класирането в Maps." },
+          ].map((item, i) => (
+            <div class={`flex gap-4 px-5 py-4 border-2 border-ink ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-mono text-xs text-yellow shrink-0 mt-0.5 font-bold">→</span>
+              <div>
+                <div class="font-bold text-sm text-ink mb-1">{item.step}</div>
+                <div class="text-xs text-muted leading-relaxed">{item.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Уеб дизайн</div>
+            <div class="font-bold text-white text-xl tracking-tight">Уебсайт за вашия кабинет. От 550€.</div>
+            <p class="text-white/40 text-sm mt-1">Услуги, записване, SEO. Готов до 3 седмици. Опишете кабинета си — отговаряме с конкретна цена до 24 часа.</p>
+          </div>
+          <div class="flex gap-3 flex-wrap shrink-0">
+            <a href="/contact" class="bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+              Поискай оферта →
+            </a>
+            <a href="/demo/dentalen-kabinet" target="_blank" class="bg-white/10 text-white font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-white/20 transition-colors whitespace-nowrap">
+              Виж пример →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>

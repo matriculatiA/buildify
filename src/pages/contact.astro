@@ -43,7 +43,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Success message (hidden by default) -->
       <div id="form-success" style="display:none" class="bg-ink border-2 border-ink p-8 mb-6 text-center">
         <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-3">✓ Съобщението е изпратено</div>
-        <p class="text-white/60 text-sm">Ще се свържем с теб до 48 часа.</p>
+        <p class="text-white/60 text-sm">Ще се свържем с теб до 24 часа.</p>
       </div>
 
       <form
@@ -84,6 +84,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <option>AI бот</option>
             <option>Не знам още</option>
           </select>
+        </div>
+
+        <div class="grid md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink border-b-2 border-ink">
+          <div class="p-6 flex flex-col gap-2">
+            <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Бюджет (ориентировъчно)</label>
+            <select name="budget" class="bg-transparent font-semibold text-ink outline-none text-base cursor-pointer">
+              <option value="">Не знам още</option>
+              <option>до 500€</option>
+              <option>500€ – 1 000€</option>
+              <option>1 000€ – 3 000€</option>
+              <option>над 3 000€</option>
+            </select>
+          </div>
+          <div class="p-6 flex flex-col gap-2">
+            <label class="font-mono text-xs font-bold uppercase tracking-widest text-muted">Срок</label>
+            <select name="timeline" class="bg-transparent font-semibold text-ink outline-none text-base cursor-pointer">
+              <option value="">Без конкретен срок</option>
+              <option>Колкото се може по-скоро</option>
+              <option>До 1 месец</option>
+              <option>1 – 3 месеца</option>
+              <option>Само проучвам</option>
+            </select>
+          </div>
         </div>
 
         <div class="p-6 flex flex-col gap-2 border-b-2 border-ink">

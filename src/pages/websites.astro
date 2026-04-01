@@ -529,6 +529,24 @@ const steps = [
     </div>
     <div class="border-t-2 border-ink bg-paper">
       <div class="px-8 py-5 border-b border-ink/10">
+        <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Допълнителни опции</span>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-ink/10 border-b border-ink/10">
+        {[
+          { label: "Допълнителна страница",   val: "+80€/бр." },
+          { label: "Многоезичност (EN/DE/RU)", val: "+200€" },
+          { label: "CMS панел за редакция",    val: "+150€" },
+          { label: "Онлайн магазин",           val: "+от 500€" },
+          { label: "Онлайн резервации",        val: "+от 200€" },
+          { label: "Поддръжка след 30 дни",    val: "по ставка" },
+        ].map(item => (
+          <div class="flex justify-between items-center px-6 py-4 gap-4">
+            <span class="text-xs text-muted">{item.label}</span>
+            <span class="font-mono text-xs font-bold text-ink">{item.val}</span>
+          </div>
+        ))}
+      </div>
+      <div class="px-8 py-5 border-b border-ink/10">
         <span class="font-mono text-xs uppercase tracking-widest text-muted font-bold">Всички пакети включват</span>
       </div>
       <div class="grid sm:grid-cols-2 md:grid-cols-4 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-ink/10 border-b border-ink/10">

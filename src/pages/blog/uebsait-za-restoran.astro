@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Уебсайт за ресторант — какво трябва да включва и колко струва",
+  "author": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "publisher": { "@type": "Organization", "name": "buildify.bg", "url": "https://buildify.bg" },
+  "datePublished": "2026-04-01",
+  "dateModified": "2026-04-01",
+  "description": "Какво трябва да включва уебсайтът на ресторант, за да носи реални резервации. Задължителни елементи, грешки и реални цени за 2026."
+};
+---
+
+<BaseLayout
+  title="Уебсайт за ресторант — какво трябва да включва и колко струва | buildify.bg"
+  description="Какво задължително трябва да има в сайта на ресторант — меню, резервации, снимки, Google. Реални цени за изработка и кои грешки да избегнеш."
+  schema={schema}
+>
+<article>
+
+  <!-- HEADER -->
+  <div class="bg-ink text-white px-8 md:px-16 py-16 border-b-2 border-ink">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-yellow border border-yellow/30 px-3 py-1">Уебсайтове</span>
+        <span class="font-mono text-xs text-white/45">Април 2026</span>
+        <span class="font-mono text-xs text-white/45">5 мин. четене</span>
+        <span class="font-mono text-xs text-white/45" data-view-count></span>
+      </div>
+      <h1 class="font-bold text-white leading-[1.05] tracking-tightest mb-6" style="font-size:clamp(2rem,5vw,3.5rem)">
+        Уебсайт за<br/>
+        <mark class="bg-yellow text-ink px-2 not-italic">ресторант</mark> —<br/>
+        какво трябва да включва
+      </h1>
+      <p class="text-white/45 text-lg leading-relaxed max-w-2xl">
+        Повечето ресторанти имат Facebook страница и смятат, че е достатъчно. Не е. Ето какво реално търси клиентът преди да резервира маса — и как сайтът може да го убеди вместо вас.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-8 md:px-10">
+
+      <!-- 01 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">01</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Защо Facebook не е достатъчно</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Когато човек търси ресторант за вечеря, обикновено не отваря Facebook — отваря Google. Пише "ресторант Бургас" или "механа с градина Несебър" и кликва на първите резултати. Ако там сте само вие — печелите. Ако не сте — клиентът е при конкурента.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Facebook профилът не се класира добре в Google за локални търсения. Уебсайтът с правилна SEO структура — да. Освен това Facebook показва само това, което алгоритъмът реши да покаже. Собственият ви сайт показва точно това, което вие искате.
+        </p>
+        <p class="text-ink/80 text-base leading-relaxed">
+          Второ: хората, които влизат в сайта ви, са вече заинтересовани. Те имат намерение да дойдат. Задачата на сайта е само да не ги изпусне.
+        </p>
+      </div>
+
+      <!-- СТАТИСТИКИ -->
+      <div class="grid grid-cols-3 border-b-2 border-ink divide-x-2 divide-ink">
+        {[
+          { val: "72%",    lbl: "От хората търсят ресторант онлайн преди да посетят" },
+          { val: "3 сек.", lbl: "Толкова чака потребителят за зареждане — после затваря" },
+          { val: "от 450€", lbl: "Цена за уебсайт на ресторант при buildify.bg" },
+        ].map(s => (
+          <div class="py-8 px-6 bg-white">
+            <div class="font-mono font-bold text-3xl text-ink mb-1">{s.val}</div>
+            <div class="text-xs text-muted uppercase tracking-wide leading-tight">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 02 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">02</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Задължителните елементи</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-6">
+          Не всеки ресторантски сайт трябва да е сложен. Но трябва да отговаря на 5-те въпроса, които клиентът задава преди да дойде.
+        </p>
+        <div class="space-y-3">
+          {[
+            { el: "Онлайн меню",           why: "Ако менюто го няма на сайта, 40% от хората затварят. PDF файл не се брои — трябва истинско, четимо на телефон меню." },
+            { el: "Форма за резервация",   why: "Телефонът не се вдига? Клиентът не чака. Онлайн формата приема резервации 24/7 — дори когато заведението е затворено." },
+            { el: "Работно време",         why: "Звучи тривиално. Но липсващото работно време е причина номер едно за излизане от сайта без резервация." },
+            { el: "Локация и паркинг",     why: "Google Maps embed + адрес + описание как се стига. Особено важно за туристически локации." },
+            { el: "Снимки на храната",     why: "Не стокови снимки — ваши. Истинска храна, истинска атмосфера. Решението да се дойде се взима визуално." },
+            { el: "Контакт и телефон",     why: "Видим на всяка страница. Не само в 'Контакти'. Хората трябва да могат да се обадят с едно кликване от телефона." },
+          ].map((item, i) => (
+            <div class={`border-2 border-ink p-5 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <div class="font-bold text-sm text-ink mb-1">{item.el}</div>
+              <div class="text-sm text-muted leading-relaxed">{item.why}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- PULL QUOTE -->
+      <div class="bg-ink px-8 py-8 border-b-2 border-ink">
+        <p class="font-bold text-white text-xl leading-snug tracking-tight max-w-xl">
+          Сайтът на ресторанта не трябва да е красив — трябва да е полезен. Клиентът иска да знае какво ядете, кога работите и дали има маса за петък.
+        </p>
+      </div>
+
+      <!-- 03 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">03</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Честите грешки</span>
+        </div>
+        <div class="space-y-3">
+          {[
+            { bad: "Меню само като PDF",                good: "PDF не се чете на телефон и Google не го индексира. Менюто трябва да е HTML текст." },
+            { bad: "Снимки от интернет",               good: "Стоковите снимки изглеждат фалшиво. Собствени снимки — дори с телефон — конвертират по-добре." },
+            { bad: "Сайт без мобилна версия",          good: "80%+ от трафика на ресторантски сайтове идва от телефон. Ако не е оптимизиран — губите ги." },
+            { bad: "Бавно зареждане",                  good: "Голям сайт с много снимки без оптимизация = 8 секунди зареждане. Google наказва, потребителите бягат." },
+            { bad: "Само Facebook линк",               good: "Препращането към Facebook вместо собствен сайт е загубена SEO стойност и загубен контрол." },
+            { bad: "Без Schema markup",                good: "Без структурирани данни Google не показва работното ви време и звездичките директно в резултатите." },
+          ].map((item, i) => (
+            <div class={`grid md:grid-cols-2 gap-0 border-2 border-ink overflow-hidden`}>
+              <div class="bg-red-50 px-5 py-4 flex gap-3 items-start border-b-2 md:border-b-0 md:border-r-2 border-ink">
+                <span class="text-red-400 font-mono text-xs shrink-0 mt-0.5 font-bold">✗</span>
+                <span class="text-sm text-ink font-semibold">{item.bad}</span>
+              </div>
+              <div class="bg-white px-5 py-4 flex gap-3 items-start">
+                <span class="text-green-600 font-mono text-xs shrink-0 mt-0.5 font-bold">✓</span>
+                <span class="text-sm text-muted">{item.good}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">04</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">Колко струва уебсайт за ресторант</span>
+        </div>
+        <div class="border-2 border-ink divide-y-2 divide-ink mb-6">
+          {[
+            { k: "Landing page (меню + резервация + контакти)", v: "от 450€" },
+            { k: "Бизнес сайт (до 6 стр. + онлайн резервации)",  v: "от 750€" },
+            { k: "Онлайн резервации като добавка към съществуващ сайт", v: "от 200€" },
+            { k: "Месечна такса след пускане",                    v: "0€" },
+            { k: "Хостинг",                                       v: "0€ (Cloudflare Pages)" },
+            { k: "Срок",                                          v: "7-14 работни дни" },
+          ].map((row, i) => (
+            <div class={`flex justify-between items-center px-5 py-4 gap-4 ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="text-sm text-ink">{row.k}</span>
+              <span class="font-mono font-bold text-sm text-ink shrink-0">{row.v}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-ink/60 text-sm leading-relaxed">
+          Цените са еднократни. Без абонамент, без скрити такси. Домейнът (~10€/год.) е единственият recurring разход.
+        </p>
+      </div>
+
+      <!-- 05 -->
+      <div class="border-b-2 border-ink py-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-mono text-xs font-bold bg-ink text-yellow px-3 py-1.5">05</span>
+          <span class="font-bold text-sm uppercase tracking-widest text-ink">SEO за ресторант — как да се появите в Google</span>
+        </div>
+        <p class="text-ink/80 text-base leading-relaxed mb-5">
+          Локалното SEO за ресторанти работи различно от класическото. Не се класирате по общи думи като "ресторант" — класирате се по "ресторант Несебър", "механа с морска гледка Бургас", "пицария до центъра". Тези търсения имат висок intent — хората са готови да дойдат.
+        </p>
+        <div class="space-y-3">
+          {[
+            { step: "Google Business Profile", desc: "Задължително. Безплатен профил с адрес, телефон, часове, снимки, отзиви. Появява се в Google Maps." },
+            { step: "Локални ключови думи в сайта", desc: 'Заглавия, мета тагове и текст, които включват локацията: "ресторант в Бургас", "механа Несебър".' },
+            { step: "Schema markup за LocalBusiness", desc: "Структурирани данни, по които Google показва часовете ви директно в резултатите — без да влизат в сайта." },
+            { step: "Бързо зареждане", desc: "Core Web Vitals зелено = Google класира по-високо. Особено важно за мобилни резултати." },
+          ].map((item, i) => (
+            <div class={`flex gap-4 px-5 py-4 border-2 border-ink ${i % 2 === 0 ? 'bg-white' : 'bg-cream'}`}>
+              <span class="font-mono text-xs text-yellow shrink-0 mt-0.5 font-bold">→</span>
+              <div>
+                <div class="font-bold text-sm text-ink mb-1">{item.step}</div>
+                <div class="text-xs text-muted leading-relaxed">{item.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="py-10">
+        <div class="bg-ink p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="font-mono text-xs text-yellow uppercase tracking-widest mb-2">buildify.bg / Уеб дизайн</div>
+            <div class="font-bold text-white text-xl tracking-tight">Уебсайт за ресторанта ви. От 450€.</div>
+            <p class="text-white/40 text-sm mt-1">Меню, резервации, SEO. Готов до 2 седмици. Опишете заведението си — отговаряме с конкретна цена до 24 часа.</p>
+          </div>
+          <div class="flex gap-3 flex-wrap shrink-0">
+            <a href="/contact" class="bg-yellow text-ink font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-yellow-dark transition-colors whitespace-nowrap">
+              Поискай оферта →
+            </a>
+            <a href="/demo/restoran" target="_blank" class="bg-white/10 text-white font-bold text-sm px-6 py-3 uppercase tracking-wide hover:bg-white/20 transition-colors whitespace-nowrap">
+              Виж пример →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</article>
+</BaseLayout>
