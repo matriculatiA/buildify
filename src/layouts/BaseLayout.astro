@@ -333,8 +333,22 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
   #cw-send:hover { background:#d4c30a; }
   #cw-send:disabled { background:#e8e4dc; cursor:not-allowed; }
 
-  @media (max-width: 400px) {
-    #cw-panel { width:calc(100vw - 32px); right:0; }
+  @media (max-width: 768px) {
+    #cw { bottom:16px; right:16px; }
+    #cw-panel {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      left: 16px;
+      width: auto;
+    }
+    #cw-notif {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      left: 16px;
+      white-space: normal;
+    }
   }
 </style>
 
@@ -352,7 +366,10 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
         <div id="cw-head-brand">buildify.bg</div>
         <div id="cw-head-sub">Асистент</div>
       </div>
-      <div id="cw-dot"></div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div id="cw-dot"></div>
+        <button id="cw-close-btn" aria-label="Затвори чат" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);font-size:18px;padding:0;line-height:1;font-family:'Space Mono',monospace;">✕</button>
+      </div>
     </div>
     <div id="cw-msgs"></div>
     <div id="cw-email-bar">
@@ -361,36 +378,32 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
       <button id="cw-email-ok">OK</button>
     </div>
     <div id="cw-inp-row">
-      <input id="cw-inp" type="text" placeholder="Напиши съобщение..." autocomplete="off" maxlength="500" />
+      <input id="cw-inp" type="text" placeholder="Напиши съобщение..." autocomplete="off" maxlength="500" readonly />
       <button id="cw-send" aria-label="Изпрати">→</button>
     </div>
   </div>
 
   <!-- Toggle button -->
   <button id="cw-btn" aria-label="Отвори чат">
-    <!-- Chat icon -->
-    <svg id="cw-ico-open" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    <!-- Close icon -->
-    <svg id="cw-ico-close" style="display:none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     <span id="cw-badge"></span>
   </button>
 </div>
 
 <script>
 (function () {
-  const panel   = document.getElementById('cw-panel');
-  const btn     = document.getElementById('cw-btn');
-  const icoOpen = document.getElementById('cw-ico-open');
-  const icoClose= document.getElementById('cw-ico-close');
-  const badge   = document.getElementById('cw-badge');
-  const notif   = document.getElementById('cw-notif');
-  const notifX  = document.getElementById('cw-notif-x');
-  const msgsEl  = document.getElementById('cw-msgs');
-  const inp     = document.getElementById('cw-inp');
-  const sendBtn = document.getElementById('cw-send');
-  const emailBar= document.getElementById('cw-email-bar');
-  const emailInp= document.getElementById('cw-email-inp');
-  const emailOk = document.getElementById('cw-email-ok');
+  const panel    = document.getElementById('cw-panel');
+  const btn      = document.getElementById('cw-btn');
+  const closeBtn = document.getElementById('cw-close-btn');
+  const badge    = document.getElementById('cw-badge');
+  const notif    = document.getElementById('cw-notif');
+  const notifX   = document.getElementById('cw-notif-x');
+  const msgsEl   = document.getElementById('cw-msgs');
+  const inp      = document.getElementById('cw-inp');
+  const sendBtn  = document.getElementById('cw-send');
+  const emailBar = document.getElementById('cw-email-bar');
+  const emailInp = document.getElementById('cw-email-inp');
+  const emailOk  = document.getElementById('cw-email-ok');
 
   let isOpen       = false;
   let history      = [];
@@ -398,6 +411,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
   let leadSent     = false;
   let exchanges    = 0;
   let proactiveDone= false;
+  let greeted      = false;
 
   // ── helpers ──────────────────────────────────────────
   function addMsg(role, text) {
@@ -425,19 +439,16 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
   function openPanel() {
     isOpen = true;
     panel.classList.add('open');
-    icoOpen.style.display  = 'none';
-    icoClose.style.display = '';
+    btn.style.display = 'none';
     badge.classList.remove('visible');
     notif.style.display = 'none';
-    inp.focus();
-    if (history.length === 0) botGreet();
+    if (!greeted) { greeted = true; botGreet(); }
   }
 
   function closePanel() {
     isOpen = false;
     panel.classList.remove('open');
-    icoOpen.style.display  = '';
-    icoClose.style.display = 'none';
+    btn.style.display = '';
   }
 
   function botGreet() {
@@ -455,6 +466,8 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
   async function sendMessage(text) {
     if (!text.trim()) return;
     inp.value = '';
+    inp.setAttribute('readonly', '');  // re-add readonly to prevent keyboard re-open
+    inp.blur();
     sendBtn.disabled = true;
     addMsg('user', text);
     history.push({ role: 'user', content: text });
@@ -491,7 +504,6 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
     }
 
     sendBtn.disabled = false;
-    inp.focus();
   }
 
   // ── email submit ──────────────────────────────────────
@@ -518,6 +530,10 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
 
   // ── toggle ────────────────────────────────────────────
   btn.addEventListener('click', () => isOpen ? closePanel() : openPanel());
+  closeBtn?.addEventListener('click', closePanel);
+
+  // Remove readonly on tap so keyboard opens only when user explicitly taps the input
+  inp.addEventListener('focus', () => { inp.removeAttribute('readonly'); });
 
   // ── send ──────────────────────────────────────────────
   sendBtn.addEventListener('click', () => sendMessage(inp.value));
