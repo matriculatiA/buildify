@@ -473,7 +473,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
       });
       const data = await res.json();
       hideTyping();
-      const reply = data.reply || 'Извини, нещо се обърка. Пиши ни на hello@buildify.bg';
+      const reply = data.reply || 'Извини, нещо се обърка. Пиши ни на contact@buildify.bg';
       history.push({ role: 'assistant', content: reply });
       addMsg('bot', reply);
       exchanges++;
@@ -487,7 +487,7 @@ const fullTitle = title.includes('buildify') ? title : `${title} | buildify.bg`;
       }
     } catch {
       hideTyping();
-      addMsg('bot', 'Технически проблем. Пиши ни на hello@buildify.bg');
+      addMsg('bot', 'Технически проблем. Пиши ни на contact@buildify.bg');
     }
 
     sendBtn.disabled = false;

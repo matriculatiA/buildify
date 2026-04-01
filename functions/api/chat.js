@@ -11,7 +11,7 @@ export async function onRequestPost(context) {
 
     if (!env.ANTHROPIC_API_KEY) {
       return new Response(
-        JSON.stringify({ reply: 'Конфигурационна грешка. Пиши ни на hello@buildify.bg' }),
+        JSON.stringify({ reply: 'Конфигурационна грешка. Пиши ни на contact@buildify.bg' }),
         { status: 200, headers: cors }
       );
     }
@@ -37,7 +37,7 @@ export async function onRequestPost(context) {
 - Отговаряй САМО на български
 - Максимум 3 кратки изречения на отговор
 - Препоръчвай конкретен линк когато е уместно (пиши като /websites)
-- Ако не знаеш — кажи: пиши директно на hello@buildify.bg
+- Ако не знаеш — кажи: пиши директно на contact@buildify.bg
 - Никога не измисляй факти, цени или услуги
 - Текущата страница на потребителя: ${pageUrl || '/'}`;
 
@@ -87,7 +87,7 @@ export async function onRequestPost(context) {
 
   } catch {
     return new Response(
-      JSON.stringify({ reply: 'Имам технически проблем. Пиши ни директно на hello@buildify.bg' }),
+      JSON.stringify({ reply: 'Имам технически проблем. Пиши ни директно на contact@buildify.bg' }),
       { status: 200, headers: cors }
     );
   }
